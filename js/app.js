@@ -1,95 +1,81 @@
 /* =========================================================
    ALLWEB
-   JAVASCRIPT PRINCIPAL
+   MAIN JAVASCRIPT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    document.body.classList.add("page-loaded");
+
+
     /* =====================================================
-       ENTRADA DE LA PÁGINA
+       HEADER SCROLL
     ===================================================== */
 
-    requestAnimationFrame(() => {
+    const header = document.querySelector(".site-header");
 
-        document.body.classList.add("page-loaded");
+    function updateHeader() {
 
-    });
+        if (!header) return;
+
+        if (window.scrollY > 30) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
+    }
+
+    updateHeader();
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        { passive: true }
+    );
 
 
     /* =====================================================
-       AÑO AUTOMÁTICO
-    ===================================================== */
-
-    document.querySelectorAll(".current-year").forEach(element => {
-
-        element.textContent =
-            new Date().getFullYear();
-
-    });
-
-
-    /* =====================================================
-       MENÚ MÓVIL
+       MOBILE MENU
     ===================================================== */
 
     const menuToggle =
         document.getElementById("menuToggle");
 
-    const mainNav =
-        document.getElementById("mainNav");
+    const mobileMenu =
+        document.getElementById("mobileMenu");
 
 
-    if (menuToggle && mainNav) {
+    if (menuToggle && mobileMenu) {
 
         menuToggle.addEventListener("click", () => {
 
+            mobileMenu.classList.toggle("open");
+
             const isOpen =
-                mainNav.classList.toggle("open");
+                mobileMenu.classList.contains("open");
 
             menuToggle.setAttribute(
                 "aria-expanded",
-                isOpen ? "true" : "false"
+                isOpen
             );
-
-
-            const icon =
-                menuToggle.querySelector("i");
-
-
-            if (icon) {
-
-                icon.className =
-                    isOpen
-                        ? "fa-solid fa-xmark"
-                        : "fa-solid fa-bars";
-
-            }
 
         });
 
 
-        mainNav.querySelectorAll("a").forEach(link => {
+        const mobileLinks =
+            mobileMenu.querySelectorAll("a");
+
+
+        mobileLinks.forEach(link => {
 
             link.addEventListener("click", () => {
 
-                mainNav.classList.remove("open");
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                const icon =
-                    menuToggle.querySelector("i");
-
-
-                if (icon) {
-
-                    icon.className =
-                        "fa-solid fa-bars";
-
-                }
+                mobileMenu.classList.remove("open");
 
             });
 
@@ -99,299 +85,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CERRAR MENÚ CON ESC
+       ACTIVE NAVIGATION
     ===================================================== */
 
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-
-            if (mainNav) {
-
-                mainNav.classList.remove("open");
-
-            }
-
-            if (menuToggle) {
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop() || "index.html";
 
 
-                const icon =
-                    menuToggle.querySelector("i");
-
-
-                if (icon) {
-
-                    icon.className =
-                        "fa-solid fa-bars";
-
-                }
-
-            }
-
-        }
-
-    });
-
-
-    /* =====================================================
-       TRANSICIONES ENTRE PÁGINAS
-    ===================================================== */
-
-    document.querySelectorAll(
-        'a[href$=".html"]'
-    ).forEach(link => {
-
-        link.addEventListener("click", event => {
+    document
+        .querySelectorAll(".nav-link, .mobile-link")
+        .forEach(link => {
 
             const href =
                 link.getAttribute("href");
 
+            if (!href) return;
 
-            if (!href) {
-                return;
-            }
-
-
-            if (
-                href.startsWith("#") ||
-                href.startsWith("http") ||
-                href.startsWith("mailto:") ||
-                href.startsWith("tel:")
-            ) {
-
-                return;
-
-            }
+            const cleanHref =
+                href.split("#")[0]
+                    .split("?")[0];
 
 
-            if (
-                event.ctrlKey ||
-                event.metaKey ||
-                event.shiftKey ||
-                event.altKey
-            ) {
+            if (cleanHref === currentPage) {
 
-                return;
-
-            }
-
-
-            event.preventDefault();
-
-
-            document.body.classList.add(
-                "page-leaving"
-            );
-
-
-            setTimeout(() => {
-
-                window.location.href = href;
-
-            }, 280);
-
-        });
-
-    });
-
-
-    /* =====================================================
-       HEADER AL HACER SCROLL
-    ===================================================== */
-
-    const header =
-        document.querySelector(".site-header");
-
-
-    const updateHeader =
-        () => {
-
-            if (!header) {
-                return;
-            }
-
-
-            if (window.scrollY > 30) {
-
-                header.style.boxShadow =
-                    "0 15px 45px rgba(0,0,0,.22)";
+                link.classList.add("active");
 
             } else {
 
-                header.style.boxShadow =
-                    "none";
+                link.classList.remove("active");
 
             }
 
-        };
-
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-    );
-
-
-    updateHeader();
+        });
 
 
     /* =====================================================
-       FILTRO DEL PORTAFOLIO
+       PAGE TRANSITIONS
     ===================================================== */
 
-    const filterButtons =
-        document.querySelectorAll(
-            ".filter-btn"
-        );
+    document
+        .querySelectorAll('a[href$=".html"]')
+        .forEach(link => {
 
+            link.addEventListener("click", event => {
 
-    const portfolioCards =
-        document.querySelectorAll(
-            ".portfolio-card"
-        );
+                const href =
+                    link.getAttribute("href");
 
+                if (!href) return;
 
-    if (
-        filterButtons.length &&
-        portfolioCards.length
-    ) {
-
-        filterButtons.forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    filterButtons.forEach(
-                        item => {
-                            item.classList.remove(
-                                "active"
-                            );
-                        }
-                    );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    const filter =
-                        button.dataset.filter;
-
-
-                    portfolioCards.forEach(card => {
-
-                        const category =
-                            card.dataset.category;
-
-
-                        if (
-                            filter === "all" ||
-                            category === filter
-                        ) {
-
-                            card.classList.remove(
-                                "hidden"
-                            );
-
-                        } else {
-
-                            card.classList.add(
-                                "hidden"
-                            );
-
-                        }
-
-                    });
-
+                if (
+                    href.startsWith("http") ||
+                    href.startsWith("#") ||
+                    link.target === "_blank"
+                ) {
+                    return;
                 }
-            );
+
+                event.preventDefault();
+
+                document.body.classList.add(
+                    "page-changing"
+                );
+
+                setTimeout(() => {
+
+                    window.location.href = href;
+
+                }, 220);
+
+            });
 
         });
 
-    }
-
 
     /* =====================================================
-       CALCULADORA DE PLANES
+       YEAR
     ===================================================== */
 
-    const projectType =
-        document.getElementById(
-            "projectType"
-        );
+    const year =
+        document.getElementById("currentYear");
 
+    if (year) {
 
-    const calculatorPrice =
-        document.getElementById(
-            "calculatorPrice"
-        );
-
-
-    if (
-        projectType &&
-        calculatorPrice
-    ) {
-
-        const formatCOP =
-            value => {
-
-                if (
-                    !value ||
-                    Number(value) === 0
-                ) {
-
-                    return "A cotizar";
-
-                }
-
-
-                return "$" +
-                    Number(value)
-                        .toLocaleString(
-                            "es-CO"
-                        );
-
-            };
-
-
-        const updatePrice =
-            () => {
-
-                calculatorPrice.textContent =
-                    formatCOP(
-                        projectType.value
-                    );
-
-            };
-
-
-        projectType.addEventListener(
-            "change",
-            updatePrice
-        );
-
-
-        updatePrice();
+        year.textContent =
+            new Date().getFullYear();
 
     }
 
 
     /* =====================================================
-       FORMULARIO DE CONTACTO
+       CONTACT FORM
     ===================================================== */
 
     const contactForm =
-        document.getElementById(
-            "contactForm"
-        );
+        document.getElementById("contactForm");
 
 
     if (contactForm) {
@@ -404,80 +194,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const name =
-                    document.getElementById(
-                        "name"
-                    )?.value.trim();
+                    document
+                        .getElementById("name")
+                        ?.value
+                        .trim() || "";
 
 
-                const business =
-                    document.getElementById(
-                        "business"
-                    )?.value.trim();
+                const phone =
+                    document
+                        .getElementById("phone")
+                        ?.value
+                        .trim() || "";
 
 
                 const project =
-                    document.getElementById(
-                        "project"
-                    )?.value;
+                    document
+                        .getElementById("project")
+                        ?.value
+                        .trim() || "";
 
 
                 const message =
-                    document.getElementById(
-                        "message"
-                    )?.value.trim();
+                    document
+                        .getElementById("message")
+                        ?.value
+                        .trim() || "";
 
 
-                if (!name || !project || !message) {
-
-                    alert(
-                        "Por favor completa los campos obligatorios."
-                    );
-
-                    return;
-
-                }
+                const text =
+                    `Hola ALLWEB, quiero solicitar información sobre una página web.%0A%0A` +
+                    `Nombre: ${name}%0A` +
+                    `Teléfono: ${phone}%0A` +
+                    `Proyecto: ${project}%0A` +
+                    `Necesidad: ${message}`;
 
 
-                let text =
-                    "Hola ALLWEB,%0A%0A";
-
-
-                text +=
-                    "Mi nombre es: " +
-                    encodeURIComponent(name) +
-                    "%0A";
-
-
-                if (business) {
-
-                    text +=
-                        "Mi negocio es: " +
-                        encodeURIComponent(business) +
-                        "%0A";
-
-                }
-
-
-                text +=
-                    "Necesito: " +
-                    encodeURIComponent(project) +
-                    "%0A%0A";
-
-
-                text +=
-                    "Información del proyecto:%0A" +
-                    encodeURIComponent(message);
-
-
-                const whatsappURL =
-                    "https://wa.me/573042753303?text=" +
-                    text;
+                const whatsapp =
+                    `https://wa.me/573042753303?text=${text}`;
 
 
                 window.open(
-                    whatsappURL,
-                    "_blank",
-                    "noopener"
+                    whatsapp,
+                    "_blank"
                 );
 
             }
@@ -487,67 +245,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       ANIMACIÓN SUAVE AL APARECER
+       ESC - CERRAR MENU
     ===================================================== */
 
-    const animatedElements =
-        document.querySelectorAll(
-            ".service-card, .portfolio-card, .value-card, .process-card, .pricing-card, .timeline-item"
-        );
+    document.addEventListener(
+        "keydown",
+        event => {
 
+            if (event.key === "Escape") {
 
-    if (
-        "IntersectionObserver" in window &&
-        animatedElements.length
-    ) {
+                if (mobileMenu) {
 
-        const observer =
-            new IntersectionObserver(
-                entries => {
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
 
-                    entries.forEach(entry => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.style.opacity =
-                                "1";
-
-                            entry.target.style.transform =
-                                "translateY(0)";
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: .08
                 }
-            );
 
+            }
 
-        animatedElements.forEach(element => {
-
-            element.style.opacity =
-                "0";
-
-            element.style.transform =
-                "translateY(20px)";
-
-            element.style.transition =
-                "opacity .6s ease, transform .6s ease";
-
-
-            observer.observe(element);
-
-        });
-
-    }
+        }
+    );
 
 });
