@@ -1,18 +1,34 @@
 /* =========================================================
    ALLWEB
-   MAIN JAVASCRIPT
+   JAVASCRIPT PRINCIPAL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* =====================================================
+       CARGA DE PÁGINA
+    ===================================================== */
 
     document.body.classList.add("page-loaded");
 
 
     /* =====================================================
-       HEADER SCROLL
+       ELEMENTOS
     ===================================================== */
 
-    const header = document.querySelector(".site-header");
+    const header =
+        document.querySelector(".site-header");
+
+    const menuToggle =
+        document.getElementById("menu-toggle");
+
+    const mobileMenu =
+        document.getElementById("site-nav");
+
+
+    /* =====================================================
+       HEADER AL HACER SCROLL
+    ===================================================== */
 
     function updateHeader() {
 
@@ -35,67 +51,211 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener(
         "scroll",
         updateHeader,
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 
     /* =====================================================
-       MOBILE MENU
+       MENÚ MÓVIL
     ===================================================== */
 
-    const menuToggle =
-        document.getElementById("menuToggle");
+    function openMenu() {
 
-    const mobileMenu =
-        document.getElementById("mobileMenu");
+        if (!mobileMenu || !menuToggle) return;
+
+        mobileMenu.classList.add("open");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Cerrar menú"
+        );
+
+        const icon =
+            menuToggle.querySelector("i");
+
+        if (icon) {
+
+            icon.classList.remove(
+                "fa-bars"
+            );
+
+            icon.classList.add(
+                "fa-xmark"
+            );
+
+        }
+
+    }
+
+
+    function closeMenu() {
+
+        if (!mobileMenu || !menuToggle) return;
+
+        mobileMenu.classList.remove("open");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Abrir menú"
+        );
+
+        const icon =
+            menuToggle.querySelector("i");
+
+        if (icon) {
+
+            icon.classList.remove(
+                "fa-xmark"
+            );
+
+            icon.classList.add(
+                "fa-bars"
+            );
+
+        }
+
+    }
+
+
+    function toggleMenu() {
+
+        if (!mobileMenu) return;
+
+        const isOpen =
+            mobileMenu.classList.contains("open");
+
+        if (isOpen) {
+
+            closeMenu();
+
+        } else {
+
+            openMenu();
+
+        }
+
+    }
 
 
     if (menuToggle && mobileMenu) {
 
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener(
+            "click",
+            (event) => {
 
-            mobileMenu.classList.toggle("open");
+                event.stopPropagation();
 
-            const isOpen =
-                mobileMenu.classList.contains("open");
+                toggleMenu();
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen
+            }
+        );
+
+
+        /* CERRAR AL HACER CLICK EN UN ENLACE */
+
+        const mobileLinks =
+            mobileMenu.querySelectorAll("a");
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    closeMenu();
+
+                }
             );
 
         });
 
 
-        const mobileLinks =
-            mobileMenu.querySelectorAll("a");
+        /* CERRAR AL HACER CLICK FUERA */
+
+        document.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    !mobileMenu.classList.contains("open")
+                ) {
+                    return;
+                }
+
+                const clickedInsideMenu =
+                    mobileMenu.contains(event.target);
+
+                const clickedButton =
+                    menuToggle.contains(event.target);
+
+                if (
+                    !clickedInsideMenu &&
+                    !clickedButton
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
 
 
-        mobileLinks.forEach(link => {
+        /* ESC PARA CERRAR */
 
-            link.addEventListener("click", () => {
+        document.addEventListener(
+            "keydown",
+            (event) => {
 
-                mobileMenu.classList.remove("open");
+                if (
+                    event.key === "Escape"
+                ) {
 
-            });
+                    closeMenu();
 
-        });
+                }
+
+            }
+        );
 
     }
 
 
     /* =====================================================
-       ACTIVE NAVIGATION
+       NAVEGACIÓN ACTIVA
     ===================================================== */
 
-    const currentPage =
+    let currentPage =
         window.location.pathname
             .split("/")
-            .pop() || "index.html";
+            .pop();
+
+
+    if (
+        !currentPage ||
+        currentPage === ""
+    ) {
+
+        currentPage =
+            "index.html";
+
+    }
 
 
     document
-        .querySelectorAll(".nav-link, .mobile-link")
+        .querySelectorAll(".nav-link")
         .forEach(link => {
 
             const href =
@@ -103,18 +263,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!href) return;
 
+
             const cleanHref =
-                href.split("#")[0]
+                href
+                    .split("#")[0]
                     .split("?")[0];
 
 
-            if (cleanHref === currentPage) {
+            if (
+                cleanHref === currentPage
+            ) {
 
-                link.classList.add("active");
+                link.classList.add(
+                    "active"
+                );
 
             } else {
 
-                link.classList.remove("active");
+                link.classList.remove(
+                    "active"
+                );
 
             }
 
@@ -122,51 +290,89 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       PAGE TRANSITIONS
+       TRANSICIÓN ENTRE PÁGINAS
     ===================================================== */
 
     document
-        .querySelectorAll('a[href$=".html"]')
+        .querySelectorAll(
+            'a[href$=".html"]'
+        )
         .forEach(link => {
 
-            link.addEventListener("click", event => {
+            link.addEventListener(
+                "click",
+                event => {
 
-                const href =
-                    link.getAttribute("href");
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
 
-                if (!href) return;
+                    if (!href) return;
 
-                if (
-                    href.startsWith("http") ||
-                    href.startsWith("#") ||
-                    link.target === "_blank"
-                ) {
-                    return;
+
+                    /* No modificar enlaces externos */
+
+                    if (
+                        href.startsWith("http") ||
+                        href.startsWith("#") ||
+                        href.startsWith("mailto:") ||
+                        href.startsWith("tel:") ||
+                        link.target === "_blank"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /* No interceptar CTRL/CMD */
+
+                    if (
+                        event.ctrlKey ||
+                        event.metaKey ||
+                        event.shiftKey ||
+                        event.altKey
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    closeMenu();
+
+
+                    document.body.classList.add(
+                        "page-changing"
+                    );
+
+
+                    setTimeout(() => {
+
+                        window.location.href =
+                            href;
+
+                    }, 220);
+
                 }
-
-                event.preventDefault();
-
-                document.body.classList.add(
-                    "page-changing"
-                );
-
-                setTimeout(() => {
-
-                    window.location.href = href;
-
-                }, 220);
-
-            });
+            );
 
         });
 
 
     /* =====================================================
-       YEAR
+       AÑO ACTUAL
     ===================================================== */
 
     const year =
-        document.getElementById("currentYear");
+        document.getElementById(
+            "current-year"
+        );
+
 
     if (year) {
 
@@ -177,11 +383,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CONTACT FORM
+       FORMULARIO DE CONTACTO
     ===================================================== */
 
     const contactForm =
-        document.getElementById("contactForm");
+        document.getElementById(
+            "contactForm"
+        );
 
 
     if (contactForm) {
@@ -222,20 +430,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 const text =
-                    `Hola ALLWEB, quiero solicitar información sobre una página web.%0A%0A` +
-                    `Nombre: ${name}%0A` +
-                    `Teléfono: ${phone}%0A` +
-                    `Proyecto: ${project}%0A` +
-                    `Necesidad: ${message}`;
+                    [
+                        "Hola ALLWEB, quiero solicitar información sobre una página web.",
+                        "",
+                        `Nombre: ${name}`,
+                        `Teléfono: ${phone}`,
+                        `Proyecto: ${project}`,
+                        `Necesidad: ${message}`
+                    ].join("\n");
 
 
                 const whatsapp =
-                    `https://wa.me/573042753303?text=${text}`;
+                    "https://wa.me/573042753303?text=" +
+                    encodeURIComponent(text);
 
 
                 window.open(
                     whatsapp,
-                    "_blank"
+                    "_blank",
+                    "noopener,noreferrer"
                 );
 
             }
@@ -245,22 +458,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       ESC - CERRAR MENU
+       CERRAR MENÚ SI PASA A ESCRITORIO
     ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        event => {
+    window.addEventListener(
+        "resize",
+        () => {
 
-            if (event.key === "Escape") {
+            if (
+                window.innerWidth > 900
+            ) {
 
-                if (mobileMenu) {
-
-                    mobileMenu.classList.remove(
-                        "open"
-                    );
-
-                }
+                closeMenu();
 
             }
 
