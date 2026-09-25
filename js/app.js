@@ -1,105 +1,65 @@
 /* =========================================================
    ALLWEB
-   JAVASCRIPT PRINCIPAL
-========================================================= */
+   JavaScript principal
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
-       CARGA DE PÁGINA
-    ===================================================== */
+       PAGE LOADED
+       ===================================================== */
 
     document.body.classList.add("page-loaded");
 
 
     /* =====================================================
-       ELEMENTOS
-    ===================================================== */
+       HEADER
+       ===================================================== */
 
-    const header =
-        document.querySelector(".site-header");
+    const header = document.querySelector(".site-header");
+
+    if (header) {
+
+        const updateHeader = () => {
+
+            if (window.scrollY > 20) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+
+        };
+
+        updateHeader();
+
+        window.addEventListener(
+            "scroll",
+            updateHeader,
+            { passive: true }
+        );
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
 
     const menuToggle =
         document.getElementById("menu-toggle");
 
-    const mobileMenu =
+    const siteNav =
         document.getElementById("site-nav");
 
 
-    /* =====================================================
-       HEADER AL HACER SCROLL
-    ===================================================== */
+    const closeMenu = () => {
 
-    function updateHeader() {
-
-        if (!header) return;
-
-        if (window.scrollY > 30) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
+        if (!menuToggle || !siteNav) {
+            return;
         }
 
-    }
+        menuToggle.classList.remove("open");
 
-    updateHeader();
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        {
-            passive: true
-        }
-    );
-
-
-    /* =====================================================
-       MENÚ MÓVIL
-    ===================================================== */
-
-    function openMenu() {
-
-        if (!mobileMenu || !menuToggle) return;
-
-        mobileMenu.classList.add("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Cerrar menú"
-        );
-
-        const icon =
-            menuToggle.querySelector("i");
-
-        if (icon) {
-
-            icon.classList.remove(
-                "fa-bars"
-            );
-
-            icon.classList.add(
-                "fa-xmark"
-            );
-
-        }
-
-    }
-
-
-    function closeMenu() {
-
-        if (!mobileMenu || !menuToggle) return;
-
-        mobileMenu.classList.remove("open");
+        siteNav.classList.remove("open");
 
         menuToggle.setAttribute(
             "aria-expanded",
@@ -111,45 +71,39 @@ document.addEventListener("DOMContentLoaded", () => {
             "Abrir menú"
         );
 
-        const icon =
-            menuToggle.querySelector("i");
+        document.body.classList.remove(
+            "menu-open"
+        );
+    };
 
-        if (icon) {
 
-            icon.classList.remove(
-                "fa-xmark"
-            );
+    const openMenu = () => {
 
-            icon.classList.add(
-                "fa-bars"
-            );
-
+        if (!menuToggle || !siteNav) {
+            return;
         }
 
-    }
+        menuToggle.classList.add("open");
+
+        siteNav.classList.add("open");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        menuToggle.setAttribute(
+            "aria-label",
+            "Cerrar menú"
+        );
+
+        document.body.classList.add(
+            "menu-open"
+        );
+    };
 
 
-    function toggleMenu() {
-
-        if (!mobileMenu) return;
-
-        const isOpen =
-            mobileMenu.classList.contains("open");
-
-        if (isOpen) {
-
-            closeMenu();
-
-        } else {
-
-            openMenu();
-
-        }
-
-    }
-
-
-    if (menuToggle && mobileMenu) {
+    if (menuToggle && siteNav) {
 
         menuToggle.addEventListener(
             "click",
@@ -157,74 +111,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 event.stopPropagation();
 
-                toggleMenu();
+                const isOpen =
+                    siteNav.classList.contains("open");
+
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
 
             }
         );
 
 
-        /* CERRAR AL HACER CLICK EN UN ENLACE */
+        /* Cerrar al seleccionar una página */
 
-        const mobileLinks =
-            mobileMenu.querySelectorAll("a");
+        siteNav
+            .querySelectorAll("a")
+            .forEach((link) => {
 
-        mobileLinks.forEach(link => {
+                link.addEventListener(
+                    "click",
+                    () => {
 
-            link.addEventListener(
-                "click",
-                () => {
+                        closeMenu();
 
-                    closeMenu();
+                    }
+                );
 
-                }
-            );
-
-        });
+            });
 
 
-        /* CERRAR AL HACER CLICK FUERA */
+        /* Cerrar al hacer click fuera */
 
         document.addEventListener(
             "click",
             (event) => {
 
                 if (
-                    !mobileMenu.classList.contains("open")
+                    !siteNav.contains(event.target) &&
+                    !menuToggle.contains(event.target)
                 ) {
-                    return;
-                }
-
-                const clickedInsideMenu =
-                    mobileMenu.contains(event.target);
-
-                const clickedButton =
-                    menuToggle.contains(event.target);
-
-                if (
-                    !clickedInsideMenu &&
-                    !clickedButton
-                ) {
-
                     closeMenu();
-
                 }
 
             }
         );
 
 
-        /* ESC PARA CERRAR */
+        /* ESC */
 
         document.addEventListener(
             "keydown",
             (event) => {
 
-                if (
-                    event.key === "Escape"
-                ) {
-
+                if (event.key === "Escape") {
                     closeMenu();
+                }
 
+            }
+        );
+
+
+        /* Si vuelve a escritorio */
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                if (window.innerWidth > 900) {
+                    closeMenu();
                 }
 
             }
@@ -234,161 +190,150 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       NAVEGACIÓN ACTIVA
-    ===================================================== */
+       ACTIVE PAGE
+       ===================================================== */
 
-    let currentPage =
+    const currentFile =
         window.location.pathname
             .split("/")
-            .pop();
+            .pop() || "index.html";
 
 
-    if (
-        !currentPage ||
-        currentPage === ""
-    ) {
-
-        currentPage =
-            "index.html";
-
-    }
+    const navigationLinks =
+        document.querySelectorAll(
+            ".site-nav a"
+        );
 
 
-    document
-        .querySelectorAll(".nav-link")
-        .forEach(link => {
+    navigationLinks.forEach((link) => {
 
-            const href =
-                link.getAttribute("href");
+        const href =
+            link.getAttribute("href");
 
-            if (!href) return;
+        if (!href) {
+            return;
+        }
 
-
-            const cleanHref =
-                href
-                    .split("#")[0]
-                    .split("?")[0];
+        const cleanHref =
+            href.split("#")[0]
+                .split("?")[0];
 
 
-            if (
-                cleanHref === currentPage
-            ) {
+        if (
+            cleanHref === currentFile ||
+            (
+                currentFile === "" &&
+                cleanHref === "index.html"
+            )
+        ) {
 
-                link.classList.add(
-                    "active"
-                );
+            link.classList.add("active");
 
-            } else {
+        } else {
 
-                link.classList.remove(
-                    "active"
-                );
+            link.classList.remove("active");
 
-            }
+        }
 
-        });
+    });
 
 
     /* =====================================================
-       TRANSICIÓN ENTRE PÁGINAS
-    ===================================================== */
+       FOOTER YEAR
+       ===================================================== */
 
-    document
-        .querySelectorAll(
-            'a[href$=".html"]'
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                event => {
-
-                    const href =
-                        link.getAttribute(
-                            "href"
-                        );
-
-                    if (!href) return;
-
-
-                    /* No modificar enlaces externos */
-
-                    if (
-                        href.startsWith("http") ||
-                        href.startsWith("#") ||
-                        href.startsWith("mailto:") ||
-                        href.startsWith("tel:") ||
-                        link.target === "_blank"
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    /* No interceptar CTRL/CMD */
-
-                    if (
-                        event.ctrlKey ||
-                        event.metaKey ||
-                        event.shiftKey ||
-                        event.altKey
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    event.preventDefault();
-
-
-                    closeMenu();
-
-
-                    document.body.classList.add(
-                        "page-changing"
-                    );
-
-
-                    setTimeout(() => {
-
-                        window.location.href =
-                            href;
-
-                    }, 220);
-
-                }
-            );
-
-        });
-
-
-    /* =====================================================
-       AÑO ACTUAL
-    ===================================================== */
-
-    const year =
+    const yearElement =
         document.getElementById(
             "current-year"
         );
 
+    if (yearElement) {
 
-    if (year) {
-
-        year.textContent =
+        yearElement.textContent =
             new Date().getFullYear();
 
     }
 
 
     /* =====================================================
-       FORMULARIO DE CONTACTO
-    ===================================================== */
+       INTERNAL PAGE TRANSITIONS
+       ===================================================== */
+
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href$=".html"]'
+        );
+
+
+    internalLinks.forEach((link) => {
+
+        link.addEventListener(
+            "click",
+            (event) => {
+
+                /* No interceptar Ctrl/Cmd/Shift/Alt */
+
+                if (
+                    event.ctrlKey ||
+                    event.metaKey ||
+                    event.shiftKey ||
+                    event.altKey
+                ) {
+                    return;
+                }
+
+
+                /* No interceptar nueva pestaña */
+
+                if (
+                    link.target === "_blank"
+                ) {
+                    return;
+                }
+
+
+                const href =
+                    link.getAttribute("href");
+
+                if (
+                    !href ||
+                    href.startsWith("#") ||
+                    href.startsWith("http")
+                ) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+                closeMenu();
+
+
+                document.body.classList.add(
+                    "page-changing"
+                );
+
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        href;
+
+                }, 220);
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CONTACT FORM
+       ===================================================== */
 
     const contactForm =
         document.getElementById(
-            "contactForm"
+            "contact-form"
         );
 
 
@@ -396,59 +341,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
         contactForm.addEventListener(
             "submit",
-            event => {
+            (event) => {
 
                 event.preventDefault();
 
 
                 const name =
-                    document
-                        .getElementById("name")
-                        ?.value
-                        .trim() || "";
+                    document.getElementById(
+                        "name"
+                    )?.value.trim() || "";
 
 
                 const phone =
-                    document
-                        .getElementById("phone")
-                        ?.value
-                        .trim() || "";
+                    document.getElementById(
+                        "phone"
+                    )?.value.trim() || "";
 
 
                 const project =
-                    document
-                        .getElementById("project")
-                        ?.value
-                        .trim() || "";
+                    document.getElementById(
+                        "project"
+                    )?.value.trim() || "";
 
 
                 const message =
-                    document
-                        .getElementById("message")
-                        ?.value
-                        .trim() || "";
+                    document.getElementById(
+                        "message"
+                    )?.value.trim() || "";
 
 
-                const text =
-                    [
-                        "Hola ALLWEB, quiero solicitar información sobre una página web.",
-                        "",
-                        `Nombre: ${name}`,
-                        `Teléfono: ${phone}`,
-                        `Proyecto: ${project}`,
-                        `Necesidad: ${message}`
-                    ].join("\n");
+                if (
+                    !name ||
+                    !phone ||
+                    !project ||
+                    !message
+                ) {
+
+                    alert(
+                        "Por favor completa todos los campos."
+                    );
+
+                    return;
+
+                }
 
 
-                const whatsapp =
+                const whatsappMessage =
+`Hola ALLWEB 👋
+
+Quiero solicitar una cotización.
+
+Nombre: ${name}
+
+Teléfono: ${phone}
+
+Tipo de proyecto: ${project}
+
+Descripción:
+${message}`;
+
+
+                const whatsappURL =
                     "https://wa.me/573042753303?text=" +
-                    encodeURIComponent(text);
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
 
 
                 window.open(
-                    whatsapp,
+                    whatsappURL,
                     "_blank",
-                    "noopener,noreferrer"
+                    "noopener"
                 );
 
             }
@@ -458,22 +421,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CERRAR MENÚ SI PASA A ESCRITORIO
-    ===================================================== */
+       VIDEO
+       ===================================================== */
 
-    window.addEventListener(
-        "resize",
-        () => {
+    const video =
+        document.querySelector(
+            ".allweb-video"
+        );
+
+
+    if (video) {
+
+        video.muted = true;
+
+        const playVideo = () => {
+
+            const promise =
+                video.play();
 
             if (
-                window.innerWidth > 900
+                promise &&
+                typeof promise.catch === "function"
             ) {
 
-                closeMenu();
+                promise.catch(() => {
+                    /* El navegador puede bloquear autoplay */
+                });
 
             }
 
-        }
-    );
+        };
+
+        playVideo();
+
+    }
 
 });
