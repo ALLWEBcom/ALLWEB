@@ -2,509 +2,990 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="ALLWEB crea páginas web profesionales, modernas y adaptadas a negocios, empresas y profesionales.">
+
+    <meta name="theme-color" content="#050509">
 
     <title>ALLWEB | Diseño y Desarrollo Web Profesional</title>
 
-    <meta name="description"
-        content="ALLWEB crea páginas web profesionales, modernas y de alto impacto para negocios, empresas y profesionales.">
-
-    <meta name="theme-color" content="#050507">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <link rel="stylesheet" href="css/styles.css">
-
+    <!-- Evita el parpadeo de entrada -->
     <script>
         document.documentElement.classList.add("js");
     </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<div class="page-bg"></div>
-<div class="grid-background"></div>
+<!-- =====================================================
+     FONDO DECORATIVO
+     ===================================================== -->
 
-<header class="site-header" id="siteHeader">
+<div class="background-grid"></div>
+
+<div class="ambient ambient-one"></div>
+<div class="ambient ambient-two"></div>
+<div class="ambient ambient-three"></div>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header class="site-header" id="site-header">
 
     <div class="container nav-container">
 
-        <a href="index.html" class="brand">
+        <!-- LOGO ALLWEB -->
+        <a href="index.html" class="brand" aria-label="ALLWEB - Inicio">
 
-            <span class="brand-main">
+            <span class="brand-text">
                 ALL<span>WEB</span>
             </span>
 
-            <span class="brand-line"></span>
-
-            <span class="brand-sub">
-                DIGITAL STUDIO
+            <!-- Línea animada del logo -->
+            <span class="brand-line" aria-hidden="true">
+                <span></span>
             </span>
 
         </a>
 
-        <nav class="desktop-nav">
 
-            <a href="index.html" class="nav-link active">
+        <!-- BOTÓN MOBILE -->
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="site-nav" id="site-nav">
+
+            <a href="index.html" data-nav="index.html">
                 Inicio
             </a>
 
-            <a href="servicios.html" class="nav-link">
+            <a href="servicios.html" data-nav="servicios.html">
                 Servicios
             </a>
 
-            <a href="portafolio.html" class="nav-link">
+            <a href="portafolio.html" data-nav="portafolio.html">
                 Portafolio
             </a>
 
-            <a href="planes.html" class="nav-link">
+            <a href="planes.html" data-nav="planes.html">
                 Planes
             </a>
 
-            <a href="nosotros.html" class="nav-link">
+            <a href="nosotros.html" data-nav="nosotros.html">
                 Nosotros
             </a>
 
-            <a href="contacto.html" class="nav-link">
+            <a href="contacto.html" data-nav="contacto.html">
                 Contacto
             </a>
 
         </nav>
 
-        <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web."
-            class="header-button"
-            target="_blank"
-            rel="noopener">
 
-            <i class="fa-brands fa-whatsapp"></i>
+        <!-- CTA HEADER -->
 
-            Cotizar
+        <div class="header-action">
 
-        </a>
+            <a
+                href="contacto.html"
+                class="nav-cta"
+            >
+                Cotizar proyecto
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
-
-    </div>
-
-    <div class="mobile-menu" id="mobileMenu">
-
-        <a href="index.html" class="mobile-link active">
-            Inicio
-        </a>
-
-        <a href="servicios.html" class="mobile-link">
-            Servicios
-        </a>
-
-        <a href="portafolio.html" class="mobile-link">
-            Portafolio
-        </a>
-
-        <a href="planes.html" class="mobile-link">
-            Planes
-        </a>
-
-        <a href="nosotros.html" class="mobile-link">
-            Nosotros
-        </a>
-
-        <a href="contacto.html" class="mobile-link">
-            Contacto
-        </a>
+        </div>
 
     </div>
 
 </header>
 
 
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
 <main>
 
-    <!-- HERO -->
 
-    <section class="hero">
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
-        <div class="container hero-grid">
+<section class="hero">
 
-            <div class="hero-content">
+    <div class="container hero-grid">
 
-                <div class="eyebrow">
-                    <span class="status-dot"></span>
-                    DISEÑO WEB PROFESIONAL
-                </div>
 
-                <h1>
-                    Tu negocio merece
-                    <span class="gradient-text">
-                        una presencia digital extraordinaria.
-                    </span>
-                </h1>
+        <!-- TEXTO -->
 
-                <p class="hero-description">
+        <div class="hero-content">
 
-                    Creamos páginas web modernas, rápidas y profesionales
-                    diseñadas para convertir visitantes en clientes.
+            <div class="eyebrow">
 
-                </p>
+                <span class="eyebrow-dot"></span>
 
-                <div class="hero-buttons">
-
-                    <a href="contacto.html" class="btn btn-primary">
-
-                        Crear mi página
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                    <a href="portafolio.html" class="btn btn-secondary">
-
-                        Ver proyectos
-
-                    </a>
-
-                </div>
-
-                <div class="hero-trust">
-
-                    <div>
-                        <i class="fa-solid fa-bolt"></i>
-                        Diseño moderno
-                    </div>
-
-                    <div>
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        Responsive
-                    </div>
-
-                    <div>
-                        <i class="fa-solid fa-rocket"></i>
-                        Optimizada
-                    </div>
-
-                </div>
+                DISEÑO WEB · DESARROLLO · EXPERIENCIA DIGITAL
 
             </div>
 
 
-            <div class="hero-visual">
+            <h1>
 
-                <div class="orb orb-one"></div>
-                <div class="orb orb-two"></div>
+                Tu negocio merece una web que
 
-                <div class="code-window">
-
-                    <div class="window-top">
-
-                        <div class="window-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <div class="window-title">
-                            allweb.dev
-                        </div>
-
-                    </div>
-
-                    <div class="code-content">
-
-<pre><span class="code-purple">&lt;website</span>
-    <span class="code-cyan">brand</span>=<span class="code-green">"ALLWEB"</span>
-    <span class="code-cyan">status</span>=<span class="code-green">"online"</span>
-<span class="code-purple">&gt;</span>
-
-    <span class="code-blue">&lt;design</span>
-        <span class="code-cyan">quality</span>=<span class="code-green">"premium"</span>
-    <span class="code-blue">/&gt;</span>
-
-    <span class="code-blue">&lt;performance</span>
-        <span class="code-cyan">speed</span>=<span class="code-green">"fast"</span>
-    <span class="code-blue">/&gt;</span>
-
-<span class="code-purple">&lt;/website&gt;</span></pre>
-
-                    </div>
-
-                    <div class="code-status">
-
-                        <span class="status-live"></span>
-
-                        Sistema online
-
-                        <span>
-                            99.9%
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="floating-card floating-card-one">
-
-                    <i class="fa-solid fa-chart-line"></i>
-
-                    <div>
-                        <strong>Más clientes</strong>
-                        <small>Mayor presencia digital</small>
-                    </div>
-
-                </div>
-
-                <div class="floating-card floating-card-two">
-
-                    <i class="fa-solid fa-bolt"></i>
-
-                    <div>
-                        <strong>Ultra rápido</strong>
-                        <small>Experiencia optimizada</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- STATS -->
-
-    <section class="stats-section">
-
-        <div class="container stats-grid">
-
-            <div class="stat">
-                <strong>100%</strong>
-                <span>Diseño personalizado</span>
-            </div>
-
-            <div class="stat">
-                <strong>24/7</strong>
-                <span>Tu negocio en línea</span>
-            </div>
-
-            <div class="stat">
-                <strong>∞</strong>
-                <span>Posibilidades digitales</span>
-            </div>
-
-            <div class="stat">
-                <strong>1</strong>
-                <span>Objetivo: hacer crecer tu negocio</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- SERVICIOS -->
-
-    <section class="section">
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <span class="section-tag">
-                    LO QUE HACEMOS
+                <span class="gradient-text">
+                    trabaje por ti.
                 </span>
 
-                <h2>
-                    Soluciones digitales
-                    <span>para cada negocio.</span>
-                </h2>
-
-                <p>
-                    No hacemos páginas genéricas.
-                    Creamos experiencias digitales pensadas para tu negocio.
-                </p>
-
-            </div>
+            </h1>
 
 
-            <div class="services-grid">
+            <p class="hero-description">
 
-                <article class="service-card">
+                Diseñamos páginas web modernas, rápidas y profesionales
+                para convertir visitantes en clientes y darle a tu negocio
+                una presencia digital que inspire confianza.
 
-                    <div class="service-icon">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-
-                    <h3>
-                        Página empresarial
-                    </h3>
-
-                    <p>
-                        Una presencia digital profesional para presentar
-                        tu empresa, servicios y propuesta de valor.
-                    </p>
-
-                    <a href="servicios.html">
-                        Ver servicio
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </article>
+            </p>
 
 
-                <article class="service-card">
+            <div class="hero-buttons">
 
-                    <div class="service-icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
+                <a
+                    href="contacto.html"
+                    class="btn btn-primary"
+                >
 
-                    <h3>
-                        Tienda virtual
-                    </h3>
-
-                    <p>
-                        Presenta tus productos y facilita que tus clientes
-                        puedan comprar o contactarte.
-                    </p>
-
-                    <a href="servicios.html">
-                        Ver servicio
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-                        <i class="fa-solid fa-mobile-screen-button"></i>
-                    </div>
-
-                    <h3>
-                        Landing page
-                    </h3>
-
-                    <p>
-                        Una página enfocada en promocionar un producto,
-                        servicio, campaña o lanzamiento.
-                    </p>
-
-                    <a href="servicios.html">
-                        Ver servicio
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-                        <i class="fa-solid fa-rotate"></i>
-                    </div>
-
-                    <h3>
-                        Rediseño web
-                    </h3>
-
-                    <p>
-                        Modernizamos páginas existentes para mejorar
-                        diseño, navegación y experiencia.
-                    </p>
-
-                    <a href="servicios.html">
-                        Ver servicio
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CTA -->
-
-    <section class="cta-section">
-
-        <div class="container">
-
-            <div class="cta-box">
-
-                <div class="cta-glow"></div>
-
-                <span class="section-tag">
-                    ¿LISTO PARA DAR EL SIGUIENTE PASO?
-                </span>
-
-                <h2>
-                    Construyamos algo
-                    <span>extraordinario.</span>
-                </h2>
-
-                <p>
-                    Cuéntanos qué necesitas y diseñaremos una solución
-                    digital pensada para tu negocio.
-                </p>
-
-                <a href="contacto.html" class="btn btn-primary">
-
-                    Hablar con ALLWEB
+                    <span>Crear mi página web</span>
 
                     <i class="fa-solid fa-arrow-right"></i>
 
                 </a>
 
+
+                <a
+                    href="portafolio.html"
+                    class="btn btn-secondary"
+                >
+
+                    Ver proyectos
+
+                    <i class="fa-solid fa-grid-2"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- MINI BENEFICIOS -->
+
+            <div class="hero-trust">
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Diseño profesional
+
+                </div>
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Adaptada a celulares
+
+                </div>
+
+                <div class="trust-item">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    WhatsApp integrado
+
+                </div>
+
             </div>
 
         </div>
 
-    </section>
+
+
+        <!-- VISUAL HERO -->
+
+        <div class="hero-visual">
+
+            <div class="code-window">
+
+                <div class="window-top">
+
+                    <div class="window-dots">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                    <span class="window-title">
+                        ALLWEB / DIGITAL EXPERIENCE
+                    </span>
+
+                </div>
+
+
+                <div class="code-body">
+
+                    <div class="code-line">
+                        <span class="code-number">01</span>
+                        <span class="code-purple">&lt;website</span>
+                        <span class="code-white">premium=</span>
+                        <span class="code-cyan">"true"</span>
+                        <span class="code-purple">&gt;</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="code-number">02</span>
+                        <span class="code-space"></span>
+                        <span class="code-purple">&lt;design</span>
+                        <span class="code-white">modern=</span>
+                        <span class="code-cyan">"true"</span>
+                        <span class="code-purple">/&gt;</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="code-number">03</span>
+                        <span class="code-space"></span>
+                        <span class="code-purple">&lt;responsive</span>
+                        <span class="code-white">device=</span>
+                        <span class="code-cyan">"all"</span>
+                        <span class="code-purple">/&gt;</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="code-number">04</span>
+                        <span class="code-space"></span>
+                        <span class="code-purple">&lt;conversion</span>
+                        <span class="code-white">optimized=</span>
+                        <span class="code-cyan">"true"</span>
+                        <span class="code-purple">/&gt;</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="code-number">05</span>
+                        <span class="code-space"></span>
+                        <span class="code-green">
+                            ✓ ALL SYSTEMS READY
+                        </span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="code-number">06</span>
+                        <span class="code-purple">&lt;/website&gt;</span>
+                    </div>
+
+                </div>
+
+
+                <div class="code-status">
+
+                    <span class="status-dot"></span>
+
+                    EXPERIENCIA DIGITAL ACTIVA
+
+                </div>
+
+            </div>
+
+
+            <!-- TARJETAS FLOTANTES -->
+
+            <div class="floating-card floating-card-one">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                <div>
+
+                    <strong>Rápida</strong>
+
+                    <span>Optimizada</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card floating-card-two">
+
+                <i class="fa-solid fa-mobile-screen"></i>
+
+                <div>
+
+                    <strong>Responsive</strong>
+
+                    <span>Todos los dispositivos</span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VIDEO PROMOCIONAL
+     ===================================================== -->
+
+<section class="video-showcase" id="video">
+
+    <div class="container">
+
+
+        <div class="video-heading">
+
+            <span class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                ALLWEB · EXPERIENCIA DIGITAL
+
+            </span>
+
+
+            <h2>
+
+                Así comienza una nueva
+
+                <span class="gradient-text">
+                    presencia digital.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                Descubre nuestra propuesta y todo lo que podemos
+                crear para llevar tu negocio al mundo digital.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- CONTENEDOR DEL VIDEO -->
+
+        <div class="video-frame">
+
+            <!-- Línea luminosa -->
+            <div class="video-line video-line-top"></div>
+
+
+            <div class="video-inner">
+
+                <video
+                    class="allweb-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                >
+
+                    <source
+                        src="videoallweb.mp4"
+                        type="video/mp4"
+                    >
+
+                    Tu navegador no soporta videos HTML5.
+
+                </video>
+
+
+                <!-- Overlay -->
+
+                <div class="video-overlay">
+
+                    <div class="video-corner top-left"></div>
+                    <div class="video-corner top-right"></div>
+                    <div class="video-corner bottom-left"></div>
+                    <div class="video-corner bottom-right"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Línea luminosa inferior -->
+
+            <div class="video-line video-line-bottom"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS
+     ===================================================== -->
+
+<section class="stats-section">
+
+    <div class="container stats-grid">
+
+
+        <div class="stat">
+
+            <strong>100%</strong>
+
+            <span>Adaptable a celulares</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>24/7</strong>
+
+            <span>Tu negocio visible</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>+1</strong>
+
+            <span>Experiencia digital</span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>∞</strong>
+
+            <span>Posibilidades</span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICIOS
+     ===================================================== -->
+
+<section class="section services-preview">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    LO QUE HACEMOS
+                </span>
+
+                <h2>
+                    Soluciones digitales
+                    <span class="gradient-text">para crecer.</span>
+                </h2>
+
+            </div>
+
+
+            <a
+                href="servicios.html"
+                class="text-link"
+            >
+
+                Ver todos los servicios
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="services-grid">
+
+
+            <!-- CARD 1 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+
+                    <i class="fa-solid fa-laptop-code"></i>
+
+                </div>
+
+                <span class="service-number">
+                    01
+                </span>
+
+                <h3>
+                    Página empresarial
+                </h3>
+
+                <p>
+
+                    Una presencia digital profesional
+                    para presentar tu empresa, servicios
+                    y propuesta de valor.
+
+                </p>
+
+                <a href="servicios.html">
+
+                    Explorar
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- CARD 2 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+
+                    <i class="fa-solid fa-rocket"></i>
+
+                </div>
+
+                <span class="service-number">
+                    02
+                </span>
+
+                <h3>
+                    Landing Page
+                </h3>
+
+                <p>
+
+                    Diseños enfocados en presentar
+                    una oferta y generar contactos
+                    o conversiones.
+
+                </p>
+
+                <a href="servicios.html">
+
+                    Explorar
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- CARD 3 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </div>
+
+                <span class="service-number">
+                    03
+                </span>
+
+                <h3>
+                    Tienda virtual
+                </h3>
+
+                <p>
+
+                    Convierte tu catálogo de productos
+                    en una experiencia de compra
+                    moderna y atractiva.
+
+                </p>
+
+                <a href="servicios.html">
+
+                    Explorar
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </article>
+
+
+
+            <!-- CARD 4 -->
+
+            <article class="service-card">
+
+                <div class="service-icon">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                </div>
+
+                <span class="service-number">
+                    04
+                </span>
+
+                <h3>
+                    Rediseño web
+                </h3>
+
+                <p>
+
+                    Transformamos una página existente
+                    en una experiencia más moderna,
+                    clara y profesional.
+
+                </p>
+
+                <a href="servicios.html">
+
+                    Explorar
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     POR QUÉ ALLWEB
+     ===================================================== -->
+
+<section class="section why-section">
+
+    <div class="container why-grid">
+
+
+        <div class="why-visual">
+
+            <div class="orbital-card">
+
+                <div class="orbital-center">
+
+                    <span>ALL</span>
+                    <strong>WEB</strong>
+
+                </div>
+
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="orbit-dot dot-one"></div>
+                <div class="orbit-dot dot-two"></div>
+                <div class="orbit-dot dot-three"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="why-content">
+
+            <span class="section-label">
+                NUESTRA DIFERENCIA
+            </span>
+
+
+            <h2>
+
+                No hacemos páginas.
+
+                <span class="gradient-text">
+                    Creamos experiencias.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                Cada proyecto combina diseño, tecnología y estrategia
+                para que tu página no sea simplemente bonita, sino que
+                tenga un propósito claro para tu negocio.
+
+            </p>
+
+
+            <div class="benefits">
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Diseño con identidad
+                        </h3>
+
+                        <p>
+                            Una imagen digital coherente con tu marca.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Experiencia rápida
+                        </h3>
+
+                        <p>
+                            Diseñamos pensando en velocidad y facilidad de uso.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Contacto directo
+                        </h3>
+
+                        <p>
+                            Facilitamos que tus visitantes puedan contactarte.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="nosotros.html"
+                class="btn btn-secondary"
+            >
+
+                Conoce ALLWEB
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+     ===================================================== -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="cta-glow"></div>
+
+
+            <div class="cta-content">
+
+                <span class="section-label">
+                    ¿LISTO PARA DAR EL SIGUIENTE PASO?
+                </span>
+
+
+                <h2>
+
+                    Hagamos que tu negocio
+
+                    <span class="gradient-text">
+                        se vea diferente.
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Cuéntanos qué necesitas y construyamos
+                    juntos tu próxima experiencia digital.
+
+                </p>
+
+
+                <div class="cta-buttons">
+
+                    <a
+                        href="contacto.html"
+                        class="btn btn-primary"
+                    >
+
+                        Solicitar cotización
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a
+                        href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web."
+                        class="btn btn-whatsapp"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
 <footer class="site-footer">
 
     <div class="container footer-grid">
 
+
         <div class="footer-brand">
 
-            <a href="index.html" class="brand footer-logo">
+            <a href="index.html" class="brand">
 
-                <span class="brand-main">
+                <span class="brand-text">
                     ALL<span>WEB</span>
                 </span>
 
-                <span class="brand-line"></span>
-
-                <span class="brand-sub">
-                    DIGITAL STUDIO
+                <span class="brand-line">
+                    <span></span>
                 </span>
 
             </a>
 
+
             <p>
-                Diseño y desarrollo web profesional para negocios
-                que quieren crecer.
+
+                Diseño y desarrollo web profesional
+                para negocios que quieren crecer.
+
             </p>
 
         </div>
+
 
 
         <div class="footer-column">
@@ -521,6 +1002,7 @@
         </div>
 
 
+
         <div class="footer-column">
 
             <h4>
@@ -533,20 +1015,24 @@
         </div>
 
 
+
         <div class="footer-column">
 
             <h4>
                 Contacto
             </h4>
 
-            <a href="https://wa.me/573042753303"
+            <a
+                href="https://wa.me/573042753303"
                 target="_blank"
-                rel="noopener">
-
-                <i class="fa-brands fa-whatsapp"></i>
+                rel="noopener noreferrer"
+            >
                 WhatsApp
-
             </a>
+
+            <span>
+                304 275 3303
+            </span>
 
         </div>
 
@@ -556,9 +1042,9 @@
     <div class="container footer-bottom">
 
         <span>
-            © <span id="currentYear"></span> ALLWEB.
-            Todos los derechos reservados.
+            © <span id="current-year"></span> ALLWEB. Todos los derechos reservados.
         </span>
+
 
         <span>
             Diseño digital con propósito.
@@ -569,16 +1055,30 @@
 </footer>
 
 
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web."
+
+<!-- =====================================================
+     WHATSAPP FLOTANTE
+     ===================================================== -->
+
+<a
+    href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web."
     class="whatsapp-float"
     target="_blank"
-    rel="noopener"
-    aria-label="Contactar por WhatsApp">
+    rel="noopener noreferrer"
+    aria-label="Contactar por WhatsApp"
+>
 
     <i class="fa-brands fa-whatsapp"></i>
 
+    <span>
+        Hablemos
+    </span>
+
 </a>
 
+
+
+<!-- JS -->
 
 <script src="js/app.js"></script>
 
