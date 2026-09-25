@@ -1,740 +1,250 @@
-"use strict";
-
-
 /* =========================================================
-   CONFIGURACIÓN ALLWEB
-========================================================= */
-
-const ALLWEB_CONFIG = {
-
-    whatsapp: "573042753303",
-
-    whatsappMessage:
-        "Hola ALLWEB, quiero cotizar una página web para mi negocio."
-
-};
-
-
-/* =========================================================
-   INICIO
+   ALLWEB - APP.JS
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    initializeMobileMenu();
+    /* =====================================================
+       PAGE LOAD
+    ===================================================== */
 
-    initializePortfolioFilter();
-
-    initializeFAQ();
-
-    initializeQuoteCalculator();
-
-    initializeNavigation();
-
-    initializeYear();
-
-    initializeWhatsApp();
-
-});
+    requestAnimationFrame(() => {
+        document.body.classList.add("page-loaded");
+    });
 
 
-/* =========================================================
-   MENÚ MOBILE
-========================================================= */
+    /* =====================================================
+       HEADER SCROLL
+    ===================================================== */
 
-function initializeMobileMenu() {
+    const header = document.getElementById("header");
 
-    const button =
-        document.getElementById(
-            "mobile-menu-button"
-        );
+    const updateHeader = () => {
 
-    const menu =
-        document.getElementById(
-            "mobile-nav"
-        );
+        if (!header) return;
 
-
-    if (!button || !menu) {
-        return;
-    }
-
-
-    button.addEventListener("click", () => {
-
-        const isOpen =
-            menu.classList.toggle("open");
-
-
-        button.setAttribute(
-            "aria-expanded",
-            String(isOpen)
-        );
-
-
-        button.setAttribute(
-            "aria-label",
-            isOpen
-                ? "Cerrar menú"
-                : "Abrir menú"
-        );
-
-
-        const icon =
-            button.querySelector("i");
-
-
-        if (icon) {
-
-            icon.className = isOpen
-                ? "fa-solid fa-xmark"
-                : "fa-solid fa-bars";
-
+        if (window.scrollY > 30) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
         }
 
-    });
+    };
+
+    updateHeader();
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        { passive: true }
+    );
 
 
-    const links =
-        menu.querySelectorAll("a");
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
 
+    const menuButton =
+        document.getElementById("mobileMenuButton");
 
-    links.forEach(link => {
+    const mobileMenu =
+        document.getElementById("mobileMenu");
 
-        link.addEventListener(
+    if (menuButton && mobileMenu) {
+
+        menuButton.addEventListener(
             "click",
             () => {
 
-                menu.classList.remove("open");
-
-                button.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                button.setAttribute(
-                    "aria-label",
-                    "Abrir menú"
-                );
-
+                mobileMenu.classList.toggle("open");
 
                 const icon =
-                    button.querySelector("i");
+                    menuButton.querySelector("i");
 
+                if (
+                    mobileMenu.classList.contains("open")
+                ) {
 
-                if (icon) {
+                    icon.classList.remove(
+                        "fa-bars"
+                    );
 
-                    icon.className =
-                        "fa-solid fa-bars";
+                    icon.classList.add(
+                        "fa-xmark"
+                    );
 
+                } else {
+
+                    icon.classList.remove(
+                        "fa-xmark"
+                    );
+
+                    icon.classList.add(
+                        "fa-bars"
+                    );
                 }
 
             }
         );
 
-    });
 
-}
+        mobileMenu
+            .querySelectorAll("a")
+            .forEach(link => {
 
+                link.addEventListener(
+                    "click",
+                    () => {
 
-/* =========================================================
-   FILTRO PORTAFOLIO
-========================================================= */
-
-function initializePortfolioFilter() {
-
-    const buttons =
-        document.querySelectorAll(
-            ".filter-button"
-        );
-
-
-    const cards =
-        document.querySelectorAll(
-            ".portfolio-card"
-        );
-
-
-    if (!buttons.length || !cards.length) {
-        return;
-    }
-
-
-    buttons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const filter =
-                    button.dataset.filter;
-
-
-                buttons.forEach(item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                });
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                cards.forEach(card => {
-
-                    const category =
-                        card.dataset.category;
-
-
-                    if (
-                        filter === "all" ||
-                        category === filter
-                    ) {
-
-                        card.classList.remove(
-                            "hidden"
-                        );
-
-                    } else {
-
-                        card.classList.add(
-                            "hidden"
-                        );
-
-                    }
-
-                });
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-function initializeFAQ() {
-
-    const questions =
-        document.querySelectorAll(
-            ".faq-question"
-        );
-
-
-    questions.forEach(question => {
-
-        question.addEventListener(
-            "click",
-            () => {
-
-                const currentItem =
-                    question.closest(
-                        ".faq-item"
-                    );
-
-
-                if (!currentItem) {
-                    return;
-                }
-
-
-                const wasOpen =
-                    currentItem.classList.contains(
-                        "open"
-                    );
-
-
-                document
-                    .querySelectorAll(".faq-item")
-                    .forEach(item => {
-
-                        item.classList.remove(
+                        mobileMenu.classList.remove(
                             "open"
                         );
 
+                        const icon =
+                            menuButton.querySelector("i");
 
-                        const answer =
-                            item.querySelector(
-                                ".faq-answer"
-                            );
-
-
-                        if (answer) {
-
-                            answer.style.maxHeight =
-                                null;
-
-                        }
-
-                    });
-
-
-                if (!wasOpen) {
-
-                    currentItem.classList.add(
-                        "open"
-                    );
-
-
-                    const answer =
-                        currentItem.querySelector(
-                            ".faq-answer"
+                        icon.classList.remove(
+                            "fa-xmark"
                         );
 
-
-                    if (answer) {
-
-                        answer.style.maxHeight =
-                            answer.scrollHeight + "px";
+                        icon.classList.add(
+                            "fa-bars"
+                        );
 
                     }
-
-                }
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   COTIZADOR
-========================================================= */
-
-function initializeQuoteCalculator() {
-
-    const projectSelect =
-        document.getElementById(
-            "project-type"
-        );
-
-
-    const addons =
-        document.querySelectorAll(
-            ".quote-addon"
-        );
-
-
-    const totalElement =
-        document.getElementById(
-            "total-price"
-        );
-
-
-    const summaryElement =
-        document.getElementById(
-            "quote-summary"
-        );
-
-
-    const whatsappButton =
-        document.getElementById(
-            "quote-whatsapp"
-        );
-
-
-    if (
-        !projectSelect ||
-        !totalElement ||
-        !summaryElement
-    ) {
-
-        return;
-
-    }
-
-
-    function calculateQuote() {
-
-        const selectedOption =
-            projectSelect.options[
-                projectSelect.selectedIndex
-            ];
-
-
-        const basePrice =
-            Number(
-                projectSelect.value
-            ) || 0;
-
-
-        const projectName =
-            selectedOption.dataset.name ||
-            selectedOption.textContent.trim();
-
-
-        let total =
-            basePrice;
-
-
-        const selectedAddons = [];
-
-
-        addons.forEach(addon => {
-
-            if (addon.checked) {
-
-                const value =
-                    Number(addon.value) || 0;
-
-
-                total += value;
-
-
-                selectedAddons.push(
-                    addon.dataset.name
                 );
 
-            }
-
-        });
-
-
-        totalElement.textContent =
-            total > 0
-                ? formatCOP(total)
-                : "Cotizar";
-
-
-        const summaryParts = [
-            projectName
-        ];
-
-
-        if (selectedAddons.length) {
-
-            summaryParts.push(
-                "Adicionales:\n• " +
-                selectedAddons.join(
-                    "\n• "
-                )
-            );
-
-        }
-
-
-        summaryElement.textContent =
-            summaryParts.join("\n\n");
-
-
-        if (whatsappButton) {
-
-            const message =
-                createQuoteMessage(
-                    projectName,
-                    basePrice,
-                    selectedAddons,
-                    total
-                );
-
-
-            whatsappButton.href =
-                buildWhatsAppUrl(
-                    message
-                );
-
-        }
+            });
 
     }
 
 
-    projectSelect.addEventListener(
-        "change",
-        calculateQuote
-    );
+    /* =====================================================
+       ACTIVE NAVIGATION
+    ===================================================== */
 
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop() || "index.html";
 
-    addons.forEach(addon => {
-
-        addon.addEventListener(
-            "change",
-            calculateQuote
-        );
-
-    });
-
-
-    calculateQuote();
-
-}
-
-
-/* =========================================================
-   FORMATO PESOS COLOMBIANOS
-========================================================= */
-
-function formatCOP(value) {
-
-    return new Intl.NumberFormat(
-        "es-CO",
-        {
-            style: "currency",
-            currency: "COP",
-            maximumFractionDigits: 0
-        }
-    ).format(value);
-
-}
-
-
-/* =========================================================
-   MENSAJE DE COTIZACIÓN
-========================================================= */
-
-function createQuoteMessage(
-    projectName,
-    basePrice,
-    addons,
-    total
-) {
-
-    let message =
-        "Hola ALLWEB, quiero cotizar una página web.%0A%0A";
-
-
-    message +=
-        "Proyecto: " +
-        projectName +
-        "%0A";
-
-
-    if (basePrice > 0) {
-
-        message +=
-            "Valor base: " +
-            formatCOP(basePrice) +
-            "%0A";
-
-    }
-
-
-    if (addons.length) {
-
-        message +=
-            "%0AAdicionales:%0A";
-
-
-        addons.forEach(addon => {
-
-            message +=
-                "• " +
-                addon +
-                "%0A";
-
-        });
-
-    }
-
-
-    message +=
-        "%0AEstimación inicial: " +
-        (
-            total > 0
-                ? formatCOP(total)
-                : "Por cotizar"
-        );
-
-
-    message +=
-        "%0A%0AQuiero recibir más información.";
-
-
-    return decodeURIComponent(
-        message
-    );
-
-}
-
-
-/* =========================================================
-   URL WHATSAPP
-========================================================= */
-
-function buildWhatsAppUrl(message) {
-
-    return (
-        "https://wa.me/" +
-        ALLWEB_CONFIG.whatsapp +
-        "?text=" +
-        encodeURIComponent(message)
-    );
-
-}
-
-
-/* =========================================================
-   NAVEGACIÓN ACTIVA
-========================================================= */
-
-function initializeNavigation() {
-
-    const sections =
-        document.querySelectorAll(
-            "main section[id]"
-        );
-
-
-    const navLinks =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             ".desktop-nav .nav-link"
-        );
+        )
+        .forEach(link => {
+
+            const href =
+                link.getAttribute("href");
+
+            link.classList.remove("active");
+
+            if (
+                href === currentPage ||
+                (
+                    currentPage === "" &&
+                    href === "index.html"
+                )
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
 
 
-    if (!sections.length || !navLinks.length) {
-        return;
-    }
+    /* =====================================================
+       INTERNAL PAGE TRANSITIONS
+    ===================================================== */
 
+    document
+        .querySelectorAll(
+            'a[href$=".html"]'
+        )
+        .forEach(link => {
 
-    const observer =
-        new IntersectionObserver(
-            entries => {
+            link.addEventListener(
+                "click",
+                event => {
 
-                entries.forEach(entry => {
+                    const href =
+                        link.getAttribute("href");
 
-                    if (!entry.isIntersecting) {
+                    if (
+                        !href ||
+                        href.startsWith("#") ||
+                        link.target === "_blank"
+                    ) {
                         return;
                     }
 
+                    if (
+                        event.ctrlKey ||
+                        event.metaKey ||
+                        event.shiftKey ||
+                        event.altKey
+                    ) {
+                        return;
+                    }
 
-                    const id =
-                        entry.target.id;
+                    event.preventDefault();
 
+                    document.body.classList.remove(
+                        "page-loaded"
+                    );
 
-                    navLinks.forEach(link => {
+                    document.body.classList.add(
+                        "page-leaving"
+                    );
 
-                        link.classList.toggle(
-                            "active",
-                            link.getAttribute(
-                                "href"
-                            ) === "#" + id
-                        );
+                    setTimeout(() => {
 
-                    });
+                        window.location.href =
+                            href;
 
-                });
+                    }, 280);
 
-            },
-            {
-                rootMargin:
-                    "-35% 0px -55% 0px"
-            }
-        );
+                }
+            );
 
-
-    sections.forEach(section => {
-
-        observer.observe(section);
-
-    });
-
-}
+        });
 
 
-/* =========================================================
-   AÑO AUTOMÁTICO
-========================================================= */
+    /* =====================================================
+       YEAR
+    ===================================================== */
 
-function initializeYear() {
+    const year =
+        document.getElementById("year");
 
-    const yearElement =
-        document.getElementById(
-            "current-year"
-        );
+    if (year) {
 
+        year.textContent =
+            new Date().getFullYear();
 
-    if (!yearElement) {
-        return;
     }
 
 
-    yearElement.textContent =
-        new Date().getFullYear();
+    /* =====================================================
+       ESC PARA CERRAR MENU
+    ===================================================== */
 
-}
+    document.addEventListener(
+        "keydown",
+        event => {
 
+            if (event.key === "Escape") {
 
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function initializeWhatsApp() {
-
-    const links =
-        document.querySelectorAll(
-            'a[href*="wa.me"]'
-        );
-
-
-    links.forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                /*
-                    Espacio reservado para
-                    futuras estadísticas.
-                */
-
-                console.log(
-                    "ALLWEB: WhatsApp abierto"
-                );
+                if (mobileMenu) {
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
+                }
 
             }
-        );
 
-    });
+        }
+    );
 
-}
-
-
-/* =========================================================
-   SCROLL A SECCIÓN
-========================================================= */
-
-function scrollToSection(
-    sectionId
-) {
-
-    const section =
-        document.getElementById(
-            sectionId
-        );
-
-
-    if (!section) {
-        return;
-    }
-
-
-    section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-}
-
-
-/* =========================================================
-   API GLOBAL
-========================================================= */
-
-window.ALLWEB = {
-
-    config: ALLWEB_CONFIG,
-
-    scrollToSection,
-
-    formatCOP
-
-};
+});
