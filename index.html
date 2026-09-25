@@ -1,3810 +1,636 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <title>ALLWEB | Diseño y Desarrollo Web Profesional</title>
+    <meta name="description" content="Creamos páginas web profesionales, modernas y orientadas a resultados para negocios, empresas y profesionales.">
 
-  <meta name="description"
-        content="ALLWEB crea páginas web profesionales para negocios, comercios, restaurantes, tiendas, profesionales y empresas en Colombia. Diseño moderno, WhatsApp, catálogo, SEO y adaptación móvil.">
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
 
-  <meta name="keywords"
-        content="páginas web Colombia, diseño web Colombia, páginas web para negocios, tienda virtual, páginas web Soacha, desarrollo web, ALLWEB">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <meta name="author" content="ALLWEB">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-  <meta name="theme-color" content="#05070c">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <meta property="og:title"
-        content="ALLWEB | Páginas Web Profesionales">
-
-  <meta property="og:description"
-        content="Creamos páginas web modernas que ayudan a tu negocio a conseguir clientes.">
-
-  <meta property="og:type"
-        content="website">
-
-  <title>ALLWEB | Páginas Web Profesionales para Negocios</title>
-
-  <!-- =========================================================
-       TAILWIND
-  ========================================================== -->
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-
-      theme: {
-        extend: {
-
-          colors: {
-
-            allweb: {
-              cyan: '#00e5ff',
-              cyan2: '#00a8ff',
-              purple: '#7c3aed',
-              green: '#22c55e',
-              dark: '#05070c',
-              card: '#0b1019'
-            }
-
-          },
-
-          fontFamily: {
-
-            sans: ['Inter', 'sans-serif'],
-
-            display: ['Orbitron', 'sans-serif']
-
-          },
-
-          boxShadow: {
-
-            cyan:
-              '0 0 30px rgba(0,229,255,.18)',
-
-            purple:
-              '0 0 30px rgba(124,58,237,.18)'
-
-          }
-
-        }
-      }
-    }
-  </script>
-
-
-  <!-- =========================================================
-       FUENTES
-  ========================================================== -->
-
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap"
-        rel="stylesheet">
-
-
-  <!-- =========================================================
-       ICONOS
-  ========================================================== -->
-
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
-  <!-- =========================================================
-       ESTILOS
-  ========================================================== -->
-
-  <style>
-
-    :root {
-
-      --cyan: #00e5ff;
-      --cyan2: #00a8ff;
-      --purple: #7c3aed;
-
-      --bg: #05070c;
-      --card: rgba(11,16,25,.76);
-
-    }
-
-
-    * {
-      box-sizing: border-box;
-    }
-
-
-    body {
-
-      margin: 0;
-
-      background:
-        radial-gradient(
-          circle at 15% 10%,
-          rgba(0,229,255,.08),
-          transparent 30%
-        ),
-
-        radial-gradient(
-          circle at 85% 20%,
-          rgba(124,58,237,.08),
-          transparent 30%
-        ),
-
-        var(--bg);
-
-      color: #f8fafc;
-
-      font-family: 'Inter', sans-serif;
-
-      overflow-x: hidden;
-
-    }
-
-
-    .orbitron {
-      font-family: 'Orbitron', sans-serif;
-    }
-
-
-    /* =========================================================
-       BACKGROUND
-    ========================================================== */
-
-    #networkCanvas {
-
-      position: fixed;
-
-      inset: 0;
-
-      width: 100%;
-
-      height: 100%;
-
-      z-index: -5;
-
-      pointer-events: none;
-
-      opacity: .45;
-
-    }
-
-
-    .grid-bg {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: -4;
-
-      pointer-events: none;
-
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,.025) 1px,
-          transparent 1px
-        ),
-
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,.025) 1px,
-          transparent 1px
-        );
-
-      background-size: 50px 50px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 90%
-        );
-
-    }
-
-
-    /* =========================================================
-       GLASS
-    ========================================================== */
-
-    .glass {
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.045),
-          rgba(255,255,255,.015)
-        );
-
-      border:
-
-        1px solid rgba(255,255,255,.08);
-
-      backdrop-filter:
-        blur(18px);
-
-      -webkit-backdrop-filter:
-        blur(18px);
-
-    }
-
-
-    .glass:hover {
-
-      border-color:
-        rgba(0,229,255,.28);
-
-      box-shadow:
-        0 0 35px
-        rgba(0,229,255,.08);
-
-      transform:
-        translateY(-4px);
-
-    }
-
-
-    .transition-card {
-
-      transition:
-        all .35s ease;
-
-    }
-
-
-    /* =========================================================
-       GRADIENT TEXT
-    ========================================================== */
-
-    .gradient-text {
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--cyan),
-          #fff,
-          var(--purple)
-        );
-
-      -webkit-background-clip: text;
-
-      background-clip: text;
-
-      color: transparent;
-
-    }
-
-
-    .glow {
-
-      text-shadow:
-        0 0 20px
-        rgba(0,229,255,.3);
-
-    }
-
-
-    /* =========================================================
-       BUTTONS
-    ========================================================== */
-
-    .btn-primary {
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--cyan),
-          var(--cyan2)
-        );
-
-      color: #020617;
-
-      font-weight: 800;
-
-      box-shadow:
-        0 0 30px
-        rgba(0,229,255,.18);
-
-      transition:
-        all .3s ease;
-
-    }
-
-
-    .btn-primary:hover {
-
-      transform:
-        translateY(-2px)
-        scale(1.02);
-
-      box-shadow:
-        0 0 45px
-        rgba(0,229,255,.35);
-
-    }
-
-
-    .btn-whatsapp {
-
-      background:
-        linear-gradient(
-          90deg,
-          #16a34a,
-          #22c55e
-        );
-
-      color: white;
-
-      box-shadow:
-        0 0 30px
-        rgba(34,197,94,.16);
-
-    }
-
-
-    /* =========================================================
-       HEADER
-    ========================================================== */
-
-    header {
-
-      transition:
-        background .3s ease,
-        border .3s ease;
-
-    }
-
-
-    header.scrolled {
-
-      background:
-        rgba(5,7,12,.88);
-
-      backdrop-filter:
-        blur(20px);
-
-      border-bottom:
-        1px solid
-        rgba(0,229,255,.14);
-
-    }
-
-
-    /* =========================================================
-       HERO
-    ========================================================== */
-
-    .hero-orb {
-
-      position: absolute;
-
-      width: 500px;
-
-      height: 500px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(0,229,255,.13),
-          transparent 65%
-        );
-
-      filter:
-        blur(10px);
-
-      pointer-events: none;
-
-    }
-
-
-    .floating {
-
-      animation:
-        floating 5s ease-in-out infinite;
-
-    }
-
-
-    @keyframes floating {
-
-      0%,
-      100% {
-
-        transform:
-          translateY(0);
-
-      }
-
-      50% {
-
-        transform:
-          translateY(-10px);
-
-      }
-
-    }
-
-
-    /* =========================================================
-       REVEAL
-    ========================================================== */
-
-    .reveal {
-
-      opacity: 0;
-
-      transform:
-        translateY(25px);
-
-      transition:
-        all .8s ease;
-
-    }
-
-
-    .reveal.show {
-
-      opacity: 1;
-
-      transform:
-        translateY(0);
-
-    }
-
-
-    /* =========================================================
-       SERVICE ICON
-    ========================================================== */
-
-    .service-icon {
-
-      width: 58px;
-
-      height: 58px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      border-radius: 16px;
-
-      background:
-        rgba(0,229,255,.08);
-
-      border:
-        1px solid
-        rgba(0,229,255,.18);
-
-      color:
-        var(--cyan);
-
-      font-size: 22px;
-
-    }
-
-
-    /* =========================================================
-       PORTFOLIO
-    ========================================================== */
-
-    .portfolio-card {
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
-
-    .portfolio-preview {
-
-      min-height: 220px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
-
-    .portfolio-preview::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent 20%,
-          rgba(255,255,255,.08) 45%,
-          transparent 70%
-        );
-
-      transform:
-        translateX(-100%);
-
-      transition:
-        transform .8s ease;
-
-    }
-
-
-    .portfolio-card:hover
-    .portfolio-preview::after {
-
-      transform:
-        translateX(100%);
-
-    }
-
-
-    /* =========================================================
-       PRICING
-    ========================================================== */
-
-    .price-card {
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
-
-    .price-card.featured {
-
-      border:
-        1px solid
-        rgba(0,229,255,.55);
-
-      box-shadow:
-        0 0 45px
-        rgba(0,229,255,.12);
-
-    }
-
-
-    .popular {
-
-      position: absolute;
-
-      top: 18px;
-
-      right: -34px;
-
-      transform:
-        rotate(45deg);
-
-      width: 140px;
-
-      text-align: center;
-
-      padding: 6px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--cyan),
-          var(--purple)
-        );
-
-      color: #020617;
-
-      font-size: 10px;
-
-      font-weight: 900;
-
-    }
-
-
-    /* =========================================================
-       FAQ
-    ========================================================== */
-
-    .faq-content {
-
-      max-height: 0;
-
-      overflow: hidden;
-
-      transition:
-        max-height .4s ease;
-
-    }
-
-
-    .faq.open
-    .faq-content {
-
-      max-height: 300px;
-
-    }
-
-
-    .faq-icon {
-
-      transition:
-        transform .3s ease;
-
-    }
-
-
-    .faq.open
-    .faq-icon {
-
-      transform:
-        rotate(45deg);
-
-    }
-
-
-    /* =========================================================
-       FLOATING WHATSAPP
-    ========================================================== */
-
-    .whatsapp-float {
-
-      position: fixed;
-
-      right: 20px;
-
-      bottom: 20px;
-
-      width: 62px;
-
-      height: 62px;
-
-      border-radius: 50%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background: #25D366;
-
-      color: white;
-
-      font-size: 29px;
-
-      z-index: 100;
-
-      box-shadow:
-        0 10px 35px
-        rgba(37,211,102,.35);
-
-      animation:
-        pulseWhatsApp 2.5s infinite;
-
-    }
-
-
-    @keyframes pulseWhatsApp {
-
-      0% {
-        box-shadow:
-          0 0 0 0
-          rgba(37,211,102,.4);
-      }
-
-      70% {
-        box-shadow:
-          0 0 0 15px
-          rgba(37,211,102,0);
-      }
-
-      100% {
-        box-shadow:
-          0 0 0 0
-          rgba(37,211,102,0);
-      }
-
-    }
-
-
-    /* =========================================================
-       MOBILE MENU
-    ========================================================== */
-
-    #mobileMenu {
-
-      display: none;
-
-    }
-
-
-    #mobileMenu.open {
-
-      display: block;
-
-    }
-
-
-    /* =========================================================
-       FORM
-    ========================================================== */
-
-    input,
-    select,
-    textarea {
-
-      outline: none;
-
-    }
-
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-
-      border-color:
-        rgba(0,229,255,.5) !important;
-
-      box-shadow:
-        0 0 20px
-        rgba(0,229,255,.06);
-
-    }
-
-
-    /* =========================================================
-       RESPONSIVE
-    ========================================================== */
-
-    @media(max-width: 640px) {
-
-      .hero-orb {
-
-        width: 300px;
-
-        height: 300px;
-
-      }
-
-      .whatsapp-float {
-
-        width: 56px;
-
-        height: 56px;
-
-        right: 16px;
-
-        bottom: 16px;
-
-      }
-
-    }
-
-  </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
+<body data-page="inicio">
 
-<body>
+<div class="site-bg"></div>
+<div class="grid-overlay"></div>
 
-<!-- =========================================================
-     BACKGROUND
-========================================================== -->
+<header class="header" id="header">
 
-<canvas id="networkCanvas"></canvas>
+    <div class="container nav-container">
 
-<div class="grid-bg"></div>
+        <a href="index.html" class="brand">
+            <span class="brand-symbol">A</span>
 
-
-<!-- =========================================================
-     HEADER
-========================================================== -->
-
-<header
-  id="header"
-  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent">
-
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="h-20 flex items-center justify-between">
-
-      <!-- LOGO -->
-
-      <a
-        href="#inicio"
-        class="flex items-center gap-3">
-
-        <div
-          class="w-11 h-11 rounded-xl flex items-center justify-center
-          bg-gradient-to-br from-cyan-400 to-blue-600
-          text-black orbitron font-black text-xl
-          shadow-lg shadow-cyan-500/20">
-
-          A
-
-        </div>
-
-        <div>
-
-          <div
-            class="orbitron font-black text-xl tracking-wider gradient-text">
-
-            ALLWEB
-
-          </div>
-
-          <div
-            class="text-[9px] text-gray-500 tracking-[.25em]">
-
-            DIGITAL STUDIO
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- DESKTOP NAV -->
-
-      <nav
-        class="hidden lg:flex items-center gap-1">
-
-        <a href="#inicio"
-           class="nav-link px-4 py-2 text-sm text-gray-300 hover:text-cyan-300">
-
-          Inicio
-
+            <span class="brand-text">
+                <strong>ALL<span>WEB</span></strong>
+                <small>Digital Solutions</small>
+            </span>
         </a>
 
-        <a href="#soluciones"
-           class="nav-link px-4 py-2 text-sm text-gray-300 hover:text-cyan-300">
+        <nav class="desktop-nav">
 
-          Soluciones
+            <a href="index.html" data-page="inicio">Inicio</a>
+            <a href="servicios.html" data-page="servicios">Servicios</a>
+            <a href="portafolio.html" data-page="portafolio">Portafolio</a>
+            <a href="planes.html" data-page="planes">Planes</a>
+            <a href="nosotros.html" data-page="nosotros">Nosotros</a>
 
-        </a>
+            <a href="contacto.html" class="nav-contact" data-page="contacto">
+                Contacto
+            </a>
 
-        <a href="#portafolio"
-           class="nav-link px-4 py-2 text-sm text-gray-300 hover:text-cyan-300">
+        </nav>
 
-          Portafolio
-
-        </a>
-
-        <a href="#planes"
-           class="nav-link px-4 py-2 text-sm text-gray-300 hover:text-cyan-300">
-
-          Planes
-
-        </a>
-
-        <a href="#proceso"
-           class="nav-link px-4 py-2 text-sm text-gray-300 hover:text-cyan-300">
-
-          Cómo trabajamos
-
-        </a>
-
-      </nav>
-
-
-      <!-- CTA -->
-
-      <div
-        class="hidden sm:flex items-center gap-3">
-
-        <a
-          href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20crear%20una%20pagina%20web%20para%20mi%20negocio."
-          target="_blank"
-          class="btn-whatsapp px-5 py-2.5 rounded-full text-sm font-bold flex items-center gap-2">
-
-          <i class="fa-brands fa-whatsapp"></i>
-
-          Hablar con nosotros
-
-        </a>
-
-      </div>
-
-
-      <!-- MOBILE BUTTON -->
-
-      <button
-        id="menuButton"
-        class="lg:hidden w-11 h-11 rounded-xl glass flex items-center justify-center text-white">
-
-        <i class="fa-solid fa-bars"></i>
-
-      </button>
+        <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
     </div>
 
+    <div class="mobile-nav" id="mobileNav">
 
-    <!-- MOBILE MENU -->
-
-    <div
-      id="mobileMenu"
-      class="pb-5">
-
-      <div
-        class="glass rounded-2xl p-4 space-y-2">
-
-        <a href="#inicio"
-           class="mobile-link block p-3 rounded-xl hover:bg-white/5">
-
-          Inicio
-
+        <a href="index.html" data-page="inicio">
+            <i class="fa-solid fa-house"></i>
+            Inicio
         </a>
 
-        <a href="#soluciones"
-           class="mobile-link block p-3 rounded-xl hover:bg-white/5">
-
-          Soluciones
-
+        <a href="servicios.html" data-page="servicios">
+            <i class="fa-solid fa-laptop-code"></i>
+            Servicios
         </a>
 
-        <a href="#portafolio"
-           class="mobile-link block p-3 rounded-xl hover:bg-white/5">
-
-          Portafolio
-
+        <a href="portafolio.html" data-page="portafolio">
+            <i class="fa-solid fa-layer-group"></i>
+            Portafolio
         </a>
 
-        <a href="#planes"
-           class="mobile-link block p-3 rounded-xl hover:bg-white/5">
-
-          Planes
-
+        <a href="planes.html" data-page="planes">
+            <i class="fa-solid fa-tags"></i>
+            Planes
         </a>
 
-        <a href="#proceso"
-           class="mobile-link block p-3 rounded-xl hover:bg-white/5">
-
-          Cómo trabajamos
-
+        <a href="nosotros.html" data-page="nosotros">
+            <i class="fa-solid fa-building"></i>
+            Nosotros
         </a>
 
-        <a
-          href="#cotizar"
-          class="mobile-link block p-3 rounded-xl bg-cyan-400 text-black font-bold text-center">
-
-          Cotizar mi página
-
+        <a href="contacto.html" data-page="contacto">
+            <i class="fa-solid fa-paper-plane"></i>
+            Contacto
         </a>
-
-      </div>
 
     </div>
-
-  </div>
 
 </header>
 
 
-<!-- =========================================================
-     MAIN
-========================================================== -->
-
 <main>
 
+    <!-- HERO -->
 
-<!-- =========================================================
-     HERO
-========================================================== -->
+    <section class="hero">
 
-<section
-  id="inicio"
-  class="relative min-h-screen flex items-center pt-28 pb-20">
+        <div class="container hero-grid">
 
-  <div class="hero-orb top-20 left-1/2 -translate-x-1/2"></div>
+            <div class="hero-content">
 
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6 w-full">
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    Diseño web profesional
+                </div>
 
-    <div
-      class="max-w-5xl mx-auto text-center">
+                <h1>
+                    Tu negocio merece
+                    <span>una presencia digital</span>
+                    extraordinaria.
+                </h1>
 
-      <!-- BADGE -->
+                <p>
+                    Creamos sitios web modernos, rápidos y profesionales
+                    diseñados para convertir visitantes en clientes.
+                </p>
 
-      <div
-        class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-cyan-300 text-xs sm:text-sm mb-7">
+                <div class="hero-buttons">
 
-        <span
-          class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse">
+                    <a href="contacto.html" class="btn btn-primary">
+                        Crear mi página
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
 
-        </span>
+                    <a href="portafolio.html" class="btn btn-secondary">
+                        Ver proyectos
+                    </a>
 
-        Creamos presencia digital para negocios en Colombia
+                </div>
 
-      </div>
+                <div class="hero-trust">
 
+                    <div>
+                        <i class="fa-solid fa-check"></i>
+                        Diseño personalizado
+                    </div>
 
-      <!-- TITLE -->
+                    <div>
+                        <i class="fa-solid fa-check"></i>
+                        Adaptado a celulares
+                    </div>
 
-      <h1
-        class="reveal orbitron text-4xl sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
+                    <div>
+                        <i class="fa-solid fa-check"></i>
+                        Soporte directo
+                    </div>
 
-        TU NEGOCIO
-
-        <br>
-
-        <span class="gradient-text glow">
-
-          MERECE UNA WEB
-
-        </span>
-
-        <br>
-
-        PROFESIONAL
-
-      </h1>
-
-
-      <!-- DESCRIPTION -->
-
-      <p
-        class="reveal mt-7 max-w-3xl mx-auto text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed">
-
-        Diseñamos páginas web modernas, rápidas y adaptadas a celulares
-        para que tus clientes conozcan tus productos, contacten contigo
-        y encuentren tu negocio en Internet.
-
-      </p>
-
-
-      <!-- BUTTONS -->
-
-      <div
-        class="reveal mt-9 flex flex-col sm:flex-row justify-center gap-4">
-
-        <a
-          href="#cotizar"
-          class="btn-primary px-8 py-4 rounded-xl flex items-center justify-center gap-3">
-
-          <i class="fa-solid fa-rocket"></i>
-
-          QUIERO MI PÁGINA WEB
-
-        </a>
-
-        <a
-          href="#portafolio"
-          class="glass px-8 py-4 rounded-xl flex items-center justify-center gap-3 font-bold hover:bg-white/5">
-
-          <i class="fa-solid fa-eye text-cyan-400"></i>
-
-          Ver proyectos
-
-        </a>
-
-      </div>
-
-
-      <!-- BENEFITS -->
-
-      <div
-        class="reveal mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
-
-        <div class="glass rounded-xl p-4">
-
-          <i class="fa-solid fa-mobile-screen-button text-cyan-400 mb-2"></i>
-
-          <div class="text-xs text-gray-300">
-            100% adaptable
-          </div>
-
-        </div>
-
-
-        <div class="glass rounded-xl p-4">
-
-          <i class="fa-brands fa-whatsapp text-green-400 mb-2"></i>
-
-          <div class="text-xs text-gray-300">
-            WhatsApp integrado
-          </div>
-
-        </div>
-
-
-        <div class="glass rounded-xl p-4">
-
-          <i class="fa-solid fa-gauge-high text-purple-400 mb-2"></i>
-
-          <div class="text-xs text-gray-300">
-            Carga rápida
-          </div>
-
-        </div>
-
-
-        <div class="glass rounded-xl p-4">
-
-          <i class="fa-solid fa-magnifying-glass text-cyan-400 mb-2"></i>
-
-          <div class="text-xs text-gray-300">
-            SEO básico
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- TRUST -->
-
-      <div
-        class="reveal mt-12 text-xs text-gray-500">
-
-        Diseño personalizado · Entrega digital · Soporte inicial · Colombia
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     SOLUCIONES
-========================================================== -->
-
-<section
-  id="soluciones"
-  class="py-24">
-
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal text-center max-w-3xl mx-auto mb-14">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        SOLUCIONES DIGITALES
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl lg:text-5xl font-black mt-3">
-
-        ¿QUÉ TIPO DE NEGOCIO TIENES?
-
-      </h2>
-
-      <p
-        class="text-gray-400 mt-5">
-
-        Creamos la estructura y el diseño según la forma en que funciona
-        tu negocio.
-
-      </p>
-
-    </div>
-
-
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-
-      <!-- CARD -->
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-utensils"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Restaurantes
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Menú digital, ubicación, reservas, pedidos y WhatsApp.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-scissors"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Barberías & Belleza
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Servicios, precios, galería, agenda y contacto.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-bag-shopping"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Tiendas
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Catálogo de productos, carrito y pedidos.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Servicios técnicos
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Servicios, cotizaciones, contacto y ubicación.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-user-tie"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Profesionales
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Perfil profesional, servicios, experiencia y contacto.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-house"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Inmobiliarias
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Propiedades, características, galerías y contacto.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-building"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Empresas
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Presentación corporativa, servicios y portafolio.
-
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass transition-card rounded-2xl p-6">
-
-        <div class="service-icon mb-5">
-
-          <i class="fa-solid fa-bullhorn"></i>
-
-        </div>
-
-        <h3 class="font-bold text-lg mb-2">
-
-          Campañas
-
-        </h3>
-
-        <p class="text-gray-400 text-sm">
-
-          Landing pages para promociones, publicidad y campañas.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     QUÉ INCLUYE
-========================================================== -->
-
-<section
-  class="py-24 border-y border-white/5">
-
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="grid lg:grid-cols-2 gap-14 items-center">
-
-      <div class="reveal">
-
-        <span
-          class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-          MÁS QUE UNA PÁGINA
-
-        </span>
-
-        <h2
-          class="orbitron text-3xl sm:text-4xl font-black mt-3">
-
-          UNA HERRAMIENTA PARA TU NEGOCIO
-
-        </h2>
-
-        <p
-          class="text-gray-400 mt-5 leading-relaxed">
-
-          No se trata solamente de tener una página bonita.
-          La estructura se diseña pensando en que tus visitantes
-          puedan encontrar información y contactarte fácilmente.
-
-        </p>
-
-
-        <div
-          class="mt-8 space-y-4">
-
-          <div class="flex gap-4">
-
-            <i class="fa-solid fa-check text-cyan-400 mt-1"></i>
-
-            <div>
-
-              <strong>Diseño responsive</strong>
-
-              <p class="text-sm text-gray-500">
-                Funciona correctamente en celulares, tablets y computadores.
-              </p>
+                </div>
 
             </div>
 
-          </div>
+
+            <div class="hero-visual">
+
+                <div class="orb orb-one"></div>
+                <div class="orb orb-two"></div>
+
+                <div class="code-window">
+
+                    <div class="window-top">
+
+                        <div class="window-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <span>allweb.dev</span>
+
+                    </div>
+
+                    <div class="code-content">
+
+                        <div class="code-line">
+                            <span class="code-purple">&lt;website</span>
+                            <span class="code-cyan">premium</span><span class="code-purple">&gt;</span>
+                        </div>
+
+                        <div class="code-line indent">
+                            <span class="code-purple">&lt;design&gt;</span>
+                            <span>único</span>
+                            <span class="code-purple">&lt;/design&gt;</span>
+                        </div>
+
+                        <div class="code-line indent">
+                            <span class="code-purple">&lt;responsive&gt;</span>
+                            <span>true</span>
+                            <span class="code-purple">&lt;/responsive&gt;</span>
+                        </div>
+
+                        <div class="code-line indent">
+                            <span class="code-purple">&lt;performance&gt;</span>
+                            <span>optimized</span>
+                            <span class="code-purple">&lt;/performance&gt;</span>
+                        </div>
+
+                        <div class="code-line">
+                            <span class="code-purple">&lt;/website&gt;</span>
+                        </div>
+
+                    </div>
+
+                    <div class="window-glow"></div>
+
+                </div>
 
 
-          <div class="flex gap-4">
+                <div class="floating-card card-performance">
 
-            <i class="fa-solid fa-check text-cyan-400 mt-1"></i>
+                    <i class="fa-solid fa-bolt"></i>
 
-            <div>
+                    <div>
+                        <strong>Alto rendimiento</strong>
+                        <span>Experiencia rápida</span>
+                    </div>
 
-              <strong>WhatsApp y redes sociales</strong>
-
-              <p class="text-sm text-gray-500">
-                Facilitamos el contacto directo con tus clientes.
-              </p>
-
-            </div>
-
-          </div>
+                </div>
 
 
-          <div class="flex gap-4">
+                <div class="floating-card card-responsive">
 
-            <i class="fa-solid fa-check text-cyan-400 mt-1"></i>
+                    <i class="fa-solid fa-mobile-screen-button"></i>
 
-            <div>
+                    <div>
+                        <strong>100% Responsive</strong>
+                        <span>Celular · Tablet · PC</span>
+                    </div>
 
-              <strong>SEO básico</strong>
-
-              <p class="text-sm text-gray-500">
-                Estructura preparada para buscadores.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="flex gap-4">
-
-            <i class="fa-solid fa-check text-cyan-400 mt-1"></i>
-
-            <div>
-
-              <strong>Entrega y publicación</strong>
-
-              <p class="text-sm text-gray-500">
-                Te ayudamos a dejar el proyecto publicado.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- VISUAL -->
-
-      <div
-        class="reveal relative">
-
-        <div
-          class="glass rounded-3xl p-6 floating">
-
-          <div
-            class="rounded-2xl bg-black/70 border border-white/10 overflow-hidden">
-
-            <div
-              class="h-10 bg-white/5 flex items-center px-4 gap-2">
-
-              <span class="w-3 h-3 rounded-full bg-red-500"></span>
-
-              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-
-              <span class="w-3 h-3 rounded-full bg-green-500"></span>
-
-            </div>
-
-            <div class="p-7">
-
-              <div
-                class="w-24 h-3 rounded bg-cyan-400/30 mb-6">
-
-              </div>
-
-              <div
-                class="h-24 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border border-white/5 mb-5">
-
-              </div>
-
-              <div
-                class="grid grid-cols-3 gap-3">
-
-                <div class="h-20 rounded-xl bg-white/5"></div>
-
-                <div class="h-20 rounded-xl bg-white/5"></div>
-
-                <div class="h-20 rounded-xl bg-white/5"></div>
-
-              </div>
+                </div>
 
             </div>
 
-          </div>
-
         </div>
 
-      </div>
+    </section>
 
-    </div>
 
-  </div>
+    <!-- SOLUCIONES -->
 
-</section>
+    <section class="section section-dark">
 
+        <div class="container">
 
-<!-- =========================================================
-     PORTAFOLIO
-========================================================== -->
+            <div class="section-heading">
 
-<section
-  id="portafolio"
-  class="py-24">
+                <div>
+                    <span class="section-kicker">SOLUCIONES</span>
 
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
+                    <h2>
+                        Una web para cada
+                        <span>tipo de negocio.</span>
+                    </h2>
+                </div>
 
-    <div
-      class="reveal text-center mb-14">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        PORTAFOLIO
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl lg:text-5xl font-black mt-3">
-
-        EJEMPLOS DE SOLUCIONES
-
-      </h2>
-
-      <p
-        class="text-gray-400 mt-5">
-
-        Estos ejemplos muestran diferentes estilos que podemos adaptar
-        a cada negocio.
-
-      </p>
-
-    </div>
-
-
-    <div
-      class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-
-      <!-- PORTFOLIO 1 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-red-950 via-black to-orange-950">
-
-          <i
-            class="fa-solid fa-utensils text-7xl text-orange-400/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Restaurante
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Gastro Experience
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Menú digital, reservas, ubicación y pedidos mediante WhatsApp.
-
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- PORTFOLIO 2 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-cyan-950 via-black to-blue-950">
-
-          <i
-            class="fa-solid fa-laptop-code text-7xl text-cyan-400/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Servicios
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Servicio Técnico
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Servicios, cotización, contacto y WhatsApp.
-
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- PORTFOLIO 3 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-yellow-950 via-black to-amber-950">
-
-          <i
-            class="fa-solid fa-gem text-7xl text-yellow-400/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Belleza
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Belleza Profesional
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Catálogo de productos, redes sociales y pedidos.
-
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- PORTFOLIO 4 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-purple-950 via-black to-fuchsia-950">
-
-          <i
-            class="fa-solid fa-house text-7xl text-purple-400/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Inmobiliaria
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Real Estate
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Propiedades, galerías, características y contacto.
-
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- PORTFOLIO 5 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-emerald-950 via-black to-teal-950">
-
-          <i
-            class="fa-solid fa-cart-shopping text-7xl text-emerald-400/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Tienda
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Online Store
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Productos, carrito y pedidos.
-
-          </p>
-
-        </div>
-
-      </article>
-
-
-      <!-- PORTFOLIO 6 -->
-
-      <article
-        class="reveal portfolio-card glass rounded-2xl transition-card">
-
-        <div
-          class="portfolio-preview bg-gradient-to-br from-slate-900 via-black to-cyan-950">
-
-          <i
-            class="fa-solid fa-building text-7xl text-cyan-300/80">
-
-          </i>
-
-          <span
-            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs">
-
-            Corporativo
-
-          </span>
-
-        </div>
-
-        <div class="p-6">
-
-          <h3 class="font-bold text-xl">
-
-            Business Pro
-
-          </h3>
-
-          <p class="text-gray-400 text-sm mt-2">
-
-            Página empresarial, servicios, equipo y contacto.
-
-          </p>
-
-        </div>
-
-      </article>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     PLANES
-========================================================== -->
-
-<section
-  id="planes"
-  class="py-24 border-y border-white/5">
-
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal text-center max-w-3xl mx-auto mb-14">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        PLANES
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl lg:text-5xl font-black mt-3">
-
-        ELIGE EL PUNTO DE PARTIDA
-
-      </h2>
-
-      <p
-        class="text-gray-400 mt-5">
-
-        Todos los proyectos se pueden personalizar según las necesidades
-        de tu negocio.
-
-      </p>
-
-    </div>
-
-
-    <div
-      class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-
-
-      <!-- START -->
-
-      <div
-        class="reveal price-card glass rounded-2xl p-7 transition-card">
-
-        <div class="text-cyan-400 text-xs font-bold">
-          START
-        </div>
-
-        <h3 class="orbitron text-xl font-bold mt-2">
-          Presencia
-        </h3>
-
-        <div class="mt-6">
-
-          <span class="text-gray-400 text-sm">
-            Desde
-          </span>
-
-          <div class="orbitron text-3xl font-black mt-1">
-            $690.000
-          </div>
-
-          <span class="text-gray-500 text-xs">
-            COP
-          </span>
-
-        </div>
-
-        <ul class="mt-7 space-y-3 text-sm text-gray-300">
-
-          <li>✓ One Page profesional</li>
-
-          <li>✓ Diseño responsive</li>
-
-          <li>✓ WhatsApp</li>
-
-          <li>✓ Redes sociales</li>
-
-          <li>✓ SEO básico</li>
-
-        </ul>
-
-        <a
-          href="#cotizar"
-          onclick="selectPlan('Landing Page')"
-          class="mt-8 block text-center border border-white/10 rounded-xl py-3 font-bold hover:bg-white/5">
-
-          Elegir plan
-
-        </a>
-
-      </div>
-
-
-      <!-- PRO -->
-
-      <div
-        class="reveal price-card featured glass rounded-2xl p-7 transition-card">
-
-        <div class="popular">
-          POPULAR
-        </div>
-
-        <div class="text-cyan-400 text-xs font-bold">
-          PRO
-        </div>
-
-        <h3 class="orbitron text-xl font-bold mt-2">
-          Negocio
-        </h3>
-
-        <div class="mt-6">
-
-          <span class="text-gray-400 text-sm">
-            Desde
-          </span>
-
-          <div class="orbitron text-3xl font-black mt-1">
-            $1.290.000
-          </div>
-
-          <span class="text-gray-500 text-xs">
-            COP
-          </span>
-
-        </div>
-
-        <ul class="mt-7 space-y-3 text-sm text-gray-300">
-
-          <li>✓ Hasta 5 secciones</li>
-
-          <li>✓ Diseño personalizado</li>
-
-          <li>✓ WhatsApp</li>
-
-          <li>✓ Galería / catálogo</li>
-
-          <li>✓ SEO básico</li>
-
-          <li>✓ Publicación</li>
-
-        </ul>
-
-        <a
-          href="#cotizar"
-          onclick="selectPlan('Sitio Web Profesional')"
-          class="mt-8 block text-center btn-primary rounded-xl py-3 font-bold">
-
-          Elegir plan
-
-        </a>
-
-      </div>
-
-
-      <!-- BUSINESS -->
-
-      <div
-        class="reveal price-card glass rounded-2xl p-7 transition-card">
-
-        <div class="text-purple-400 text-xs font-bold">
-          BUSINESS
-        </div>
-
-        <h3 class="orbitron text-xl font-bold mt-2">
-          Empresa
-        </h3>
-
-        <div class="mt-6">
-
-          <span class="text-gray-400 text-sm">
-            Desde
-          </span>
-
-          <div class="orbitron text-3xl font-black mt-1">
-            $1.890.000
-          </div>
-
-          <span class="text-gray-500 text-xs">
-            COP
-          </span>
-
-        </div>
-
-        <ul class="mt-7 space-y-3 text-sm text-gray-300">
-
-          <li>✓ Sitio multi-sección</li>
-
-          <li>✓ Diseño premium</li>
-
-          <li>✓ Catálogo</li>
-
-          <li>✓ Formularios</li>
-
-          <li>✓ WhatsApp</li>
-
-          <li>✓ SEO</li>
-
-        </ul>
-
-        <a
-          href="#cotizar"
-          onclick="selectPlan('Web Empresarial')"
-          class="mt-8 block text-center border border-white/10 rounded-xl py-3 font-bold hover:bg-white/5">
-
-          Elegir plan
-
-        </a>
-
-      </div>
-
-
-      <!-- ECOMMERCE -->
-
-      <div
-        class="reveal price-card glass rounded-2xl p-7 transition-card">
-
-        <div class="text-emerald-400 text-xs font-bold">
-          E-COMMERCE
-        </div>
-
-        <h3 class="orbitron text-xl font-bold mt-2">
-          Tienda
-        </h3>
-
-        <div class="mt-6">
-
-          <span class="text-gray-400 text-sm">
-            Desde
-          </span>
-
-          <div class="orbitron text-3xl font-black mt-1">
-            $2.490.000
-          </div>
-
-          <span class="text-gray-500 text-xs">
-            COP
-          </span>
-
-        </div>
-
-        <ul class="mt-7 space-y-3 text-sm text-gray-300">
-
-          <li>✓ Catálogo de productos</li>
-
-          <li>✓ Carrito</li>
-
-          <li>✓ Pedidos</li>
-
-          <li>✓ WhatsApp</li>
-
-          <li>✓ Pagos opcionales</li>
-
-          <li>✓ SEO básico</li>
-
-        </ul>
-
-        <a
-          href="#cotizar"
-          onclick="selectPlan('Tienda Online')"
-          class="mt-8 block text-center border border-white/10 rounded-xl py-3 font-bold hover:bg-white/5">
-
-          Elegir plan
-
-        </a>
-
-      </div>
-
-    </div>
-
-
-    <p
-      class="text-center text-xs text-gray-600 mt-8">
-
-      *Los precios son valores iniciales y pueden variar según funcionalidades,
-      cantidad de productos, integraciones, dominio y otros requerimientos.
-
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     PROCESO
-========================================================== -->
-
-<section
-  id="proceso"
-  class="py-24">
-
-  <div
-    class="max-w-6xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal text-center mb-14">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        PROCESO
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl lg:text-5xl font-black mt-3">
-
-        ASÍ CONSTRUIMOS TU WEB
-
-      </h2>
-
-    </div>
-
-
-    <div
-      class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          01
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Conocemos tu negocio
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          Definimos qué vendes, quiénes son tus clientes y qué debe lograr
-          la página.
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          02
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Diseñamos la propuesta
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          Creamos una estructura visual coherente con tu marca.
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          03
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Desarrollamos
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          Construimos la página y sus funcionalidades.
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          04
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Integramos
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          WhatsApp, redes, formularios, mapas, catálogos y otras herramientas.
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          05
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Publicamos
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          Dejamos el proyecto listo para que pueda ser visitado.
-        </p>
-
-      </div>
-
-
-      <div class="reveal glass rounded-2xl p-7">
-
-        <div
-          class="orbitron text-4xl text-cyan-400 font-black">
-
-          06
-
-        </div>
-
-        <h3 class="font-bold text-xl mt-5">
-          Entregamos
-        </h3>
-
-        <p class="text-gray-400 text-sm mt-3">
-          Te entregamos tu proyecto y orientación inicial para utilizarlo.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     COTIZADOR
-========================================================== -->
-
-<section
-  id="cotizar"
-  class="py-24 border-y border-white/5">
-
-  <div
-    class="max-w-6xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal text-center mb-12">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        COTIZACIÓN
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl lg:text-5xl font-black mt-3">
-
-        CALCULA UNA ESTIMACIÓN
-
-      </h2>
-
-      <p class="text-gray-400 mt-4">
-
-        Selecciona las características que necesitas.
-
-      </p>
-
-    </div>
-
-
-    <div
-      class="grid lg:grid-cols-5 gap-6">
-
-
-      <!-- FORM -->
-
-      <div
-        class="reveal lg:col-span-3 glass rounded-2xl p-6 sm:p-8">
-
-        <h3 class="font-bold text-lg mb-5">
-
-          1. Tipo de página
-
-        </h3>
-
-
-        <div
-          class="grid sm:grid-cols-2 gap-3">
-
-
-          <label class="cursor-pointer">
-
-            <input
-              type="radio"
-              name="projectType"
-              value="690000"
-              data-name="Landing Page"
-              class="hidden project-radio"
-              checked>
-
-            <div
-              class="project-option glass rounded-xl p-4">
-
-              <strong>Landing Page</strong>
-
-              <div class="text-xs text-gray-500 mt-1">
-                Desde $690.000
-              </div>
+                <p>
+                    No importa si estás empezando o si ya tienes una empresa.
+                    Diseñamos una solución adaptada a tus objetivos.
+                </p>
 
             </div>
 
-          </label>
+
+            <div class="solution-grid">
+
+                <article class="solution-card">
+
+                    <div class="icon-box">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+
+                    <h3>Tiendas</h3>
+
+                    <p>
+                        Presenta tus productos y facilita que tus clientes
+                        puedan contactarte y comprar.
+                    </p>
+
+                    <a href="servicios.html">
+                        Conocer servicio
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </article>
 
 
-          <label class="cursor-pointer">
+                <article class="solution-card">
 
-            <input
-              type="radio"
-              name="projectType"
-              value="1290000"
-              data-name="Sitio Web Profesional"
-              class="hidden project-radio">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
 
-            <div
-              class="project-option glass rounded-xl p-4">
+                    <h3>Restaurantes</h3>
 
-              <strong>Sitio Profesional</strong>
+                    <p>
+                        Menús digitales, reservas, ubicación y contacto
+                        integrados en una experiencia moderna.
+                    </p>
 
-              <div class="text-xs text-gray-500 mt-1">
-                Desde $1.290.000
-              </div>
+                    <a href="servicios.html">
+                        Conocer servicio
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="solution-card">
+
+                    <div class="icon-box">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+
+                    <h3>Profesionales</h3>
+
+                    <p>
+                        Construye una presencia digital que transmita
+                        confianza y profesionalismo.
+                    </p>
+
+                    <a href="servicios.html">
+                        Conocer servicio
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </article>
+
+
+                <article class="solution-card">
+
+                    <div class="icon-box">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+
+                    <h3>Empresas</h3>
+
+                    <p>
+                        Sitios corporativos preparados para presentar
+                        servicios, proyectos y soluciones.
+                    </p>
+
+                    <a href="servicios.html">
+                        Conocer servicio
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </article>
 
             </div>
 
-          </label>
 
+            <div class="center-button">
 
-          <label class="cursor-pointer">
-
-            <input
-              type="radio"
-              name="projectType"
-              value="1890000"
-              data-name="Web Empresarial"
-              class="hidden project-radio">
-
-            <div
-              class="project-option glass rounded-xl p-4">
-
-              <strong>Web Empresarial</strong>
-
-              <div class="text-xs text-gray-500 mt-1">
-                Desde $1.890.000
-              </div>
+                <a href="servicios.html" class="btn btn-secondary">
+                    Ver todos los servicios
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
 
             </div>
-
-          </label>
-
-
-          <label class="cursor-pointer">
-
-            <input
-              type="radio"
-              name="projectType"
-              value="2490000"
-              data-name="Tienda Online"
-              class="hidden project-radio">
-
-            <div
-              class="project-option glass rounded-xl p-4">
-
-              <strong>Tienda Online</strong>
-
-              <div class="text-xs text-gray-500 mt-1">
-                Desde $2.490.000
-              </div>
-
-            </div>
-
-          </label>
 
         </div>
 
-
-        <h3 class="font-bold text-lg mt-8 mb-5">
-
-          2. Adicionales
-
-        </h3>
+    </section>
 
 
-        <div class="space-y-3">
+    <!-- PORTAFOLIO -->
 
+    <section class="section">
 
-          <label
-            class="flex items-center justify-between gap-4 glass rounded-xl p-4 cursor-pointer">
+        <div class="container">
 
-            <div class="flex items-center gap-3">
+            <div class="section-heading">
 
-              <input
-                type="checkbox"
-                class="addon-check accent-cyan-400"
-                value="180000"
-                data-name="Dominio personalizado">
+                <div>
 
-              <span class="text-sm">
-                Dominio personalizado
-              </span>
+                    <span class="section-kicker">PORTAFOLIO</span>
 
-            </div>
+                    <h2>
+                        Diseños pensados para
+                        <span>destacar.</span>
+                    </h2>
 
-            <span class="text-xs text-cyan-400 font-bold">
-              +$180.000
-            </span>
+                </div>
 
-          </label>
-
-
-          <label
-            class="flex items-center justify-between gap-4 glass rounded-xl p-4 cursor-pointer">
-
-            <div class="flex items-center gap-3">
-
-              <input
-                type="checkbox"
-                class="addon-check accent-cyan-400"
-                value="250000"
-                data-name="Catálogo de productos">
-
-              <span class="text-sm">
-                Catálogo de productos
-              </span>
+                <a href="portafolio.html" class="text-link">
+                    Ver portafolio completo
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
 
             </div>
 
-            <span class="text-xs text-cyan-400 font-bold">
-              +$250.000
-            </span>
 
-          </label>
+            <div class="portfolio-preview">
 
+                <article class="portfolio-card">
 
-          <label
-            class="flex items-center justify-between gap-4 glass rounded-xl p-4 cursor-pointer">
+                    <div class="portfolio-image website-demo beauty-demo">
 
-            <div class="flex items-center gap-3">
+                        <div class="demo-content">
 
-              <input
-                type="checkbox"
-                class="addon-check accent-cyan-400"
-                value="300000"
-                data-name="Pasarela de pagos">
+                            <small>BEAUTY</small>
 
-              <span class="text-sm">
-                Pasarela de pagos
-              </span>
+                            <strong>
+                                Belleza<br>
+                                Profesional
+                            </strong>
 
-            </div>
+                            <span>CATÁLOGO ONLINE</span>
 
-            <span class="text-xs text-cyan-400 font-bold">
-              +$300.000
-            </span>
+                        </div>
 
-          </label>
+                    </div>
 
+                    <div class="portfolio-info">
 
-          <label
-            class="flex items-center justify-between gap-4 glass rounded-xl p-4 cursor-pointer">
+                        <div>
+                            <span>CATÁLOGO</span>
+                            <h3>Beauty Professional</h3>
+                        </div>
 
-            <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
-              <input
-                type="checkbox"
-                class="addon-check accent-cyan-400"
-                value="200000"
-                data-name="SEO avanzado">
+                    </div>
 
-              <span class="text-sm">
-                SEO avanzado
-              </span>
-
-            </div>
-
-            <span class="text-xs text-cyan-400 font-bold">
-              +$200.000
-            </span>
-
-          </label>
+                </article>
 
 
-          <label
-            class="flex items-center justify-between gap-4 glass rounded-xl p-4 cursor-pointer">
+                <article class="portfolio-card">
 
-            <div class="flex items-center gap-3">
+                    <div class="portfolio-image website-demo tech-demo">
 
-              <input
-                type="checkbox"
-                class="addon-check accent-cyan-400"
-                value="150000"
-                data-name="Formulario de contacto">
+                        <div class="demo-content">
 
-              <span class="text-sm">
-                Formulario de contacto
-              </span>
+                            <small>TECH</small>
 
-            </div>
+                            <strong>
+                                Servicio<br>
+                                Técnico
+                            </strong>
 
-            <span class="text-xs text-cyan-400 font-bold">
-              +$150.000
-            </span>
+                            <span>SOLUCIÓN DIGITAL</span>
 
-          </label>
+                        </div>
 
-        </div>
+                    </div>
 
-      </div>
+                    <div class="portfolio-info">
 
+                        <div>
+                            <span>SERVICIOS</span>
+                            <h3>Tech Service</h3>
+                        </div>
 
-      <!-- TOTAL -->
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
-      <div
-        class="reveal lg:col-span-2 glass rounded-2xl p-7 flex flex-col justify-between">
+                    </div>
 
-        <div>
-
-          <span
-            class="text-xs text-gray-500 uppercase tracking-widest">
-
-            Estimación
-
-          </span>
-
-          <div
-            id="total-price"
-            class="orbitron text-4xl sm:text-5xl font-black gradient-text mt-3">
-
-            $690.000 COP
-
-          </div>
+                </article>
 
 
-          <div
-            class="mt-6 p-4 rounded-xl bg-white/5 border border-white/5">
+                <article class="portfolio-card">
 
-            <div class="text-xs text-gray-500">
-              Proyecto seleccionado
-            </div>
+                    <div class="portfolio-image website-demo business-demo">
 
-            <div
-              id="selected-project"
-              class="font-bold mt-1">
+                        <div class="demo-content">
 
-              Landing Page
+                            <small>BUSINESS</small>
+
+                            <strong>
+                                Business<br>
+                                Solutions
+                            </strong>
+
+                            <span>CORPORATIVO</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="portfolio-info">
+
+                        <div>
+                            <span>EMPRESA</span>
+                            <h3>Business Solutions</h3>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                    </div>
+
+                </article>
 
             </div>
 
-          </div>
+        </div>
+
+    </section>
 
 
-          <div
-            id="quote-addons"
-            class="mt-4 text-xs text-gray-400 space-y-1">
+    <!-- CTA -->
 
-            Sin adicionales
+    <section class="cta-section">
 
-          </div>
+        <div class="container">
+
+            <div class="cta-box">
+
+                <div class="cta-decoration"></div>
+
+                <span class="section-kicker">¿LISTO PARA EMPEZAR?</span>
+
+                <h2>
+                    Hagamos que tu negocio
+                    <span>se vea profesional.</span>
+                </h2>
+
+                <p>
+                    Cuéntanos qué necesitas y diseñaremos una propuesta
+                    pensada para tu negocio.
+                </p>
+
+                <a href="contacto.html" class="btn btn-primary">
+                    Solicitar cotización
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
 
         </div>
 
-
-        <button
-          onclick="sendWhatsAppQuote()"
-          class="btn-whatsapp mt-8 w-full py-4 rounded-xl font-black flex items-center justify-center gap-3">
-
-          <i class="fa-brands fa-whatsapp text-xl"></i>
-
-          SOLICITAR COTIZACIÓN
-
-        </button>
-
-
-        <p
-          class="text-[11px] text-gray-600 mt-4 text-center">
-
-          La estimación es orientativa. El precio final depende del alcance
-          y funcionalidades del proyecto.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     FAQ
-========================================================== -->
-
-<section
-  class="py-24">
-
-  <div
-    class="max-w-4xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal text-center mb-12">
-
-      <span
-        class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-        FAQ
-
-      </span>
-
-      <h2
-        class="orbitron text-3xl sm:text-4xl font-black mt-3">
-
-        PREGUNTAS FRECUENTES
-
-      </h2>
-
-    </div>
-
-
-    <div class="space-y-3">
-
-
-      <div class="faq glass rounded-2xl">
-
-        <button
-          class="w-full p-5 text-left flex justify-between items-center gap-5"
-          onclick="toggleFaq(this)">
-
-          <span class="font-bold">
-            ¿Cuánto tarda la creación de una página?
-          </span>
-
-          <i class="fa-solid fa-plus faq-icon text-cyan-400"></i>
-
-        </button>
-
-        <div class="faq-content">
-
-          <p class="px-5 pb-5 text-gray-400 text-sm leading-relaxed">
-
-            El tiempo depende del alcance, cantidad de secciones,
-            productos e integraciones. En la cotización definimos
-            un plazo estimado para cada proyecto.
-
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="faq glass rounded-2xl">
-
-        <button
-          class="w-full p-5 text-left flex justify-between items-center gap-5"
-          onclick="toggleFaq(this)">
-
-          <span class="font-bold">
-            ¿La página funciona en celulares?
-          </span>
-
-          <i class="fa-solid fa-plus faq-icon text-cyan-400"></i>
-
-        </button>
-
-        <div class="faq-content">
-
-          <p class="px-5 pb-5 text-gray-400 text-sm leading-relaxed">
-
-            Sí. Diseñamos las páginas pensando primero en una buena
-            experiencia en celulares y luego adaptamos la interfaz
-            a tablets y computadores.
-
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="faq glass rounded-2xl">
-
-        <button
-          class="w-full p-5 text-left flex justify-between items-center gap-5"
-          onclick="toggleFaq(this)">
-
-          <span class="font-bold">
-            ¿Puedo tener mi propio dominio?
-          </span>
-
-          <i class="fa-solid fa-plus faq-icon text-cyan-400"></i>
-
-        </button>
-
-        <div class="faq-content">
-
-          <p class="px-5 pb-5 text-gray-400 text-sm leading-relaxed">
-
-            Sí. Podemos trabajar con dominios como .COM, .CO u otras
-            extensiones disponibles. El dominio normalmente tiene
-            renovación anual.
-
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="faq glass rounded-2xl">
-
-        <button
-          class="w-full p-5 text-left flex justify-between items-center gap-5"
-          onclick="toggleFaq(this)">
-
-          <span class="font-bold">
-            ¿Puedo vender productos por Internet?
-          </span>
-
-          <i class="fa-solid fa-plus faq-icon text-cyan-400"></i>
-
-        </button>
-
-        <div class="faq-content">
-
-          <p class="px-5 pb-5 text-gray-400 text-sm leading-relaxed">
-
-            Sí. Podemos crear catálogos, carritos, pedidos por WhatsApp
-            y, dependiendo del proyecto, integrar una solución de pagos.
-
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="faq glass rounded-2xl">
-
-        <button
-          class="w-full p-5 text-left flex justify-between items-center gap-5"
-          onclick="toggleFaq(this)">
-
-          <span class="font-bold">
-            ¿Trabajan solamente con empresas grandes?
-          </span>
-
-          <i class="fa-solid fa-plus faq-icon text-cyan-400"></i>
-
-        </button>
-
-        <div class="faq-content">
-
-          <p class="px-5 pb-5 text-gray-400 text-sm leading-relaxed">
-
-            No. Diseñamos soluciones para emprendimientos, pequeños
-            comercios, profesionales, empresas y negocios que quieran
-            fortalecer su presencia digital.
-
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     CTA FINAL
-========================================================== -->
-
-<section
-  class="py-24">
-
-  <div
-    class="max-w-6xl mx-auto px-5 sm:px-6">
-
-    <div
-      class="reveal relative overflow-hidden glass rounded-3xl p-8 sm:p-14 text-center">
-
-      <div
-        class="absolute w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl -top-40 left-1/2 -translate-x-1/2">
-
-      </div>
-
-      <div class="relative">
-
-        <span
-          class="text-cyan-400 text-xs font-bold tracking-[.3em]">
-
-          EL SIGUIENTE PASO
-
-        </span>
-
-        <h2
-          class="orbitron text-3xl sm:text-5xl font-black mt-4">
-
-          HAGAMOS CRECER
-
-          <span class="gradient-text">
-
-            TU NEGOCIO
-
-          </span>
-
-        </h2>
-
-        <p
-          class="text-gray-400 max-w-2xl mx-auto mt-5">
-
-          Cuéntanos qué haces, qué necesitas y qué quieres conseguir
-          con tu página web.
-
-        </p>
-
-
-        <div
-          class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-
-          <a
-            href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20cotizar%20una%20pagina%20web%20para%20mi%20negocio."
-            target="_blank"
-            class="btn-whatsapp px-8 py-4 rounded-xl font-black flex items-center justify-center gap-3">
-
-            <i class="fa-brands fa-whatsapp text-xl"></i>
-
-            HABLAR POR WHATSAPP
-
-          </a>
-
-
-          <a
-            href="#cotizar"
-            class="glass px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3">
-
-            <i class="fa-solid fa-calculator text-cyan-400"></i>
-
-            Cotizar proyecto
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
+    </section>
 
 </main>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================== -->
+<footer class="footer">
 
-<footer
-  class="border-t border-white/5 py-10">
+    <div class="container footer-grid">
 
-  <div
-    class="max-w-7xl mx-auto px-5 sm:px-6">
+        <div class="footer-brand">
 
-    <div
-      class="grid md:grid-cols-3 gap-8">
+            <a href="index.html" class="brand">
 
-      <div>
+                <span class="brand-symbol">A</span>
 
-        <div
-          class="orbitron font-black text-xl gradient-text">
+                <span class="brand-text">
+                    <strong>ALL<span>WEB</span></strong>
+                    <small>Digital Solutions</small>
+                </span>
 
-          ALLWEB
+            </a>
 
-        </div>
-
-        <p
-          class="text-gray-500 text-sm mt-3 max-w-sm">
-
-          Diseño y desarrollo de páginas web para negocios,
-          profesionales y empresas.
-
-        </p>
-
-      </div>
-
-
-      <div>
-
-        <h4 class="font-bold mb-4">
-          Navegación
-        </h4>
-
-        <div class="space-y-2 text-sm text-gray-500">
-
-          <a href="#inicio" class="block hover:text-cyan-400">
-            Inicio
-          </a>
-
-          <a href="#soluciones" class="block hover:text-cyan-400">
-            Soluciones
-          </a>
-
-          <a href="#portafolio" class="block hover:text-cyan-400">
-            Portafolio
-          </a>
-
-          <a href="#planes" class="block hover:text-cyan-400">
-            Planes
-          </a>
+            <p>
+                Diseño y desarrollo de páginas web profesionales
+                para negocios, empresas y profesionales.
+            </p>
 
         </div>
 
-      </div>
 
+        <div class="footer-column">
 
-      <div>
+            <h4>Navegación</h4>
 
-        <h4 class="font-bold mb-4">
-          Contacto
-        </h4>
-
-        <div class="space-y-3 text-sm text-gray-500">
-
-          <a
-            href="https://wa.me/573042753303"
-            target="_blank"
-            class="flex items-center gap-3 hover:text-green-400">
-
-            <i class="fa-brands fa-whatsapp text-green-400"></i>
-
-            +57 304 275 3303
-
-          </a>
-
-          <div class="flex items-center gap-3">
-
-            <i class="fa-solid fa-location-dot text-cyan-400"></i>
-
-            Colombia
-
-          </div>
+            <a href="index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="portafolio.html">Portafolio</a>
+            <a href="planes.html">Planes</a>
 
         </div>
 
-      </div>
+
+        <div class="footer-column">
+
+            <h4>Empresa</h4>
+
+            <a href="nosotros.html">Nosotros</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="contacto.html#faq">Preguntas frecuentes</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Contacto</h4>
+
+            <a href="https://wa.me/573042753303" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp
+            </a>
+
+            <a href="contacto.html">
+                Solicitar cotización
+            </a>
+
+        </div>
 
     </div>
 
 
-    <div
-      class="border-t border-white/5 mt-8 pt-6 text-center text-xs text-gray-600">
+    <div class="container footer-bottom">
 
-      © <span id="year"></span> ALLWEB.
-      Todos los derechos reservados.
+        <span>
+            © <span id="currentYear"></span> ALLWEB. Todos los derechos reservados.
+        </span>
+
+        <span>
+            Diseño web profesional
+        </span>
 
     </div>
-
-  </div>
 
 </footer>
 
 
-<!-- =========================================================
-     WHATSAPP FLOAT
-========================================================== -->
-
 <a
-  href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20informacion%20sobre%20una%20pagina%20web."
-  target="_blank"
-  class="whatsapp-float"
-  aria-label="Contactar por WhatsApp">
-
-  <i class="fa-brands fa-whatsapp"></i>
-
+    href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20cotizar%20una%20p%C3%A1gina%20web."
+    class="whatsapp-float"
+    target="_blank"
+    aria-label="Contactar por WhatsApp"
+>
+    <i class="fa-brands fa-whatsapp"></i>
 </a>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================== -->
-
-<script>
-
-
-/* =========================================================
-   AÑO
-========================================================= */
-
-document.getElementById('year').textContent =
-  new Date().getFullYear();
-
-
-/* =========================================================
-   HEADER SCROLL
-========================================================= */
-
-const header =
-  document.getElementById('header');
-
-window.addEventListener('scroll', () => {
-
-  if (window.scrollY > 30) {
-
-    header.classList.add('scrolled');
-
-  } else {
-
-    header.classList.remove('scrolled');
-
-  }
-
-});
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-const menuButton =
-  document.getElementById('menuButton');
-
-const mobileMenu =
-  document.getElementById('mobileMenu');
-
-
-menuButton.addEventListener('click', () => {
-
-  mobileMenu.classList.toggle('open');
-
-  const icon =
-    menuButton.querySelector('i');
-
-  if (mobileMenu.classList.contains('open')) {
-
-    icon.className =
-      'fa-solid fa-xmark';
-
-  } else {
-
-    icon.className =
-      'fa-solid fa-bars';
-
-  }
-
-});
-
-
-document.querySelectorAll('.mobile-link')
-.forEach(link => {
-
-  link.addEventListener('click', () => {
-
-    mobileMenu.classList.remove('open');
-
-    menuButton.querySelector('i').className =
-      'fa-solid fa-bars';
-
-  });
-
-});
-
-
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
-
-const observer =
-  new IntersectionObserver(
-    entries => {
-
-      entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-          entry.target.classList.add('show');
-
-        }
-
-      });
-
-    },
-
-    {
-      threshold: .12
-    }
-
-  );
-
-
-document.querySelectorAll('.reveal')
-.forEach(element => {
-
-  observer.observe(element);
-
-});
-
-
-/* =========================================================
-   PROJECT TYPE
-========================================================= */
-
-const projectRadios =
-  document.querySelectorAll('.project-radio');
-
-
-const addonChecks =
-  document.querySelectorAll('.addon-check');
-
-
-function updateTotal() {
-
-  const selected =
-    document.querySelector(
-      'input[name="projectType"]:checked'
-    );
-
-
-  let base = 0;
-
-  let projectName =
-    'Proyecto Web';
-
-
-  if (selected) {
-
-    base =
-      parseInt(selected.value);
-
-    projectName =
-      selected.dataset.name;
-
-  }
-
-
-  let addonsTotal = 0;
-
-  let addons = [];
-
-
-  addonChecks.forEach(check => {
-
-    if (check.checked) {
-
-      addonsTotal +=
-        parseInt(check.value);
-
-      addons.push(
-        check.dataset.name
-      );
-
-    }
-
-  });
-
-
-  const total =
-    base + addonsTotal;
-
-
-  const formatted =
-    new Intl.NumberFormat(
-      'es-CO',
-      {
-        style: 'currency',
-        currency: 'COP',
-        maximumFractionDigits: 0
-      }
-    ).format(total);
-
-
-  document.getElementById(
-    'total-price'
-  ).textContent =
-    formatted;
-
-
-  document.getElementById(
-    'selected-project'
-  ).textContent =
-    projectName;
-
-
-  const addonsContainer =
-    document.getElementById(
-      'quote-addons'
-    );
-
-
-  if (addons.length === 0) {
-
-    addonsContainer.innerHTML =
-      '<span class="text-gray-500">Sin adicionales seleccionados</span>';
-
-  } else {
-
-    addonsContainer.innerHTML =
-      addons
-        .map(
-          addon =>
-            `<div>✓ ${addon}</div>`
-        )
-        .join('');
-
-  }
-
-}
-
-
-/* =========================================================
-   RADIO VISUAL
-========================================================= */
-
-function updateRadioVisuals() {
-
-  document
-    .querySelectorAll('.project-option')
-    .forEach(option => {
-
-      option.classList.remove(
-        'border-cyan-400',
-        'bg-cyan-400/10'
-      );
-
-    });
-
-
-  const selected =
-    document.querySelector(
-      '.project-radio:checked'
-    );
-
-
-  if (selected) {
-
-    const option =
-      selected.parentElement.querySelector(
-        '.project-option'
-      );
-
-
-    option.classList.add(
-      'border-cyan-400',
-      'bg-cyan-400/10'
-    );
-
-  }
-
-}
-
-
-projectRadios.forEach(radio => {
-
-  radio.addEventListener(
-    'change',
-    () => {
-
-      updateTotal();
-
-      updateRadioVisuals();
-
-    }
-  );
-
-});
-
-
-addonChecks.forEach(check => {
-
-  check.addEventListener(
-    'change',
-    updateTotal
-  );
-
-});
-
-
-/* =========================================================
-   SELECT PLAN
-========================================================= */
-
-function selectPlan(plan) {
-
-  projectRadios.forEach(radio => {
-
-    if (radio.dataset.name === plan) {
-
-      radio.checked = true;
-
-    }
-
-  });
-
-
-  updateTotal();
-
-  updateRadioVisuals();
-
-}
-
-
-/* =========================================================
-   WHATSAPP QUOTE
-========================================================= */
-
-function sendWhatsAppQuote() {
-
-  const selected =
-    document.querySelector(
-      'input[name="projectType"]:checked'
-    );
-
-
-  const projectName =
-    selected
-      ? selected.dataset.name
-      : 'Proyecto Web';
-
-
-  const base =
-    selected
-      ? parseInt(selected.value)
-      : 0;
-
-
-  let addons = [];
-
-  let addonsTotal = 0;
-
-
-  addonChecks.forEach(check => {
-
-    if (check.checked) {
-
-      addons.push(
-        check.dataset.name
-      );
-
-      addonsTotal +=
-        parseInt(check.value);
-
-    }
-
-  });
-
-
-  const total =
-    base + addonsTotal;
-
-
-  const formatted =
-    new Intl.NumberFormat(
-      'es-CO',
-      {
-        style: 'currency',
-        currency: 'COP',
-        maximumFractionDigits: 0
-      }
-    ).format(total);
-
-
-  let message =
-`Hola ALLWEB 👋
-
-Quiero cotizar una página web.
-
-🌐 Tipo de proyecto:
-${projectName}
-
-`;
-
-
-  if (addons.length > 0) {
-
-    message +=
-`➕ Adicionales:
-${addons.map(a => '• ' + a).join('\n')}
-
-`;
-
-  }
-
-
-  message +=
-`💰 Estimación:
-${formatted}
-
-Me gustaría recibir información sobre el proceso, tiempo de entrega y forma de pago.`;
-
-
-  const url =
-    `https://wa.me/573042753303?text=${
-      encodeURIComponent(message)
-    }`;
-
-
-  window.open(
-    url,
-    '_blank'
-  );
-
-}
-
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-function toggleFaq(button) {
-
-  const faq =
-    button.closest('.faq');
-
-
-  document
-    .querySelectorAll('.faq')
-    .forEach(item => {
-
-      if (item !== faq) {
-
-        item.classList.remove('open');
-
-      }
-
-    });
-
-
-  faq.classList.toggle('open');
-
-}
-
-
-/* =========================================================
-   CANVAS NETWORK
-========================================================= */
-
-const canvas =
-  document.getElementById(
-    'networkCanvas'
-  );
-
-
-const ctx =
-  canvas.getContext('2d');
-
-
-let particles = [];
-
-let canvasWidth =
-  window.innerWidth;
-
-let canvasHeight =
-  window.innerHeight;
-
-
-function resizeCanvas() {
-
-  canvasWidth =
-    canvas.width =
-    window.innerWidth;
-
-  canvasHeight =
-    canvas.height =
-    window.innerHeight;
-
-}
-
-
-window.addEventListener(
-  'resize',
-  resizeCanvas
-);
-
-
-resizeCanvas();
-
-
-class Particle {
-
-  constructor() {
-
-    this.x =
-      Math.random() *
-      canvasWidth;
-
-    this.y =
-      Math.random() *
-      canvasHeight;
-
-    this.vx =
-      (Math.random() - .5) *
-      .45;
-
-    this.vy =
-      (Math.random() - .5) *
-      .45;
-
-    this.radius =
-      Math.random() *
-      1.7 + .5;
-
-  }
-
-
-  update() {
-
-    this.x += this.vx;
-
-    this.y += this.vy;
-
-
-    if (
-      this.x < 0 ||
-      this.x > canvasWidth
-    ) {
-
-      this.vx *= -1;
-
-    }
-
-
-    if (
-      this.y < 0 ||
-      this.y > canvasHeight
-    ) {
-
-      this.vy *= -1;
-
-    }
-
-  }
-
-
-  draw() {
-
-    ctx.beginPath();
-
-    ctx.arc(
-      this.x,
-      this.y,
-      this.radius,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fillStyle =
-      '#00e5ff';
-
-    ctx.globalAlpha =
-      .55;
-
-    ctx.fill();
-
-    ctx.globalAlpha =
-      1;
-
-  }
-
-}
-
-
-function createParticles() {
-
-  particles = [];
-
-
-  const amount =
-    window.innerWidth < 768
-      ? 30
-      : 55;
-
-
-  for (
-    let i = 0;
-    i < amount;
-    i++
-  ) {
-
-    particles.push(
-      new Particle()
-    );
-
-  }
-
-}
-
-
-createParticles();
-
-
-window.addEventListener(
-  'resize',
-  createParticles
-);
-
-
-function animateNetwork() {
-
-  ctx.clearRect(
-    0,
-    0,
-    canvasWidth,
-    canvasHeight
-  );
-
-
-  particles.forEach(
-    particle => {
-
-      particle.update();
-
-      particle.draw();
-
-    }
-  );
-
-
-  for (
-    let i = 0;
-    i < particles.length;
-    i++
-  ) {
-
-    for (
-      let j = i + 1;
-      j < particles.length;
-      j++
-    ) {
-
-      const dx =
-        particles[i].x -
-        particles[j].x;
-
-
-      const dy =
-        particles[i].y -
-        particles[j].y;
-
-
-      const distance =
-        Math.sqrt(
-          dx * dx +
-          dy * dy
-        );
-
-
-      if (distance < 120) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-          particles[i].x,
-          particles[i].y
-        );
-
-        ctx.lineTo(
-          particles[j].x,
-          particles[j].y
-        );
-
-
-        ctx.strokeStyle =
-          `rgba(0,229,255,${
-            (1 - distance / 120) * .25
-          })`;
-
-
-        ctx.lineWidth =
-          .5;
-
-
-        ctx.stroke();
-
-      }
-
-    }
-
-  }
-
-
-  requestAnimationFrame(
-    animateNetwork
-  );
-
-}
-
-
-animateNetwork();
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-updateTotal();
-
-updateRadioVisuals();
-
-
-</script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
