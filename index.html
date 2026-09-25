@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
 
@@ -12,12 +13,11 @@
 
     <title>ALLWEB | Diseño y Desarrollo Web Profesional</title>
 
-    <!-- Evita el parpadeo de entrada -->
     <script>
         document.documentElement.classList.add("js");
     </script>
 
-    <!-- Google Fonts -->
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -26,7 +26,7 @@
         rel="stylesheet"
     >
 
-    <!-- Font Awesome -->
+    <!-- FONT AWESOME -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -39,8 +39,8 @@
 <body>
 
 <!-- =====================================================
-     FONDO DECORATIVO
-     ===================================================== -->
+     FONDO
+===================================================== -->
 
 <div class="background-grid"></div>
 
@@ -51,20 +51,20 @@
 
 <!-- =====================================================
      HEADER
-     ===================================================== -->
+===================================================== -->
 
 <header class="site-header" id="site-header">
 
     <div class="container nav-container">
 
-        <!-- LOGO ALLWEB -->
+        <!-- LOGO -->
+
         <a href="index.html" class="brand" aria-label="ALLWEB - Inicio">
 
             <span class="brand-text">
                 ALL<span>WEB</span>
             </span>
 
-            <!-- Línea animada del logo -->
             <span class="brand-line" aria-hidden="true">
                 <span></span>
             </span>
@@ -72,50 +72,82 @@
         </a>
 
 
-        <!-- BOTÓN MOBILE -->
+        <!-- BOTÓN MENÚ MÓVIL -->
 
         <button
+            type="button"
             class="menu-toggle"
             id="menu-toggle"
             aria-label="Abrir menú"
             aria-expanded="false"
+            aria-controls="site-nav"
         >
+
             <i class="fa-solid fa-bars"></i>
+
         </button>
 
 
         <!-- NAVEGACIÓN -->
 
-        <nav class="site-nav" id="site-nav">
+        <nav
+            class="site-nav"
+            id="site-nav"
+            aria-label="Navegación principal"
+        >
 
-            <a href="index.html" data-nav="index.html">
+            <a
+                href="index.html"
+                class="nav-link"
+                data-nav="index.html"
+            >
                 Inicio
             </a>
 
-            <a href="servicios.html" data-nav="servicios.html">
+            <a
+                href="servicios.html"
+                class="nav-link"
+                data-nav="servicios.html"
+            >
                 Servicios
             </a>
 
-            <a href="portafolio.html" data-nav="portafolio.html">
+            <a
+                href="portafolio.html"
+                class="nav-link"
+                data-nav="portafolio.html"
+            >
                 Portafolio
             </a>
 
-            <a href="planes.html" data-nav="planes.html">
+            <a
+                href="planes.html"
+                class="nav-link"
+                data-nav="planes.html"
+            >
                 Planes
             </a>
 
-            <a href="nosotros.html" data-nav="nosotros.html">
+            <a
+                href="nosotros.html"
+                class="nav-link"
+                data-nav="nosotros.html"
+            >
                 Nosotros
             </a>
 
-            <a href="contacto.html" data-nav="contacto.html">
+            <a
+                href="contacto.html"
+                class="nav-link"
+                data-nav="contacto.html"
+            >
                 Contacto
             </a>
 
         </nav>
 
 
-        <!-- CTA HEADER -->
+        <!-- CTA -->
 
         <div class="header-action">
 
@@ -123,8 +155,11 @@
                 href="contacto.html"
                 class="nav-cta"
             >
-                Cotizar proyecto
+
+                <span>Cotizar proyecto</span>
+
                 <i class="fa-solid fa-arrow-right"></i>
+
             </a>
 
         </div>
@@ -134,17 +169,16 @@
 </header>
 
 
-
 <!-- =====================================================
      MAIN
-     ===================================================== -->
+===================================================== -->
 
 <main>
 
 
 <!-- =====================================================
      HERO
-     ===================================================== -->
+===================================================== -->
 
 <section class="hero">
 
@@ -159,7 +193,9 @@
 
                 <span class="eyebrow-dot"></span>
 
-                DISEÑO WEB · DESARROLLO · EXPERIENCIA DIGITAL
+                <span>
+                    DISEÑO WEB · DESARROLLO · EXPERIENCIA DIGITAL
+                </span>
 
             </div>
 
@@ -203,16 +239,16 @@
                     class="btn btn-secondary"
                 >
 
-                    Ver proyectos
+                    <span>Ver proyectos</span>
 
-                    <i class="fa-solid fa-grid-2"></i>
+                    <i class="fa-solid fa-table-cells-large"></i>
 
                 </a>
 
             </div>
 
 
-            <!-- MINI BENEFICIOS -->
+            <!-- BENEFICIOS -->
 
             <div class="hero-trust">
 
@@ -220,23 +256,25 @@
 
                     <i class="fa-solid fa-circle-check"></i>
 
-                    Diseño profesional
+                    <span>Diseño profesional</span>
 
                 </div>
+
 
                 <div class="trust-item">
 
                     <i class="fa-solid fa-circle-check"></i>
 
-                    Adaptada a celulares
+                    <span>Adaptada a celulares</span>
 
                 </div>
+
 
                 <div class="trust-item">
 
                     <i class="fa-solid fa-circle-check"></i>
 
-                    WhatsApp integrado
+                    <span>WhatsApp integrado</span>
 
                 </div>
 
@@ -245,8 +283,7 @@
         </div>
 
 
-
-        <!-- VISUAL HERO -->
+        <!-- VISUAL -->
 
         <div class="hero-visual">
 
@@ -272,51 +309,92 @@
                 <div class="code-body">
 
                     <div class="code-line">
+
                         <span class="code-number">01</span>
+
                         <span class="code-purple">&lt;website</span>
+
                         <span class="code-white">premium=</span>
+
                         <span class="code-cyan">"true"</span>
+
                         <span class="code-purple">&gt;</span>
+
                     </div>
 
+
                     <div class="code-line">
+
                         <span class="code-number">02</span>
+
                         <span class="code-space"></span>
+
                         <span class="code-purple">&lt;design</span>
+
                         <span class="code-white">modern=</span>
+
                         <span class="code-cyan">"true"</span>
+
                         <span class="code-purple">/&gt;</span>
+
                     </div>
 
+
                     <div class="code-line">
+
                         <span class="code-number">03</span>
+
                         <span class="code-space"></span>
+
                         <span class="code-purple">&lt;responsive</span>
+
                         <span class="code-white">device=</span>
+
                         <span class="code-cyan">"all"</span>
+
                         <span class="code-purple">/&gt;</span>
+
                     </div>
 
+
                     <div class="code-line">
+
                         <span class="code-number">04</span>
+
                         <span class="code-space"></span>
+
                         <span class="code-purple">&lt;conversion</span>
+
                         <span class="code-white">optimized=</span>
+
                         <span class="code-cyan">"true"</span>
+
                         <span class="code-purple">/&gt;</span>
+
                     </div>
 
+
                     <div class="code-line">
+
                         <span class="code-number">05</span>
+
                         <span class="code-space"></span>
+
                         <span class="code-green">
                             ✓ ALL SYSTEMS READY
                         </span>
+
                     </div>
 
+
                     <div class="code-line">
+
                         <span class="code-number">06</span>
-                        <span class="code-purple">&lt;/website&gt;</span>
+
+                        <span class="code-purple">
+                            &lt;/website&gt;
+                        </span>
+
                     </div>
 
                 </div>
@@ -326,14 +404,16 @@
 
                     <span class="status-dot"></span>
 
-                    EXPERIENCIA DIGITAL ACTIVA
+                    <span>
+                        EXPERIENCIA DIGITAL ACTIVA
+                    </span>
 
                 </div>
 
             </div>
 
 
-            <!-- TARJETAS FLOTANTES -->
+            <!-- TARJETA 1 -->
 
             <div class="floating-card floating-card-one">
 
@@ -350,6 +430,8 @@
             </div>
 
 
+            <!-- TARJETA 2 -->
+
             <div class="floating-card floating-card-two">
 
                 <i class="fa-solid fa-mobile-screen"></i>
@@ -364,7 +446,6 @@
 
             </div>
 
-
         </div>
 
     </div>
@@ -372,15 +453,13 @@
 </section>
 
 
-
 <!-- =====================================================
-     VIDEO PROMOCIONAL
-     ===================================================== -->
+     VIDEO
+===================================================== -->
 
 <section class="video-showcase" id="video">
 
     <div class="container">
-
 
         <div class="video-heading">
 
@@ -388,7 +467,9 @@
 
                 <span class="eyebrow-dot"></span>
 
-                ALLWEB · EXPERIENCIA DIGITAL
+                <span>
+                    ALLWEB · EXPERIENCIA DIGITAL
+                </span>
 
             </span>
 
@@ -414,12 +495,12 @@
         </div>
 
 
-
-        <!-- CONTENEDOR DEL VIDEO -->
+        <!-- VIDEO -->
 
         <div class="video-frame">
 
-            <!-- Línea luminosa -->
+            <!-- LÍNEA SUPERIOR -->
+
             <div class="video-line video-line-top"></div>
 
 
@@ -444,13 +525,14 @@
                 </video>
 
 
-                <!-- Overlay -->
-
                 <div class="video-overlay">
 
                     <div class="video-corner top-left"></div>
+
                     <div class="video-corner top-right"></div>
+
                     <div class="video-corner bottom-left"></div>
+
                     <div class="video-corner bottom-right"></div>
 
                 </div>
@@ -458,7 +540,7 @@
             </div>
 
 
-            <!-- Línea luminosa inferior -->
+            <!-- LÍNEA INFERIOR -->
 
             <div class="video-line video-line-bottom"></div>
 
@@ -469,15 +551,13 @@
 </section>
 
 
-
 <!-- =====================================================
      STATS
-     ===================================================== -->
+===================================================== -->
 
 <section class="stats-section">
 
     <div class="container stats-grid">
-
 
         <div class="stat">
 
@@ -514,21 +594,18 @@
 
         </div>
 
-
     </div>
 
 </section>
 
 
-
 <!-- =====================================================
      SERVICIOS
-     ===================================================== -->
+===================================================== -->
 
 <section class="section services-preview">
 
     <div class="container">
-
 
         <div class="section-heading">
 
@@ -539,8 +616,13 @@
                 </span>
 
                 <h2>
+
                     Soluciones digitales
-                    <span class="gradient-text">para crecer.</span>
+
+                    <span class="gradient-text">
+                        para crecer.
+                    </span>
+
                 </h2>
 
             </div>
@@ -551,7 +633,7 @@
                 class="text-link"
             >
 
-                Ver todos los servicios
+                <span>Ver todos los servicios</span>
 
                 <i class="fa-solid fa-arrow-right"></i>
 
@@ -560,11 +642,10 @@
         </div>
 
 
-
         <div class="services-grid">
 
 
-            <!-- CARD 1 -->
+            <!-- 01 -->
 
             <article class="service-card">
 
@@ -592,7 +673,7 @@
 
                 <a href="servicios.html">
 
-                    Explorar
+                    <span>Explorar</span>
 
                     <i class="fa-solid fa-arrow-right"></i>
 
@@ -601,8 +682,7 @@
             </article>
 
 
-
-            <!-- CARD 2 -->
+            <!-- 02 -->
 
             <article class="service-card">
 
@@ -630,7 +710,7 @@
 
                 <a href="servicios.html">
 
-                    Explorar
+                    <span>Explorar</span>
 
                     <i class="fa-solid fa-arrow-right"></i>
 
@@ -639,8 +719,7 @@
             </article>
 
 
-
-            <!-- CARD 3 -->
+            <!-- 03 -->
 
             <article class="service-card">
 
@@ -668,7 +747,7 @@
 
                 <a href="servicios.html">
 
-                    Explorar
+                    <span>Explorar</span>
 
                     <i class="fa-solid fa-arrow-right"></i>
 
@@ -677,8 +756,7 @@
             </article>
 
 
-
-            <!-- CARD 4 -->
+            <!-- 04 -->
 
             <article class="service-card">
 
@@ -706,14 +784,13 @@
 
                 <a href="servicios.html">
 
-                    Explorar
+                    <span>Explorar</span>
 
                     <i class="fa-solid fa-arrow-right"></i>
 
                 </a>
 
             </article>
-
 
         </div>
 
@@ -722,15 +799,13 @@
 </section>
 
 
-
 <!-- =====================================================
      POR QUÉ ALLWEB
-     ===================================================== -->
+===================================================== -->
 
 <section class="section why-section">
 
     <div class="container why-grid">
-
 
         <div class="why-visual">
 
@@ -739,22 +814,26 @@
                 <div class="orbital-center">
 
                     <span>ALL</span>
+
                     <strong>WEB</strong>
 
                 </div>
 
 
                 <div class="orbit orbit-one"></div>
+
                 <div class="orbit orbit-two"></div>
 
+
                 <div class="orbit-dot dot-one"></div>
+
                 <div class="orbit-dot dot-two"></div>
+
                 <div class="orbit-dot dot-three"></div>
 
             </div>
 
         </div>
-
 
 
         <div class="why-content">
@@ -790,7 +869,9 @@
                 <div class="benefit">
 
                     <div class="benefit-icon">
+
                         <i class="fa-solid fa-palette"></i>
+
                     </div>
 
                     <div>
@@ -811,7 +892,9 @@
                 <div class="benefit">
 
                     <div class="benefit-icon">
+
                         <i class="fa-solid fa-gauge-high"></i>
+
                     </div>
 
                     <div>
@@ -832,7 +915,9 @@
                 <div class="benefit">
 
                     <div class="benefit-icon">
+
                         <i class="fa-brands fa-whatsapp"></i>
+
                     </div>
 
                     <div>
@@ -849,7 +934,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -858,7 +942,7 @@
                 class="btn btn-secondary"
             >
 
-                Conoce ALLWEB
+                <span>Conoce ALLWEB</span>
 
                 <i class="fa-solid fa-arrow-right"></i>
 
@@ -871,10 +955,9 @@
 </section>
 
 
-
 <!-- =====================================================
      CTA
-     ===================================================== -->
+===================================================== -->
 
 <section class="cta-section">
 
@@ -918,7 +1001,7 @@
                         class="btn btn-primary"
                     >
 
-                        Solicitar cotización
+                        <span>Solicitar cotización</span>
 
                         <i class="fa-solid fa-arrow-right"></i>
 
@@ -934,7 +1017,7 @@
 
                         <i class="fa-brands fa-whatsapp"></i>
 
-                        WhatsApp
+                        <span>WhatsApp</span>
 
                     </a>
 
@@ -948,14 +1031,12 @@
 
 </section>
 
-
 </main>
-
 
 
 <!-- =====================================================
      FOOTER
-     ===================================================== -->
+===================================================== -->
 
 <footer class="site-footer">
 
@@ -987,7 +1068,6 @@
         </div>
 
 
-
         <div class="footer-column">
 
             <h4>
@@ -995,12 +1075,14 @@
             </h4>
 
             <a href="index.html">Inicio</a>
+
             <a href="servicios.html">Servicios</a>
+
             <a href="portafolio.html">Portafolio</a>
+
             <a href="planes.html">Planes</a>
 
         </div>
-
 
 
         <div class="footer-column">
@@ -1009,11 +1091,15 @@
                 Empresa
             </h4>
 
-            <a href="nosotros.html">Nosotros</a>
-            <a href="contacto.html">Contacto</a>
+            <a href="nosotros.html">
+                Nosotros
+            </a>
+
+            <a href="contacto.html">
+                Contacto
+            </a>
 
         </div>
-
 
 
         <div class="footer-column">
@@ -1042,7 +1128,10 @@
     <div class="container footer-bottom">
 
         <span>
-            © <span id="current-year"></span> ALLWEB. Todos los derechos reservados.
+
+            © <span id="current-year"></span>
+            ALLWEB. Todos los derechos reservados.
+
         </span>
 
 
@@ -1055,10 +1144,9 @@
 </footer>
 
 
-
 <!-- =====================================================
      WHATSAPP FLOTANTE
-     ===================================================== -->
+===================================================== -->
 
 <a
     href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web."
@@ -1077,8 +1165,7 @@
 </a>
 
 
-
-<!-- JS -->
+<!-- JAVASCRIPT -->
 
 <script src="js/app.js"></script>
 
