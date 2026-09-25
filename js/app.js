@@ -1,37 +1,235 @@
 /* =========================================================
-   ALLWEB - APP.JS
+   ALLWEB
+   JAVASCRIPT PRINCIPAL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
-       PAGE LOAD
+       ENTRADA DE LA PÁGINA
     ===================================================== */
 
     requestAnimationFrame(() => {
+
         document.body.classList.add("page-loaded");
+
     });
 
 
     /* =====================================================
-       HEADER SCROLL
+       AÑO AUTOMÁTICO
     ===================================================== */
 
-    const header = document.getElementById("header");
+    document.querySelectorAll(".current-year").forEach(element => {
 
-    const updateHeader = () => {
+        element.textContent =
+            new Date().getFullYear();
 
-        if (!header) return;
+    });
 
-        if (window.scrollY > 30) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
+
+    /* =====================================================
+       MENÚ MÓVIL
+    ===================================================== */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const mainNav =
+        document.getElementById("mainNav");
+
+
+    if (menuToggle && mainNav) {
+
+        menuToggle.addEventListener("click", () => {
+
+            const isOpen =
+                mainNav.classList.toggle("open");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+
+            const icon =
+                menuToggle.querySelector("i");
+
+
+            if (icon) {
+
+                icon.className =
+                    isOpen
+                        ? "fa-solid fa-xmark"
+                        : "fa-solid fa-bars";
+
+            }
+
+        });
+
+
+        mainNav.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                mainNav.classList.remove("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                const icon =
+                    menuToggle.querySelector("i");
+
+
+                if (icon) {
+
+                    icon.className =
+                        "fa-solid fa-bars";
+
+                }
+
+            });
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CERRAR MENÚ CON ESC
+    ===================================================== */
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+
+            if (mainNav) {
+
+                mainNav.classList.remove("open");
+
+            }
+
+            if (menuToggle) {
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                const icon =
+                    menuToggle.querySelector("i");
+
+
+                if (icon) {
+
+                    icon.className =
+                        "fa-solid fa-bars";
+
+                }
+
+            }
+
         }
 
-    };
+    });
 
-    updateHeader();
+
+    /* =====================================================
+       TRANSICIONES ENTRE PÁGINAS
+    ===================================================== */
+
+    document.querySelectorAll(
+        'a[href$=".html"]'
+    ).forEach(link => {
+
+        link.addEventListener("click", event => {
+
+            const href =
+                link.getAttribute("href");
+
+
+            if (!href) {
+                return;
+            }
+
+
+            if (
+                href.startsWith("#") ||
+                href.startsWith("http") ||
+                href.startsWith("mailto:") ||
+                href.startsWith("tel:")
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                event.ctrlKey ||
+                event.metaKey ||
+                event.shiftKey ||
+                event.altKey
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            document.body.classList.add(
+                "page-leaving"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href = href;
+
+            }, 280);
+
+        });
+
+    });
+
+
+    /* =====================================================
+       HEADER AL HACER SCROLL
+    ===================================================== */
+
+    const header =
+        document.querySelector(".site-header");
+
+
+    const updateHeader =
+        () => {
+
+            if (!header) {
+                return;
+            }
+
+
+            if (window.scrollY > 30) {
+
+                header.style.boxShadow =
+                    "0 15px 45px rgba(0,0,0,.22)";
+
+            } else {
+
+                header.style.boxShadow =
+                    "none";
+
+            }
+
+        };
+
 
     window.addEventListener(
         "scroll",
@@ -40,211 +238,316 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
+    updateHeader();
+
+
     /* =====================================================
-       MOBILE MENU
+       FILTRO DEL PORTAFOLIO
     ===================================================== */
 
-    const menuButton =
-        document.getElementById("mobileMenuButton");
-
-    const mobileMenu =
-        document.getElementById("mobileMenu");
-
-    if (menuButton && mobileMenu) {
-
-        menuButton.addEventListener(
-            "click",
-            () => {
-
-                mobileMenu.classList.toggle("open");
-
-                const icon =
-                    menuButton.querySelector("i");
-
-                if (
-                    mobileMenu.classList.contains("open")
-                ) {
-
-                    icon.classList.remove(
-                        "fa-bars"
-                    );
-
-                    icon.classList.add(
-                        "fa-xmark"
-                    );
-
-                } else {
-
-                    icon.classList.remove(
-                        "fa-xmark"
-                    );
-
-                    icon.classList.add(
-                        "fa-bars"
-                    );
-                }
-
-            }
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-btn"
         );
 
 
-        mobileMenu
-            .querySelectorAll("a")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        mobileMenu.classList.remove(
-                            "open"
-                        );
-
-                        const icon =
-                            menuButton.querySelector("i");
-
-                        icon.classList.remove(
-                            "fa-xmark"
-                        );
-
-                        icon.classList.add(
-                            "fa-bars"
-                        );
-
-                    }
-                );
-
-            });
-
-    }
+    const portfolioCards =
+        document.querySelectorAll(
+            ".portfolio-card"
+        );
 
 
-    /* =====================================================
-       ACTIVE NAVIGATION
-    ===================================================== */
+    if (
+        filterButtons.length &&
+        portfolioCards.length
+    ) {
 
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop() || "index.html";
+        filterButtons.forEach(button => {
 
-    document
-        .querySelectorAll(
-            ".desktop-nav .nav-link"
-        )
-        .forEach(link => {
-
-            const href =
-                link.getAttribute("href");
-
-            link.classList.remove("active");
-
-            if (
-                href === currentPage ||
-                (
-                    currentPage === "" &&
-                    href === "index.html"
-                )
-            ) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-
-    /* =====================================================
-       INTERNAL PAGE TRANSITIONS
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href$=".html"]'
-        )
-        .forEach(link => {
-
-            link.addEventListener(
+            button.addEventListener(
                 "click",
-                event => {
+                () => {
 
-                    const href =
-                        link.getAttribute("href");
-
-                    if (
-                        !href ||
-                        href.startsWith("#") ||
-                        link.target === "_blank"
-                    ) {
-                        return;
-                    }
-
-                    if (
-                        event.ctrlKey ||
-                        event.metaKey ||
-                        event.shiftKey ||
-                        event.altKey
-                    ) {
-                        return;
-                    }
-
-                    event.preventDefault();
-
-                    document.body.classList.remove(
-                        "page-loaded"
+                    filterButtons.forEach(
+                        item => {
+                            item.classList.remove(
+                                "active"
+                            );
+                        }
                     );
 
-                    document.body.classList.add(
-                        "page-leaving"
+
+                    button.classList.add(
+                        "active"
                     );
 
-                    setTimeout(() => {
 
-                        window.location.href =
-                            href;
+                    const filter =
+                        button.dataset.filter;
 
-                    }, 280);
+
+                    portfolioCards.forEach(card => {
+
+                        const category =
+                            card.dataset.category;
+
+
+                        if (
+                            filter === "all" ||
+                            category === filter
+                        ) {
+
+                            card.classList.remove(
+                                "hidden"
+                            );
+
+                        } else {
+
+                            card.classList.add(
+                                "hidden"
+                            );
+
+                        }
+
+                    });
 
                 }
             );
 
         });
 
+    }
+
 
     /* =====================================================
-       YEAR
+       CALCULADORA DE PLANES
     ===================================================== */
 
-    const year =
-        document.getElementById("year");
+    const projectType =
+        document.getElementById(
+            "projectType"
+        );
 
-    if (year) {
 
-        year.textContent =
-            new Date().getFullYear();
+    const calculatorPrice =
+        document.getElementById(
+            "calculatorPrice"
+        );
+
+
+    if (
+        projectType &&
+        calculatorPrice
+    ) {
+
+        const formatCOP =
+            value => {
+
+                if (
+                    !value ||
+                    Number(value) === 0
+                ) {
+
+                    return "A cotizar";
+
+                }
+
+
+                return "$" +
+                    Number(value)
+                        .toLocaleString(
+                            "es-CO"
+                        );
+
+            };
+
+
+        const updatePrice =
+            () => {
+
+                calculatorPrice.textContent =
+                    formatCOP(
+                        projectType.value
+                    );
+
+            };
+
+
+        projectType.addEventListener(
+            "change",
+            updatePrice
+        );
+
+
+        updatePrice();
 
     }
 
 
     /* =====================================================
-       ESC PARA CERRAR MENU
+       FORMULARIO DE CONTACTO
     ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        event => {
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
 
-            if (event.key === "Escape") {
 
-                if (mobileMenu) {
-                    mobileMenu.classList.remove(
-                        "open"
+    if (contactForm) {
+
+        contactForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById(
+                        "name"
+                    )?.value.trim();
+
+
+                const business =
+                    document.getElementById(
+                        "business"
+                    )?.value.trim();
+
+
+                const project =
+                    document.getElementById(
+                        "project"
+                    )?.value;
+
+
+                const message =
+                    document.getElementById(
+                        "message"
+                    )?.value.trim();
+
+
+                if (!name || !project || !message) {
+
+                    alert(
+                        "Por favor completa los campos obligatorios."
                     );
+
+                    return;
+
                 }
 
-            }
 
-        }
-    );
+                let text =
+                    "Hola ALLWEB,%0A%0A";
+
+
+                text +=
+                    "Mi nombre es: " +
+                    encodeURIComponent(name) +
+                    "%0A";
+
+
+                if (business) {
+
+                    text +=
+                        "Mi negocio es: " +
+                        encodeURIComponent(business) +
+                        "%0A";
+
+                }
+
+
+                text +=
+                    "Necesito: " +
+                    encodeURIComponent(project) +
+                    "%0A%0A";
+
+
+                text +=
+                    "Información del proyecto:%0A" +
+                    encodeURIComponent(message);
+
+
+                const whatsappURL =
+                    "https://wa.me/573042753303?text=" +
+                    text;
+
+
+                window.open(
+                    whatsappURL,
+                    "_blank",
+                    "noopener"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ANIMACIÓN SUAVE AL APARECER
+    ===================================================== */
+
+    const animatedElements =
+        document.querySelectorAll(
+            ".service-card, .portfolio-card, .value-card, .process-card, .pricing-card, .timeline-item"
+        );
+
+
+    if (
+        "IntersectionObserver" in window &&
+        animatedElements.length
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.style.opacity =
+                                "1";
+
+                            entry.target.style.transform =
+                                "translateY(0)";
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: .08
+                }
+            );
+
+
+        animatedElements.forEach(element => {
+
+            element.style.opacity =
+                "0";
+
+            element.style.transform =
+                "translateY(20px)";
+
+            element.style.transition =
+                "opacity .6s ease, transform .6s ease";
+
+
+            observer.observe(element);
+
+        });
+
+    }
 
 });
