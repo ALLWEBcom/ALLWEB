@@ -3466,3 +3466,442 @@ body {
     }
 
 }
+
+
+/* =========================================================
+   ALLWEB — FONDO DINÁMICO INTERACTIVO
+   Se añade sin modificar el fondo original ni las líneas láser.
+========================================================= */
+
+.allweb-motion-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: .72;
+}
+
+.motion-orb {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: .14;
+    will-change: transform;
+    transition: transform .25s ease-out;
+}
+
+.motion-orb-cyan {
+    left: 8%;
+    top: 24%;
+    background: var(--cyan);
+}
+
+.motion-orb-purple {
+    right: 8%;
+    top: 58%;
+    background: var(--purple);
+}
+
+.motion-grid {
+    position: absolute;
+    inset: -20%;
+    opacity: .16;
+    background-image:
+        linear-gradient(rgba(0,242,254,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(121,40,202,.08) 1px, transparent 1px);
+    background-size: 90px 90px;
+    transform: perspective(700px) rotateX(58deg) translateY(12%);
+    transform-origin: center bottom;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, transparent 90%);
+}
+
+.motion-cursor {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,242,254,.12) 0%, rgba(121,40,202,.05) 28%, transparent 68%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    will-change: left, top;
+}
+
+body.motion-active .motion-cursor {
+    opacity: 1;
+}
+
+@media (max-width: 700px) {
+    .allweb-motion-bg { opacity: .5; }
+    .motion-orb { width: 210px; height: 210px; filter: blur(55px); }
+    .motion-grid { background-size: 65px 65px; }
+    .motion-cursor { width: 260px; height: 260px; }
+}
+
+
+/* =========================================================
+   ALLWEB — DOS VIDEOS
+========================================================= */
+
+.video-wrapper-secondary {
+    margin-top: 85px;
+}
+
+.video-wrapper-secondary .video-frame {
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.6),
+        0 0 50px rgba(121,40,202,.07);
+}
+
+
+/* =========================================================
+   ALLWEB — OPINIONES / CALIFICACIONES
+========================================================= */
+
+.reviews-section {
+    padding-top: 110px;
+    padding-bottom: 100px;
+}
+
+.reviews-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.glass-review-card,
+.review-card,
+.payment-panel {
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+    box-shadow: 0 25px 80px rgba(0,0,0,.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.rating-summary {
+    min-height: 100%;
+    padding: 30px;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rating-kicker,
+.payment-label {
+    color: var(--cyan);
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.rating-number {
+    margin-top: 8px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 55px;
+    line-height: 1;
+    background: linear-gradient(90deg, #fff, var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.rating-stars,
+.review-stars {
+    display: flex;
+    gap: 5px;
+    color: #ffd84d;
+    text-shadow: 0 0 12px rgba(255,216,77,.22);
+}
+
+.rating-stars {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.rating-summary p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.review-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+    min-height: 43px;
+    padding: 0 15px;
+    border: 1px solid rgba(37,211,102,.3);
+    border-radius: 11px;
+    color: #fff;
+    background: rgba(37,211,102,.08);
+    font-size: 12px;
+    font-weight: 700;
+    transition: .25s ease;
+}
+
+.review-action:hover {
+    transform: translateY(-2px);
+    background: rgba(37,211,102,.16);
+}
+
+.review-action i { color: #25d366; }
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.review-card {
+    min-width: 0;
+    padding: 23px;
+    border-radius: 18px;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0,242,254,.28);
+    box-shadow: 0 25px 70px rgba(0,242,254,.06);
+}
+
+.review-top {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+}
+
+.review-avatar {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #030305;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--cyan), var(--purple-light));
+}
+
+.review-top strong,
+.review-top span {
+    display: block;
+}
+
+.review-top strong {
+    font-size: 12px;
+}
+
+.review-top span {
+    margin-top: 2px;
+    color: var(--muted-dark);
+    font-size: 9px;
+}
+
+.review-stars {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.review-card > p {
+    margin-top: 18px;
+    color: #d8deea;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ALLWEB — MEDIOS DE PAGO
+========================================================= */
+
+.payments-section {
+    padding-top: 10px;
+    padding-bottom: 110px;
+}
+
+.payment-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 45px;
+    border-radius: 25px;
+}
+
+.payment-panel::before {
+    content: "";
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    right: -180px;
+    top: -180px;
+    border-radius: 50%;
+    background: var(--cyan);
+    opacity: .07;
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+.payment-panel::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: -180px;
+    bottom: -190px;
+    border-radius: 50%;
+    background: var(--purple);
+    opacity: .07;
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+.payment-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+}
+
+.payment-copy h2 {
+    margin-top: 15px;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.08;
+}
+
+.payment-copy h2 span {
+    display: block;
+    background: linear-gradient(90deg, var(--cyan), var(--purple-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.payment-copy p {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.payment-methods {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.payment-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 105px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: rgba(3,3,5,.48);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.payment-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,242,254,.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.payment-icon {
+    width: 55px;
+    height: 55px;
+    flex: 0 0 55px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    color: var(--cyan);
+    background: rgba(0,242,254,.07);
+    border: 1px solid rgba(0,242,254,.18);
+    font-size: 22px;
+}
+
+.payment-tullave .payment-icon {
+    color: var(--purple-light);
+    background: rgba(121,40,202,.08);
+    border-color: rgba(168,85,247,.22);
+}
+
+.payment-card h3 {
+    margin-top: 3px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 19px;
+}
+
+.payment-card p {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.payment-note {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+    font-size: 10px;
+}
+
+.payment-note i { color: var(--cyan); }
+
+
+/* =========================================================
+   RESPONSIVE — NUEVAS SECCIONES
+========================================================= */
+
+@media (max-width: 1050px) {
+    .reviews-layout { grid-template-columns: 1fr; }
+    .rating-summary { min-height: auto; }
+    .reviews-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+    .payment-panel { padding: 30px; }
+}
+
+@media (max-width: 700px) {
+    .video-wrapper-secondary { margin-top: 55px; }
+    .payment-methods { grid-template-columns: 1fr; }
+    .payment-panel { padding: 25px 20px; border-radius: 20px; }
+    .payment-note { align-items: flex-start; }
+    .review-card { padding: 20px; }
+}
+
+@media (max-width: 520px) {
+    .rating-number { font-size: 45px; }
+    .payment-card { min-height: 92px; padding: 16px; gap: 13px; }
+    .payment-icon { width: 48px; height: 48px; flex-basis: 48px; font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-orb,
+    .motion-cursor,
+    .review-card,
+    .payment-card,
+    .review-action { transition: none; }
+}
