@@ -533,6 +533,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
+       FONDO DINÁMICO INTERACTIVO
+       No modifica las líneas láser existentes.
+    ===================================================== */
+
+    const motionBg = document.querySelector(".allweb-motion-bg");
+    const motionCursor = document.querySelector(".motion-cursor");
+    const motionCyan = document.querySelector(".motion-orb-cyan");
+    const motionPurple = document.querySelector(".motion-orb-purple");
+
+    if (motionBg) {
+
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+
+        const updateMotion = event => {
+
+            targetX = event.clientX ?? targetX;
+            targetY = event.clientY ?? targetY;
+            document.body.classList.add("motion-active");
+
+        };
+
+        window.addEventListener("pointermove", updateMotion, { passive: true });
+
+        window.addEventListener("pointerleave", () => {
+            document.body.classList.remove("motion-active");
+        }, { passive: true });
+
+        const animateMotion = () => {
+
+            currentX += (targetX - currentX) * 0.055;
+            currentY += (targetY - currentY) * 0.055;
+
+            const nx = currentX / Math.max(window.innerWidth, 1) - 0.5;
+            const ny = currentY / Math.max(window.innerHeight, 1) - 0.5;
+
+            if (motionCursor) {
+                motionCursor.style.left = `${currentX}px`;
+                motionCursor.style.top = `${currentY}px`;
+            }
+
+            if (motionCyan) {
+                motionCyan.style.transform = `translate3d(${nx * 90}px, ${ny * 70}px, 0)`;
+            }
+
+            if (motionPurple) {
+                motionPurple.style.transform = `translate3d(${nx * -120}px, ${ny * -80}px, 0)`;
+            }
+
+            requestAnimationFrame(animateMotion);
+
+        };
+
+        requestAnimationFrame(animateMotion);
+
+    }
+
+
+    /* =====================================================
        ANIMACIÓN SUAVE DEL MENÚ
     ===================================================== */
 
