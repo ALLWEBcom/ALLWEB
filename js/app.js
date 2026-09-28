@@ -1,237 +1,91 @@
 /* =========================================================
    ALLWEB
    JavaScript principal
-   ========================================================= */
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
-       PAGE LOADED
-       ===================================================== */
+       AÑO DEL FOOTER
+    ===================================================== */
 
-    document.body.classList.add("page-loaded");
+    const currentYear = document.getElementById("current-year");
 
+    if (currentYear) {
 
-    /* =====================================================
-       HEADER
-       ===================================================== */
+        currentYear.textContent = new Date().getFullYear();
 
-    const header = document.querySelector(".site-header");
-
-    if (header) {
-
-        const updateHeader = () => {
-
-            if (window.scrollY > 20) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-
-        };
-
-        updateHeader();
-
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            { passive: true }
-        );
     }
 
 
     /* =====================================================
-       MOBILE MENU
-       ===================================================== */
+       MENÚ MOBILE
+    ===================================================== */
 
-    const menuToggle =
-        document.getElementById("menu-toggle");
-
-    const siteNav =
-        document.getElementById("site-nav");
-
-
-    const closeMenu = () => {
-
-        if (!menuToggle || !siteNav) {
-            return;
-        }
-
-        menuToggle.classList.remove("open");
-
-        siteNav.classList.remove("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Abrir menú"
-        );
-
-        document.body.classList.remove(
-            "menu-open"
-        );
-    };
-
-
-    const openMenu = () => {
-
-        if (!menuToggle || !siteNav) {
-            return;
-        }
-
-        menuToggle.classList.add("open");
-
-        siteNav.classList.add("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-        menuToggle.setAttribute(
-            "aria-label",
-            "Cerrar menú"
-        );
-
-        document.body.classList.add(
-            "menu-open"
-        );
-    };
-
+    const menuToggle = document.getElementById("menu-toggle");
+    const siteNav = document.getElementById("site-nav");
 
     if (menuToggle && siteNav) {
 
-        menuToggle.addEventListener(
-            "click",
-            (event) => {
+        menuToggle.addEventListener("click", () => {
 
-                event.stopPropagation();
+            const isOpen = siteNav.classList.toggle("open");
 
-                const isOpen =
-                    siteNav.classList.contains("open");
+            menuToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
 
-                if (isOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
+            menuToggle.classList.toggle(
+                "active",
+                isOpen
+            );
 
-            }
-        );
+        });
 
 
-        /* Cerrar al seleccionar una página */
+        siteNav.querySelectorAll("a").forEach(link => {
 
-        siteNav
-            .querySelectorAll("a")
-            .forEach((link) => {
+            link.addEventListener("click", () => {
 
-                link.addEventListener(
-                    "click",
-                    () => {
+                siteNav.classList.remove("open");
 
-                        closeMenu();
-
-                    }
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
                 );
+
+                menuToggle.classList.remove("active");
 
             });
 
-
-        /* Cerrar al hacer click fuera */
-
-        document.addEventListener(
-            "click",
-            (event) => {
-
-                if (
-                    !siteNav.contains(event.target) &&
-                    !menuToggle.contains(event.target)
-                ) {
-                    closeMenu();
-                }
-
-            }
-        );
-
-
-        /* ESC */
-
-        document.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (event.key === "Escape") {
-                    closeMenu();
-                }
-
-            }
-        );
-
-
-        /* Si vuelve a escritorio */
-
-        window.addEventListener(
-            "resize",
-            () => {
-
-                if (window.innerWidth > 900) {
-                    closeMenu();
-                }
-
-            }
-        );
+        });
 
     }
 
 
     /* =====================================================
-       ACTIVE PAGE
-       ===================================================== */
+       CERRAR MENÚ AL CAMBIAR TAMAÑO
+    ===================================================== */
 
-    const currentFile =
-        window.location.pathname
-            .split("/")
-            .pop() || "index.html";
+    window.addEventListener("resize", () => {
 
+        if (window.innerWidth > 900) {
 
-    const navigationLinks =
-        document.querySelectorAll(
-            ".site-nav a"
-        );
+            if (siteNav) {
+                siteNav.classList.remove("open");
+            }
 
+            if (menuToggle) {
 
-    navigationLinks.forEach((link) => {
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
-        const href =
-            link.getAttribute("href");
+                menuToggle.classList.remove("active");
 
-        if (!href) {
-            return;
-        }
-
-        const cleanHref =
-            href.split("#")[0]
-                .split("?")[0];
-
-
-        if (
-            cleanHref === currentFile ||
-            (
-                currentFile === "" &&
-                cleanHref === "index.html"
-            )
-        ) {
-
-            link.classList.add("active");
-
-        } else {
-
-            link.classList.remove("active");
+            }
 
         }
 
@@ -239,180 +93,310 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       FOOTER YEAR
-       ===================================================== */
+       TRANSICIÓN ENTRE PÁGINAS
+    ===================================================== */
 
-    const yearElement =
-        document.getElementById(
-            "current-year"
-        );
+    document.querySelectorAll(
+        'a[href$=".html"]:not([target="_blank"])'
+    ).forEach(link => {
 
-    if (yearElement) {
+        link.addEventListener("click", event => {
 
-        yearElement.textContent =
-            new Date().getFullYear();
+            const href = link.getAttribute("href");
+
+            if (!href || href.startsWith("#")) {
+                return;
+            }
+
+            if (
+                event.ctrlKey ||
+                event.metaKey ||
+                event.shiftKey ||
+                event.altKey
+            ) {
+                return;
+            }
+
+            event.preventDefault();
+
+            document.body.classList.add("page-changing");
+
+            setTimeout(() => {
+
+                window.location.href = href;
+
+            }, 180);
+
+        });
+
+    });
+
+
+    /* =====================================================
+       FORMULARIO → WHATSAPP
+    ===================================================== */
+
+    const whatsappForm =
+        document.getElementById("whatsapp-form");
+
+    if (whatsappForm) {
+
+        whatsappForm.addEventListener("submit", event => {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("name")?.value.trim() || "";
+
+            const business =
+                document.getElementById("business")?.value.trim() || "";
+
+            const service =
+                document.getElementById("service")?.value || "";
+
+            const message =
+                document.getElementById("message")?.value.trim() || "";
+
+
+            const whatsappMessage =
+                `Hola ALLWEB.%0A%0A` +
+                `Mi nombre es: ${name}%0A` +
+                `Mi negocio es: ${business}%0A` +
+                `Necesito: ${service}%0A%0A` +
+                `Detalles:%0A${message}`;
+
+
+            const url =
+                `https://wa.me/573042753303?text=${whatsappMessage}`;
+
+
+            window.open(
+                url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        });
 
     }
 
 
     /* =====================================================
-       INTERNAL PAGE TRANSITIONS
-       ===================================================== */
+       INTERACCIÓN DEL LÁSER
+       
+       IMPORTANTE:
+       NO CAMBIA LA ANIMACIÓN ORIGINAL.
 
-    const internalLinks =
-        document.querySelectorAll(
-            'a[href$=".html"]'
+       Permite:
+       - Click con mouse
+       - Toque con celular
+       - Pointer
+       - Pulsos luminosos
+       - Onda láser
+    ===================================================== */
+
+
+    const laserTargets = [
+        ".brand-line",
+        ".video-line"
+    ];
+
+
+    laserTargets.forEach(selector => {
+
+        document.querySelectorAll(selector).forEach(laser => {
+
+            createLaserInteraction(laser);
+
+        });
+
+    });
+
+
+    function createLaserInteraction(laser) {
+
+        /*
+         * Creamos una capa independiente.
+         * No modificamos:
+         * - posición original
+         * - animación original
+         * - tamaño original
+         * - diseño original
+         */
+
+        const parent = laser.parentElement;
+
+        if (!parent) {
+            return;
+        }
+
+
+        /*
+         * El contenedor necesita posición relativa
+         * para que la zona de interacción se ubique
+         * correctamente.
+         */
+
+        const parentStyle =
+            window.getComputedStyle(parent);
+
+
+        if (parentStyle.position === "static") {
+
+            parent.style.position = "relative";
+
+        }
+
+
+        const interaction =
+            document.createElement("div");
+
+        interaction.className =
+            "laser-interaction-layer";
+
+
+        /*
+         * Ubicamos la capa exactamente sobre la línea.
+         */
+
+        const updateInteractionPosition = () => {
+
+            const parentRect =
+                parent.getBoundingClientRect();
+
+            const laserRect =
+                laser.getBoundingClientRect();
+
+
+            const top =
+                laserRect.top -
+                parentRect.top -
+                12;
+
+
+            const height =
+                laserRect.height + 24;
+
+
+            interaction.style.top =
+                `${top}px`;
+
+            interaction.style.bottom =
+                "auto";
+
+            interaction.style.height =
+                `${Math.max(height, 28)}px`;
+
+        };
+
+
+        parent.appendChild(interaction);
+
+        updateInteractionPosition();
+
+
+        window.addEventListener(
+            "resize",
+            updateInteractionPosition
         );
 
 
-    internalLinks.forEach((link) => {
+        /*
+         * MOUSE / POINTER
+         */
 
-        link.addEventListener(
-            "click",
-            (event) => {
+        interaction.addEventListener(
+            "pointerdown",
+            event => {
 
-                /* No interceptar Ctrl/Cmd/Shift/Alt */
+                const rect =
+                    interaction.getBoundingClientRect();
 
-                if (
-                    event.ctrlKey ||
-                    event.metaKey ||
-                    event.shiftKey ||
-                    event.altKey
-                ) {
-                    return;
-                }
+                const x =
+                    event.clientX - rect.left;
 
-
-                /* No interceptar nueva pestaña */
-
-                if (
-                    link.target === "_blank"
-                ) {
-                    return;
-                }
+                const y =
+                    event.clientY - rect.top;
 
 
-                const href =
-                    link.getAttribute("href");
-
-                if (
-                    !href ||
-                    href.startsWith("#") ||
-                    href.startsWith("http")
-                ) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-                closeMenu();
-
-
-                document.body.classList.add(
-                    "page-changing"
+                createLaserPulse(
+                    interaction,
+                    x,
+                    y
                 );
+
+
+                /*
+                 * Para el efecto de iluminación
+                 * temporal.
+                 */
+
+                laser.style.filter =
+                    `
+                    brightness(1.45)
+                    drop-shadow(0 0 8px rgba(0,242,254,.95))
+                    drop-shadow(0 0 20px rgba(121,40,202,.75))
+                    `;
 
 
                 setTimeout(() => {
 
-                    window.location.href =
-                        href;
+                    laser.style.filter = "";
 
                 }, 220);
 
             }
         );
 
-    });
+
+        /*
+         * MOVIMIENTO DEL MOUSE
+         *
+         * Cuando se mueve sobre la línea,
+         * aparece una pequeña respuesta luminosa.
+         */
+
+        let lastMove = 0;
 
 
-    /* =====================================================
-       CONTACT FORM
-       ===================================================== */
+        interaction.addEventListener(
+            "pointermove",
+            event => {
 
-    const contactForm =
-        document.getElementById(
-            "contact-form"
-        );
+                /*
+                 * En celular evitamos generar
+                 * demasiados elementos.
+                 */
 
+                const now =
+                    Date.now();
 
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            (event) => {
-
-                event.preventDefault();
-
-
-                const name =
-                    document.getElementById(
-                        "name"
-                    )?.value.trim() || "";
-
-
-                const phone =
-                    document.getElementById(
-                        "phone"
-                    )?.value.trim() || "";
-
-
-                const project =
-                    document.getElementById(
-                        "project"
-                    )?.value.trim() || "";
-
-
-                const message =
-                    document.getElementById(
-                        "message"
-                    )?.value.trim() || "";
-
-
-                if (
-                    !name ||
-                    !phone ||
-                    !project ||
-                    !message
-                ) {
-
-                    alert(
-                        "Por favor completa todos los campos."
-                    );
-
+                if (now - lastMove < 80) {
                     return;
-
                 }
 
-
-                const whatsappMessage =
-`Hola ALLWEB 👋
-
-Quiero solicitar una cotización.
-
-Nombre: ${name}
-
-Teléfono: ${phone}
-
-Tipo de proyecto: ${project}
-
-Descripción:
-${message}`;
+                lastMove = now;
 
 
-                const whatsappURL =
-                    "https://wa.me/573042753303?text=" +
-                    encodeURIComponent(
-                        whatsappMessage
+                if (event.pointerType === "mouse") {
+
+                    const rect =
+                        interaction.getBoundingClientRect();
+
+                    const x =
+                        event.clientX - rect.left;
+
+                    const y =
+                        event.clientY - rect.top;
+
+
+                    createLaserTrail(
+                        interaction,
+                        x,
+                        y
                     );
 
-
-                window.open(
-                    whatsappURL,
-                    "_blank",
-                    "noopener"
-                );
+                }
 
             }
         );
@@ -421,38 +405,176 @@ ${message}`;
 
 
     /* =====================================================
-       VIDEO
-       ===================================================== */
+       PULSO LÁSER
+    ===================================================== */
 
-    const video =
-        document.querySelector(
-            ".allweb-video"
-        );
+    function createLaserPulse(
+        container,
+        x,
+        y
+    ) {
+
+        const pulse =
+            document.createElement("span");
+
+        pulse.className =
+            "laser-pulse";
 
 
-    if (video) {
+        pulse.style.left =
+            `${x}px`;
 
-        video.muted = true;
+        pulse.style.top =
+            `${y}px`;
 
-        const playVideo = () => {
 
-            const promise =
-                video.play();
+        container.appendChild(pulse);
 
-            if (
-                promise &&
-                typeof promise.catch === "function"
-            ) {
 
-                promise.catch(() => {
-                    /* El navegador puede bloquear autoplay */
-                });
+        const wave =
+            document.createElement("span");
+
+        wave.className =
+            "laser-wave";
+
+
+        wave.style.left =
+            `${x}px`;
+
+        wave.style.top =
+            `${y}px`;
+
+
+        container.appendChild(wave);
+
+
+        setTimeout(() => {
+
+            pulse.remove();
+
+        }, 900);
+
+
+        setTimeout(() => {
+
+            wave.remove();
+
+        }, 1000);
+
+    }
+
+
+    /* =====================================================
+       PEQUEÑO RASTRO AL MOVER EL MOUSE
+    ===================================================== */
+
+    function createLaserTrail(
+        container,
+        x,
+        y
+    ) {
+
+        const trail =
+            document.createElement("span");
+
+
+        trail.className =
+            "laser-pulse";
+
+
+        trail.style.left =
+            `${x}px`;
+
+        trail.style.top =
+            `${y}px`;
+
+
+        trail.style.width =
+            "4px";
+
+        trail.style.height =
+            "4px";
+
+
+        trail.style.animationDuration =
+            ".45s";
+
+
+        container.appendChild(trail);
+
+
+        setTimeout(() => {
+
+            trail.remove();
+
+        }, 500);
+
+    }
+
+
+    /* =====================================================
+       DETECTAR TOUCH EN CELULARES
+    ===================================================== */
+
+    document.addEventListener(
+        "touchstart",
+        () => {
+
+            document.body.classList.add(
+                "touch-device"
+            );
+
+        },
+        {
+            passive: true,
+            once: true
+        }
+    );
+
+
+    /* =====================================================
+       ANIMACIÓN SUAVE DEL MENÚ
+    ===================================================== */
+
+    if (menuToggle) {
+
+        menuToggle.addEventListener(
+            "click",
+            () => {
+
+                menuToggle
+                    .querySelectorAll("span")
+                    .forEach((line, index) => {
+
+                        if (
+                            menuToggle.classList.contains("active")
+                        ) {
+
+                            if (index === 0) {
+                                line.style.transform =
+                                    "translateY(7px) rotate(45deg)";
+                            }
+
+                            if (index === 1) {
+                                line.style.opacity = "0";
+                            }
+
+                            if (index === 2) {
+                                line.style.transform =
+                                    "translateY(-7px) rotate(-45deg)";
+                            }
+
+                        } else {
+
+                            line.style.transform = "";
+                            line.style.opacity = "";
+
+                        }
+
+                    });
 
             }
-
-        };
-
-        playVideo();
+        );
 
     }
 
