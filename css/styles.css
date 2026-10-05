@@ -3467,10 +3467,9 @@ body {
 
 }
 
-
 /* =========================================================
-   ALLWEB — FONDO DINÁMICO INTERACTIVO
-   Se añade sin modificar el fondo original ni las líneas láser.
+   ALLWEB — FONDO INTERACTIVO + REVIEWS + PAGOS
+   Complemento: conserva las líneas láser originales.
 ========================================================= */
 
 .allweb-motion-bg {
@@ -3479,134 +3478,120 @@ body {
     z-index: -8;
     pointer-events: none;
     overflow: hidden;
-    opacity: .72;
+    opacity: .95;
 }
 
 .motion-orb {
     position: absolute;
-    width: 280px;
-    height: 280px;
+    width: 34vw;
+    height: 34vw;
+    min-width: 280px;
+    min-height: 280px;
     border-radius: 50%;
     filter: blur(70px);
-    opacity: .14;
+    opacity: .16;
+    transform: translate3d(var(--motion-x, 0px), var(--motion-y, 0px), 0);
+    transition: transform .35s ease-out;
     will-change: transform;
-    transition: transform .25s ease-out;
 }
 
 .motion-orb-cyan {
-    left: 8%;
-    top: 24%;
-    background: var(--cyan);
+    top: 4%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(0,242,254,.9) 0%, rgba(0,242,254,.25) 35%, transparent 70%);
 }
 
 .motion-orb-purple {
-    right: 8%;
-    top: 58%;
-    background: var(--purple);
+    bottom: -12%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(121,40,202,.9) 0%, rgba(121,40,202,.25) 35%, transparent 70%);
 }
 
 .motion-grid {
     position: absolute;
-    inset: -20%;
-    opacity: .16;
+    inset: -25%;
     background-image:
-        linear-gradient(rgba(0,242,254,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(121,40,202,.08) 1px, transparent 1px);
+        linear-gradient(rgba(0,242,254,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(121,40,202,.035) 1px, transparent 1px);
     background-size: 90px 90px;
-    transform: perspective(700px) rotateX(58deg) translateY(12%);
-    transform-origin: center bottom;
-    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, transparent 90%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, transparent 90%);
+    transform: perspective(700px) rotateX(62deg) translate3d(var(--grid-x, 0px), var(--grid-y, 0px), 0) scale(1.25);
+    transform-origin: center center;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
+    opacity: .45;
+    will-change: transform;
 }
 
 .motion-cursor {
     position: absolute;
-    width: 360px;
-    height: 360px;
+    width: 420px;
+    height: 420px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(0,242,254,.12) 0%, rgba(121,40,202,.05) 28%, transparent 68%);
-    opacity: 0;
-    transition: opacity .3s ease;
-    will-change: left, top;
+    background: radial-gradient(circle, rgba(0,242,254,.09) 0%, rgba(121,40,202,.035) 30%, transparent 70%);
+    transform: translate3d(calc(var(--pointer-x, 50vw) - 210px), calc(var(--pointer-y, 50vh) - 210px), 0);
+    transition: transform .12s linear;
+    will-change: transform;
 }
-
-body.motion-active .motion-cursor {
-    opacity: 1;
-}
-
-@media (max-width: 700px) {
-    .allweb-motion-bg { opacity: .5; }
-    .motion-orb { width: 210px; height: 210px; filter: blur(55px); }
-    .motion-grid { background-size: 65px 65px; }
-    .motion-cursor { width: 260px; height: 260px; }
-}
-
-
-/* =========================================================
-   ALLWEB — DOS VIDEOS
-========================================================= */
 
 .video-wrapper-secondary {
-    margin-top: 85px;
+    margin-top: 58px;
 }
-
-.video-wrapper-secondary .video-frame {
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.6),
-        0 0 50px rgba(121,40,202,.07);
-}
-
-
-/* =========================================================
-   ALLWEB — OPINIONES / CALIFICACIONES
-========================================================= */
 
 .reviews-section {
-    padding-top: 110px;
-    padding-bottom: 100px;
+    position: relative;
 }
 
 .reviews-layout {
     display: grid;
-    grid-template-columns: 280px minmax(0, 1fr);
-    gap: 25px;
+    grid-template-columns: minmax(240px, .75fr) minmax(0, 2fr);
+    gap: 28px;
     align-items: stretch;
 }
 
 .glass-review-card,
 .review-card,
 .payment-panel {
-    border: 1px solid var(--border);
-    background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-    box-shadow: 0 25px 80px rgba(0,0,0,.28);
+    border: 1px solid rgba(255,255,255,.09);
+    background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+    box-shadow: 0 20px 70px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 }
 
-.rating-summary {
-    min-height: 100%;
-    padding: 30px;
-    border-radius: 22px;
+.glass-review-card {
+    border-radius: 24px;
+    padding: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-review-card::before,
+.payment-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(0,242,254,.09), transparent 35%), radial-gradient(circle at bottom left, rgba(121,40,202,.08), transparent 35%);
+    pointer-events: none;
 }
 
 .rating-kicker,
 .payment-label {
     color: var(--cyan);
     font-family: "Orbitron", sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 10px;
+    letter-spacing: .18em;
+    font-weight: 700;
 }
 
 .rating-number {
-    margin-top: 8px;
     font-family: "Orbitron", sans-serif;
-    font-size: 55px;
+    font-size: clamp(48px, 6vw, 76px);
     line-height: 1;
-    background: linear-gradient(90deg, #fff, var(--cyan));
+    margin: 14px 0 8px;
+    background: linear-gradient(135deg, #fff, var(--cyan));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -3614,83 +3599,80 @@ body.motion-active .motion-cursor {
 
 .rating-stars,
 .review-stars {
-    display: flex;
-    gap: 5px;
-    color: #ffd84d;
-    text-shadow: 0 0 12px rgba(255,216,77,.22);
+    color: #ffd34d;
+    letter-spacing: 3px;
 }
 
 .rating-stars {
-    margin-top: 15px;
     font-size: 18px;
+    margin-bottom: 18px;
 }
 
-.rating-summary p {
-    margin-top: 15px;
+.glass-review-card p {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 auto 22px;
+    max-width: 310px;
 }
 
 .review-action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 22px;
-    min-height: 43px;
-    padding: 0 15px;
-    border: 1px solid rgba(37,211,102,.3);
-    border-radius: 11px;
-    color: #fff;
-    background: rgba(37,211,102,.08);
-    font-size: 12px;
-    font-weight: 700;
-    transition: .25s ease;
+    gap: 9px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid rgba(0,242,254,.28);
+    border-radius: 12px;
+    color: var(--text);
+    background: rgba(0,242,254,.055);
+    transition: transform .25s ease, border-color .25s ease, background .25s ease;
 }
 
 .review-action:hover {
-    transform: translateY(-2px);
-    background: rgba(37,211,102,.16);
+    transform: translateY(-3px);
+    border-color: var(--cyan);
+    background: rgba(0,242,254,.10);
 }
-
-.review-action i { color: #25d366; }
 
 .reviews-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
+    gap: 18px;
 }
 
 .review-card {
-    min-width: 0;
-    padding: 23px;
-    border-radius: 18px;
+    border-radius: 20px;
+    padding: 22px;
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
 .review-card:hover {
     transform: translateY(-5px);
     border-color: rgba(0,242,254,.28);
-    box-shadow: 0 25px 70px rgba(0,242,254,.06);
+    box-shadow: 0 25px 70px rgba(0,0,0,.3), 0 0 30px rgba(0,242,254,.05);
 }
 
 .review-top {
     display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 10px;
+    grid-template-columns: 42px minmax(0,1fr);
+    gap: 11px;
     align-items: center;
+    margin-bottom: 18px;
 }
 
 .review-avatar {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
     border-radius: 50%;
-    color: #030305;
+    background: linear-gradient(135deg, rgba(0,242,254,.18), rgba(121,40,202,.22));
+    border: 1px solid rgba(255,255,255,.12);
+    color: var(--white);
     font-family: "Orbitron", sans-serif;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--cyan), var(--purple-light));
+    font-weight: 700;
 }
 
 .review-top strong,
@@ -3699,209 +3681,324 @@ body.motion-active .motion-cursor {
 }
 
 .review-top strong {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .review-top span {
-    margin-top: 2px;
     color: var(--muted-dark);
-    font-size: 9px;
+    font-size: 10px;
+    margin-top: 3px;
 }
 
 .review-stars {
-    grid-column: 1 / -1;
-    font-size: 11px;
-    margin-top: 5px;
+    grid-column: 2;
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 
 .review-card > p {
-    margin-top: 18px;
-    color: #d8deea;
-    font-size: 12px;
-    line-height: 1.8;
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.75;
 }
 
-
-/* =========================================================
-   ALLWEB — MEDIOS DE PAGO
-========================================================= */
-
 .payments-section {
-    padding-top: 10px;
-    padding-bottom: 110px;
+    padding-top: 20px;
 }
 
 .payment-panel {
     position: relative;
     overflow: hidden;
-    padding: 45px;
-    border-radius: 25px;
+    border-radius: 28px;
+    padding: clamp(28px, 5vw, 52px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
 }
 
-.payment-panel::before {
-    content: "";
-    position: absolute;
-    width: 360px;
-    height: 360px;
-    right: -180px;
-    top: -180px;
-    border-radius: 50%;
-    background: var(--cyan);
-    opacity: .07;
-    filter: blur(70px);
-    pointer-events: none;
-}
-
-.payment-panel::after {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    left: -180px;
-    bottom: -190px;
-    border-radius: 50%;
-    background: var(--purple);
-    opacity: .07;
-    filter: blur(70px);
-    pointer-events: none;
-}
-
-.payment-copy {
+.payment-copy,
+.payment-methods,
+.payment-note {
     position: relative;
     z-index: 1;
-    max-width: 650px;
 }
 
 .payment-copy h2 {
-    margin-top: 15px;
-    font-family: "Orbitron", sans-serif;
-    font-size: clamp(28px, 4vw, 48px);
-    line-height: 1.08;
-}
-
-.payment-copy h2 span {
-    display: block;
-    background: linear-gradient(90deg, var(--cyan), var(--purple-light));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    margin: 15px 0 16px;
 }
 
 .payment-copy p {
-    margin-top: 16px;
     color: var(--muted);
-    font-size: 14px;
+    line-height: 1.75;
+    max-width: 560px;
 }
 
 .payment-methods {
-    position: relative;
-    z-index: 1;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px;
-    margin-top: 30px;
+    gap: 16px;
+    align-content: center;
 }
 
 .payment-card {
+    min-height: 150px;
+    border-radius: 20px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: rgba(0,0,0,.28);
     display: flex;
     align-items: center;
-    gap: 18px;
-    min-height: 105px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    background: rgba(3,3,5,.48);
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    gap: 16px;
+    transition: transform .25s ease, border-color .25s ease, background .25s ease;
 }
 
 .payment-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(0,242,254,.25);
-    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    border-color: rgba(0,242,254,.3);
+    background: rgba(0,242,254,.045);
 }
 
 .payment-icon {
-    width: 55px;
-    height: 55px;
-    flex: 0 0 55px;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
     display: grid;
     place-items: center;
-    border-radius: 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,242,254,.2);
     color: var(--cyan);
-    background: rgba(0,242,254,.07);
-    border: 1px solid rgba(0,242,254,.18);
-    font-size: 22px;
-}
-
-.payment-tullave .payment-icon {
-    color: var(--purple-light);
-    background: rgba(121,40,202,.08);
-    border-color: rgba(168,85,247,.22);
+    background: rgba(0,242,254,.06);
+    font-size: 20px;
 }
 
 .payment-card h3 {
-    margin-top: 3px;
-    font-family: "Orbitron", sans-serif;
-    font-size: 19px;
+    margin: 5px 0 5px;
+    font-size: 20px;
 }
 
 .payment-card p {
-    margin-top: 3px;
+    margin: 0;
     color: var(--muted);
     font-size: 11px;
+    line-height: 1.5;
 }
 
 .payment-note {
-    position: relative;
-    z-index: 1;
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
-    padding: 12px 15px;
-    border-radius: 12px;
-    color: var(--muted);
-    background: rgba(255,255,255,.025);
-    border: 1px solid rgba(255,255,255,.06);
-    font-size: 10px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    color: var(--muted-dark);
+    font-size: 11px;
 }
 
-.payment-note i { color: var(--cyan); }
-
-
-/* =========================================================
-   RESPONSIVE — NUEVAS SECCIONES
-========================================================= */
-
-@media (max-width: 1050px) {
-    .reviews-layout { grid-template-columns: 1fr; }
-    .rating-summary { min-height: auto; }
-    .reviews-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.payment-note i {
+    color: var(--cyan);
 }
 
 @media (max-width: 900px) {
-    .reviews-grid { grid-template-columns: 1fr; }
-    .payment-panel { padding: 30px; }
+    .reviews-layout,
+    .payment-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-methods {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
-@media (max-width: 700px) {
-    .video-wrapper-secondary { margin-top: 55px; }
-    .payment-methods { grid-template-columns: 1fr; }
-    .payment-panel { padding: 25px 20px; border-radius: 20px; }
-    .payment-note { align-items: flex-start; }
-    .review-card { padding: 20px; }
-}
+@media (max-width: 560px) {
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
 
-@media (max-width: 520px) {
-    .rating-number { font-size: 45px; }
-    .payment-card { min-height: 92px; padding: 16px; gap: 13px; }
-    .payment-icon { width: 48px; height: 48px; flex-basis: 48px; font-size: 19px; }
+    .payment-note {
+        align-items: flex-start;
+    }
+
+    .motion-orb {
+        width: 70vw;
+        height: 70vw;
+        filter: blur(55px);
+    }
+
+    .motion-grid {
+        background-size: 65px 65px;
+    }
+
+    .motion-cursor {
+        width: 300px;
+        height: 300px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .motion-orb,
+    .motion-grid,
     .motion-cursor,
     .review-card,
     .payment-card,
-    .review-action { transition: none; }
+    .review-action {
+        transition: none !important;
+    }
 }
+
+/* =========================================================
+   ALLWEB — CAPA CINEMATOGRÁFICA PREMIUM
+   Añadido sin alterar las líneas láser originales.
+========================================================= */
+
+.allweb-particles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -7;
+    pointer-events: none;
+    opacity: .42;
+}
+
+.allweb-motion-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 50% 45%, transparent 0%, rgba(3,3,5,.12) 45%, rgba(3,3,5,.72) 100%),
+        linear-gradient(180deg, rgba(3,3,5,.12), transparent 35%, rgba(3,3,5,.28));
+    pointer-events: none;
+}
+
+.motion-orb {
+    animation: allwebOrbFloat 14s ease-in-out infinite alternate;
+}
+
+.motion-orb-purple {
+    animation-delay: -5s;
+    animation-duration: 18s;
+}
+
+.motion-cursor {
+    mix-blend-mode: screen;
+}
+
+@keyframes allwebOrbFloat {
+    0% { margin-top: -10px; margin-left: -8px; scale: 1; }
+    50% { margin-top: 12px; margin-left: 10px; scale: 1.035; }
+    100% { margin-top: -4px; margin-left: 16px; scale: .98; }
+}
+
+/* Micro profundidad: movimiento mínimo y elegante */
+.allweb-tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.allweb-tilt::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--tilt-light-x, 50%) var(--tilt-light-y, 50%), rgba(255,255,255,.10), transparent 32%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+}
+
+.allweb-tilt:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+    .allweb-particles { opacity: .24; }
+    .allweb-tilt { transform: none !important; }
+    .allweb-tilt::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .allweb-particles,
+    .motion-orb { animation: none !important; }
+}
+
+/* =========================================================
+   ALLWEB — OFERTA DE LANZAMIENTO 50%
+========================================================= */
+.hero-badge-promo {
+    border-color: rgba(0,242,254,.28);
+    background: linear-gradient(90deg, rgba(0,242,254,.08), rgba(121,40,202,.10));
+    box-shadow: 0 0 30px rgba(0,242,254,.08);
+}
+
+.hero-promo-card {
+    position: relative;
+    max-width: 650px;
+    margin: 28px 0 6px;
+    padding: 20px 22px;
+    border: 1px solid rgba(0,242,254,.22);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0,242,254,.075), rgba(121,40,202,.08) 55%, rgba(255,255,255,.025));
+    box-shadow: 0 18px 70px rgba(0,0,0,.24), inset 0 0 35px rgba(0,242,254,.025);
+    overflow: hidden;
+}
+
+.hero-promo-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -30%;
+    width: 45%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    animation: promoScan 4s linear infinite;
+}
+
+@keyframes promoScan { to { left: 110%; } }
+
+.promo-card-top { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.promo-kicker { color:var(--cyan); font-size:.68rem; font-weight:800; letter-spacing:.16em; }
+.promo-discount { color:#fff; font-family:Orbitron,sans-serif; font-weight:800; font-size:1.05rem; text-shadow:0 0 18px rgba(0,242,254,.55); }
+.hero-promo-card h2 { margin:10px 0 6px; font-family:Orbitron,sans-serif; font-size:1.35rem; }
+.hero-promo-card p { margin:0; color:var(--muted); line-height:1.65; font-size:.9rem; }
+.promo-link { display:inline-flex; align-items:center; gap:10px; margin-top:16px; padding:12px 16px; border-radius:12px; color:#fff; background:rgba(37,211,102,.10); border:1px solid rgba(37,211,102,.28); font-weight:800; transition:.25s ease; }
+.promo-link:hover { transform:translateY(-2px); background:rgba(37,211,102,.16); box-shadow:0 10px 30px rgba(37,211,102,.10); }
+
+.offer-section { padding-top: 10px; }
+.offer-main-card { position:relative; overflow:hidden; border:1px solid rgba(0,242,254,.22); border-radius:28px; background:radial-gradient(circle at 80% 20%, rgba(121,40,202,.16), transparent 32%), linear-gradient(135deg, rgba(0,242,254,.07), rgba(255,255,255,.035)); box-shadow:0 30px 100px rgba(0,0,0,.3), inset 0 0 60px rgba(0,242,254,.025); }
+.offer-main-card::before { content:""; position:absolute; inset:0; background:linear-gradient(115deg, transparent 0 42%, rgba(255,255,255,.035) 50%, transparent 58%); transform:translateX(-80%); animation:offerSweep 7s ease-in-out infinite; pointer-events:none; }
+@keyframes offerSweep { 50%,100% { transform:translateX(90%); } }
+.offer-scanline { position:absolute; left:0; right:0; top:0; height:2px; background:linear-gradient(90deg, transparent, var(--purple), var(--cyan), #fff, var(--cyan), var(--purple), transparent); background-size:200% 100%; animation:laserMove 2.5s linear infinite; box-shadow:0 0 8px var(--cyan),0 0 24px rgba(0,242,254,.55); }
+.offer-content { position:relative; z-index:1; max-width:850px; margin:auto; padding:64px 30px; text-align:center; }
+.offer-kicker { color:var(--cyan); font-size:.72rem; font-weight:800; letter-spacing:.22em; }
+.offer-number { margin-top:12px; font-family:Orbitron,sans-serif; font-size:clamp(5rem,14vw,9rem); line-height:.9; font-weight:800; background:linear-gradient(90deg,#fff,var(--cyan),var(--purple-light)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 35px rgba(0,242,254,.18); }
+.offer-number span { font-size:.48em; }
+.offer-content h2 { margin:4px 0 14px; font-family:Orbitron,sans-serif; letter-spacing:.12em; }
+.offer-lead { max-width:680px; margin:0 auto 26px; color:var(--muted); line-height:1.8; font-size:1.02rem; }
+.offer-note { max-width:680px; margin:18px auto 0; color:var(--muted-dark); font-size:.78rem; line-height:1.6; }
+.offer-note i { color:var(--cyan); margin-right:6px; }
+.offer-benefits { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.offer-benefit { padding:26px; min-height:220px; }
+.offer-icon { width:52px; height:52px; display:grid; place-items:center; border-radius:15px; color:var(--cyan); background:rgba(0,242,254,.08); border:1px solid rgba(0,242,254,.18); font-size:1.2rem; margin-bottom:20px; }
+.offer-benefit h3 { font-family:Orbitron,sans-serif; font-size:1rem; margin-bottom:10px; }
+.offer-benefit p { color:var(--muted); line-height:1.7; font-size:.9rem; }
+.process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.process-step { position:relative; padding:26px; border:1px solid rgba(255,255,255,.08); border-radius:18px; background:rgba(255,255,255,.025); }
+.process-step span { color:var(--cyan); font-family:Orbitron,sans-serif; font-weight:800; font-size:.75rem; }
+.process-step h3 { margin:18px 0 8px; font-family:Orbitron,sans-serif; font-size:1rem; }
+.process-step p { margin:0; color:var(--muted); line-height:1.7; font-size:.88rem; }
+
+@media (max-width: 1000px) { .offer-benefits,.process-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width: 700px) {
+    .hero-promo-card { padding:18px; }
+    .promo-card-top { align-items:flex-start; flex-direction:column; gap:7px; }
+    .hero-promo-card h2 { font-size:1.1rem; }
+    .offer-content { padding:48px 20px; }
+    .offer-benefits,.process-grid { grid-template-columns:1fr; }
+    .offer-number { font-size:5.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-promo-card::before,.offer-main-card::before { animation:none; } }
