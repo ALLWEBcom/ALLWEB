@@ -1,456 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Planes | ALLWEB</title>
-
-    <meta name="description"
-          content="Planes de diseño y desarrollo web de ALLWEB.">
-
+    <meta name="description" content="Promoción de lanzamiento ALLWEB. Inicia tu proyecto de página web con 50% de descuento. Cotización personalizada por WhatsApp.">
+    <title>Oferta de Lanzamiento | ALLWEB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
-
 <body>
 
 <div class="background-grid"></div>
 <div class="background-glow glow-one"></div>
 <div class="background-glow glow-two"></div>
+<div class="allweb-motion-bg" aria-hidden="true">
+    <div class="motion-orb motion-orb-cyan"></div>
+    <div class="motion-orb motion-orb-purple"></div>
+    <div class="motion-grid"></div>
+    <div class="motion-cursor"></div>
+</div>
+<canvas class="allweb-particles" aria-hidden="true"></canvas>
 
 <header class="site-header">
-
     <div class="header-container">
-
         <a href="index.html" class="logo">
-
             <span class="logo-symbol">&lt;</span>
             <span class="logo-text">ALLWEB</span>
             <span class="logo-symbol">/&gt;</span>
             <span class="logo-sub">WEB SOLUTIONS</span>
             <span class="brand-line"></span>
-
         </a>
 
-        <button class="menu-toggle"
-                id="menu-toggle"
-                aria-label="Abrir menú"
-                aria-expanded="false">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
         </button>
 
         <nav class="site-nav" id="site-nav">
-
             <a href="index.html">Inicio</a>
             <a href="servicios.html">Servicios</a>
             <a href="portafolio.html">Portafolio</a>
-            <a href="planes.html" class="active">Planes</a>
+            <a href="planes.html" class="active">Oferta</a>
             <a href="nosotros.html">Nosotros</a>
             <a href="contacto.html">Contacto</a>
-
-            <a href="https://wa.me/573042753303"
-               class="nav-whatsapp"
-               target="_blank"
-               rel="noopener noreferrer">
-
-                <i class="fa-brands fa-whatsapp"></i>
-                WhatsApp
-
+            <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="nav-whatsapp" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
             </a>
-
         </nav>
-
     </div>
-
 </header>
 
-
 <main>
-
 <section class="page-hero">
-
     <div class="section-container">
-
-        <div class="section-tag">
-            <span></span>
-            PLANES ALLWEB
-        </div>
-
-        <h1>
-            Una solución para
-            <span>cada tipo de negocio.</span>
-        </h1>
-
-        <p>
-            Los precios pueden adaptarse de acuerdo con las funciones,
-            contenido y necesidades de cada proyecto.
-        </p>
-
+        <div class="section-tag"><span></span> PROMOCIÓN DE LANZAMIENTO</div>
+        <h1>Haz que tu negocio<br><span>tenga presencia digital.</span></h1>
+        <p>En ALLWEB desarrollamos páginas web modernas, profesionales y pensadas para ayudarte a vender, presentar tus servicios y generar confianza.</p>
     </div>
-
 </section>
 
+<section class="offer-section section">
+    <div class="section-container">
+        <div class="offer-main-card">
+            <div class="offer-scanline"></div>
+            <div class="offer-content">
+                <span class="offer-kicker">OFERTA ESPECIAL ALLWEB</span>
+                <div class="offer-number">50<span>%</span></div>
+                <h2>DE DESCUENTO</h2>
+                <p class="offer-lead">Comunícate con nosotros durante la promoción y comienza tu proyecto web con el beneficio de lanzamiento.</p>
+                <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% de descuento
+                </a>
+                <p class="offer-note"><i class="fa-solid fa-circle-info"></i> El descuento se aplica según el tipo y alcance del proyecto. Solicita tu propuesta personalizada.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="section">
-
     <div class="section-container">
-
-        <div class="pricing-grid">
-
-            <article class="pricing-card">
-
-                <div class="pricing-header">
-
-                    <span>START</span>
-
-                    <h2>
-                        $650.000
-                        <small>COP</small>
-                    </h2>
-
-                    <p>
-                        Para negocios que necesitan comenzar
-                        su presencia digital.
-                    </p>
-
-                </div>
-
-                <ul>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Página profesional
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Diseño responsive
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Botón WhatsApp
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Secciones principales
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Publicación web
-                    </li>
-
-                </ul>
-
-                <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20estoy%20interesado%20en%20el%20plan%20START"
-                   class="btn btn-outline"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-                    Consultar
-
-                </a>
-
-            </article>
-
-
-            <article class="pricing-card featured">
-
-                <div class="popular-badge">
-                    MÁS SOLICITADO
-                </div>
-
-                <div class="pricing-header">
-
-                    <span>PRO</span>
-
-                    <h2>
-                        $1.200.000
-                        <small>COP</small>
-                    </h2>
-
-                    <p>
-                        Para negocios que quieren una presencia
-                        digital más completa.
-                    </p>
-
-                </div>
-
-                <ul>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Todo lo incluido en START
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Diseño premium
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Animaciones
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Catálogo o portafolio
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Integración avanzada WhatsApp
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Optimización
-                    </li>
-
-                </ul>
-
-                <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20estoy%20interesado%20en%20el%20plan%20PRO"
-                   class="btn btn-primary"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-                    Cotizar PRO
-
-                </a>
-
-            </article>
-
-
-            <article class="pricing-card">
-
-                <div class="pricing-header">
-
-                    <span>BUSINESS</span>
-
-                    <h2>
-                        $2.000.000+
-                        <small>COP</small>
-                    </h2>
-
-                    <p>
-                        Para proyectos empresariales y tiendas
-                        digitales más completas.
-                    </p>
-
-                </div>
-
-                <ul>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Proyecto personalizado
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        E-commerce
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Catálogo avanzado
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Funciones especiales
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Integraciones
-                    </li>
-
-                </ul>
-
-                <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20cotizar%20un%20proyecto%20BUSINESS"
-                   class="btn btn-outline"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-                    Cotizar
-
-                </a>
-
-            </article>
-
+        <div class="section-heading">
+            <div class="section-tag"><span></span> ¿QUÉ INCLUYE?</div>
+            <h2>Una web diseñada <span>para tu negocio.</span></h2>
+            <p>No trabajamos con una solución idéntica para todos. Analizamos lo que necesitas y construimos una propuesta acorde a tu proyecto.</p>
         </div>
 
-        <p class="pricing-note">
-            * Los valores son de referencia. El precio final depende
-            de las características específicas del proyecto.
-        </p>
-
+        <div class="offer-benefits">
+            <article class="offer-benefit glass-card">
+                <div class="offer-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>Diseño personalizado</h3>
+                <p>Una identidad visual coherente con tu negocio, tus servicios y tu público.</p>
+            </article>
+            <article class="offer-benefit glass-card">
+                <div class="offer-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>Adaptable a celulares</h3>
+                <p>Tu página preparada para verse correctamente en computadores, tablets y teléfonos.</p>
+            </article>
+            <article class="offer-benefit glass-card">
+                <div class="offer-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <h3>Contacto directo</h3>
+                <p>Integramos llamadas a la acción para facilitar que tus visitantes se conviertan en clientes.</p>
+            </article>
+            <article class="offer-benefit glass-card">
+                <div class="offer-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                <h3>Enfoque profesional</h3>
+                <p>Una experiencia rápida, clara y moderna para proyectar confianza desde el primer vistazo.</p>
+            </article>
+        </div>
     </div>
-
 </section>
 
+<section class="section process-section">
+    <div class="section-container">
+        <div class="section-heading">
+            <div class="section-tag"><span></span> ASÍ COMENZAMOS</div>
+            <h2>Tu proyecto empieza con <span>una conversación.</span></h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step"><span>01</span><h3>Nos escribes</h3><p>Cuéntanos qué negocio tienes y qué quieres conseguir con tu página.</p></div>
+            <div class="process-step"><span>02</span><h3>Analizamos</h3><p>Definimos la estructura, funcionalidades y estilo que mejor se adapten a tu proyecto.</p></div>
+            <div class="process-step"><span>03</span><h3>Propuesta</h3><p>Te presentamos una propuesta personalizada con el beneficio de la promoción.</p></div>
+            <div class="process-step"><span>04</span><h3>Comenzamos</h3><p>Una vez aprobado el proyecto, iniciamos el desarrollo de tu nueva presencia digital.</p></div>
+        </div>
+    </div>
+</section>
 
 <section class="cta-section">
-
     <div class="cta-glow"></div>
-
     <div class="section-container">
-
         <div class="cta-content">
-
-            <div class="section-tag">
-                <span></span>
-                COTIZACIÓN
-            </div>
-
-            <h2>
-                Cuéntanos qué
-                <span>quieres construir.</span>
-            </h2>
-
-            <p>
-                Podemos crear una propuesta personalizada para tu negocio.
-            </p>
-
-            <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20una%20cotizaci%C3%B3n%20personalizada"
-               class="btn btn-whatsapp btn-large"
-               target="_blank"
-               rel="noopener noreferrer">
-
-                <i class="fa-brands fa-whatsapp"></i>
-                Solicitar cotización
-
+            <div class="section-tag"><span></span> 50% DE DESCUENTO</div>
+            <h2>Tu página web puede<br><span>comenzar hoy.</span></h2>
+            <p>Escríbenos por WhatsApp, cuéntanos tu idea y descubre cómo podemos convertirla en una experiencia digital profesional.</p>
+            <a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i> Iniciar mi proyecto
             </a>
-
         </div>
-
     </div>
-
 </section>
-
 </main>
 
-
 <footer class="site-footer">
-
     <div class="section-container">
-
         <div class="footer-grid">
-
             <div class="footer-brand">
-
-                <a href="index.html" class="logo footer-logo">
-
-                    <span class="logo-symbol">&lt;</span>
-                    <span class="logo-text">ALLWEB</span>
-                    <span class="logo-symbol">/&gt;</span>
-
-                </a>
-
-                <p>
-                    Diseño y desarrollo web profesional.
-                </p>
-
-                <a href="https://wa.me/573042753303"
-                   class="footer-whatsapp"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-                    304 275 3303
-
-                </a>
-
+                <a href="index.html" class="logo footer-logo"><span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span></a>
+                <p>Diseño y desarrollo web para negocios que quieren destacar.</p>
+                <a href="https://wa.me/573042753303" class="footer-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> 304 275 3303</a>
             </div>
-
-            <div class="footer-column">
-
-                <h4>Explorar</h4>
-
-                <a href="index.html">Inicio</a>
-                <a href="servicios.html">Servicios</a>
-                <a href="portafolio.html">Portafolio</a>
-                <a href="planes.html">Planes</a>
-
-            </div>
-
-            <div class="footer-column">
-
-                <h4>ALLWEB</h4>
-
-                <a href="nosotros.html">Nosotros</a>
-                <a href="contacto.html">Contacto</a>
-
-            </div>
-
-            <div class="footer-column">
-
-                <h4>Contacto</h4>
-
-                <a href="https://wa.me/573042753303"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-whatsapp"></i>
-                    WhatsApp
-
-                </a>
-
-                <span>Colombia</span>
-
-            </div>
-
+            <div class="footer-column"><h4>Explorar</h4><a href="index.html">Inicio</a><a href="servicios.html">Servicios</a><a href="portafolio.html">Portafolio</a><a href="planes.html">Oferta</a></div>
+            <div class="footer-column"><h4>ALLWEB</h4><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></div>
+            <div class="footer-column"><h4>Contacto</h4><a href="https://wa.me/573042753303" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><span>Colombia</span></div>
         </div>
-
-        <div class="footer-bottom">
-
-            <span>
-                © <span id="current-year"></span> ALLWEB.
-                Todos los derechos reservados.
-            </span>
-
-            <span>Diseño & Desarrollo Web</span>
-
-        </div>
-
+        <div class="footer-bottom"><span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span><span>Diseño & Desarrollo Web</span></div>
     </div>
-
 </footer>
 
-
-<a href="https://wa.me/573042753303"
-   class="whatsapp-float"
-   target="_blank"
-   rel="noopener noreferrer">
-
-    <i class="fa-brands fa-whatsapp"></i>
-    <span>WhatsApp</span>
-
-</a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar a ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 
 <script src="js/app.js"></script>
-
 </body>
 </html>
+
