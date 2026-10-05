@@ -1,6 +1,7 @@
 /* =========================================================
    ALLWEB
    JavaScript principal
+   Mantiene las funciones y efectos originales
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentYear = document.getElementById("current-year");
 
     if (currentYear) {
-
         currentYear.textContent = new Date().getFullYear();
-
     }
 
 
@@ -183,18 +182,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        INTERACCIÓN DEL LÁSER
-       
+
        IMPORTANTE:
-       NO CAMBIA LA ANIMACIÓN ORIGINAL.
+       NO REEMPLAZA NI ELIMINA LAS LÍNEAS LÁSER.
 
-       Permite:
-       - Click con mouse
-       - Toque con celular
-       - Pointer
-       - Pulsos luminosos
-       - Onda láser
+       Se mantiene la animación original del CSS.
     ===================================================== */
-
 
     const laserTargets = [
         ".brand-line",
@@ -215,27 +208,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createLaserInteraction(laser) {
 
-        /*
-         * Creamos una capa independiente.
-         * No modificamos:
-         * - posición original
-         * - animación original
-         * - tamaño original
-         * - diseño original
-         */
-
         const parent = laser.parentElement;
 
         if (!parent) {
             return;
         }
 
-
-        /*
-         * El contenedor necesita posición relativa
-         * para que la zona de interacción se ubique
-         * correctamente.
-         */
 
         const parentStyle =
             window.getComputedStyle(parent);
@@ -254,10 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         interaction.className =
             "laser-interaction-layer";
 
-
-        /*
-         * Ubicamos la capa exactamente sobre la línea.
-         */
 
         const updateInteractionPosition = () => {
 
@@ -301,9 +275,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /*
-         * MOUSE / POINTER
-         */
+        /* =================================================
+           CLICK / TOUCH
+        ================================================= */
 
         interaction.addEventListener(
             "pointerdown",
@@ -326,11 +300,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                /*
-                 * Para el efecto de iluminación
-                 * temporal.
-                 */
-
                 laser.style.filter =
                     `
                     brightness(1.45)
@@ -349,12 +318,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /*
-         * MOVIMIENTO DEL MOUSE
-         *
-         * Cuando se mueve sobre la línea,
-         * aparece una pequeña respuesta luminosa.
-         */
+        /* =================================================
+           MOVIMIENTO DEL MOUSE
+        ================================================= */
 
         let lastMove = 0;
 
@@ -362,11 +328,6 @@ document.addEventListener("DOMContentLoaded", () => {
         interaction.addEventListener(
             "pointermove",
             event => {
-
-                /*
-                 * En celular evitamos generar
-                 * demasiados elementos.
-                 */
 
                 const now =
                     Date.now();
@@ -465,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       PEQUEÑO RASTRO AL MOVER EL MOUSE
+       RASTRO LÁSER
     ===================================================== */
 
     function createLaserTrail(
@@ -490,14 +451,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         trail.style.width =
-            "4px";
+            "5px";
 
         trail.style.height =
-            "4px";
+            "5px";
 
-
-        trail.style.animationDuration =
-            ".45s";
+        trail.style.opacity =
+            ".55";
 
 
         container.appendChild(trail);
@@ -513,88 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       DETECTAR TOUCH EN CELULARES
-    ===================================================== */
-
-    document.addEventListener(
-        "touchstart",
-        () => {
-
-            document.body.classList.add(
-                "touch-device"
-            );
-
-        },
-        {
-            passive: true,
-            once: true
-        }
-    );
-
-
-    /* =====================================================
-       FONDO DINÁMICO INTERACTIVO
-       No modifica las líneas láser existentes.
-    ===================================================== */
-
-    const motionBg = document.querySelector(".allweb-motion-bg");
-    const motionCursor = document.querySelector(".motion-cursor");
-    const motionCyan = document.querySelector(".motion-orb-cyan");
-    const motionPurple = document.querySelector(".motion-orb-purple");
-
-    if (motionBg) {
-
-        let targetX = window.innerWidth / 2;
-        let targetY = window.innerHeight / 2;
-        let currentX = targetX;
-        let currentY = targetY;
-
-        const updateMotion = event => {
-
-            targetX = event.clientX ?? targetX;
-            targetY = event.clientY ?? targetY;
-            document.body.classList.add("motion-active");
-
-        };
-
-        window.addEventListener("pointermove", updateMotion, { passive: true });
-
-        window.addEventListener("pointerleave", () => {
-            document.body.classList.remove("motion-active");
-        }, { passive: true });
-
-        const animateMotion = () => {
-
-            currentX += (targetX - currentX) * 0.055;
-            currentY += (targetY - currentY) * 0.055;
-
-            const nx = currentX / Math.max(window.innerWidth, 1) - 0.5;
-            const ny = currentY / Math.max(window.innerHeight, 1) - 0.5;
-
-            if (motionCursor) {
-                motionCursor.style.left = `${currentX}px`;
-                motionCursor.style.top = `${currentY}px`;
-            }
-
-            if (motionCyan) {
-                motionCyan.style.transform = `translate3d(${nx * 90}px, ${ny * 70}px, 0)`;
-            }
-
-            if (motionPurple) {
-                motionPurple.style.transform = `translate3d(${nx * -120}px, ${ny * -80}px, 0)`;
-            }
-
-            requestAnimationFrame(animateMotion);
-
-        };
-
-        requestAnimationFrame(animateMotion);
-
-    }
-
-
-    /* =====================================================
-       ANIMACIÓN SUAVE DEL MENÚ
+       BOTÓN DEL MENÚ
     ===================================================== */
 
     if (menuToggle) {
@@ -603,40 +482,498 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                menuToggle
-                    .querySelectorAll("span")
-                    .forEach((line, index) => {
-
-                        if (
-                            menuToggle.classList.contains("active")
-                        ) {
-
-                            if (index === 0) {
-                                line.style.transform =
-                                    "translateY(7px) rotate(45deg)";
-                            }
-
-                            if (index === 1) {
-                                line.style.opacity = "0";
-                            }
-
-                            if (index === 2) {
-                                line.style.transform =
-                                    "translateY(-7px) rotate(-45deg)";
-                            }
-
-                        } else {
-
-                            line.style.transform = "";
-                            line.style.opacity = "";
-
-                        }
-
-                    });
+                menuToggle.classList.toggle(
+                    "menu-open"
+                );
 
             }
         );
 
     }
+
+
+    /* =====================================================
+       FONDO INTERACTIVO ALLWEB
+       
+       Estos efectos son adicionales.
+       NO sustituyen el fondo ni las líneas láser.
+    ===================================================== */
+
+    const motionBackground =
+        document.querySelector(".allweb-motion-bg");
+
+    const motionCursor =
+        document.querySelector(".motion-cursor");
+
+    const cyanOrb =
+        document.querySelector(".motion-orb-cyan");
+
+    const purpleOrb =
+        document.querySelector(".motion-orb-purple");
+
+    const motionGrid =
+        document.querySelector(".motion-grid");
+
+
+    if (
+        motionBackground &&
+        !window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+
+        let pointerX =
+            window.innerWidth / 2;
+
+        let pointerY =
+            window.innerHeight / 2;
+
+
+        window.addEventListener(
+            "pointermove",
+            event => {
+
+                pointerX =
+                    event.clientX;
+
+                pointerY =
+                    event.clientY;
+
+
+                document.documentElement.style.setProperty(
+                    "--pointer-x",
+                    `${pointerX}px`
+                );
+
+                document.documentElement.style.setProperty(
+                    "--pointer-y",
+                    `${pointerY}px`
+                );
+
+
+                const normalizedX =
+                    (pointerX / window.innerWidth - 0.5) * 2;
+
+                const normalizedY =
+                    (pointerY / window.innerHeight - 0.5) * 2;
+
+
+                if (cyanOrb) {
+
+                    cyanOrb.style.setProperty(
+                        "--motion-x",
+                        `${normalizedX * 18}px`
+                    );
+
+                    cyanOrb.style.setProperty(
+                        "--motion-y",
+                        `${normalizedY * 12}px`
+                    );
+
+                }
+
+
+                if (purpleOrb) {
+
+                    purpleOrb.style.setProperty(
+                        "--motion-x",
+                        `${normalizedX * -14}px`
+                    );
+
+                    purpleOrb.style.setProperty(
+                        "--motion-y",
+                        `${normalizedY * -10}px`
+                    );
+
+                }
+
+
+                if (motionGrid) {
+
+                    motionGrid.style.setProperty(
+                        "--grid-x",
+                        `${normalizedX * 8}px`
+                    );
+
+                    motionGrid.style.setProperty(
+                        "--grid-y",
+                        `${normalizedY * 5}px`
+                    );
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PARTÍCULAS DIGITALES
+    ===================================================== */
+
+    const particleCanvas =
+        document.querySelector(".allweb-particles");
+
+
+    if (
+        particleCanvas &&
+        !window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+
+        const ctx =
+            particleCanvas.getContext("2d");
+
+        let particles = [];
+
+        let animationFrame;
+
+
+        function resizeCanvas() {
+
+            const dpr =
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+
+            particleCanvas.width =
+                window.innerWidth * dpr;
+
+            particleCanvas.height =
+                window.innerHeight * dpr;
+
+
+            particleCanvas.style.width =
+                `${window.innerWidth}px`;
+
+            particleCanvas.style.height =
+                `${window.innerHeight}px`;
+
+
+            ctx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+
+        }
+
+
+        function createParticles() {
+
+            const count =
+                window.innerWidth < 700
+                    ? 24
+                    : 48;
+
+
+            particles =
+                Array.from(
+                    {
+                        length: count
+                    },
+                    () => ({
+                        x:
+                            Math.random() *
+                            window.innerWidth,
+
+                        y:
+                            Math.random() *
+                            window.innerHeight,
+
+                        size:
+                            Math.random() * 1.6 + .4,
+
+                        speed:
+                            Math.random() * .25 + .08,
+
+                        opacity:
+                            Math.random() * .35 + .08,
+
+                        direction:
+                            Math.random() > .5
+                                ? 1
+                                : -1
+                    })
+                );
+
+        }
+
+
+        function animateParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                window.innerWidth,
+                window.innerHeight
+            );
+
+
+            particles.forEach(particle => {
+
+                particle.y -=
+                    particle.speed;
+
+
+                particle.x +=
+                    particle.direction *
+                    particle.speed *
+                    .18;
+
+
+                if (
+                    particle.y <
+                    -10
+                ) {
+
+                    particle.y =
+                        window.innerHeight + 10;
+
+                }
+
+
+                if (
+                    particle.x <
+                    -10
+                ) {
+
+                    particle.x =
+                        window.innerWidth + 10;
+
+                }
+
+
+                if (
+                    particle.x >
+                    window.innerWidth + 10
+                ) {
+
+                    particle.x = -10;
+
+                }
+
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.size,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                /*
+                 * Cyan muy tenue.
+                 * Se mantiene el aspecto elegante
+                 * sin llenar demasiado el fondo.
+                 */
+
+                ctx.fillStyle =
+                    `rgba(0,242,254,${particle.opacity})`;
+
+
+                ctx.fill();
+
+            });
+
+
+            animationFrame =
+                requestAnimationFrame(
+                    animateParticles
+                );
+
+        }
+
+
+        resizeCanvas();
+
+        createParticles();
+
+        animateParticles();
+
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                resizeCanvas();
+
+                createParticles();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "visibilitychange",
+            () => {
+
+                if (
+                    document.hidden
+                ) {
+
+                    cancelAnimationFrame(
+                        animationFrame
+                    );
+
+                } else {
+
+                    animateParticles();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       EFECTO 3D SUTIL EN TARJETAS
+       
+       No modifica colores ni estructura.
+    ===================================================== */
+
+    const tiltCards =
+        document.querySelectorAll(
+            ".glass-card, .service-card, .portfolio-card, .plan-card, .review-card, .offer-benefit"
+        );
+
+
+    tiltCards.forEach(card => {
+
+        card.addEventListener(
+            "pointermove",
+            event => {
+
+                if (
+                    window.innerWidth < 768 ||
+                    event.pointerType !== "mouse"
+                ) {
+                    return;
+                }
+
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                const px =
+                    x / rect.width;
+
+
+                const py =
+                    y / rect.height;
+
+
+                const rotateY =
+                    (px - 0.5) * 4.5;
+
+
+                const rotateX =
+                    (0.5 - py) * 4.5;
+
+
+                card.style.transform =
+                    `
+                    perspective(900px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-3px)
+                    `;
+
+
+                card.style.setProperty(
+                    "--tilt-light-x",
+                    `${px * 100}%`
+                );
+
+
+                card.style.setProperty(
+                    "--tilt-light-y",
+                    `${py * 100}%`
+                );
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        card.addEventListener(
+            "pointerleave",
+            () => {
+
+                card.style.transform = "";
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       BOTONES 50% DESCUENTO
+       
+       Cualquier botón que tenga:
+       .offer-whatsapp
+       abrirá WhatsApp con el mensaje de promoción.
+    ===================================================== */
+
+    const offerButtons =
+        document.querySelectorAll(
+            ".offer-whatsapp"
+        );
+
+
+    offerButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const message =
+                    "Hola ALLWEB, quiero aprovechar el 50% de descuento y comenzar mi proyecto web.";
+
+                const whatsappURL =
+                    `https://wa.me/573042753303?text=${encodeURIComponent(message)}`;
+
+                window.open(
+                    whatsappURL,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+        );
+
+    });
 
 });
