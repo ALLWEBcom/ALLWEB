@@ -4121,3 +4121,188 @@ body {
         overflow-wrap: anywhere;
     }
 }
+/* =========================================================
+   ALLWEB · FONDO PREMIUM FUTURISTA
+   Mantiene colores y líneas láser originales.
+   Añade profundidad, auroras, brillo y una rejilla tecnológica sutil.
+   ========================================================= */
+
+:root {
+    --premium-cyan: #00f2fe;
+    --premium-purple: #7928ca;
+    --premium-blue: #2563eb;
+}
+
+/* Capa base ligeramente más luminosa, sin convertirla en un fondo claro */
+body {
+    position: relative;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(0,242,254,.075), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(121,40,202,.095), transparent 30%),
+        radial-gradient(circle at 52% 86%, rgba(37,99,235,.055), transparent 32%),
+        linear-gradient(135deg, #05070d 0%, #080a12 48%, #05060c 100%);
+}
+
+/* Aura principal */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -18%;
+    z-index: -8;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 18% 24%, rgba(0,242,254,.13) 0%, transparent 27%),
+        radial-gradient(ellipse at 82% 18%, rgba(121,40,202,.15) 0%, transparent 28%),
+        radial-gradient(ellipse at 68% 78%, rgba(0,183,255,.07) 0%, transparent 24%),
+        radial-gradient(ellipse at 28% 88%, rgba(121,40,202,.08) 0%, transparent 25%);
+    filter: blur(12px);
+    animation: allwebAurora 16s ease-in-out infinite alternate;
+}
+
+/* Brillo central para evitar el aspecto de "negro plano" */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -7;
+    pointer-events: none;
+    background:
+        linear-gradient(115deg, transparent 0%, rgba(0,242,254,.018) 35%, transparent 55%),
+        linear-gradient(295deg, transparent 0%, rgba(121,40,202,.022) 45%, transparent 68%);
+    opacity: .95;
+    animation: allwebLightShift 18s linear infinite;
+}
+
+/* Rejilla tecnológica más fina y elegante */
+.background-grid {
+    opacity: .75;
+    background-image:
+        linear-gradient(rgba(0,242,254,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(121,40,202,.032) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.30) 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.30) 65%, transparent 100%);
+}
+
+/* Halos existentes: más visibles, pero todavía elegantes */
+.background-glow {
+    filter: blur(100px);
+    opacity: .15;
+}
+
+.glow-one {
+    width: 560px;
+    height: 560px;
+    top: -210px;
+    right: -160px;
+}
+
+.glow-two {
+    width: 620px;
+    height: 620px;
+    bottom: -280px;
+    left: -190px;
+}
+
+/* Luz ambiental que recorre lentamente la interfaz */
+.premium-light-sweep {
+    position: fixed;
+    width: 42vw;
+    height: 42vw;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 680px;
+    max-height: 680px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -6;
+    opacity: .07;
+    filter: blur(70px);
+    background: conic-gradient(from 180deg, transparent, var(--premium-cyan), transparent 32%, var(--premium-purple), transparent 68%);
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: allwebOrbit 20s ease-in-out infinite alternate;
+}
+
+/* Efecto de profundidad para secciones, sin cambiar su estructura */
+section {
+    position: relative;
+}
+
+section::before {
+    content: "";
+    position: absolute;
+    width: min(42vw, 520px);
+    height: 180px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(0,242,254,.035), transparent 68%);
+    filter: blur(25px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Mantener el láser original intacto; solo reforzamos su halo */
+.brand-line,
+.video-line {
+    filter: drop-shadow(0 0 3px rgba(0,242,254,.65));
+}
+
+@keyframes allwebAurora {
+    0% {
+        transform: translate3d(-2%, -1%, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(2%, 1.5%, 0) scale(1.04);
+    }
+    100% {
+        transform: translate3d(-1%, 2%, 0) scale(1.02);
+    }
+}
+
+@keyframes allwebLightShift {
+    0% { transform: translateX(-3%); opacity: .72; }
+    50% { transform: translateX(3%); opacity: 1; }
+    100% { transform: translateX(-3%); opacity: .72; }
+}
+
+@keyframes allwebOrbit {
+    0% {
+        transform: translate(-58%, -46%) rotate(0deg) scale(.92);
+    }
+    50% {
+        transform: translate(-40%, -54%) rotate(90deg) scale(1.04);
+    }
+    100% {
+        transform: translate(-62%, -38%) rotate(180deg) scale(.96);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after,
+    .premium-light-sweep {
+        animation: none;
+    }
+}
+
+@media (max-width: 700px) {
+    body::before {
+        opacity: .82;
+    }
+
+    .background-grid {
+        background-size: 58px 58px, 58px 58px, 18px 18px, 18px 18px;
+    }
+
+    .premium-light-sweep {
+        width: 80vw;
+        height: 80vw;
+        opacity: .045;
+    }
+}
