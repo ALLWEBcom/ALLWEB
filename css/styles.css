@@ -4002,3 +4002,122 @@ body {
     .offer-number { font-size:5.5rem; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-promo-card::before,.offer-main-card::before { animation:none; } }
+
+
+/* =========================================================
+   ALLWEB · REDES SOCIALES Y CORREO
+   Se añade sin modificar la identidad visual existente.
+   ========================================================= */
+
+.footer-social-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,.07);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.footer-social-label {
+    color: var(--cyan);
+    font-family: Orbitron, sans-serif;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+    margin-right: 4px;
+}
+
+.footer-social-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.footer-social-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: transform .25s ease, color .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.footer-social-icon i {
+    font-size: 1rem;
+}
+
+.footer-social-icon span {
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.footer-social-icon:hover {
+    transform: translateY(-2px);
+    color: #fff;
+    background: rgba(0,242,254,.055);
+    border-color: rgba(0,242,254,.35);
+    box-shadow: 0 0 18px rgba(0,242,254,.10);
+}
+
+.footer-social-icon.instagram:hover {
+    border-color: rgba(225,48,108,.50);
+    box-shadow: 0 0 20px rgba(225,48,108,.13);
+}
+
+.footer-social-icon.tiktok:hover {
+    border-color: rgba(0,242,254,.55);
+    box-shadow: 0 0 20px rgba(0,242,254,.13);
+}
+
+.footer-social-icon.email:hover {
+    border-color: rgba(121,40,202,.55);
+    box-shadow: 0 0 20px rgba(121,40,202,.13);
+}
+
+.footer-email-address {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: .78rem;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.footer-email-address:hover {
+    color: var(--cyan);
+}
+
+/* Los enlaces sociales dentro de la columna Contacto */
+.footer-column a[aria-label="Instagram ALLWEB"] i {
+    color: #e1306c;
+}
+
+.footer-column a[aria-label="TikTok ALLWEB"] i {
+    color: var(--cyan);
+}
+
+.footer-column a[aria-label="Correo ALLWEB"] i {
+    color: var(--purple-light);
+}
+
+@media (max-width: 700px) {
+    .footer-social-bar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-email-address {
+        margin-left: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+}
