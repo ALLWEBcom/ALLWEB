@@ -1023,6 +1023,80 @@
 
 
 <script src="js/app.js"></script>
+<!-- ALLWEB: SECCIÓN DE RESEÑAS -->
+<section id="resenas" class="aw-resenas-section">
+  <div class="aw-resenas-container">
 
+    <div class="aw-resenas-heading">
+      <span class="aw-resenas-tag">EXPERIENCIAS REALES</span>
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>Tu opinión nos ayuda a construir una mejor experiencia digital.</p>
+    </div>
+
+    <div class="aw-resenas-summary">
+      <div class="aw-resenas-score">
+        <strong id="resenas-promedio">0.0</strong>
+        <span id="resenas-resumen-estrellas" aria-label="Promedio de estrellas">☆☆☆☆☆</span>
+        <small id="resenas-total">0 opiniones</small>
+      </div>
+    </div>
+
+    <div class="aw-resenas-grid">
+
+      <form id="resenas-formulario" class="aw-resenas-form">
+        <h3>Comparte tu experiencia</h3>
+
+        <label for="resenas-nombre">Tu nombre</label>
+        <input
+          id="resenas-nombre"
+          name="nombre"
+          type="text"
+          minlength="2"
+          maxlength="60"
+          autocomplete="name"
+          placeholder="Escribe tu nombre"
+          required
+        >
+
+        <fieldset class="aw-resenas-rating">
+          <legend>Tu calificación</legend>
+          <div id="resenas-estrellas" class="aw-resenas-stars-input">
+            <button type="button" data-rating="1" aria-label="1 estrella">★</button>
+            <button type="button" data-rating="2" aria-label="2 estrellas">★</button>
+            <button type="button" data-rating="3" aria-label="3 estrellas">★</button>
+            <button type="button" data-rating="4" aria-label="4 estrellas">★</button>
+            <button type="button" data-rating="5" aria-label="5 estrellas">★</button>
+          </div>
+        </fieldset>
+
+        <label for="resenas-comentario">Tu opinión</label>
+        <textarea
+          id="resenas-comentario"
+          name="comentario"
+          minlength="3"
+          maxlength="1000"
+          rows="5"
+          placeholder="Cuéntanos cómo fue tu experiencia con ALLWEB..."
+          required
+        ></textarea>
+
+        <button id="resenas-enviar" class="aw-resenas-submit" type="submit">
+          Publicar reseña
+        </button>
+
+        <p id="resenas-mensaje" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="aw-resenas-reviews">
+        <h3>Opiniones de nuestros clientes</h3>
+        <div id="resenas-lista" aria-live="polite">
+          Cargando opiniones...
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- FIN DE LA SECCIÓN DE RESEÑAS -->
 </body>
 </html>
