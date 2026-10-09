@@ -1,0 +1,260 @@
+/* ALLWEB — Estilos futuristas para reseñas */
+
+.aw-resenas-section {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 20px;
+  color: #f5f7ff;
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(0, 242, 254, .10), transparent 40%),
+    radial-gradient(ellipse at 90% 90%, rgba(121, 40, 202, .15), transparent 45%),
+    #08090f;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.aw-resenas-container {
+  position: relative;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.aw-resenas-heading {
+  max-width: 750px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.aw-resenas-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #00f2fe;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .22em;
+}
+
+.aw-resenas-heading h2 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #00f2fe, #c5a3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.aw-resenas-heading p {
+  color: #aab2c8;
+  line-height: 1.7;
+}
+
+.aw-resenas-summary {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.aw-resenas-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 25px;
+  border: 1px solid rgba(0, 242, 254, .3);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .035);
+  box-shadow: 0 0 28px rgba(0, 242, 254, .06);
+}
+
+.aw-resenas-score strong {
+  font-size: 2rem;
+}
+
+#resenas-resumen-estrellas,
+.aw-review-stars {
+  color: #ffd166;
+  letter-spacing: 2px;
+}
+
+#resenas-total,
+.aw-review-date {
+  color: #aab2c8;
+  font-size: .85rem;
+}
+
+.aw-resenas-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 25px;
+  align-items: start;
+}
+
+.aw-resenas-form,
+.aw-resenas-reviews {
+  min-width: 0;
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid rgba(121, 40, 202, .45);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(20, 23, 39, .96), rgba(9, 11, 20, .96));
+  box-shadow: 0 15px 45px rgba(0, 0, 0, .22);
+}
+
+.aw-resenas-form h3,
+.aw-resenas-reviews h3 {
+  margin: 0 0 24px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.aw-resenas-form label,
+.aw-resenas-rating legend {
+  display: block;
+  margin: 17px 0 9px;
+  color: #dfe6ff;
+  font-size: .92rem;
+  font-weight: 650;
+}
+
+.aw-resenas-form input,
+.aw-resenas-form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  color: #fff;
+  background: #0b0e18;
+  border: 1px solid #34394f;
+  border-radius: 12px;
+  font: inherit;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.aw-resenas-form input:focus,
+.aw-resenas-form textarea:focus {
+  border-color: #00f2fe;
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, .1);
+}
+
+.aw-resenas-form textarea {
+  resize: vertical;
+}
+
+.aw-resenas-rating {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.aw-resenas-stars-input {
+  display: flex;
+  gap: 7px;
+}
+
+.aw-resenas-stars-input button {
+  padding: 0 2px;
+  color: #64708b;
+  background: transparent;
+  border: 0;
+  font-size: 2.15rem;
+  cursor: pointer;
+  transition: color .15s, transform .15s;
+}
+
+.aw-resenas-stars-input button.is-selected {
+  color: #ffd166;
+}
+
+.aw-resenas-stars-input button:hover {
+  transform: scale(1.15);
+}
+
+.aw-resenas-submit {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px 20px;
+  color: #08090f;
+  background: linear-gradient(100deg, #00f2fe, #a78bfa);
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: filter .2s, transform .2s;
+}
+
+.aw-resenas-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.aw-resenas-submit:disabled {
+  opacity: .6;
+  cursor: wait;
+  transform: none;
+}
+
+#resenas-mensaje {
+  min-height: 1.4em;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+#resenas-lista {
+  display: grid;
+  gap: 14px;
+}
+
+.aw-review-card {
+  padding: 18px;
+  border: 1px solid rgba(0, 242, 254, .17);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .025);
+  overflow-wrap: anywhere;
+}
+
+.aw-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.aw-review-name {
+  color: #fff;
+}
+
+.aw-review-comment {
+  margin: 13px 0;
+  color: #d2d8e9;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.aw-review-empty {
+  color: #aab2c8;
+  line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+  .aw-resenas-section {
+    padding: 65px 16px;
+  }
+
+  .aw-resenas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aw-resenas-score {
+    gap: 9px;
+    padding: 15px;
+  }
+
+  .aw-review-header {
+    flex-direction: column;
+  }
+}
