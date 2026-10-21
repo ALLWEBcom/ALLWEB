@@ -566,3 +566,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("allweb-loaded");
 
 });
+window.addEventListener("pageshow", () => {
+    document.body.classList.remove("page-changing");
+});
