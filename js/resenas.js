@@ -7,8 +7,8 @@
   "use strict";
 
   // 1. REEMPLAZA estos dos valores por los de tu proyecto Supabase.
-  const SUPABASE_URL = "https://shziyfkoldietcxzsgnj.supabase.co/rest/v1/";
-  const SUPABASE_KEY = "sb_publishable_cq-1l9aen0qRYwadshIQYw_1kEiiErd";
+  const SUPABASE_URL = "https://avntplffdmkqkfclwxzl.supabase.co/";
+  const SUPABASE_KEY = "sb_publishable_guQFe2GBus3iNvWj6g-WWg_z7ZBw...";
 
   const TABLE = "resenas";
   const MAX_REVIEW_LENGTH = 1000;
