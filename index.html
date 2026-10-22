@@ -19,28 +19,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="css/styles.css">
 
-<!-- ESTILOS DE RESEÑAS -->
+<!-- Ajuste pequeño: casilla de aceptación dentro del formulario de reseñas -->
 <style>
-.resenas{max-width:900px;margin:0 auto;color:#fff}
-.resenas__resumen{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0 24px;flex-wrap:wrap}
-.resenas__resumen strong{font-size:2.5rem;font-family:'Orbitron',sans-serif}
-.estrellas{color:#ffc83d;letter-spacing:2px}
-.resenas__form{display:grid;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px;margin:24px 0;position:relative}
-.resenas__form label,.resenas__label{font-size:.9rem;opacity:.85}
-.resenas__form input[type=text],.resenas__form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.4);color:#fff;font:inherit}
-.resenas__form input[type=text]:focus,.resenas__form textarea:focus{outline:2px solid #00f2fe;outline-offset:1px}
-.selector{display:flex;gap:4px}
-.selector button{background:none;border:0;font-size:2rem;color:#555;cursor:pointer;transition:transform .15s,color .15s;padding:0 2px}
-.selector button.activa{color:#ffc83d}
-.selector button:hover{transform:scale(1.2)}
-.resenas__check{font-size:.9rem;display:flex;gap:8px;align-items:center}
-.resenas__btn{padding:14px;border:0;border-radius:10px;background:linear-gradient(90deg,#00e5ff,#7a5cff);color:#030305;font-weight:700;cursor:pointer;font:inherit;font-weight:700}
-.resenas__btn:disabled{opacity:.6;cursor:wait}
-.resena{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px;margin-bottom:12px}
-.resena__cabeza{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-.resena p{margin:6px 0}
-.resena small{opacity:.6}
-#resMensaje{min-height:1.2em;font-size:.95rem;margin:0}
+#resenas-formulario .aw-check{display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:14px;color:#c0cad9}
+#resenas-formulario .aw-check input[type="checkbox"]{width:auto;flex:0 0 auto;display:inline-block;padding:0;margin-top:4px;accent-color:#00f2fe}
+#resenas-formulario .aw-check a{color:#00f2fe;text-decoration:underline}
+#resenas-mensaje{color:#00f2fe}
 </style>
 </head>
 <body>
@@ -201,54 +185,60 @@
 </section>
 
 <!-- RESEÑAS -->
-<section class="section" id="resenas">
-<div class="section-container">
-<div class="section-heading centered">
-<div class="section-tag"><span></span> EXPERIENCIAS REALES</div>
-<h2>Lo que dicen <span>nuestros clientes</span></h2>
-<p>Tu opinión nos ayuda a construir una mejor experiencia digital.</p>
-</div>
+<section id="resenas" class="aw-reviews-section">
+<div class="aw-reviews-container">
 
-<div class="resenas">
-  <div class="resenas__resumen">
-    <strong id="promedio">0.0</strong>
-    <span id="promedioEstrellas" class="estrellas">☆☆☆☆☆</span>
-    <span id="totalResenas">0 opiniones</span>
+  <div class="section-tag"><span></span> EXPERIENCIAS REALES</div>
+  <h2>Lo que dicen nuestros clientes</h2>
+  <p class="aw-reviews-subtitle">Tu opinión nos ayuda a construir una mejor experiencia digital.</p>
+
+  <div class="aw-review-summary">
+    <span class="aw-review-average" id="resenas-promedio">0.0</span>
+    <span class="aw-review-stars" id="resenas-resumen-estrellas">☆☆☆☆☆</span>
+    <span id="resenas-total">0 opiniones</span>
   </div>
 
-  <form id="formResena" class="resenas__form" novalidate>
+  <form id="resenas-formulario" novalidate>
     <h3>Comparte tu experiencia</h3>
 
-    <label for="resNombre">Tu nombre</label>
-    <input id="resNombre" type="text" maxlength="60" required>
-
-    <span class="resenas__label">Tu calificación</span>
-    <div id="selectorEstrellas" class="selector" role="radiogroup" aria-label="Calificación">
-      <button type="button" data-v="1" aria-label="1 estrella">★</button>
-      <button type="button" data-v="2" aria-label="2 estrellas">★</button>
-      <button type="button" data-v="3" aria-label="3 estrellas">★</button>
-      <button type="button" data-v="4" aria-label="4 estrellas">★</button>
-      <button type="button" data-v="5" aria-label="5 estrellas">★</button>
+    <div>
+      <label for="resenas-nombre">Tu nombre</label>
+      <input id="resenas-nombre" type="text" maxlength="60" autocomplete="name" required>
     </div>
 
-    <label for="resTexto">Tu opinión</label>
-    <textarea id="resTexto" rows="4" maxlength="500" required></textarea>
+    <div>
+      <label id="resenas-estrellas-label">Tu calificación</label>
+      <div id="resenas-estrellas" role="radiogroup" aria-labelledby="resenas-estrellas-label">
+        <button type="button" data-rating="1" aria-label="1 estrella">★</button>
+        <button type="button" data-rating="2" aria-label="2 estrellas">★</button>
+        <button type="button" data-rating="3" aria-label="3 estrellas">★</button>
+        <button type="button" data-rating="4" aria-label="4 estrellas">★</button>
+        <button type="button" data-rating="5" aria-label="5 estrellas">★</button>
+      </div>
+    </div>
 
-    <!-- Campo trampa contra bots -->
-    <input type="text" id="resWeb" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+    <div>
+      <label for="resenas-texto">Tu opinión</label>
+      <textarea id="resenas-texto" maxlength="500" required></textarea>
+    </div>
 
-    <label class="resenas__check">
-      <input type="checkbox" id="resAcepto" required>
+    <!-- Campo trampa contra bots (no lo borres) -->
+    <input type="text" id="resenas-web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+    <label class="aw-check">
+      <input type="checkbox" id="resenas-acepto" required>
       <span>Acepto la <a href="legal.html#datos">política de tratamiento de datos</a>.</span>
     </label>
 
-    <button type="submit" class="resenas__btn" id="resBtn">Publicar reseña</button>
-    <p id="resMensaje" role="status"></p>
+    <button type="submit" id="resenas-enviar">Publicar reseña</button>
+    <p id="resenas-mensaje" role="status"></p>
   </form>
 
   <h3>Opiniones de nuestros clientes</h3>
-  <div id="listaResenas">Cargando opiniones...</div>
-</div>
+  <div id="resenas-lista">
+    <div class="aw-review-empty">Cargando opiniones...</div>
+  </div>
+
 </div>
 </section>
 
@@ -358,7 +348,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-/* ====== PEGA AQUÍ TU CONFIGURACIÓN DE FIREBASE (Paso 4) ====== */
 const firebaseConfig = {
   apiKey: "AIzaSyABpaGuzz2oW7CqGi4gyK6klY29fbKh8Nw",
   authDomain: "allweb-resenas.firebaseapp.com",
@@ -368,36 +357,40 @@ const firebaseConfig = {
   appId: "1:384949733251:web:1018d4aa99be13d8c0d8b6",
   measurementId: "G-GWNBVYK8YL"
 };
-/* ============================================================= */
 
 const $ = (id) => document.getElementById(id);
-const lista = $("listaResenas");
+const lista = $("resenas-lista");
 let calificacion = 0;
 
 const estrellasTxt = (n) => "★".repeat(n) + "☆".repeat(5 - n);
 
-// ---- Selector de estrellas (funciona aunque Firebase falle) ----
-const botones = document.querySelectorAll("#selectorEstrellas button");
-function pintar(n){ botones.forEach(b => b.classList.toggle("activa", +b.dataset.v <= n)); }
+function mostrarVacio(texto){
+  lista.textContent = "";
+  const d = document.createElement("div");
+  d.className = "aw-review-empty";
+  d.textContent = texto;
+  lista.append(d);
+}
+
+// ---- Selector de estrellas ----
+const botones = document.querySelectorAll("#resenas-estrellas button");
+function pintar(n){ botones.forEach(b => b.classList.toggle("is-selected", +b.dataset.rating <= n)); }
 botones.forEach(b => {
-  b.addEventListener("click", () => { calificacion = +b.dataset.v; pintar(calificacion); });
-  b.addEventListener("mouseenter", () => pintar(+b.dataset.v));
+  b.addEventListener("click", () => { calificacion = +b.dataset.rating; pintar(calificacion); });
+  b.addEventListener("mouseenter", () => pintar(+b.dataset.rating));
 });
-$("selectorEstrellas").addEventListener("mouseleave", () => pintar(calificacion));
+$("resenas-estrellas").addEventListener("mouseleave", () => pintar(calificacion));
 
 let db = null;
 try {
   db = getFirestore(initializeApp(firebaseConfig));
 } catch (e) {
-  console.error("Firebase no configurado:", e);
+  console.error("Firebase no pudo iniciar:", e);
 }
 
 // ---- Cargar reseñas aprobadas ----
 async function cargar(){
-  if (!db){
-    lista.textContent = "Las opiniones estarán disponibles muy pronto.";
-    return;
-  }
+  if (!db){ mostrarVacio("Las opiniones estarán disponibles muy pronto."); return; }
   try {
     const snap = await getDocs(query(collection(db, "reviews"), where("approved", "==", true)));
     const datos = snap.docs.map(d => d.data())
@@ -405,45 +398,52 @@ async function cargar(){
 
     const total = datos.length;
     const prom = total ? datos.reduce((s, r) => s + r.rating, 0) / total : 0;
-    $("promedio").textContent = prom.toFixed(1);
-    $("promedioEstrellas").textContent = estrellasTxt(Math.round(prom));
-    $("totalResenas").textContent = total + (total === 1 ? " opinión" : " opiniones");
+    $("resenas-promedio").textContent = prom.toFixed(1);
+    $("resenas-resumen-estrellas").textContent = estrellasTxt(Math.round(prom));
+    $("resenas-total").textContent = total + (total === 1 ? " opinión" : " opiniones");
+
+    if (!total){ mostrarVacio("Aún no hay opiniones. ¡Sé el primero en compartir la tuya!"); return; }
 
     lista.textContent = "";
-    if (!total){ lista.textContent = "Aún no hay opiniones. ¡Sé el primero en compartir la tuya!"; return; }
-
     datos.forEach(r => {
-      const card = document.createElement("article"); card.className = "resena";
-      const cab = document.createElement("div"); cab.className = "resena__cabeza";
-      const nom = document.createElement("strong"); nom.textContent = r.name;
-      const est = document.createElement("span"); est.className = "estrellas"; est.textContent = estrellasTxt(r.rating);
-      cab.append(nom, est);
-      const txt = document.createElement("p"); txt.textContent = r.comment;
-      const fecha = document.createElement("small");
+      const card = document.createElement("article"); card.className = "aw-review-card";
+
+      const head = document.createElement("div"); head.className = "aw-review-header";
+      const nom = document.createElement("strong"); nom.className = "aw-review-name"; nom.textContent = r.name;
+      const est = document.createElement("span"); est.className = "aw-review-stars"; est.textContent = estrellasTxt(r.rating);
+      head.append(nom, est);
+
+      const txt = document.createElement("p"); txt.className = "aw-review-comment"; txt.textContent = r.comment;
+
+      const fecha = document.createElement("span"); fecha.className = "aw-review-date";
       fecha.textContent = r.createdAt ? r.createdAt.toDate().toLocaleDateString("es-CO") : "";
-      card.append(cab, txt, fecha);
+
+      card.append(head, txt, fecha);
       lista.append(card);
     });
   } catch (e) {
     console.error(e);
-    lista.textContent = "No pudimos cargar las opiniones en este momento.";
+    mostrarVacio("No pudimos cargar las opiniones en este momento.");
   }
 }
 
 // ---- Enviar reseña ----
-$("formResena").addEventListener("submit", async (e) => {
+$("resenas-formulario").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const msg = $("resMensaje");
-  const name = $("resNombre").value.trim();
-  const comment = $("resTexto").value.trim();
+  const msg = $("resenas-mensaje");
+  const name = $("resenas-nombre").value.trim();
+  const comment = $("resenas-texto").value.trim();
 
-  if ($("resWeb").value) return; // bot
+  if ($("resenas-web").value) return; // bot
   if (name.length < 2 || comment.length < 5 || !calificacion){ msg.textContent = "Completa tu nombre, calificación y opinión."; return; }
-  if (!$("resAcepto").checked){ msg.textContent = "Debes aceptar la política de datos."; return; }
+  if (!$("resenas-acepto").checked){ msg.textContent = "Debes aceptar la política de datos."; return; }
   if (!db){ msg.textContent = "El envío de opiniones aún no está activo."; return; }
-  if (Date.now() - (+localStorage.getItem("ultimaResena") || 0) < 60000){ msg.textContent = "Espera un minuto antes de enviar otra."; return; }
 
-  const btn = $("resBtn");
+  let ultima = 0;
+  try { ultima = +localStorage.getItem("ultimaResena") || 0; } catch (_) {}
+  if (Date.now() - ultima < 60000){ msg.textContent = "Espera un minuto antes de enviar otra."; return; }
+
+  const btn = $("resenas-enviar");
   btn.disabled = true;
   try {
     await addDoc(collection(db, "reviews"), {
