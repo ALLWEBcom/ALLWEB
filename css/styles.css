@@ -4629,3 +4629,102 @@ body {
         background-attachment: scroll;
     }
 }
+/* =========================================================
+   ALLWEB — IMAGEN DE FONDO (pegar al FINAL de css/styles.css)
+========================================================= */
+body {
+    background-color: #05070d;
+    background-image: url("../img/fondo-allweb-4k.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Pantallas pequeñas: imagen ligera y sin fixed (iOS no lo soporta bien) */
+@media (max-width: 900px) {
+    body {
+        background-image: url("../img/fondo-allweb-hd.jpg");
+        background-attachment: scroll;
+    }
+}
+
+/* =========================================================
+   ALLWEB — IMÁGENES EN LAS TARJETAS DE SERVICIOS
+   (pegar también al final de css/styles.css)
+========================================================= */
+.service-media {
+    position: relative;
+    margin: -6px -6px 22px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: #05070d;
+}
+
+.service-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.service-card:hover .service-media img {
+    transform: scale(1.04);
+}
+
+.service-media figcaption {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 4px 9px;
+    border-radius: 50px;
+    background: rgba(0,0,0,.6);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #cbd5e1;
+    font-size: 9px;
+    letter-spacing: .08em;
+    backdrop-filter: blur(6px);
+}
+
+/* =========================================================
+   ALLWEB — AJUSTES DEL FORMULARIO DE RESEÑAS (Firebase)
+   (pegar al final de css/styles.css)
+========================================================= */
+.aw-trap {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.aw-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e6f4ff;
+    font-weight: 600;
+}
+
+.aw-check {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: .85rem;
+    font-weight: 400 !important;
+    color: #c0cad9;
+}
+
+.aw-check input {
+    width: auto !important;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.aw-check a { color: #00f2fe; }
+
+#resenas-mensaje.is-ok    { color: #86efac; }
+#resenas-mensaje.is-error { color: #fca5a5; }
