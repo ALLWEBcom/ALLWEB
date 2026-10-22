@@ -4606,21 +4606,26 @@ section::before {
   .aw-review-summary { width: 100%; }
 }
 /* =========================================================
-   ALLWEB — IMAGEN DE FONDO (pegar al FINAL de css/styles.css)
+   ALLWEB — IMAGEN DE FONDO (al FINAL de css/styles.css)
 ========================================================= */
 body {
     background-color: #05070d;
-    background-image: url("../img/fondo-allweb-4k.jpg");
+    /* La capa oscura mejora la lectura del texto sobre la foto */
+    background-image:
+        linear-gradient(rgba(3, 3, 5, .55), rgba(3, 3, 5, .55)),
+        url("../img/fondo-allweb-4k.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-/* Pantallas pequeñas: imagen ligera y sin fixed (iOS no lo soporta bien) */
+/* Móvil: imagen ligera y sin fixed (iOS no lo soporta bien) */
 @media (max-width: 900px) {
     body {
-        background-image: url("../img/fondo-allweb-hd.jpg");
+        background-image:
+            linear-gradient(rgba(3, 3, 5, .55), rgba(3, 3, 5, .55)),
+            url("../img/fondo-allweb-hd.jpg");
         background-attachment: scroll;
     }
 }
