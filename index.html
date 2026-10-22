@@ -360,12 +360,13 @@ import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestam
 
 /* ====== PEGA AQUÍ TU CONFIGURACIÓN DE FIREBASE (Paso 4) ====== */
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyABpaGuzz2oW7CqGi4gyK6klY29fbKh8Nw",
+  authDomain: "allweb-resenas.firebaseapp.com",
+  projectId: "allweb-resenas",
+  storageBucket: "allweb-resenas.firebasestorage.app",
+  messagingSenderId: "384949733251",
+  appId: "1:384949733251:web:1018d4aa99be13d8c0d8b6",
+  measurementId: "G-GWNBVYK8YL"
 };
 /* ============================================================= */
 
@@ -393,7 +394,7 @@ try {
 
 // ---- Cargar reseñas aprobadas ----
 async function cargar(){
-  if (!db || firebaseConfig.apiKey === "TU_API_KEY"){
+  if (!db){
     lista.textContent = "Las opiniones estarán disponibles muy pronto.";
     return;
   }
@@ -439,7 +440,7 @@ $("formResena").addEventListener("submit", async (e) => {
   if ($("resWeb").value) return; // bot
   if (name.length < 2 || comment.length < 5 || !calificacion){ msg.textContent = "Completa tu nombre, calificación y opinión."; return; }
   if (!$("resAcepto").checked){ msg.textContent = "Debes aceptar la política de datos."; return; }
-  if (!db || firebaseConfig.apiKey === "TU_API_KEY"){ msg.textContent = "El envío de opiniones aún no está activo."; return; }
+  if (!db){ msg.textContent = "El envío de opiniones aún no está activo."; return; }
   if (Date.now() - (+localStorage.getItem("ultimaResena") || 0) < 60000){ msg.textContent = "Espera un minuto antes de enviar otra."; return; }
 
   const btn = $("resBtn");
