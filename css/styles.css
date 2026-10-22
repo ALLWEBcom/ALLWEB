@@ -4308,113 +4308,118 @@ section::before {
 }
 ```css
 /* ==========================================
-   ALLWEB — DISEÑO PROFESIONAL DE RESEÑAS
+   ALLWEB — RESEÑAS
    ========================================== */
 
-#resenas,
-#seccion-resenas,
 .aw-reviews-section {
   position: relative;
-  isolation: isolate;
   width: 100%;
-  padding: 76px 20px;
-  overflow: hidden;
-  color: #eef7ff;
-  background:
-    radial-gradient(ellipse at 10% 15%, rgba(0, 242, 254, .10), transparent 42%),
-    radial-gradient(ellipse at 90% 85%, rgba(121, 40, 202, .15), transparent 45%),
-    #08090f;
-  font-family: Inter, sans-serif;
+  padding: 100px 20px;
+  color: var(--text);
+  /* Semitransparente: deja ver el fondo del sitio */
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(3, 3, 5, .55) 12%,
+    rgba(3, 3, 5, .55) 88%,
+    transparent
+  );
 }
 
-#resenas *,
-#seccion-resenas *,
-.aw-reviews-section * {
-  box-sizing: border-box;
-}
+.aw-reviews-section * { box-sizing: border-box; }
 
-#resenas .aw-reviews-container,
-#seccion-resenas .aw-reviews-container,
-.aw-reviews-section .aw-reviews-container {
+.aw-reviews-container {
   width: min(100%, 1000px);
   margin: 0 auto;
 }
 
-#resenas h2,
-#seccion-resenas h2,
 .aw-reviews-section h2 {
-  margin: 8px 0 14px;
-  color: #f4f8ff;
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  line-height: 1.2;
+  margin: 12px 0 14px;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -.5px;
+  color: #fff;
 }
 
-#resenas p,
-#seccion-resenas p,
-.aw-reviews-section p {
+.aw-reviews-section h3 {
+  margin: 0 0 20px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.aw-reviews-subtitle {
+  max-width: 600px;
+  color: var(--muted);
   line-height: 1.7;
 }
 
-#resenas .aw-reviews-subtitle,
-.aw-reviews-section .aw-reviews-subtitle {
-  color: #aab8cb;
-}
-
-#resenas .aw-review-summary,
-.aw-reviews-section .aw-review-summary {
+/* ---- Resumen ---- */
+.aw-review-summary {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 14px;
+  width: fit-content;
+  max-width: 100%;
   margin: 28px 0;
-  padding: 22px;
-  border: 1px solid rgba(0, 242, 254, .24);
+  padding: 18px 26px;
+  border: 1px solid rgba(0, 242, 254, .28);
   border-radius: 18px;
-  background: rgba(14, 22, 36, .82);
-  box-shadow: 0 0 28px rgba(0, 242, 254, .06);
+  background: rgba(10, 14, 26, .72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 0 28px rgba(0, 242, 254, .07);
 }
 
-#resenas .aw-review-average,
-.aw-reviews-section .aw-review-average {
-  color: #00f2fe;
-  font-size: 38px;
+.aw-review-average {
+  font-family: "Orbitron", sans-serif;
+  font-size: 40px;
   font-weight: 800;
+  line-height: 1;
+  color: var(--cyan);
 }
 
-#resenas .aw-review-stars,
-#resenas #resenas-resumen-estrellas,
-#seccion-resenas .aw-review-stars,
-.aw-reviews-section .aw-review-stars,
-.aw-reviews-section #resenas-resumen-estrellas {
+.aw-review-stars,
+#resenas-resumen-estrellas {
   color: #ffd166;
-  letter-spacing: 3px;
   font-size: 19px;
+  letter-spacing: 3px;
 }
 
-#resenas #resenas-formulario,
-#seccion-resenas #resenas-formulario,
-.aw-reviews-section #resenas-formulario {
+#resenas-total {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---- Formulario ---- */
+#resenas-formulario {
+  position: relative;
   display: grid;
   gap: 18px;
   width: 100%;
   max-width: 720px;
-  margin: 24px auto 42px;
-  padding: clamp(20px, 4vw, 34px);
+  margin: 0 0 56px;
+  padding: clamp(22px, 4vw, 34px);
   border: 1px solid rgba(0, 242, 254, .25);
   border-radius: 22px;
-  background: linear-gradient(145deg, rgba(16, 24, 40, .96), rgba(10, 12, 23, .96));
-  box-shadow: 0 0 35px rgba(0, 242, 254, .07);
+  background: linear-gradient(145deg, rgba(16, 24, 40, .85), rgba(10, 12, 23, .88));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3), 0 0 35px rgba(0, 242, 254, .05);
 }
 
-#resenas-formulario label {
+#resenas-formulario label,
+#resenas-formulario .aw-label {
   display: block;
   margin-bottom: 8px;
   color: #e6f4ff;
+  font-size: 14px;
   font-weight: 600;
 }
 
-#resenas-formulario input,
+#resenas-formulario input[type="text"]:not(.aw-trap),
 #resenas-formulario textarea {
   display: block;
   width: 100%;
@@ -4431,13 +4436,8 @@ section::before {
 
 #resenas-formulario input:focus,
 #resenas-formulario textarea:focus {
-  border-color: #00f2fe;
+  border-color: var(--cyan);
   box-shadow: 0 0 0 3px rgba(0, 242, 254, .12);
-}
-
-#resenas-formulario input::placeholder,
-#resenas-formulario textarea::placeholder {
-  color: #8391a7;
 }
 
 #resenas-formulario textarea {
@@ -4445,104 +4445,133 @@ section::before {
   resize: vertical;
 }
 
+/* Campo trampa para bots (invisible) */
+.aw-trap {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Estrellas ---- */
 #resenas-estrellas {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  width: fit-content;
-  max-width: 100%;
-  padding: 8px 0;
-  border: 0;
-  background: transparent;
 }
 
-#resenas-estrellas button,
-#resenas-estrellas [data-rating] {
+#resenas-estrellas button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   padding: 0;
   border: 1px solid #334155;
   border-radius: 12px;
   background: #111827;
-  color: #8190a5;
-  font-size: 27px;
+  color: #64708b;
+  font-size: 26px;
   line-height: 1;
   cursor: pointer;
-  transition: .2s ease;
+  transition: color .2s, border-color .2s, background .2s, transform .2s;
 }
 
-#resenas-estrellas button.is-selected,
-#resenas-estrellas [data-rating].is-selected {
+#resenas-estrellas button:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+}
+
+#resenas-estrellas button.is-selected {
   border-color: #ffd166;
   background: rgba(255, 209, 102, .12);
   color: #ffd166;
   text-shadow: 0 0 12px rgba(255, 209, 102, .45);
 }
 
-#resenas-estrellas button:hover,
-#resenas-estrellas [data-rating]:hover {
-  transform: translateY(-2px);
-  border-color: #00f2fe;
+/* ---- Casilla de aceptación ---- */
+#resenas-formulario .aw-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #c0cad9;
 }
 
+#resenas-formulario .aw-check input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--cyan);
+}
+
+#resenas-formulario .aw-check a {
+  color: var(--cyan);
+  text-decoration: underline;
+}
+
+/* ---- Botón enviar ---- */
 #resenas-enviar {
   justify-self: start;
-  min-height: 48px;
-  padding: 13px 24px;
+  min-height: 50px;
+  padding: 0 28px;
   border: 0;
   border-radius: 12px;
-  background: linear-gradient(100deg, #00d9f5, #7928ca);
-  color: #fff;
+  background: linear-gradient(100deg, var(--cyan), #a78bfa);
+  color: #030305;
   font: inherit;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 0 22px rgba(0, 242, 254, .15);
+  box-shadow: 0 0 22px rgba(0, 242, 254, .18);
   transition: transform .2s, filter .2s;
 }
 
-#resenas-enviar:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.15);
-}
+#resenas-enviar:hover { transform: translateY(-2px); filter: brightness(1.1); }
+#resenas-enviar:disabled { cursor: wait; opacity: .6; transform: none; }
 
-#resenas-enviar:disabled {
-  cursor: wait;
-  opacity: .6;
-}
-
+/* ---- Mensajes ---- */
 #resenas-mensaje {
-  min-height: 20px;
-  overflow-wrap: anywhere;
+  min-height: 1.4em;
+  margin: 0;
   font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
+#resenas-mensaje.is-ok    { color: #86efac; }
+#resenas-mensaje.is-error { color: #fca5a5; }
+
+/* ---- Lista de opiniones ---- */
 #resenas-lista {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
   width: 100%;
-  margin-top: 24px;
 }
 
-#resenas-lista .aw-review-card {
+.aw-review-card {
   min-width: 0;
   padding: 22px;
   border: 1px solid rgba(121, 40, 202, .35);
   border-radius: 18px;
-  background: rgba(14, 18, 31, .88);
+  background: rgba(14, 18, 31, .8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   overflow-wrap: anywhere;
   transition: border-color .2s, transform .2s;
 }
 
-#resenas-lista .aw-review-card:hover {
+.aw-review-card:hover {
   transform: translateY(-3px);
   border-color: rgba(0, 242, 254, .55);
 }
 
-#resenas-lista .aw-review-header {
+.aw-review-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -4550,51 +4579,32 @@ section::before {
   gap: 10px;
 }
 
-#resenas-lista .aw-review-name {
-  color: #f4f8ff;
-  overflow-wrap: anywhere;
-}
+.aw-review-name { color: #fff; }
 
-#resenas-lista .aw-review-comment {
-  margin: 16px 0;
+.aw-review-comment {
+  margin: 14px 0;
   color: #c0cad9;
+  line-height: 1.7;
   white-space: pre-wrap;
 }
 
-#resenas-lista .aw-review-date {
-  color: #8290a6;
-  font-size: 12px;
-}
+.aw-review-date { color: #8290a6; font-size: 12px; }
 
-#resenas-lista .aw-review-empty {
+.aw-review-empty {
   grid-column: 1 / -1;
   padding: 22px;
   border: 1px dashed #35445c;
   border-radius: 14px;
-  color: #aab8cb;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
-@media (max-width: 640px) {
-  #resenas,
-  #seccion-resenas,
-  .aw-reviews-section {
-    padding: 48px 16px;
-  }
-
-  #resenas-lista {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  #resenas-formulario {
-    padding: 20px !important;
-  }
-
-  #resenas-enviar {
-    width: 100%;
-    justify-self: stretch;
-  }
+@media (max-width: 700px) {
+  .aw-reviews-section { padding: 64px 16px; }
+  #resenas-lista { grid-template-columns: minmax(0, 1fr); }
+  #resenas-enviar { width: 100%; justify-self: stretch; }
+  .aw-review-summary { width: 100%; }
 }
-```
 /* =========================================================
    ALLWEB — IMAGEN DE FONDO (pegar al FINAL de css/styles.css)
 ========================================================= */
