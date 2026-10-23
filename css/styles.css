@@ -2554,3 +2554,57 @@ nav {
   opacity: 1;
   filter: blur(20px);
 }
+.checkout-container {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+/* truck rides over the badge */
+.truck { 
+  z-index: 3; 
+  position: absolute;
+  top: 0;
+  left: -100px;
+  transition: transform 0.8s ease-in-out;
+}
+
+.confirm { 
+  z-index: 1; 
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* label -> cart */
+.is-packing .ate__label {
+  opacity: 0; 
+}
+
+/* wheels roll on drive */
+.is-rolling .wheel__spin {
+  animation: roll .34s linear infinite;
+}
+
+/* Clases de estado dinámicas */
+.checkout-container.animating .truck {
+  transform: translateX(300px);
+}
+
+.checkout-container.success .confirm {
+  opacity: 1;
+}
+
+.checkout-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+}
