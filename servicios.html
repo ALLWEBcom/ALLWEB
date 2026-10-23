@@ -37,80 +37,126 @@
   }
 
   /* =====================================================
-     LÁMPARA
+     ESCENA: VENTANA + LÁMPARA + ROBOT
   ===================================================== */
-  .aw-lamp {
+  .aw-scene-section { padding: 30px 0 70px; }
+  .aw-scene {
+    --teal: #1de9b6;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
-    height: 130px;
-    margin: 0 auto 20px;
-    cursor: pointer;
-    outline: none;
+    overflow: hidden;
+    padding: clamp(18px, 5vw, 56px);
+    border-radius: 28px;
+    background: #0c0e12;
+    border: 1px solid rgba(255,255,255,.07);
   }
-  .aw-lamp-cord {
-    width: 2px;
-    height: 50px;
-    background: rgba(255, 255, 255, .25);
+  .aw-rain { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .aw-window {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    max-width: 820px;
+    min-height: 340px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 34px;
+    background: linear-gradient(160deg, #05241f, #030f0d);
+    border: 1px solid rgba(29,233,182,.2);
+    box-shadow: 0 30px 80px rgba(0,0,0,.65), inset 0 0 60px rgba(29,233,182,.04);
   }
-  .aw-lamp-shade {
-    width: 70px;
-    height: 30px;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border: 1px solid rgba(255, 255, 255, .15);
-    border-radius: 0 0 35px 35px;
-    transition: .3s ease;
-  }
-  .aw-lamp-bulb {
-    width: 16px;
-    height: 16px;
-    margin-top: -4px;
-    border-radius: 50%;
-    background: #475569;
-    transition: .3s ease;
-  }
-  .aw-lamp-glow {
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    width: 120px;
-    height: 0;
+  .aw-stage { position: relative; min-height: 340px; overflow: hidden; }
+  .aw-wire { position: absolute; top: 0; left: 50%; width: 2px; height: 62px; background: rgba(255,255,255,.28); transform: translateX(-50%); }
+  .aw-shade {
+    position: absolute; top: 62px; left: 50%; width: 104px; height: 44px;
     transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(255, 211, 105, .35) 0%, transparent 70%);
-    opacity: 0;
-    filter: blur(18px);
-    pointer-events: none;
-    transition: .4s ease;
+    background: linear-gradient(180deg, #343b44, #14181d);
+    clip-path: polygon(32% 0, 68% 0, 100% 100%, 0 100%);
   }
+  .aw-bulb {
+    position: absolute; top: 102px; left: 50%; width: 30px; height: 12px;
+    transform: translateX(-50%);
+    border-radius: 0 0 30px 30px;
+    background: #3b4a47;
+    transition: background .4s, box-shadow .4s;
+  }
+  .aw-cone {
+    position: absolute; top: 112px; left: 50%; width: 280px; height: 230px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(29,233,182,.55), rgba(29,233,182,.06) 80%, transparent);
+    clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+    filter: blur(5px);
+    opacity: 0;
+    transition: opacity .7s ease;
+    pointer-events: none;
+  }
+  .aw-cord {
+    position: absolute; top: 80px; left: calc(50% + 46px);
+    padding: 0 14px 10px; background: none; border: 0; cursor: pointer;
+    transform-origin: top center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .aw-cord-line { display: block; width: 1px; height: 46px; margin: 0 auto; background: rgba(255,255,255,.4); }
+  .aw-cord-knob { display: block; width: 9px; height: 9px; margin: 0 auto; border-radius: 50%; background: #cfd6dd; }
+  .aw-cord:focus-visible { outline: 2px solid var(--teal); border-radius: 6px; }
+  .aw-cord.pulled { animation: awPull .35s ease; }
+  @keyframes awPull { 40% { transform: translateY(10px); } }
+
+  .aw-robot {
+    position: absolute; bottom: 26px; left: 50%; width: 96px; height: 100px;
+    margin-left: -48px;
+    opacity: .12; transform: translateY(14px); filter: grayscale(1);
+    transition: opacity .8s ease .25s, transform .8s ease .25s, filter .8s ease .25s;
+  }
+  .aw-head {
+    position: absolute; left: 6px; right: 6px; top: 8px; bottom: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, #0d3a33, #06201c);
+    border: 3px solid var(--teal);
+    box-shadow: 0 0 22px rgba(29,233,182,.45);
+  }
+  .aw-ear { position: absolute; top: 34px; width: 12px; height: 28px; border-radius: 8px; background: var(--teal); }
+  .aw-ear.l { left: -2px; } .aw-ear.r { right: -2px; }
+  .aw-eye {
+    position: absolute; top: 32px; width: 20px; height: 20px; border-radius: 50%; background: #fff;
+    animation: awBlink 5s infinite;
+  }
+  .aw-eye.l { left: 17px; } .aw-eye.r { right: 17px; }
+  .aw-pupil { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 50%; background: #06201c; transition: transform .12s ease-out; }
+  .aw-smile { position: absolute; left: 50%; bottom: 20px; width: 24px; height: 11px; margin-left: -12px; border-bottom: 3px solid #fff; border-radius: 0 0 24px 24px; }
+  @keyframes awBlink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+  @keyframes awFloat { 50% { transform: translateY(-6px); } }
+
+  .aw-panel {
+    position: relative; display: flex; flex-direction: column; justify-content: center;
+    margin: 18px 18px 18px 0; padding: clamp(24px, 4vw, 40px);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+    border: 1px solid rgba(255,255,255,.12);
+    opacity: .35; transform: translateX(12px);
+    transition: opacity .8s ease .35s, transform .8s ease .35s;
+    overflow: hidden;
+  }
+  .aw-panel h2 { font-family: "Inter", sans-serif; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; color: #fff; }
+  .aw-panel h2 span { color: var(--teal); }
+  .aw-panel p { margin: 10px 0 22px; color: #9fb3ad; font-size: 14px; }
+  .aw-panel .btn { align-self: flex-start; background: linear-gradient(90deg, var(--teal), #5ff5d2); color: #04201b; }
+  .aw-spark { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px var(--teal); opacity: 0; pointer-events: none; }
 
   /* Estado encendido */
-  .aw-lamp.on .aw-lamp-shade {
-    border-color: rgba(255, 211, 105, .6);
-    box-shadow: 0 0 15px rgba(255, 211, 105, .35);
-  }
-  .aw-lamp.on .aw-lamp-bulb {
-    background: #fff3c4;
-    box-shadow: 0 0 12px #ffd369, 0 0 28px #ffd369, 0 0 50px #ffc107;
-    animation: awLampPulse 2s ease-in-out infinite;
-  }
-  .aw-lamp.on .aw-lamp-glow {
-    width: 300px;
-    height: 200px;
-    opacity: 1;
-  }
-  .aw-lamp:focus-visible .aw-lamp-shade {
-    outline: 2px solid #00f2fe;
-    outline-offset: 3px;
-  }
+  .aw-scene.on .aw-bulb { background: #eafff9; box-shadow: 0 0 14px #fff, 0 0 30px var(--teal), 0 0 60px var(--teal); }
+  .aw-scene.on .aw-cone { opacity: 1; }
+  .aw-scene.on .aw-robot { opacity: 1; transform: none; filter: none; animation: awFloat 4s ease-in-out 1.2s infinite; }
+  .aw-scene.on .aw-panel { opacity: 1; transform: none; }
+  .aw-scene.on .aw-spark { animation: awTwinkle 2.6s ease-in-out infinite; }
+  @keyframes awTwinkle { 0%, 100% { opacity: 0; transform: translateY(0); } 50% { opacity: .9; transform: translateY(-8px); } }
 
-  @keyframes awLampPulse {
-    0%, 100% { box-shadow: 0 0 12px #ffd369, 0 0 25px #ffd369, 0 0 40px #ffc107; }
-    50%      { box-shadow: 0 0 18px #ffd369, 0 0 40px #ffd369, 0 0 70px #ffc107; }
+  @media (max-width: 700px) {
+    .aw-window { grid-template-columns: 1fr; border-radius: 26px; }
+    .aw-stage { min-height: 300px; }
+    .aw-panel { margin: 0 14px 14px; transform: translateY(12px); }
+    .aw-panel .btn { align-self: stretch; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .aw-lamp.on .aw-lamp-bulb { animation: none; }
+    .aw-scene *, .aw-scene.on * { animation: none !important; transition-duration: .01ms !important; }
   }
   </style>
 </head>
@@ -157,20 +203,48 @@
     <div class="section-container">
       <div class="section-tag"><span></span> SERVICIOS DIGITALES</div>
 
-      <!-- LÁMPARA (clic para apagar o encender) -->
-      <div class="aw-lamp" id="awLamp" role="button" tabindex="0"
-           aria-label="Encender o apagar la lámpara" aria-pressed="true">
-        <div class="aw-lamp-cord"></div>
-        <div class="aw-lamp-shade"></div>
-        <div class="aw-lamp-bulb"></div>
-        <div class="aw-lamp-glow"></div>
-      </div>
-
       <h1>Soluciones web para <span>hacer crecer tu negocio.</span></h1>
       <p>Diseñamos experiencias digitales claras, modernas y adaptadas a los objetivos de tu marca. Cada propuesta se construye según las necesidades reales de tu negocio.</p>
       <div class="hero-buttons">
         <a class="btn btn-primary" href="contacto.html">Cuéntanos tu idea <i class="fa-solid fa-arrow-right"></i></a>
         <a class="btn btn-whatsapp" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESCENA: VENTANA CON LÁMPARA Y ROBOT -->
+  <section class="aw-scene-section">
+    <div class="section-container">
+      <div class="aw-scene" id="awScene">
+        <canvas class="aw-rain" aria-hidden="true"></canvas>
+
+        <div class="aw-window">
+          <div class="aw-stage">
+            <div class="aw-wire"></div>
+            <div class="aw-shade"></div>
+            <div class="aw-bulb"></div>
+            <div class="aw-cone"></div>
+
+            <button class="aw-cord" id="awCord" type="button" aria-label="Encender o apagar la luz" aria-pressed="false">
+              <span class="aw-cord-line"></span><span class="aw-cord-knob"></span>
+            </button>
+
+            <div class="aw-robot" aria-hidden="true">
+              <div class="aw-head">
+                <span class="aw-ear l"></span><span class="aw-ear r"></span>
+                <span class="aw-eye l"><i class="aw-pupil"></i></span>
+                <span class="aw-eye r"><i class="aw-pupil"></i></span>
+                <span class="aw-smile"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="aw-panel" id="awPanel">
+            <h2>Bienvenido <span>de vuelta.</span></h2>
+            <p>Jala el cordón para iluminar tu camino y cuéntanos qué proyecto tienes en mente.</p>
+            <a class="btn btn-primary" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -308,21 +382,81 @@
 <!-- SCRIPT GENERAL -->
 <script src="js/app.js"></script>
 
-<!-- LÁMPARA -->
+<!-- ESCENA: LLUVIA, LUZ Y ROBOT -->
 <script>
 (() => {
-  const lamp = document.getElementById('awLamp');
-  if (!lamp) return;
-  lamp.classList.add('on');
+  const scene = document.getElementById('awScene');
+  if (!scene) return;
+  const cord = document.getElementById('awCord');
+  const panel = document.getElementById('awPanel');
+  const canvas = scene.querySelector('.aw-rain');
+  const pupils = scene.querySelectorAll('.aw-pupil');
+  const robot = scene.querySelector('.aw-robot');
 
-  const toggle = () => {
-    const on = lamp.classList.toggle('on');
-    lamp.setAttribute('aria-pressed', String(on));
+  /* Gotas de lluvia sobre vidrio (se dibujan una sola vez) */
+  const drawRain = () => {
+    const w = scene.clientWidth, h = scene.clientHeight;
+    const r = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = w * r; canvas.height = h * r;
+    const c = canvas.getContext('2d');
+    c.setTransform(r, 0, 0, r, 0, 0);
+    const bg = c.createLinearGradient(0, 0, 0, h);
+    bg.addColorStop(0, '#3a3d42'); bg.addColorStop(1, '#14161a');
+    c.fillStyle = bg; c.fillRect(0, 0, w, h);
+    const count = Math.round((w * h) / 2600);
+    for (let i = 0; i < count; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const rad = 3 + Math.random() * 9 * (Math.random() < .15 ? 2 : 1);
+      const g = c.createRadialGradient(x, y, rad * .1, x, y, rad);
+      g.addColorStop(0, 'rgba(8,9,11,.95)'); g.addColorStop(.75, 'rgba(20,22,26,.9)'); g.addColorStop(1, 'rgba(120,126,134,.55)');
+      c.fillStyle = g;
+      c.beginPath(); c.ellipse(x, y, rad, rad * 1.12, 0, 0, Math.PI * 2); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.55)';
+      c.beginPath(); c.ellipse(x - rad * .3, y - rad * .45, rad * .22, rad * .12, -.5, 0, Math.PI * 2); c.fill();
+    }
+    const vg = c.createRadialGradient(w / 2, h / 2, h * .2, w / 2, h / 2, Math.max(w, h) * .7);
+    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.55)');
+    c.fillStyle = vg; c.fillRect(0, 0, w, h);
   };
-  lamp.addEventListener('click', toggle);
-  lamp.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  drawRain();
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(drawRain, 200); });
+
+  /* Destellos en el panel */
+  for (let i = 0; i < 14; i++) {
+    const sp = document.createElement('span');
+    sp.className = 'aw-spark';
+    sp.style.left = (Math.random() * 96) + '%';
+    sp.style.top = (45 + Math.random() * 50) + '%';
+    sp.style.animationDelay = (Math.random() * 2.6) + 's';
+    panel.appendChild(sp);
+  }
+
+  /* Luz: cordón para encender o apagar */
+  const setLight = (on) => {
+    scene.classList.toggle('on', on);
+    cord.setAttribute('aria-pressed', String(on));
+  };
+  cord.addEventListener('click', () => {
+    cord.classList.remove('pulled'); void cord.offsetWidth; cord.classList.add('pulled');
+    setLight(!scene.classList.contains('on'));
   });
+
+  /* Se enciende sola al llegar a la escena */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { setTimeout(() => setLight(true), 700); io.disconnect(); }
+    }, { threshold: .35 });
+    io.observe(scene);
+  } else { setLight(true); }
+
+  /* Los ojos del robot siguen el puntero */
+  scene.addEventListener('pointermove', (e) => {
+    const b = robot.getBoundingClientRect();
+    const dx = e.clientX - (b.left + b.width / 2);
+    const dy = e.clientY - (b.top + b.height / 2);
+    const d = Math.hypot(dx, dy) || 1, m = Math.min(4, d / 40);
+    pupils.forEach(p => { p.style.transform = 'translate(' + (dx / d * m) + 'px,' + (dy / d * m) + 'px)'; });
+  }, { passive: true });
 })();
 </script>
 
