@@ -2608,3 +2608,84 @@ nav {
   gap: 10px;
   transition: background 0.2s;
 }
+<style>
+/* Estilos para la animación del carrito */
+.checkout-container {
+  position: relative;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.truck { 
+  z-index: 3; 
+  position: absolute;
+  top: 50%;
+  left: -90px;
+  transform: translateY(-50%);
+  width: 75px;
+  height: 35px;
+  pointer-events: none;
+  fill: #030305;
+  transition: transform 0.8s ease-in-out;
+}
+.confirm { 
+  z-index: 1; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #10b981;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.is-packing .ate__label, .is-packing .ate__cart {
+  opacity: 0; 
+}
+.is-rolling .wheel__spin {
+  animation: roll .34s linear infinite;
+}
+.checkout-container.animating .truck {
+  animation: drive 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.checkout-container.success .confirm {
+  opacity: 1;
+  z-index: 4;
+}
+.checkout-btn {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  color: #030305;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+  transition: opacity 0.2s;
+}
+.checkout-btn:hover {
+  opacity: 0.9;
+}
+@keyframes drive {
+  0% { left: -90px; }
+  50% { left: calc(50% - 37px); }
+  100% { left: 115%; }
+}
+@keyframes roll {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
