@@ -10,6 +10,8 @@
 <meta property="og:title" content="ALLWEB | Diseño y Desarrollo Web">
 <meta property="og:description" content="Páginas web profesionales, modernas y estratégicas para negocios en Colombia.">
 <meta property="og:url" content="https://allwebcom.github.io/ALLWEB/index.html">
+<!-- Para que se vea imagen al compartir, sube una imagen y descomenta: -->
+<!-- <meta property="og:image" content="https://allwebcom.github.io/ALLWEB/og-image.jpg"> -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23030305'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='bold' fill='%2300f2fe' text-anchor='middle'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,68 +19,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="css/styles.css">
 
-<!-- ESTILOS COMPLETOS DEL BOTÓN Y LA ANIMACIÓN DEL CAMIÓN/CARRITO -->
+<!-- ESTILOS CSS PARA LA ANIMACIÓN DEL CARRITO -->
 <style>
-:root {
-  --primary: #00f2fe;
-  --bg-dark: #030305;
-}
-
-.checkout {
+.checkout-container {
   position: relative;
   display: inline-block;
-  cursor: pointer;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  outline: none;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
-  transition: transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.checkout:active {
-  transform: scale(0.96);
-}
-
-.checkout button {
-  background: transparent;
-  border: none;
-  color: var(--bg-dark);
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 14px 32px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  width: 100%;
+  margin-top: 15px;
 }
 
-.ate__cart {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-/* Camioneta que pasa por encima */
-.truck {
+.truck { 
+  z-index: 3; 
   position: absolute;
-  top: 50%;
-  left: -90px;
-  transform: translateY(-50%);
-  width: 75px;
-  height: 35px;
-  z-index: 3;
+  top: 0;
+  left: -100px;
+  transition: transform 0.8s ease-in-out;
+  color: #030305;
+  width: 45px;
   pointer-events: none;
-  fill: var(--bg-dark);
 }
 
-/* Mensaje de Confirmado */
-.confirm {
+.confirm { 
+  z-index: 1; 
   position: absolute;
   top: 0;
   left: 0;
@@ -86,47 +48,51 @@
   height: 100%;
   background: #10b981;
   color: #fff;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  z-index: 1;
+  border-radius: 8px;
   opacity: 0;
-  border-radius: 10px;
   transition: opacity 0.3s ease;
 }
 
-/* Estados de animación (activados por JS) */
-.checkout.is-packing .ate__label,
-.checkout.is-packing .ate__cart {
-  opacity: 0;
+.is-packing .ate__label, .is-packing .ate__cart {
+  opacity: 0; 
 }
 
-.checkout.animating .truck {
-  animation: drive 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.is-rolling .wheel__spin {
+  animation: roll .34s linear infinite;
 }
 
-.checkout.is-rolling .wheel {
-  animation: wheel-spin 0.34s linear infinite;
+.checkout-container.animating .truck {
+  transform: translateX(250px);
 }
 
-.checkout.success .confirm {
+.checkout-container.success .confirm {
   opacity: 1;
   z-index: 4;
 }
 
-@keyframes drive {
-  0% { left: -90px; }
-  50% { left: calc(50% - 37px); }
-  100% { left: 115%; }
+.checkout-btn {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  color: #030305;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+  transition: opacity 0.2s;
 }
 
-@keyframes wheel-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.checkout-btn:hover {
+  opacity: 0.9;
 }
 </style>
 </head>
@@ -136,6 +102,12 @@
 <div class="background-grid"></div>
 <div class="background-glow glow-one"></div>
 <div class="background-glow glow-two"></div>
+<div class="allweb-motion-bg" aria-hidden="true">
+<div class="motion-orb motion-orb-cyan"></div>
+<div class="motion-orb motion-orb-purple"></div>
+<div class="motion-grid"></div>
+<div class="motion-cursor"></div>
+</div>
 
 <!-- HEADER -->
 <header class="site-header">
@@ -152,7 +124,7 @@
 <a href="planes.html">Oferta</a>
 <a href="nosotros.html">Nosotros</a>
 <a href="contacto.html">Contacto</a>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20asesor%C3%ADa" class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
 </nav>
 </div>
 </header>
@@ -166,40 +138,230 @@
 <h1>Tu negocio merece <span>una web extraordinaria.</span></h1>
 <p class="hero-description">Creamos páginas web modernas, profesionales y estratégicas para convertir visitantes en clientes.</p>
 
-<!-- TARJETA DE OFERTA CON EL BOTÓN ANIMADO INTEGRADO -->
-<div class="hero-promo-card" style="margin-top: 25px;">
-<div class="promo-card-top"><span class="promo-kicker">PLAN WEB PROFESIONAL ALLWEB</span><span class="promo-discount">50% OFF</span></div>
-<h2>Adquiere tu página ahora</h2>
-<p>Haz clic en el botón para simular tu compra y saltar directo a la atención personalizada.</p>
+<div class="hero-promo-card">
+<div class="promo-card-top"><span class="promo-kicker">OFERTA DE LANZAMIENTO ALLWEB</span><span class="promo-discount">50% OFF</span></div>
+<h2>Inicia tu proyecto web con nosotros.</h2>
+<p>Comunícate ahora, cuéntanos tu idea y comienza tu proyecto con el beneficio de lanzamiento.</p>
 
-<!-- Contenedor del Botón Animado con Carrito/Camión -->
-<div style="margin-top: 20px;">
-  <div class="checkout" id="checkout-btn">
-    <button id="ate">
-      <span class="ate__label">Comprar Ahora</span>
-      <svg class="ate__cart" viewBox="0 0 24 24">
-        <path d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
-      </svg>
-    </button>
+<!-- AQUÍ ESTÁ INTEGRADO EL BOTÓN CON EL CARRITO ANIMADO -->
+<div class="checkout-container" id="checkout-widget">
+  <button id="ate" class="checkout-btn">
+    <span class="ate__label">Comprar Ahora</span>
+    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
+    </svg>
+  </button>
 
-    <!-- Camión / Carrito con SVG detallado y ruedas con soporte de giro -->
-    <div class="truck">
-      <svg viewBox="0 0 272 96" width="100%" height="100%">
-        <g fill="currentColor">
-          <path d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" class="wheel__spin"/>
-        </g>
-      </svg>
-    </div>
+  <div class="truck">
+    <svg viewBox="0 0 272 96" width="100%" height="100%">
+      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" class="wheel__spin"/>
+    </svg>
+  </div>
 
-    <!-- Mensaje de orden completada -->
-    <div class="confirm">
-      Ordered <i class="fa-solid fa-check"></i>
-    </div>
+  <div class="confirm">
+    Ordered <i class="fa-solid fa-check"></i>
   </div>
 </div>
 
+<p style="font-size:.72rem;margin-top:10px"><a href="legal.html#promos">Aplican términos y condiciones</a></p>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="promo-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% <i class="fa-solid fa-arrow-right"></i></a>
 </div>
 
+<div class="hero-buttons">
+<a href="portafolio.html" class="btn btn-primary">Ver portafolio <i class="fa-solid fa-arrow-right"></i></a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
+</div>
+
+<div class="hero-trust">
+<div><strong>100%</strong><span>Diseño personalizado</span></div>
+<div><strong>24/7</strong><span>Presencia digital</span></div>
+<div><strong>∞</strong><span>Posibilidades</span></div>
+</div>
+</div>
+
+<div class="hero-visual">
+<div class="hero-orbit orbit-one"></div>
+<div class="hero-orbit orbit-two"></div>
+<div class="code-window">
+<div class="window-top"><div class="window-dots"><span></span><span></span><span></span></div><span>ALLWEB / website</span></div>
+<div class="code-content">
+<div><span class="code-purple">&lt;</span><span class="code-cyan">website</span><span class="code-purple">&gt;</span></div>
+<div class="code-indent"><span class="code-purple">&lt;</span><span class="code-cyan">design</span><span class="code-white">&gt;</span><span class="code-green">future</span><span class="code-white">&lt;/</span><span class="code-cyan">design</span><span class="code-purple">&gt;</span></div>
+<div class="code-indent"><span class="code-purple">&lt;</span><span class="code-cyan">experience</span><span class="code-white">&gt;</span><span class="code-green">premium</span><span class="code-white">&lt;/</span><span class="code-cyan">experience</span><span class="code-purple">&gt;</span></div>
+<div><span class="code-purple">&lt;/</span><span class="code-cyan">website</span><span class="code-purple">&gt;</span></div>
+</div>
+<div class="code-glow"></div>
+</div>
+</div>
+</section>
+
+<!-- SECCIÓN DE VIDEOS (RECUPERADA) -->
+<section class="video-showcase" id="video">
+<div class="section-container">
+<div class="section-heading centered">
+<div class="section-tag"><span></span> ALLWEB EXPERIENCE</div>
+<h2>Diseñamos el futuro <span>de tu presencia digital.</span></h2>
+<p>Una página web no tiene que ser solamente bonita. Debe representar tu marca y ayudar a vender.</p>
+</div>
+
+<div class="video-wrapper">
+<div class="video-line video-line-top"></div>
+<div class="video-frame">
+<video class="allweb-video" autoplay muted loop playsinline preload="metadata"><source src="videoallweb.mp4" type="video/mp4">Tu navegador no soporta videos HTML5.</video>
+<div class="video-overlay"></div>
+<div class="video-label"><span class="status-dot"></span> ALLWEB DIGITAL EXPERIENCE · 01</div>
+</div>
+<div class="video-line video-line-bottom"></div>
+</div>
+
+<div class="video-wrapper video-wrapper-secondary">
+<div class="video-line video-line-top"></div>
+<div class="video-frame">
+<video class="allweb-video" autoplay muted loop playsinline preload="metadata"><source src="videoallweb2.mp4" type="video/mp4">Tu navegador no soporta videos HTML5.</video>
+<div class="video-overlay"></div>
+<div class="video-label"><span class="status-dot"></span> ALLWEB DIGITAL EXPERIENCE · 02</div>
+</div>
+<div class="video-line video-line-bottom"></div>
+</div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+<div class="section-container stats-grid">
+<div class="stat-card"><span class="stat-number">01</span><strong>Diseño</strong><p>Interfaces modernas y profesionales.</p></div>
+<div class="stat-card"><span class="stat-number">02</span><strong>Experiencia</strong><p>Navegación rápida, clara y atractiva.</p></div>
+<div class="stat-card"><span class="stat-number">03</span><strong>Conversión</strong><p>Botones y estructuras pensadas para vender.</p></div>
+<div class="stat-card"><span class="stat-number">04</span><strong>Presencia</strong><p>Tu negocio disponible desde cualquier dispositivo.</p></div>
+</div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section" id="servicios">
+<div class="section-container">
+<div class="section-heading">
+<div class="section-tag"><span></span> LO QUE HACEMOS</div>
+<h2>Soluciones digitales <span>hechas para crecer.</span></h2>
+<p>Desde una página empresarial hasta una tienda online, construimos experiencias digitales adaptadas a tu negocio.</p>
+</div>
+<div class="services-grid">
+<article class="service-card"><div class="service-icon"><i class="fa-solid fa-code"></i></div><span class="service-number">01</span><h3>Diseño Web</h3><p>Páginas modernas, profesionales y adaptadas completamente a la identidad de tu negocio.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
+<article class="service-card"><div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><span class="service-number">02</span><h3>Tiendas Online</h3><p>Catálogos digitales, productos, carrito, contacto y herramientas para vender online.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
+<article class="service-card"><div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><span class="service-number">03</span><h3>Diseño Responsive</h3><p>Tu sitio funcionando correctamente en teléfonos, tablets, computadores y pantallas grandes.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
+<article class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><span class="service-number">04</span><h3>Optimización</h3><p>Estructuras rápidas y optimizadas para ofrecer una experiencia fluida.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
+<article class="service-card"><div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div><span class="service-number">05</span><h3>Landing Pages</h3><p>Páginas enfocadas en presentar productos, servicios y campañas.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
+<article class="service-card"><div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div><span class="service-number">06</span><h3>WhatsApp Business</h3><p>Integramos accesos directos para que tus clientes puedan contactarte rápidamente.</p><a href="contacto.html">Solicitar información <i class="fa-solid fa-arrow-right"></i></a></article>
+</div>
+</div>
+</section>
+
+<!-- POR QUÉ ALLWEB -->
+<section class="section section-dark">
+<div class="section-container">
+<div class="split-section">
+<div>
+<div class="section-tag"><span></span> ¿POR QUÉ ALLWEB?</div>
+<h2>No hacemos páginas. <span>Construimos experiencias.</span></h2>
+<p class="large-text">Analizamos la identidad de tu negocio y la convertimos en una experiencia digital moderna.</p>
+<a href="nosotros.html" class="text-link">Conocer ALLWEB <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+<div class="feature-list">
+<div class="feature-item"><span>01</span><div><h3>Diseño personalizado</h3><p>Nada de páginas genéricas. Cada proyecto tiene su propia identidad.</p></div></div>
+<div class="feature-item"><span>02</span><div><h3>Experiencia móvil</h3><p>Diseñamos pensando primero en las personas que visitan desde su celular.</p></div></div>
+<div class="feature-item"><span>03</span><div><h3>Conexión directa</h3><p>Facilitamos que tus visitantes se conviertan en clientes.</p></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- RESEÑAS Y CALIFICACIONES (RECUPERADAS CON FIREBASE) -->
+<section id="resenas" class="aw-reviews-section">
+<div class="aw-reviews-container">
+
+  <div class="section-tag"><span></span> EXPERIENCIAS REALES</div>
+  <h2>Lo que dicen nuestros clientes</h2>
+  <p class="aw-reviews-subtitle">Tu opinión nos ayuda a construir una mejor experiencia digital.</p>
+
+  <div class="aw-review-summary">
+    <span class="aw-review-average" id="resenas-promedio">0.0</span>
+    <span class="aw-review-stars" id="resenas-resumen-estrellas" aria-hidden="true">☆☆☆☆☆</span>
+    <span id="resenas-total">0 opiniones</span>
+  </div>
+
+  <form id="resenas-formulario" novalidate>
+    <h3>Comparte tu experiencia</h3>
+
+    <div>
+      <label for="resenas-nombre">Tu nombre</label>
+      <input id="resenas-nombre" type="text" maxlength="60" autocomplete="name" required>
+    </div>
+
+    <div>
+      <span class="aw-label" id="resenas-estrellas-label">Tu calificación</span>
+      <div id="resenas-estrellas" role="group" aria-labelledby="resenas-estrellas-label">
+        <button type="button" data-rating="1" aria-label="1 estrella" aria-pressed="false">★</button>
+        <button type="button" data-rating="2" aria-label="2 estrellas" aria-pressed="false">★</button>
+        <button type="button" data-rating="3" aria-label="3 estrellas" aria-pressed="false">★</button>
+        <button type="button" data-rating="4" aria-label="4 estrellas" aria-pressed="false">★</button>
+        <button type="button" data-rating="5" aria-label="5 estrellas" aria-pressed="false">★</button>
+      </div>
+    </div>
+
+    <div>
+      <label for="resenas-texto">Tu opinión</label>
+      <textarea id="resenas-texto" maxlength="500" required></textarea>
+    </div>
+
+    <!-- Campo trampa contra bots -->
+    <input type="text" id="resenas-web" class="aw-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <label class="aw-check">
+      <input type="checkbox" id="resenas-acepto" required>
+      <span>Acepto la <a href="legal.html#datos">política de tratamiento de datos</a>.</span>
+    </label>
+
+    <button type="submit" id="resenas-enviar">Publicar reseña</button>
+    <p id="resenas-mensaje" role="status" aria-live="polite"></p>
+  </form>
+
+  <h3>Opiniones de nuestros clientes</h3>
+  <div id="resenas-lista">
+    <div class="aw-review-empty">Cargando opiniones...</div>
+  </div>
+
+</div>
+</section>
+
+<!-- MEDIOS DE PAGO -->
+<section class="section payments-section" id="pagos">
+<div class="section-container">
+<div class="payment-panel">
+<div class="payment-copy">
+<div class="section-tag"><span></span> MEDIOS DE PAGO</div>
+<h2>Tu proyecto, <span>pago fácil y seguro.</span></h2>
+<p>Para contratar un servicio de ALLWEB puedes consultar la disponibilidad de los medios de pago antes de realizar la transferencia.</p>
+</div>
+<div class="payment-methods">
+<div class="payment-card payment-nequi">
+<div class="payment-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+<div><span class="payment-label">MEDIO DE PAGO</span><h3>Nequi</h3><p>Pago digital desde tu celular.</p></div>
+</div>
+</div>
+<div class="payment-note"><i class="fa-solid fa-shield-halved"></i><span>Solicita por WhatsApp los datos de pago vigentes antes de realizar cualquier transferencia. Consulta los <a href="legal.html#pagos">términos de pago</a>.</span></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<div class="cta-glow"></div>
+<div class="section-container">
+<div class="cta-content">
+<div class="section-tag"><span></span> EMPECEMOS</div>
+<h2>¿Listo para llevar <span>tu negocio al siguiente nivel?</span></h2>
+<p>Cuéntanos qué necesitas y diseñaremos una propuesta para tu negocio.</p>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20cotizar%20una%20p%C3%A1gina%20web" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp</a>
+</div>
 </div>
 </section>
 
@@ -208,39 +370,91 @@
 <!-- FOOTER -->
 <footer class="site-footer">
 <div class="section-container">
+
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="index.html" class="logo footer-logo"><span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span></a>
+<p>Diseño y desarrollo web para negocios que quieren destacar.</p>
+<a href="https://wa.me/573042753303" class="footer-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> 304 275 3303</a>
+</div>
+
+<div class="footer-column">
+<h4>Explorar</h4>
+<a href="index.html">Inicio</a>
+<a href="servicios.html">Servicios</a>
+<a href="portafolio.html">Portafolio</a>
+<a href="planes.html">Oferta</a>
+</div>
+
+<div class="footer-column">
+<h4>ALLWEB</h4>
+<a href="nosotros.html">Nosotros</a>
+<a href="contacto.html">Contacto</a>
+<a href="legal.html#terminos">Términos y condiciones</a>
+<a href="legal.html#datos">Política de datos</a>
+<a href="legal.html#retracto">Derecho de retracto</a>
+<a href="legal.html#pqr">PQR y SIC</a>
+</div>
+
+<div class="footer-column">
+<h4>Contacto</h4>
+<a href="https://wa.me/573042753303" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+<a href="mailto:allwebcolombia@gmail.com" aria-label="Correo ALLWEB"><i class="fa-solid fa-envelope"></i> allwebcolombia@gmail.com</a>
+<span>Colombia</span>
+</div>
+</div>
+
+<div class="footer-social-bar" aria-label="Redes sociales de ALLWEB">
+<span class="footer-social-label">SÍGUENOS</span>
+<div class="footer-social-links">
+<a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB" title="Instagram"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+<a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB" title="TikTok"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+<a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo a ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
+</div>
+<a class="footer-email-address" href="mailto:allwebcolombia@gmail.com">allwebcolombia@gmail.com</a>
+</div>
+
+<p style="margin-top:14px;color:var(--muted-dark);font-size:10px">
+[NOMBRE/RAZÓN SOCIAL] · NIT/C.C. [NÚMERO] · [DIRECCIÓN DE NOTIFICACIÓN], [CIUDAD], Colombia
+</p>
+
 <div class="footer-bottom">
 <span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span>
+<span>Diseño &amp; Desarrollo Web</span>
 </div>
+
 </div>
 </footer>
 
-<!-- SCRIPT DE LA ANIMACIÓN Y REDIRECCIÓN A WHATSAPP -->
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+
+<!-- SCRIPT GENERAL Y DE LA ANIMACIÓN DEL CARRITO -->
+<script src="js/app.js"></script>
 <script>
-const checkoutEl = document.getElementById('checkout-btn');
+const container = document.getElementById('checkout-widget');
+const btn = document.getElementById('ate');
 
-if (checkoutEl) {
-  checkoutEl.addEventListener('click', () => {
-    // Previene múltiples clics mientras anima
-    if (checkoutEl.classList.contains('animating') || checkoutEl.classList.contains('success')) return;
+if (btn && container) {
+  btn.addEventListener('click', () => {
+    if (container.classList.contains('animating') || container.classList.contains('success')) return;
 
-    // Inicia animación empaquetando el botón y arrancando el camión
-    checkoutEl.classList.add('is-packing', 'animating', 'is-rolling');
-
-    // Al finalizar el recorrido del camión (1 segundo) muestra el mensaje de éxito
+    container.classList.add('is-packing', 'animating', 'is-rolling');
+    
     setTimeout(() => {
-      checkoutEl.classList.remove('animating', 'is-rolling');
-      checkoutEl.classList.add('success');
-
-      // Redirige a WhatsApp luego de mostrar el visto bueno de compra
+      container.classList.remove('is-rolling', 'animating');
+      container.classList.add('success');
+      
+      // Redirige a WhatsApp al terminar la animación de compra
       setTimeout(() => {
-        window.open('https://wa.me/573042753303?text=Hola%20ALLWEB,%20acabo%20de%20hacer%20clic%20en%20comprar%20y%20quiero%20iniciar%20mi%20proyecto', '_blank');
+        window.open('https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20pagar%20el%20plan%20seleccionado', '_blank');
       }, 900);
     }, 1000);
   });
 }
 </script>
 
-<!-- SCRIPT DE RESEÑAS Y FIREBASE -->
+<!-- SCRIPT DE RESEÑAS CON FIREBASE (ÍNTEGRO) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -255,7 +469,139 @@ const firebaseConfig = {
   measurementId: "G-GWNBVYK8YL"
 };
 
-// Tu lógica de Firebase original opera aquí con normalidad...
+const $ = (id) => document.getElementById(id);
+const lista = $("resenas-lista");
+const msg = $("resenas-mensaje");
+let calificacion = 0;
+
+const estrellasTxt = (n) => "★".repeat(n) + "☆".repeat(5 - n);
+
+function mensaje(texto, ok = false){
+  msg.textContent = texto;
+  msg.className = texto ? (ok ? "is-ok" : "is-error") : "";
+}
+
+function mostrarVacio(texto){
+  lista.textContent = "";
+  const d = document.createElement("div");
+  d.className = "aw-review-empty";
+  d.textContent = texto;
+  lista.append(d);
+}
+
+// Selector de estrellas
+const botones = document.querySelectorAll("#resenas-estrellas button");
+function pintar(n){
+  botones.forEach(b => b.classList.toggle("is-selected", +b.dataset.rating <= n));
+}
+botones.forEach(b => {
+  b.addEventListener("click", () => {
+    calificacion = +b.dataset.rating;
+    pintar(calificacion);
+    botones.forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.rating === calificacion)));
+  });
+  b.addEventListener("mouseenter", () => pintar(+b.dataset.rating));
+});
+$("resenas-estrellas").addEventListener("mouseleave", () => pintar(calificacion));
+
+let db = null;
+try {
+  db = getFirestore(initializeApp(firebaseConfig));
+} catch (e) {
+  console.error("Firebase no pudo iniciar:", e);
+}
+
+// Cargar reseñas aprobadas
+async function cargar(){
+  if (!db){ mostrarVacio("Las opiniones estarán disponibles muy pronto."); return; }
+  try {
+    const snap = await getDocs(query(collection(db, "reviews"), where("approved", "==", true)));
+    const datos = snap.docs.map(d => d.data())
+      .sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+
+    const total = datos.length;
+    const prom = total ? datos.reduce((s, r) => s + r.rating, 0) / total : 0;
+    $("resenas-promedio").textContent = prom.toFixed(1);
+    $("resenas-resumen-estrellas").textContent = estrellasTxt(Math.round(prom));
+    $("resenas-total").textContent = total + (total === 1 ? " opinión" : " opiniones");
+
+    if (!total){ mostrarVacio("Aún no hay opiniones. ¡Sé el primero en compartir la tuya!"); return; }
+
+    lista.textContent = "";
+    datos.forEach(r => {
+      const card = document.createElement("article");
+      card.className = "aw-review-card";
+
+      const head = document.createElement("div");
+      head.className = "aw-review-header";
+      const nom = document.createElement("strong");
+      nom.className = "aw-review-name";
+      nom.textContent = r.name;
+      const est = document.createElement("span");
+      est.className = "aw-review-stars";
+      est.textContent = estrellasTxt(r.rating);
+      est.setAttribute("aria-label", r.rating + " de 5 estrellas");
+      head.append(nom, est);
+
+      const txt = document.createElement("p");
+      txt.className = "aw-review-comment";
+      txt.textContent = r.comment;
+
+      const fecha = document.createElement("span");
+      fecha.className = "aw-review-date";
+      fecha.textContent = r.createdAt ? r.createdAt.toDate().toLocaleDateString("es-CO") : "";
+
+      card.append(head, txt, fecha);
+      lista.append(card);
+    });
+  } catch (e) {
+    console.error(e);
+    mostrarVacio("No pudimos cargar las opiniones en este momento.");
+  }
+}
+
+// Enviar reseña
+$("resenas-formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = $("resenas-nombre").value.trim();
+  const comment = $("resenas-texto").value.trim();
+
+  if ($("resenas-web").value) return; 
+  if (name.length < 2 || comment.length < 5 || !calificacion){
+    mensaje("Completa tu nombre, calificación y opinión (mínimo 5 caracteres)."); return;
+  }
+  if (!$("resenas-acepto").checked){ mensaje("Debes aceptar la política de datos."); return; }
+  if (!db){ mensaje("El envío de opiniones aún no está activo."); return; }
+
+  let ultima = 0;
+  try { ultima = +localStorage.getItem("ultimaResena") || 0; } catch (_) {}
+  if (Date.now() - ultima < 60000){ mensaje("Espera un minuto antes de enviar otra."); return; }
+
+  const btnEnv = $("resenas-enviar");
+  btnEnv.disabled = true;
+  btnEnv.textContent = "Enviando…";
+  mensaje("");
+
+  try {
+    await addDoc(collection(db, "reviews"), {
+      name, comment, rating: calificacion, approved: false, createdAt: serverTimestamp()
+    });
+    try { localStorage.setItem("ultimaResena", String(Date.now())); } catch (_) {}
+    e.target.reset();
+    calificacion = 0;
+    pintar(0);
+    botones.forEach(x => x.setAttribute("aria-pressed", "false"));
+    mensaje("¡Gracias! Tu opinión fue enviada y se publicará tras ser revisada.", true);
+  } catch (err) {
+    console.error(err);
+    mensaje("No se pudo enviar. Inténtalo de nuevo.");
+  } finally {
+    btnEnv.disabled = false;
+    btnEnv.textContent = "Publicar reseña";
+  }
+});
+
+cargar();
 </script>
 </body>
 </html>
