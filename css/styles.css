@@ -1467,7 +1467,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 
 /* =========================================================
-   FONDO INTERACTIVO + RESEÑAS + PAGOS
+   FONDO INTERACTIVO + PAGOS
 ========================================================= */
 
 .allweb-motion-bg {
@@ -1739,7 +1739,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 
 /* ==========================================
-   RESEÑAS (sistema actual con Firebase)
+   RESEÑAS (sistema actual con Firebase) - INTACTO
    ========================================== */
 
 .aw-reviews-section {
@@ -1772,6 +1772,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 .aw-reviews-subtitle { max-width: 600px; color: var(--muted); line-height: 1.7; }
 
+/* ---- Resumen ---- */
 .aw-review-summary {
     display: flex;
     flex-wrap: wrap;
@@ -1802,6 +1803,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 #resenas-total { color: var(--muted); font-size: 13px; }
 
+/* ---- Formulario ---- */
 #resenas-formulario {
     position: relative;
     display: grid;
@@ -1850,6 +1852,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 #resenas-formulario textarea { min-height: 130px; resize: vertical; }
 
+/* ---- Estrellas ---- */
 #resenas-estrellas { display: flex; flex-wrap: wrap; gap: 8px; }
 
 #resenas-estrellas button {
@@ -1878,6 +1881,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
     text-shadow: 0 0 12px rgba(255, 209, 102, .45);
 }
 
+/* ---- Casilla de aceptación ---- */
 #resenas-formulario .aw-check {
     display: flex;
     align-items: flex-start;
@@ -1898,6 +1902,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 #resenas-formulario .aw-check a { color: var(--cyan); text-decoration: underline; }
 
+/* ---- Botón enviar ---- */
 #resenas-enviar {
     justify-self: start;
     min-height: 50px;
@@ -1916,6 +1921,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 #resenas-enviar:hover { transform: translateY(-2px); filter: brightness(1.1); }
 #resenas-enviar:disabled { cursor: wait; opacity: .6; transform: none; }
 
+/* ---- Mensajes ---- */
 #resenas-mensaje {
     min-height: 1.4em;
     margin: 0;
@@ -1927,6 +1933,7 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 #resenas-mensaje.is-ok    { color: #86efac; }
 #resenas-mensaje.is-error { color: #fca5a5; }
 
+/* ---- Lista de opiniones ---- */
 #resenas-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; width: 100%; }
 
 .aw-review-card {
