@@ -10,6 +10,8 @@
 <meta property="og:title" content="ALLWEB | Diseño y Desarrollo Web">
 <meta property="og:description" content="Páginas web profesionales, modernas y estratégicas para negocios en Colombia.">
 <meta property="og:url" content="https://allwebcom.github.io/ALLWEB/index.html">
+<!-- Para que se vea imagen al compartir, sube una imagen y descomenta: -->
+<!-- <meta property="og:image" content="https://allwebcom.github.io/ALLWEB/og-image.jpg"> -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23030305'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='bold' fill='%2300f2fe' text-anchor='middle'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,29 +19,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="css/styles.css">
 
-<!-- ESTILOS CSS COMPLETOS DE LA ANIMACIÓN DEL CARRITO -->
+<!-- ESTILOS CSS PARA LA ANIMACIÓN DEL CARRITO -->
 <style>
 .checkout-container {
   position: relative;
   display: inline-block;
   font-family: 'Inter', sans-serif;
   margin-top: 15px;
-  overflow: hidden;
-  border-radius: 8px;
 }
 
-/* El camión viaja sobre el botón */
 .truck { 
   z-index: 3; 
   position: absolute;
-  top: 50%;
-  left: -90px;
-  transform: translateY(-50%);
-  width: 75px;
-  height: 35px;
-  pointer-events: none;
-  fill: #030305;
+  top: 0;
+  left: -100px;
   transition: transform 0.8s ease-in-out;
+  color: #030305;
+  width: 45px;
+  pointer-events: none;
 }
 
 .confirm { 
@@ -61,19 +58,16 @@
   transition: opacity 0.3s ease;
 }
 
-/* Label del botón se oculta al empaquetar */
-.is-packing .ate__label, 
-.is-packing .ate__cart {
+.is-packing .ate__label, .is-packing .ate__cart {
   opacity: 0; 
 }
 
-/* Animación de giro de las ruedas */
 .is-rolling .wheel__spin {
   animation: roll .34s linear infinite;
 }
 
 .checkout-container.animating .truck {
-  animation: drive 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform: translateX(250px);
 }
 
 .checkout-container.success .confirm {
@@ -85,7 +79,7 @@
   background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
   color: #030305;
   border: none;
-  padding: 12px 28px;
+  padding: 12px 24px;
   font-size: 16px;
   font-weight: 700;
   border-radius: 8px;
@@ -99,17 +93,6 @@
 
 .checkout-btn:hover {
   opacity: 0.9;
-}
-
-@keyframes drive {
-  0% { left: -90px; }
-  50% { left: calc(50% - 37px); }
-  100% { left: 115%; }
-}
-
-@keyframes roll {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -160,11 +143,11 @@
 <h2>Inicia tu proyecto web con nosotros.</h2>
 <p>Comunícate ahora, cuéntanos tu idea y comienza tu proyecto con el beneficio de lanzamiento.</p>
 
-<!-- CONTENEDOR DEL BOTÓN CON LA ANIMACIÓN DEL CARRITO/CAMIÓN -->
+<!-- AQUÍ ESTÁ INTEGRADO EL BOTÓN CON EL CARRITO ANIMADO -->
 <div class="checkout-container" id="checkout-widget">
   <button id="ate" class="checkout-btn">
     <span class="ate__label">Comprar Ahora</span>
-    <svg class="ate__cart" viewBox="0 0 24 24" width="20" height="20">
+    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18">
       <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
     </svg>
   </button>
@@ -176,7 +159,7 @@
   </div>
 
   <div class="confirm">
-    Ordered ✓
+    Ordered <i class="fa-solid fa-check"></i>
   </div>
 </div>
 
@@ -212,7 +195,7 @@
 </div>
 </section>
 
-<!-- VIDEO -->
+<!-- SECCIÓN DE VIDEOS (RECUPERADA) -->
 <section class="video-showcase" id="video">
 <div class="section-container">
 <div class="section-heading centered">
@@ -291,7 +274,7 @@
 </div>
 </section>
 
-<!-- RESEÑAS -->
+<!-- RESEÑAS Y CALIFICACIONES (RECUPERADAS CON FIREBASE) -->
 <section id="resenas" class="aw-reviews-section">
 <div class="aw-reviews-container">
 
@@ -462,7 +445,7 @@ if (btn && container) {
       container.classList.remove('is-rolling', 'animating');
       container.classList.add('success');
       
-      // Redirige a WhatsApp al terminar la animación del carrito
+      // Redirige a WhatsApp al terminar la animación de compra
       setTimeout(() => {
         window.open('https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20pagar%20el%20plan%20seleccionado', '_blank');
       }, 900);
@@ -471,7 +454,154 @@ if (btn && container) {
 }
 </script>
 
-<!-- SCRIPT DE RESEÑAS CON FIREBASE -->
+<!-- SCRIPT DE RESEÑAS CON FIREBASE (ÍNTEGRO) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "
+import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyABpaGuzz2oW7CqGi4gyK6klY29fbKh8Nw",
+  authDomain: "allweb-resenas.firebaseapp.com",
+  projectId: "allweb-resenas",
+  storageBucket: "allweb-resenas.firebasestorage.app",
+  messagingSenderId: "384949733251",
+  appId: "1:384949733251:web:1018d4aa99be13d8c0d8b6",
+  measurementId: "G-GWNBVYK8YL"
+};
+
+const $ = (id) => document.getElementById(id);
+const lista = $("resenas-lista");
+const msg = $("resenas-mensaje");
+let calificacion = 0;
+
+const estrellasTxt = (n) => "★".repeat(n) + "☆".repeat(5 - n);
+
+function mensaje(texto, ok = false){
+  msg.textContent = texto;
+  msg.className = texto ? (ok ? "is-ok" : "is-error") : "";
+}
+
+function mostrarVacio(texto){
+  lista.textContent = "";
+  const d = document.createElement("div");
+  d.className = "aw-review-empty";
+  d.textContent = texto;
+  lista.append(d);
+}
+
+// Selector de estrellas
+const botones = document.querySelectorAll("#resenas-estrellas button");
+function pintar(n){
+  botones.forEach(b => b.classList.toggle("is-selected", +b.dataset.rating <= n));
+}
+botones.forEach(b => {
+  b.addEventListener("click", () => {
+    calificacion = +b.dataset.rating;
+    pintar(calificacion);
+    botones.forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.rating === calificacion)));
+  });
+  b.addEventListener("mouseenter", () => pintar(+b.dataset.rating));
+});
+$("resenas-estrellas").addEventListener("mouseleave", () => pintar(calificacion));
+
+let db = null;
+try {
+  db = getFirestore(initializeApp(firebaseConfig));
+} catch (e) {
+  console.error("Firebase no pudo iniciar:", e);
+}
+
+// Cargar reseñas aprobadas
+async function cargar(){
+  if (!db){ mostrarVacio("Las opiniones estarán disponibles muy pronto."); return; }
+  try {
+    const snap = await getDocs(query(collection(db, "reviews"), where("approved", "==", true)));
+    const datos = snap.docs.map(d => d.data())
+      .sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+
+    const total = datos.length;
+    const prom = total ? datos.reduce((s, r) => s + r.rating, 0) / total : 0;
+    $("resenas-promedio").textContent = prom.toFixed(1);
+    $("resenas-resumen-estrellas").textContent = estrellasTxt(Math.round(prom));
+    $("resenas-total").textContent = total + (total === 1 ? " opinión" : " opiniones");
+
+    if (!total){ mostrarVacio("Aún no hay opiniones. ¡Sé el primero en compartir la tuya!"); return; }
+
+    lista.textContent = "";
+    datos.forEach(r => {
+      const card = document.createElement("article");
+      card.className = "aw-review-card";
+
+      const head = document.createElement("div");
+      head.className = "aw-review-header";
+      const nom = document.createElement("strong");
+      nom.className = "aw-review-name";
+      nom.textContent = r.name;
+      const est = document.createElement("span");
+      est.className = "aw-review-stars";
+      est.textContent = estrellasTxt(r.rating);
+      est.setAttribute("aria-label", r.rating + " de 5 estrellas");
+      head.append(nom, est);
+
+      const txt = document.createElement("p");
+      txt.className = "aw-review-comment";
+      txt.textContent = r.comment;
+
+      const fecha = document.createElement("span");
+      fecha.className = "aw-review-date";
+      fecha.textContent = r.createdAt ? r.createdAt.toDate().toLocaleDateString("es-CO") : "";
+
+      card.append(head, txt, fecha);
+      lista.append(card);
+    });
+  } catch (e) {
+    console.error(e);
+    mostrarVacio("No pudimos cargar las opiniones en este momento.");
+  }
+}
+
+// Enviar reseña
+$("resenas-formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = $("resenas-nombre").value.trim();
+  const comment = $("resenas-texto").value.trim();
+
+  if ($("resenas-web").value) return; 
+  if (name.length < 2 || comment.length < 5 || !calificacion){
+    mensaje("Completa tu nombre, calificación y opinión (mínimo 5 caracteres)."); return;
+  }
+  if (!$("resenas-acepto").checked){ mensaje("Debes aceptar la política de datos."); return; }
+  if (!db){ mensaje("El envío de opiniones aún no está activo."); return; }
+
+  let ultima = 0;
+  try { ultima = +localStorage.getItem("ultimaResena") || 0; } catch (_) {}
+  if (Date.now() - ultima < 60000){ mensaje("Espera un minuto antes de enviar otra."); return; }
+
+  const btnEnv = $("resenas-enviar");
+  btnEnv.disabled = true;
+  btnEnv.textContent = "Enviando…";
+  mensaje("");
+
+  try {
+    await addDoc(collection(db, "reviews"), {
+      name, comment, rating: calificacion, approved: false, createdAt: serverTimestamp()
+    });
+    try { localStorage.setItem("ultimaResena", String(Date.now())); } catch (_) {}
+    e.target.reset();
+    calificacion = 0;
+    pintar(0);
+    botones.forEach(x => x.setAttribute("aria-pressed", "false"));
+    mensaje("¡Gracias! Tu opinión fue enviada y se publicará tras ser revisada.", true);
+  } catch (err) {
+    console.error(err);
+    mensaje("No se pudo enviar. Inténtalo de nuevo.");
+  } finally {
+    btnEnv.disabled = false;
+    btnEnv.textContent = "Publicar reseña";
+  }
+});
+
+cargar();
+</script>
+</body>
+</html>
