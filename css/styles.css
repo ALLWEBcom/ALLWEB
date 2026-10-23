@@ -2474,3 +2474,83 @@ nav {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
+/* =========================================================
+   ANIMACIÓN DE LÁMPARA / LOGIN
+========================================================= */
+
+.lamp-login-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 40px auto;
+}
+
+/* Contenedor de la lámpara superior */
+.lamp-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90px;
+  margin-bottom: -20px;
+  z-index: 10;
+}
+
+/* Cable que cuelga */
+.lamp-cord {
+  width: 2px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Pantalla / Cúpula de la lámpara */
+.lamp-shade {
+  width: 70px;
+  height: 30px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0 0 35px 35px;
+  transition: all 0.3s ease;
+}
+
+.lamp-shade.on {
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+/* Bombillo */
+.lamp-bulb {
+  width: 14px;
+  height: 14px;
+  background: #475569;
+  border-radius: 50%;
+  margin-top: -4px;
+  transition: all 0.3s ease;
+}
+
+.lamp-bulb.on {
+  background: #fff;
+  box-shadow: 0 0 12px #fff, 0 0 25px var(--cyan), 0 0 45px var(--cyan);
+}
+
+/* Destello / Cono de luz inferior */
+.lamp-glow {
+  position: absolute;
+  top: 75px;
+  width: 120px;
+  height: 0px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.lamp-glow.on {
+  width: 320px;
+  height: 220px;
+  opacity: 1;
+  filter: blur(20px);
+}
