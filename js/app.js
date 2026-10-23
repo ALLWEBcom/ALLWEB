@@ -616,6 +616,46 @@ if (btn && container) {
 <script type="module">
   // ... (tu código de firebase sigue aquí abajo)
 </script>
+   <script>
+(() => {
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  const setOpen = (open) => {
+    ['active','open','is-open'].forEach(c => {
+      nav.classList.toggle(c, open);
+      toggle.classList.toggle(c, open);
+    });
+    document.body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  // Fase de captura: si app.js también funciona, este manejador evita que se abra y cierre dos veces
+  toggle.addEventListener('click', (e) => {
+    e.stopImmediatePropagation();
+    setOpen(!nav.classList.contains('open'));
+  }, true);
+
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+</script>
+
+<style>
+@media (max-width:768px){
+  body.nav-open #site-nav{
+    display:flex !important;
+    flex-direction:column;
+    position:fixed;
+    inset:0 0 auto 0;
+    top:70px;
+    padding:24px;
+    gap:18px;
+    background:rgba(8,11,20,.97);
+    z-index:999;
+  }
+}
+</style>
 
 </body>
 </html>
