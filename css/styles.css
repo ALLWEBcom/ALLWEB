@@ -2461,11 +2461,11 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 nav {
     position: fixed;
     top: 1rem;
-    left: 54%;          /* Lo desplaza un poco más hacia la derecha del centro */
-    transform: translateX(-50%);
-    width: 74%;         /* Reducimos ligeramente el ancho para que respire por los lados */
-    max-width: 900px;   /* Límite máximo para pantallas grandes */
-    padding: 0.7rem 1.2rem;
+    left: auto;         /* Desactivamos el left por porcentaje */
+    right: 2rem;        /* Lo anclamos elegantemente a la derecha de la pantalla, o puedes usar un valor fijo */
+    transform: none;    /* Quitamos la traslación */
+    width: fit-content; /* Se ajusta exactamente al contenido de los enlaces y WhatsApp */
+    padding: 0.6rem 1.2rem;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
