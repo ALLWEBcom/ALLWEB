@@ -18,7 +18,106 @@
 <nav class="site-nav" id="site-nav"><a href="index.html">Inicio</a><a href="servicios.html" class="active" aria-current="page">Servicios</a><a href="portafolio.html">Portafolio</a><a href="planes.html">Oferta</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a><a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></nav>
 </div></header>
 <main><section class="page-hero"><div class="section-container"><div class="section-tag"><span></span> SERVICIOS DIGITALES</div><div class="aw-lamp" aria-hidden="true"></div>
-  <h1>Soluciones web para <span>hacer crecer tu negocio.</span></h1><p>Diseñamos experiencias digitales claras, modernas y adaptadas a los objetivos de tu marca. Cada propuesta se construye según las necesidades reales de tu negocio.</p><div class="hero-buttons"><a class="btn btn-primary" href="contacto.html">Cuéntanos tu idea <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-whatsapp" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a></div></div></section>
+ <div class="aw-lamp" id="awLamp" role="button" tabindex="0"
+     aria-label="Encender o apagar la lámpara" aria-pressed="true">
+  <div class="aw-lamp-cord"></div>
+  <div class="aw-lamp-shade"></div>
+  <div class="aw-lamp-bulb"></div>
+  <div class="aw-lamp-glow"></div>
+</div>
+
+<style>
+.aw-lamp{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:120px;
+  height:130px;
+  margin:0 auto 20px;
+  cursor:pointer;
+  outline:none;
+}
+.aw-lamp-cord{
+  width:2px;
+  height:50px;
+  background:rgba(255,255,255,.25);
+}
+.aw-lamp-shade{
+  width:70px;
+  height:30px;
+  background:linear-gradient(135deg,#1e293b,#0f172a);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:0 0 35px 35px;
+  transition:.3s ease;
+}
+.aw-lamp-bulb{
+  width:16px;
+  height:16px;
+  margin-top:-4px;
+  border-radius:50%;
+  background:#475569;
+  transition:.3s ease;
+}
+.aw-lamp-glow{
+  position:absolute;
+  top:60px;
+  left:50%;
+  width:120px;
+  height:0;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(255,211,105,.35) 0%,transparent 70%);
+  opacity:0;
+  filter:blur(18px);
+  pointer-events:none;
+  transition:.4s ease;
+}
+
+/* Estado encendido */
+.aw-lamp.on .aw-lamp-shade{
+  border-color:rgba(255,211,105,.6);
+  box-shadow:0 0 15px rgba(255,211,105,.35);
+}
+.aw-lamp.on .aw-lamp-bulb{
+  background:#fff3c4;
+  box-shadow:0 0 12px #ffd369,0 0 28px #ffd369,0 0 50px #ffc107;
+  animation:awLampPulse 2s ease-in-out infinite;
+}
+.aw-lamp.on .aw-lamp-glow{
+  width:300px;
+  height:200px;
+  opacity:1;
+}
+.aw-lamp:focus-visible .aw-lamp-shade{
+  outline:2px solid #00f2fe;
+  outline-offset:3px;
+}
+
+@keyframes awLampPulse{
+  0%,100%{box-shadow:0 0 12px #ffd369,0 0 25px #ffd369,0 0 40px #ffc107;}
+  50%{box-shadow:0 0 18px #ffd369,0 0 40px #ffd369,0 0 70px #ffc107;}
+}
+@media (prefers-reduced-motion:reduce){
+  .aw-lamp.on .aw-lamp-bulb{animation:none;}
+}
+</style>
+
+<script>
+(() => {
+  const lamp = document.getElementById('awLamp');
+  if (!lamp) return;
+  lamp.classList.add('on');
+
+  const toggle = () => {
+    const on = lamp.classList.toggle('on');
+    lamp.setAttribute('aria-pressed', String(on));
+  };
+  lamp.addEventListener('click', toggle);
+  lamp.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+})();
+</script> <h1>Soluciones web para <span>hacer crecer tu negocio.</span></h1><p>Diseñamos experiencias digitales claras, modernas y adaptadas a los objetivos de tu marca. Cada propuesta se construye según las necesidades reales de tu negocio.</p><div class="hero-buttons"><a class="btn btn-primary" href="contacto.html">Cuéntanos tu idea <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-whatsapp" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a></div></div></section>
 <section class="section"><div class="section-container"><div class="section-heading"><div class="section-tag"><span></span> QUÉ PODEMOS HACER</div><h2>Tu idea, convertida en <span>una experiencia digital.</span></h2><p>Un sitio web debe verse bien, ser fácil de usar y ayudar a las personas a entender qué ofreces.</p></div><div class="services-grid">
 <article class="service-card"><div class="service-number">01</div><div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Diseño y desarrollo web</h3><p>Páginas corporativas y comerciales con una identidad visual alineada con tu marca.</p><ul class="service-features"><li>Diseño personalizado</li><li>Secciones claras</li><li>Navegación intuitiva</li></ul></article>
 <article class="service-card"><div class="service-number">02</div><div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><h3>Catálogos y tiendas online</h3><p>Presenta tus productos de forma organizada y facilita que tus clientes consulten o compren.</p><ul class="service-features"><li>Catálogo de productos</li><li>Información de producto</li><li>Contacto para pedidos</li></ul></article>
