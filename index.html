@@ -445,7 +445,7 @@
 <div class="footer-social-links">
 <a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB" title="Instagram"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
 <a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB" title="TikTok"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
-<a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo a ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
+<a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo al correo ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
 </div>
 </div>
 
@@ -460,7 +460,87 @@
 <!-- WHATSAPP FLOTANTE -->
 <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
 
-<!-- SCRIPT GENERAL -->
+<!-- SCRIPTS -->
 <script src="js/app.js"></script>
 
-<!-- SCRIPT PARA EL MOVIMIENTO DE
+<!-- SCRIPT DE LUZ DESLIZANTE PARA EL MENÚ FLOTANTE -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.getElementById("site-nav");
+    if (!nav) return;
+
+    const indicator = nav.querySelector(".nav-pill-indicator");
+    const links = nav.querySelectorAll(".site-nav a:not(.nav-whatsapp)");
+
+    if (!indicator || links.length === 0) return;
+
+    function updateIndicator(element) {
+        const navRect = nav.getBoundingClientRect();
+        const elemRect = element.getBoundingClientRect();
+        
+        const left = elemRect.left - navRect.left;
+        const width = elemRect.width;
+
+        indicator.style.transform = `translateX(${left}px)`;
+        indicator.style.width = `${width}px`;
+    }
+
+    const activeLink = nav.querySelector(".site-nav a.active") || links[0];
+    if (activeLink) {
+        updateIndicator(activeLink);
+    }
+
+    links.forEach(link => {
+        link.addEventListener("mouseenter", (e) => {
+            updateIndicator(e.currentTarget);
+        });
+
+        link.addEventListener("click", (e) => {
+            links.forEach(l => l.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+            updateIndicator(e.currentTarget);
+        });
+    });
+
+    nav.addEventListener("mouseleave", () => {
+        const currentActive = nav.querySelector(".site-nav a.active") || links[0];
+        if (currentActive) {
+            updateIndicator(currentActive);
+        }
+    });
+});
+</script>
+
+<!-- SCRIPT ANIMACIÓN DEL CAMIÓN -->
+<script>
+(() => {
+  const widget = document.getElementById('checkout-widget');
+  const btn = document.getElementById('ate');
+  if (!widget || !btn) return;
+
+  const url = 'https://wa.me/573042753303?text=' +
+    encodeURIComponent('Hola ALLWEB, quiero cotizar mi página web.');
+
+  btn.addEventListener('click', () => {
+    if (widget.classList.contains('animating') || widget.classList.contains('success')) return;
+
+    const win = window.open('', '_blank');
+    if (win) win.opener = null;
+
+    widget.classList.add('is-packing', 'animating');
+
+    setTimeout(() => {
+      widget.classList.remove('animating');
+      widget.classList.add('success');
+
+      setTimeout(() => {
+        if (win) win.location.href = url;
+        else window.location.href = url;
+      }, 700);
+    }, 1000);
+  });
+})();
+</script>
+
+</body>
+</html>
