@@ -1,107 +1,403 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Diseño web, tiendas online, landing pages, sitios responsive e integración con WhatsApp para negocios en Colombia."><meta name="theme-color" content="#080B14">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Diseño web, tiendas online, landing pages, sitios responsive e integración con WhatsApp para negocios en Colombia.">
+  <meta name="theme-color" content="#080B14">
   <title>Servicios | ALLWEB</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=3">
+
+  <style>
+  /* =====================================================
+     MENÚ — estilos dentro de la página para ganarle a
+     cualquier regla suelta de styles.css (ej. nav{fixed})
+  ===================================================== */
+
+  /* Escritorio: efecto de píldora flotante */
+  @media (min-width: 901px) {
+    .site-header .site-nav {
+      position: relative;
+      top: auto;
+      right: auto;
+      left: auto;
+      transform: none;
+      width: auto;
+      height: 70px;
+      padding: 0 22px;
+      justify-content: center;
+      align-items: center;
+      background: rgba(10, 14, 26, .92);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 10px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    }
+  }
+
+  /* Celular: menú desplegable */
+  @media (max-width: 900px) {
+    .site-header .menu-toggle {
+      display: flex;
+      position: relative;
+      z-index: 1102;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .site-header .site-nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 15px;
+      right: 15px;
+      bottom: auto;
+      width: auto;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 15px;
+      background: rgba(7, 7, 11, .97);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 18px;
+      box-shadow: none;
+      z-index: 1101;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity .25s ease, transform .25s ease, visibility .25s;
+    }
+
+    .site-header .site-nav.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .site-header .site-nav a { padding: 13px; border-radius: 10px; }
+    .site-header .nav-whatsapp { justify-content: center; margin-top: 5px; }
+  }
+
+  /* Rayitas que se vuelven X */
+  .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* =====================================================
+     LÁMPARA
+  ===================================================== */
+  .aw-lamp {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    height: 130px;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    outline: none;
+  }
+  .aw-lamp-cord {
+    width: 2px;
+    height: 50px;
+    background: rgba(255, 255, 255, .25);
+  }
+  .aw-lamp-shade {
+    width: 70px;
+    height: 30px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 0 0 35px 35px;
+    transition: .3s ease;
+  }
+  .aw-lamp-bulb {
+    width: 16px;
+    height: 16px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: #475569;
+    transition: .3s ease;
+  }
+  .aw-lamp-glow {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    width: 120px;
+    height: 0;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255, 211, 105, .35) 0%, transparent 70%);
+    opacity: 0;
+    filter: blur(18px);
+    pointer-events: none;
+    transition: .4s ease;
+  }
+
+  /* Estado encendido */
+  .aw-lamp.on .aw-lamp-shade {
+    border-color: rgba(255, 211, 105, .6);
+    box-shadow: 0 0 15px rgba(255, 211, 105, .35);
+  }
+  .aw-lamp.on .aw-lamp-bulb {
+    background: #fff3c4;
+    box-shadow: 0 0 12px #ffd369, 0 0 28px #ffd369, 0 0 50px #ffc107;
+    animation: awLampPulse 2s ease-in-out infinite;
+  }
+  .aw-lamp.on .aw-lamp-glow {
+    width: 300px;
+    height: 200px;
+    opacity: 1;
+  }
+  .aw-lamp:focus-visible .aw-lamp-shade {
+    outline: 2px solid #00f2fe;
+    outline-offset: 3px;
+  }
+
+  @keyframes awLampPulse {
+    0%, 100% { box-shadow: 0 0 12px #ffd369, 0 0 25px #ffd369, 0 0 40px #ffc107; }
+    50%      { box-shadow: 0 0 18px #ffd369, 0 0 40px #ffd369, 0 0 70px #ffc107; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aw-lamp.on .aw-lamp-bulb { animation: none; }
+  }
+  </style>
 </head>
 <body>
-<div class="background-grid" aria-hidden="true"></div><div class="background-glow glow-one" aria-hidden="true"></div><div class="background-glow glow-two" aria-hidden="true"></div>
-<div class="allweb-motion-bg" aria-hidden="true"><div class="motion-orb motion-orb-cyan"></div><div class="motion-orb motion-orb-purple"></div><div class="motion-grid"></div><div class="motion-cursor"></div></div>
-<header class="site-header"><div class="header-container">
-<a href="index.html" class="logo" aria-label="ALLWEB inicio"><span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span><span class="logo-sub">WEB SOLUTIONS</span><span class="brand-line"></span></a>
-<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
-<nav class="site-nav" id="site-nav"><a href="index.html">Inicio</a><a href="servicios.html" class="active" aria-current="page">Servicios</a><a href="portafolio.html">Portafolio</a><a href="planes.html">Oferta</a><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a><a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></nav>
-</div></header>
-<main><section class="page-hero"><div class="section-container"><div class="section-tag"><span></span> SERVICIOS DIGITALES</div><div class="aw-lamp" aria-hidden="true"></div>
- <div class="aw-lamp" id="awLamp" role="button" tabindex="0"
-     aria-label="Encender o apagar la lámpara" aria-pressed="true">
-  <div class="aw-lamp-cord"></div>
-  <div class="aw-lamp-shade"></div>
-  <div class="aw-lamp-bulb"></div>
-  <div class="aw-lamp-glow"></div>
+
+<div class="background-grid" aria-hidden="true"></div>
+<div class="background-glow glow-one" aria-hidden="true"></div>
+<div class="background-glow glow-two" aria-hidden="true"></div>
+<div class="allweb-motion-bg" aria-hidden="true">
+  <div class="motion-orb motion-orb-cyan"></div>
+  <div class="motion-orb motion-orb-purple"></div>
+  <div class="motion-grid"></div>
+  <div class="motion-cursor"></div>
 </div>
 
-<style>
-.aw-lamp{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width:120px;
-  height:130px;
-  margin:0 auto 20px;
-  cursor:pointer;
-  outline:none;
-}
-.aw-lamp-cord{
-  width:2px;
-  height:50px;
-  background:rgba(255,255,255,.25);
-}
-.aw-lamp-shade{
-  width:70px;
-  height:30px;
-  background:linear-gradient(135deg,#1e293b,#0f172a);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:0 0 35px 35px;
-  transition:.3s ease;
-}
-.aw-lamp-bulb{
-  width:16px;
-  height:16px;
-  margin-top:-4px;
-  border-radius:50%;
-  background:#475569;
-  transition:.3s ease;
-}
-.aw-lamp-glow{
-  position:absolute;
-  top:60px;
-  left:50%;
-  width:120px;
-  height:0;
-  transform:translateX(-50%);
-  background:radial-gradient(circle,rgba(255,211,105,.35) 0%,transparent 70%);
-  opacity:0;
-  filter:blur(18px);
-  pointer-events:none;
-  transition:.4s ease;
-}
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-container">
+    <a href="index.html" class="logo" aria-label="ALLWEB inicio">
+      <span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span>
+      <span class="logo-sub">WEB SOLUTIONS</span><span class="brand-line"></span>
+    </a>
 
-/* Estado encendido */
-.aw-lamp.on .aw-lamp-shade{
-  border-color:rgba(255,211,105,.6);
-  box-shadow:0 0 15px rgba(255,211,105,.35);
-}
-.aw-lamp.on .aw-lamp-bulb{
-  background:#fff3c4;
-  box-shadow:0 0 12px #ffd369,0 0 28px #ffd369,0 0 50px #ffc107;
-  animation:awLampPulse 2s ease-in-out infinite;
-}
-.aw-lamp.on .aw-lamp-glow{
-  width:300px;
-  height:200px;
-  opacity:1;
-}
-.aw-lamp:focus-visible .aw-lamp-shade{
-  outline:2px solid #00f2fe;
-  outline-offset:3px;
-}
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
 
-@keyframes awLampPulse{
-  0%,100%{box-shadow:0 0 12px #ffd369,0 0 25px #ffd369,0 0 40px #ffc107;}
-  50%{box-shadow:0 0 18px #ffd369,0 0 40px #ffd369,0 0 70px #ffc107;}
-}
-@media (prefers-reduced-motion:reduce){
-  .aw-lamp.on .aw-lamp-bulb{animation:none;}
-}
-</style>
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html" class="active" aria-current="page">Servicios</a>
+      <a href="portafolio.html">Portafolio</a>
+      <a href="planes.html">Oferta</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </nav>
+  </div>
+</header>
 
+<main>
+
+  <!-- HERO DE LA PÁGINA -->
+  <section class="page-hero">
+    <div class="section-container">
+      <div class="section-tag"><span></span> SERVICIOS DIGITALES</div>
+
+      <!-- LÁMPARA (clic para apagar o encender) -->
+      <div class="aw-lamp" id="awLamp" role="button" tabindex="0"
+           aria-label="Encender o apagar la lámpara" aria-pressed="true">
+        <div class="aw-lamp-cord"></div>
+        <div class="aw-lamp-shade"></div>
+        <div class="aw-lamp-bulb"></div>
+        <div class="aw-lamp-glow"></div>
+      </div>
+
+      <h1>Soluciones web para <span>hacer crecer tu negocio.</span></h1>
+      <p>Diseñamos experiencias digitales claras, modernas y adaptadas a los objetivos de tu marca. Cada propuesta se construye según las necesidades reales de tu negocio.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="contacto.html">Cuéntanos tu idea <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn-whatsapp" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section">
+    <div class="section-container">
+      <div class="section-heading">
+        <div class="section-tag"><span></span> QUÉ PODEMOS HACER</div>
+        <h2>Tu idea, convertida en <span>una experiencia digital.</span></h2>
+        <p>Un sitio web debe verse bien, ser fácil de usar y ayudar a las personas a entender qué ofreces.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-number">01</div>
+          <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3>Diseño y desarrollo web</h3>
+          <p>Páginas corporativas y comerciales con una identidad visual alineada con tu marca.</p>
+          <ul class="service-features"><li>Diseño personalizado</li><li>Secciones claras</li><li>Navegación intuitiva</li></ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">02</div>
+          <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Catálogos y tiendas online</h3>
+          <p>Presenta tus productos de forma organizada y facilita que tus clientes consulten o compren.</p>
+          <ul class="service-features"><li>Catálogo de productos</li><li>Información de producto</li><li>Contacto para pedidos</li></ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">03</div>
+          <div class="service-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Landing pages</h3>
+          <p>Páginas enfocadas en una campaña, producto, servicio o promoción concreta.</p>
+          <ul class="service-features"><li>Mensaje directo</li><li>Llamadas a la acción</li><li>Enlace a WhatsApp</li></ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">04</div>
+          <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <h3>Diseño responsive</h3>
+          <p>Una experiencia preparada para celulares, tablets y computadores.</p>
+          <ul class="service-features"><li>Diseño adaptable</li><li>Lectura cómoda</li><li>Acciones fáciles de tocar</li></ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">05</div>
+          <div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <h3>Integración con WhatsApp</h3>
+          <p>Conecta tu sitio con un canal de contacto que tus clientes ya conocen.</p>
+          <ul class="service-features"><li>Botones de contacto</li><li>Mensajes predefinidos</li><li>Acceso rápido</li></ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">06</div>
+          <div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          <h3>Optimización y ajustes</h3>
+          <p>Mejoras de presentación, estructura y experiencia para que tu web sea más clara.</p>
+          <ul class="service-features"><li>Revisión de contenido</li><li>Mejoras responsive</li><li>Revisión de enlaces</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="section-container">
+      <div class="cta-content">
+        <div class="section-tag"><span></span> EMPECEMOS</div>
+        <h2>¿Qué necesitas construir <span>para tu negocio?</span></h2>
+        <p>Cuéntanos tu idea. Revisaremos el alcance y prepararemos una propuesta personalizada.</p>
+        <a class="btn btn-whatsapp btn-large" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Solicitar asesoría</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="section-container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo footer-logo"><span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span></a>
+        <p>Diseño y desarrollo web para negocios que quieren destacar.</p>
+        <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="footer-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> 304 275 3303</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Explorar</h4>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="portafolio.html">Portafolio</a>
+        <a href="planes.html">Oferta</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>ALLWEB</h4>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://www.instagram.com/allweb_colombia/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="https://www.tiktok.com/@allweb_colombia" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        <a href="mailto:allwebcolombia@gmail.com"><i class="fa-solid fa-envelope"></i> allwebcolombia@gmail.com</a>
+        <span>Colombia</span>
+      </div>
+    </div>
+
+    <div class="footer-social-bar">
+      <span class="footer-social-label">SÍGUENOS</span>
+      <div class="footer-social-links">
+        <a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+        <a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
+        <a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Correo ALLWEB"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
+      </div>
+      <a class="footer-email-address" href="mailto:allwebcolombia@gmail.com">allwebcolombia@gmail.com</a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span>
+      <span>Diseño &amp; Desarrollo Web</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+
+<!-- SCRIPT GENERAL -->
+<script src="js/app.js?v=3"></script>
+
+<!-- MENÚ (único script de menú; anula cualquier otro manejador sobre el botón) -->
+<script>
+(() => {
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  const setOpen = (open) => {
+    nav.classList.toggle('open', open);
+    toggle.classList.toggle('active', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  };
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setOpen(!nav.classList.contains('open'));
+  }, true);
+
+  nav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => setOpen(false)));
+
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900) setOpen(false); });
+})();
+</script>
+
+<!-- LÁMPARA -->
 <script>
 (() => {
   const lamp = document.getElementById('awLamp');
@@ -117,85 +413,7 @@
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
   });
 })();
-</script> <h1>Soluciones web para <span>hacer crecer tu negocio.</span></h1><p>Diseñamos experiencias digitales claras, modernas y adaptadas a los objetivos de tu marca. Cada propuesta se construye según las necesidades reales de tu negocio.</p><div class="hero-buttons"><a class="btn btn-primary" href="contacto.html">Cuéntanos tu idea <i class="fa-solid fa-arrow-right"></i></a><a class="btn btn-whatsapp" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp</a></div></div></section>
-<section class="section"><div class="section-container"><div class="section-heading"><div class="section-tag"><span></span> QUÉ PODEMOS HACER</div><h2>Tu idea, convertida en <span>una experiencia digital.</span></h2><p>Un sitio web debe verse bien, ser fácil de usar y ayudar a las personas a entender qué ofreces.</p></div><div class="services-grid">
-<article class="service-card"><div class="service-number">01</div><div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div><h3>Diseño y desarrollo web</h3><p>Páginas corporativas y comerciales con una identidad visual alineada con tu marca.</p><ul class="service-features"><li>Diseño personalizado</li><li>Secciones claras</li><li>Navegación intuitiva</li></ul></article>
-<article class="service-card"><div class="service-number">02</div><div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><h3>Catálogos y tiendas online</h3><p>Presenta tus productos de forma organizada y facilita que tus clientes consulten o compren.</p><ul class="service-features"><li>Catálogo de productos</li><li>Información de producto</li><li>Contacto para pedidos</li></ul></article>
-<article class="service-card"><div class="service-number">03</div><div class="service-icon"><i class="fa-solid fa-bullseye"></i></div><h3>Landing pages</h3><p>Páginas enfocadas en una campaña, producto, servicio o promoción concreta.</p><ul class="service-features"><li>Mensaje directo</li><li>Llamadas a la acción</li><li>Enlace a WhatsApp</li></ul></article>
-<article class="service-card"><div class="service-number">04</div><div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Diseño responsive</h3><p>Una experiencia preparada para celulares, tablets y computadores.</p><ul class="service-features"><li>Diseño adaptable</li><li>Lectura cómoda</li><li>Acciones fáciles de tocar</li></ul></article>
-<article class="service-card"><div class="service-number">05</div><div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div><h3>Integración con WhatsApp</h3><p>Conecta tu sitio con un canal de contacto que tus clientes ya conocen.</p><ul class="service-features"><li>Botones de contacto</li><li>Mensajes predefinidos</li><li>Acceso rápido</li></ul></article>
-<article class="service-card"><div class="service-number">06</div><div class="service-icon"><i class="fa-solid fa-gauge-high"></i></div><h3>Optimización y ajustes</h3><p>Mejoras de presentación, estructura y experiencia para que tu web sea más clara.</p><ul class="service-features"><li>Revisión de contenido</li><li>Mejoras responsive</li><li>Revisión de enlaces</li></ul></article></div></div></section>
-<section class="cta-section"><div class="cta-glow"></div><div class="section-container"><div class="cta-content"><div class="section-tag"><span></span> EMPECEMOS</div><h2>¿Qué necesitas construir <span>para tu negocio?</span></h2><p>Cuéntanos tu idea. Revisaremos el alcance y prepararemos una propuesta personalizada.</p><a class="btn btn-whatsapp btn-large" href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Solicitar asesoría</a></div></div></section></main>
-<footer class="site-footer"><div class="section-container"><div class="footer-grid">
-<div class="footer-brand"><a href="index.html" class="logo footer-logo"><span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span></a><p>Diseño y desarrollo web para negocios que quieren destacar.</p><a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="footer-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> 304 275 3303</a></div>
-<div class="footer-column"><h4>Explorar</h4><a href="index.html">Inicio</a><a href="servicios.html">Servicios</a><a href="portafolio.html">Portafolio</a><a href="planes.html">Oferta</a></div>
-<div class="footer-column"><h4>ALLWEB</h4><a href="nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a></div>
-<div class="footer-column"><h4>Contacto</h4><a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a href="https://www.instagram.com/allweb_colombia/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i> Instagram</a><a href="https://www.tiktok.com/@allweb_colombia" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i> TikTok</a><a href="mailto:allwebcolombia@gmail.com"><i class="fa-solid fa-envelope"></i> allwebcolombia@gmail.com</a><span>Colombia</span></div>
-</div>
-<div class="footer-social-bar"><span class="footer-social-label">SÍGUENOS</span><div class="footer-social-links"><a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a><a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a><a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Correo ALLWEB"><i class="fa-solid fa-envelope"></i><span>Correo</span></a></div><a class="footer-email-address" href="mailto:allwebcolombia@gmail.com">allwebcolombia@gmail.com</a></div>
-<div class="footer-bottom"><span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span><span>Diseño &amp; Desarrollo Web</span></div></div></footer>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
-<script src="js/app.js"></script>
-  <script>
-(() => {
-  const toggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
-
-  const setOpen = (open) => {
-    ['active','open','is-open'].forEach(c => {
-      nav.classList.toggle(c, open);
-      toggle.classList.toggle(c, open);
-    });
-    document.body.classList.toggle('nav-open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-  };
-
-  // Fase de captura: si app.js también funciona, este manejador evita que se abra y cierre dos veces
-  toggle.addEventListener('click', (e) => {
-    e.stopImmediatePropagation();
-    setOpen(!nav.classList.contains('open'));
-  }, true);
-
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
-})();
 </script>
 
-<style>
-@media (max-width:768px){
-  body.nav-open #site-nav{
-    display:flex !important;
-    flex-direction:column;
-    position:fixed;
-    inset:0 0 auto 0;
-    top:70px;
-    padding:24px;
-    gap:18px;
-    background:rgba(8,11,20,.97);
-    z-index:999;
-  }
-}
-</style>
-  <script>
-(() => {
-  const toggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
-
-  const setOpen = (open) => {
-    nav.classList.toggle('open', open);
-    toggle.classList.toggle('active', open);
-    toggle.setAttribute('aria-expanded', String(open));
-  };
-
-  // Fase de captura: evita doble apertura si app.js también maneja el botón
-  toggle.addEventListener('click', (e) => {
-    e.stopImmediatePropagation();
-    setOpen(!nav.classList.contains('open'));
-  }, true);
-
-  nav.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => setOpen(false)));
-})();
-</script>
-</body></html>
+</body>
+</html>
