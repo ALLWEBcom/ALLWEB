@@ -4728,3 +4728,88 @@ body {
 
 #resenas-mensaje.is-ok    { color: #86efac; }
 #resenas-mensaje.is-error { color: #fca5a5; }
+<!-- =====================================================
+     ALLWEB · TARJETAS DE SERVICIOS CON IMÁGENES
+     Reemplaza TODO el <div class="services-grid"> ... </div>
+     de index.html por este bloque.
+     Las imágenes van en la carpeta: img/
+     ===================================================== -->
+
+<div class="services-grid">
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-web.webp" alt="Ejemplo de diseño web profesional para empresa de construcción en pantalla de escritorio y celular" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-code"></i></div><span class="service-number">01</span>
+<h3>Diseño Web</h3>
+<p>Páginas modernas, profesionales y adaptadas completamente a la identidad de tu negocio.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-tienda.webp" alt="Ejemplo de tienda online con catálogo de productos, carrito y pagos seguros" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><span class="service-number">02</span>
+<h3>Tiendas Online</h3>
+<p>Catálogos digitales, productos, carrito, contacto y herramientas para vender online.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-responsive.webp" alt="Ejemplo de página web adaptada a computador, tablet y celular" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><span class="service-number">03</span>
+<h3>Diseño Responsive</h3>
+<p>Tu sitio funcionando correctamente en teléfonos, tablets, computadores y pantallas grandes.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-optimizacion.webp" alt="Ejemplo de panel de rendimiento y velocidad de un sitio web" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-bolt"></i></div><span class="service-number">04</span>
+<h3>Optimización</h3>
+<p>Estructuras rápidas y optimizadas para ofrecer una experiencia fluida.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-landing.webp" alt="Ejemplo de landing page de alta conversión con llamado a la acción y testimonios" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div><span class="service-number">05</span>
+<h3>Landing Pages</h3>
+<p>Páginas enfocadas en presentar productos, servicios y campañas.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-whatsapp.webp" alt="Ejemplo de página web con chat integrado a WhatsApp Business" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div><span class="service-number">06</span>
+<h3>WhatsApp Business</h3>
+<p>Integramos accesos directos para que tus clientes puedan contactarte rápidamente.</p>
+<a href="contacto.html">Solicitar información <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+</div>
+
+<!-- =====================================================
+     OPCIONAL: pega esto al FINAL de css/styles.css
+     para que el número 01-06 se vea sobre la imagen.
+     ===================================================== -->
+<!--
+.service-number { z-index: 3; text-shadow: 0 0 8px rgba(0,0,0,.8); color: rgba(255,255,255,.7); }
+.service-media { margin-top: 0; }
+-->
