@@ -10,15 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css">
 
   <style>
   /* =====================================================
-     MENÚ — estilos dentro de la página para ganarle a
-     cualquier regla suelta de styles.css (ej. nav{fixed})
+     MENÚ — solo escritorio (el menú del celular lo maneja
+     app.js + styles.css, igual que en index.html)
   ===================================================== */
-
-  /* Escritorio: efecto de píldora flotante */
   @media (min-width: 901px) {
     .site-header .site-nav {
       position: relative;
@@ -37,59 +35,6 @@
       box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
     }
   }
-
-  /* Celular: menú desplegable */
-  @media (max-width: 900px) {
-    .site-header .menu-toggle {
-      display: flex;
-      position: relative;
-      z-index: 1102;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .site-header .site-nav {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 15px;
-      right: 15px;
-      bottom: auto;
-      width: auto;
-      max-height: calc(100vh - 110px);
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      padding: 15px;
-      background: rgba(7, 7, 11, .97);
-      border: 1px solid rgba(255, 255, 255, .09);
-      border-radius: 18px;
-      box-shadow: none;
-      z-index: 1101;
-
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(-10px);
-      transition: opacity .25s ease, transform .25s ease, visibility .25s;
-    }
-
-    .site-header .site-nav.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .site-header .site-nav a { padding: 13px; border-radius: 10px; }
-    .site-header .nav-whatsapp { justify-content: center; margin-top: 5px; }
-  }
-
-  /* Rayitas que se vuelven X */
-  .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   /* =====================================================
      LÁMPARA
@@ -361,41 +306,7 @@
 <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
 
 <!-- SCRIPT GENERAL -->
-<script src="js/app.js?v=3"></script>
-
-<!-- MENÚ (único script de menú; anula cualquier otro manejador sobre el botón) -->
-<script>
-(() => {
-  const toggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
-
-  const setOpen = (open) => {
-    nav.classList.toggle('open', open);
-    toggle.classList.toggle('active', open);
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-  };
-
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    setOpen(!nav.classList.contains('open'));
-  }, true);
-
-  nav.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => setOpen(false)));
-
-  document.addEventListener('click', (e) => {
-    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
-      setOpen(false);
-    }
-  });
-
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-  window.addEventListener('resize', () => { if (window.innerWidth > 900) setOpen(false); });
-})();
-</script>
+<script src="js/app.js"></script>
 
 <!-- LÁMPARA -->
 <script>
