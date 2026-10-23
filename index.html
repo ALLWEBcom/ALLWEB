@@ -10,7 +10,7 @@
 <meta property="og:title" content="ALLWEB | Diseño y Desarrollo Web">
 <meta property="og:description" content="Páginas web profesionales, modernas y estratégicas para negocios en Colombia.">
 <meta property="og:url" content="https://allwebcom.github.io/ALLWEB/index.html">
-<!-- Para que se vea imagen al compartir, sube una imagen y descomenta: -->
+<!-- Para que se vea imagen al compartir, sube una imagen de 1200x630 y descomenta: -->
 <!-- <meta property="og:image" content="https://allwebcom.github.io/ALLWEB/og-image.jpg"> -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23030305'/%3E%3Ctext x='50' y='66' font-size='46' font-family='monospace' font-weight='bold' fill='%2300f2fe' text-anchor='middle'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,89 +19,78 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="css/styles.css">
 
-<!-- ESTILOS CSS PARA LA ANIMACIÓN DEL CARRITO -->
+<!-- ESTILOS DEL BOTÓN CON CAMIÓN (única copia: bórralos de styles.css) -->
 <style>
 .checkout-container {
   position: relative;
   display: inline-block;
-  font-family: 'Inter', sans-serif;
   margin-top: 15px;
+  overflow: hidden;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
 }
-
-.truck { 
-  z-index: 3; 
-  position: absolute;
-  top: 0;
-  left: -100px;
-  transition: transform 0.8s ease-in-out;
+.checkout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
   color: #030305;
-  width: 45px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+  transition: opacity .2s;
+}
+.checkout-btn:hover { opacity: .9; }
+.ate__label, .ate__cart { transition: opacity .2s; }
+.is-packing .ate__label,
+.is-packing .ate__cart { opacity: 0; }
+
+.truck {
+  position: absolute;
+  top: 50%;
+  left: -70px;
+  z-index: 3;
+  width: 60px;
+  height: 24px;
+  color: #030305;
+  transform: translateY(-50%);
   pointer-events: none;
 }
+.checkout-container.animating .truck { animation: drive 1s ease-in-out forwards; }
+@keyframes drive {
+  from { left: -70px; }
+  to   { left: 110%; }
+}
 
-.confirm { 
-  z-index: 1; 
+.confirm {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #10b981;
-  color: #fff;
-  font-weight: bold;
+  inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.is-packing .ate__label, .is-packing .ate__cart {
-  opacity: 0; 
-}
-
-.is-rolling .wheel__spin {
-  animation: roll .34s linear infinite;
-}
-
-.checkout-container.animating .truck {
-  transform: translateX(250px);
-}
-
-.checkout-container.success .confirm {
-  opacity: 1;
-  z-index: 4;
-}
-
-.checkout-btn {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #030305;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
+  background: #10b981;
+  color: #fff;
   font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-  transition: opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
 }
-
-.checkout-btn:hover {
-  opacity: 0.9;
-}
+.checkout-container.success .confirm { opacity: 1; z-index: 4; }
 </style>
 </head>
 <body>
 
 <div class="premium-light-sweep" aria-hidden="true"></div>
-<div class="background-grid"></div>
-<div class="background-glow glow-one"></div>
-<div class="background-glow glow-two"></div>
+<div class="background-grid" aria-hidden="true"></div>
+<div class="background-glow glow-one" aria-hidden="true"></div>
+<div class="background-glow glow-two" aria-hidden="true"></div>
 <div class="allweb-motion-bg" aria-hidden="true">
 <div class="motion-orb motion-orb-cyan"></div>
 <div class="motion-orb motion-orb-purple"></div>
@@ -112,19 +101,19 @@
 <!-- HEADER -->
 <header class="site-header">
 <div class="header-container">
-<a href="index.html" class="logo">
+<a href="index.html" class="logo" aria-label="ALLWEB inicio">
 <span class="logo-symbol">&lt;</span><span class="logo-text">ALLWEB</span><span class="logo-symbol">/&gt;</span>
 <span class="logo-sub">WEB SOLUTIONS</span><span class="brand-line"></span>
 </a>
-<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
 <nav class="site-nav" id="site-nav">
-<a href="index.html" class="active">Inicio</a>
+<a href="index.html" class="active" aria-current="page">Inicio</a>
 <a href="servicios.html">Servicios</a>
 <a href="portafolio.html">Portafolio</a>
 <a href="planes.html">Oferta</a>
 <a href="nosotros.html">Nosotros</a>
 <a href="contacto.html">Contacto</a>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="nav-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
 </nav>
 </div>
 </header>
@@ -138,51 +127,30 @@
 <h1>Tu negocio merece <span>una web extraordinaria.</span></h1>
 <p class="hero-description">Creamos páginas web modernas, profesionales y estratégicas para convertir visitantes en clientes.</p>
 
+<!-- UN SOLO BOTÓN (antes estaba duplicado) -->
 <div class="checkout-container" id="checkout-widget">
-  <button id="ate" class="checkout-btn">
-    <span class="ate__label">Comprar Ahora</span>
-    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18">
+  <button id="ate" class="checkout-btn" type="button">
+    <span class="ate__label">Cotizar ahora</span>
+    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
       <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
     </svg>
   </button>
 
-  <div class="truck">
+  <div class="truck" aria-hidden="true">
     <svg viewBox="0 0 272 96" width="100%" height="100%">
-      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" class="wheel__spin"/>
+      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z"/>
     </svg>
   </div>
 
-  <div class="confirm">
-    Ordered <i class="fa-solid fa-check"></i>
-  </div>
-</div>
-<!-- AQUÍ ESTÁ INTEGRADO EL BOTÓN CON EL CARRITO ANIMADO -->
-<div class="checkout-container" id="checkout-widget">
-  <button id="ate" class="checkout-btn">
-    <span class="ate__label">Comprar Ahora</span>
-    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
-    </svg>
-  </button>
-
-  <div class="truck">
-    <svg viewBox="0 0 272 96" width="100%" height="100%">
-      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z" class="wheel__spin"/>
-    </svg>
-  </div>
-
-  <div class="confirm">
-    Ordered <i class="fa-solid fa-check"></i>
-  </div>
+  <div class="confirm" aria-live="polite">¡Listo! Abriendo WhatsApp <i class="fa-solid fa-check"></i></div>
 </div>
 
 <p style="font-size:.72rem;margin-top:10px"><a href="legal.html#promos">Aplican términos y condiciones</a></p>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="promo-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% <i class="fa-solid fa-arrow-right"></i></a>
-</div>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="promo-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% <i class="fa-solid fa-arrow-right"></i></a>
 
 <div class="hero-buttons">
 <a href="portafolio.html" class="btn btn-primary">Ver portafolio <i class="fa-solid fa-arrow-right"></i></a>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
 </div>
 
 <div class="hero-trust">
@@ -208,7 +176,7 @@
 </div>
 </section>
 
-<!-- SECCIÓN DE VIDEOS (RECUPERADA) -->
+<!-- VIDEOS -->
 <section class="video-showcase" id="video">
 <div class="section-container">
 <div class="section-heading centered">
@@ -287,7 +255,7 @@
 </div>
 </section>
 
-<!-- RESEÑAS Y CALIFICACIONES (RECUPERADAS CON FIREBASE) -->
+<!-- RESEÑAS (Firebase) -->
 <section id="resenas" class="aw-reviews-section">
 <div class="aw-reviews-container">
 
@@ -373,7 +341,7 @@
 <div class="section-tag"><span></span> EMPECEMOS</div>
 <h2>¿Listo para llevar <span>tu negocio al siguiente nivel?</span></h2>
 <p>Cuéntanos qué necesitas y diseñaremos una propuesta para tu negocio.</p>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20cotizar%20una%20p%C3%A1gina%20web" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp</a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp</a>
 </div>
 </div>
 </section>
@@ -424,12 +392,13 @@
 <a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB" title="TikTok"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
 <a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo a ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
 </div>
-<a class="footer-email-address" href="mailto:allwebcolombia@gmail.com">allwebcolombia@gmail.com</a>
 </div>
 
+<!-- DATOS LEGALES: completa y quita las marcas de comentario para mostrarlos
 <p style="margin-top:14px;color:var(--muted-dark);font-size:10px">
 [NOMBRE/RAZÓN SOCIAL] · NIT/C.C. [NÚMERO] · [DIRECCIÓN DE NOTIFICACIÓN], [CIUDAD], Colombia
 </p>
+-->
 
 <div class="footer-bottom">
 <span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span>
@@ -440,34 +409,44 @@
 </footer>
 
 <!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
 
-<!-- SCRIPT GENERAL Y DE LA ANIMACIÓN DEL CARRITO -->
+<!-- SCRIPT GENERAL -->
 <script src="js/app.js"></script>
+
+<!-- ANIMACIÓN DEL CAMIÓN (envuelta para no chocar con app.js) -->
 <script>
-const container = document.getElementById('checkout-widget');
-const btn = document.getElementById('ate');
+(() => {
+  const widget = document.getElementById('checkout-widget');
+  const btn = document.getElementById('ate');
+  if (!widget || !btn) return;
 
-if (btn && container) {
+  const url = 'https://wa.me/573042753303?text=' +
+    encodeURIComponent('Hola ALLWEB, quiero cotizar mi página web.');
+
   btn.addEventListener('click', () => {
-    if (container.classList.contains('animating') || container.classList.contains('success')) return;
+    if (widget.classList.contains('animating') || widget.classList.contains('success')) return;
 
-    container.classList.add('is-packing', 'animating', 'is-rolling');
-    
+    // Se abre la pestaña dentro del clic para que el navegador no la bloquee
+    const win = window.open('', '_blank');
+    if (win) win.opener = null;
+
+    widget.classList.add('is-packing', 'animating');
+
     setTimeout(() => {
-      container.classList.remove('is-rolling', 'animating');
-      container.classList.add('success');
-      
-      // Redirige a WhatsApp al terminar la animación de compra
+      widget.classList.remove('animating');
+      widget.classList.add('success');
+
       setTimeout(() => {
-        window.open('https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20pagar%20el%20plan%20seleccionado', '_blank');
-      }, 900);
+        if (win) win.location.href = url;
+        else window.location.href = url;
+      }, 700);
     }, 1000);
   });
-}
+})();
 </script>
 
-<!-- SCRIPT DE RESEÑAS CON FIREBASE (ÍNTEGRO) -->
+<!-- RESEÑAS CON FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -579,7 +558,7 @@ $("resenas-formulario").addEventListener("submit", async (e) => {
   const name = $("resenas-nombre").value.trim();
   const comment = $("resenas-texto").value.trim();
 
-  if ($("resenas-web").value) return; 
+  if ($("resenas-web").value) return;
   if (name.length < 2 || comment.length < 5 || !calificacion){
     mensaje("Completa tu nombre, calificación y opinión (mínimo 5 caracteres)."); return;
   }
