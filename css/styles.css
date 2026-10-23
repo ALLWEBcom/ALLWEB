@@ -2750,3 +2750,23 @@ nav {
   to { transform: rotate(360deg); }
 }
 </style>
+/* ===== MENÚ: efecto en escritorio ===== */
+:root { --primary-bg: rgba(10, 14, 26, .92); }
+
+@media (min-width: 901px) {
+  .site-nav {
+    position: relative;
+    height: 70px;
+    padding: 0 22px;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-bg);
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+  }
+}
+
+/* ===== MENÚ: rayitas que se vuelven X ===== */
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
