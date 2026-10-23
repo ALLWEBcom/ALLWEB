@@ -582,3 +582,40 @@ btn.addEventListener('click', () => {
     container.classList.add('success');
   }, 1000);
 });
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/573042753303?text=Hola%20ALLWEB,%20deseo%20informaci%C3%B3n..." class="whatsapp-float" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+
+<!-- SCRIPT GENERAL -->
+<script src="js/app.js"></script>
+
+<!-- ➔ PEGA AQUÍ EL SCRIPT DE LA ANIMACIÓN DEL CARRITO -->
+<script>
+const container = document.getElementById('checkout-widget');
+const btn = document.getElementById('ate');
+
+if (btn && container) {
+  btn.addEventListener('click', () => {
+    if (container.classList.contains('animating') || container.classList.contains('success')) return;
+
+    container.classList.add('is-packing', 'animating', 'is-rolling');
+    
+    setTimeout(() => {
+      container.classList.remove('is-rolling', 'animating');
+      container.classList.add('success');
+      
+      // Redirige a WhatsApp al terminar la animación
+      setTimeout(() => {
+        window.open('https://wa.me/573042753303?text=Hola%20ALLWEB,%20quiero%20pagar%20el%20plan%20seleccionado', '_blank');
+      }, 900);
+    }, 1000);
+  });
+}
+</script>
+
+<!-- SCRIPT DE RESEÑAS CON FIREBASE -->
+<script type="module">
+  // ... (tu código de firebase sigue aquí abajo)
+</script>
+
+</body>
+</html>
