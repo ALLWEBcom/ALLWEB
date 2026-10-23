@@ -569,3 +569,16 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("pageshow", () => {
     document.body.classList.remove("page-changing");
 });
+const container = document.querySelector('.checkout-container');
+const btn = document.getElementById('ate');
+
+btn.addEventListener('click', () => {
+  // Añade las clases que inician las animaciones vistas en tu código
+  container.classList.add('is-packing', 'animating', 'is-rolling');
+  
+  // Después de que la camioneta cruce, muestra el mensaje de éxito
+  setTimeout(() => {
+    container.classList.remove('is-rolling', 'animating');
+    container.classList.add('success');
+  }, 1000);
+});
