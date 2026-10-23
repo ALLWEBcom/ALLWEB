@@ -489,6 +489,28 @@ $("resenas-formulario").addEventListener("submit", async (e) => {
         <li><a href="#">Contact</a></li>
     </ul>
 </nav>
+<div class="checkout-container">
+  <!-- Botón de Compra -->
+  <button id="ate" class="checkout-btn">
+    <span class="ate__label">Buy Now</span>
+    <svg class="ate__cart" viewBox="0 0 24 24" width="20" height="20">
+      <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
+    </svg>
+  </button>
+
+  <!-- Camioneta / Carrito animado -->
+  <div class="truck">
+    <svg viewBox="0 0 272 96" width="100%" height="100%">
+      <!-- Aquí puedes estructurar el SVG del camión completo -->
+      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z"/>
+    </svg>
+  </div>
+
+  <!-- Mensaje de Confirmado -->
+  <div class="confirm">
+    Ordered ✓
+  </div>
+</div>                                      
 });
 
 cargar();
