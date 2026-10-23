@@ -35,4 +35,45 @@
 <div class="footer-social-bar"><span class="footer-social-label">SÍGUENOS</span><div class="footer-social-links"><a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a><a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a><a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Correo ALLWEB"><i class="fa-solid fa-envelope"></i><span>Correo</span></a></div><a class="footer-email-address" href="mailto:allwebcolombia@gmail.com">allwebcolombia@gmail.com</a></div>
 <div class="footer-bottom"><span>© <span id="current-year"></span> ALLWEB. Todos los derechos reservados.</span><span>Diseño &amp; Desarrollo Web</span></div></div></footer>
 <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20informaci%C3%B3n%20sobre%20mi%20proyecto%20web." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
-<script src="js/app.js"></script></body></html>
+<script src="js/app.js"></script>
+  <script>
+(() => {
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  const setOpen = (open) => {
+    ['active','open','is-open'].forEach(c => {
+      nav.classList.toggle(c, open);
+      toggle.classList.toggle(c, open);
+    });
+    document.body.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  // Fase de captura: si app.js también funciona, este manejador evita que se abra y cierre dos veces
+  toggle.addEventListener('click', (e) => {
+    e.stopImmediatePropagation();
+    setOpen(!nav.classList.contains('open'));
+  }, true);
+
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+})();
+</script>
+
+<style>
+@media (max-width:768px){
+  body.nav-open #site-nav{
+    display:flex !important;
+    flex-direction:column;
+    position:fixed;
+    inset:0 0 auto 0;
+    top:70px;
+    padding:24px;
+    gap:18px;
+    background:rgba(8,11,20,.97);
+    z-index:999;
+  }
+}
+</style>
+</body></html>
