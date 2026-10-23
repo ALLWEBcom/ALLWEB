@@ -2460,17 +2460,17 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 }
 nav {
     position: fixed;
-    top: 1rem;          /* Distancia desde el borde superior de la pantalla */
-    left: 50%;
+    top: 1rem;
+    left: 54%;          /* Lo desplaza un poco más hacia la derecha del centro */
     transform: translateX(-50%);
-    width: 80%;
-    max-width: var(--container); /* Opcional: evita que crezca demasiado en pantallas grandes */
-    padding: 0.8rem 1.5rem;
+    width: 74%;         /* Reducimos ligeramente el ancho para que respire por los lados */
+    max-width: 900px;   /* Límite máximo para pantallas grandes */
+    padding: 0.7rem 1.2rem;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    z-index: 1000;      /* Asegura que permanezca por encima de todo */
+    z-index: 1000;
 }
