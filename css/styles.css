@@ -2458,3 +2458,30 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
     .hero-promo-card::before,
     .offer-main-card::before { animation: none !important; }
 }
+/* ===== MODO LIGERO PARA CELULAR ===== */
+@media (max-width: 900px), (pointer: coarse) {
+    body::before,
+    body::after,
+    section::before,
+    .premium-light-sweep,
+    .allweb-motion-bg,
+    .allweb-particles,
+    .background-glow { display: none !important; }
+
+    .hero-orbit { animation: none; }
+
+    .site-header { background: rgba(3,3,5,.94); }
+
+    .site-header,
+    .site-nav,
+    .payment-panel,
+    #resenas-formulario,
+    .aw-review-card,
+    .aw-review-summary,
+    .service-media figcaption,
+    .video-label,
+    .hero-3d-label {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
