@@ -17,124 +17,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="css/styles.css">
-
-<!-- ESTILOS DEL BOTÓN CON CAMIÓN Y NUEVO MENÚ FLOTANTE -->
-<style>
-/* Estilos para el menú flotante con luz deslizante */
-.site-nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 6px;
-    background: rgba(7, 7, 11, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.site-nav a:not(.nav-whatsapp) {
-    position: relative;
-    z-index: 2;
-    padding: 8px 16px;
-    color: var(--muted, #94a3b8);
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: color 0.3s ease;
-}
-
-.site-nav a:not(.nav-whatsapp)::after {
-    display: none !important;
-}
-
-.site-nav a:not(.nav-whatsapp):hover,
-.site-nav a:not(.nav-whatsapp).active {
-    color: #ffffff;
-}
-
-/* Indicador luminoso deslizante */
-.nav-pill-indicator {
-    position: absolute;
-    top: 6px;
-    bottom: 6px;
-    left: 0;
-    width: 0;
-    background: linear-gradient(90deg, rgba(0, 242, 254, 0.15), rgba(121, 40, 202, 0.2));
-    border: 1px solid rgba(0, 242, 254, 0.35);
-    border-radius: 50px;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.checkout-container {
-  position: relative;
-  display: inline-block;
-  margin-top: 15px;
-  overflow: hidden;
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-}
-.checkout-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #030305;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-  transition: opacity .2s;
-}
-.checkout-btn:hover { opacity: .9; }
-.ate__label, .ate__cart { transition: opacity .2s; }
-.is-packing .ate__label,
-.is-packing .ate__cart { opacity: 0; }
-
-.truck {
-  position: absolute;
-  top: 50%;
-  left: -70px;
-  z-index: 3;
-  width: 60px;
-  height: 24px;
-  color: #030305;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.checkout-container.animating .truck { animation: drive 1s ease-in-out forwards; }
-@keyframes drive {
-  from { left: -70px; }
-  to   { left: 110%; }
-}
-
-.confirm {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 8px;
-  background: #10b981;
-  color: #fff;
-  font-weight: 700;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-}
-.checkout-container.success .confirm { opacity: 1; z-index: 4; }
-</style>
+<!-- ?v=3 evita que el navegador use una versión vieja guardada en caché -->
+<link rel="stylesheet" href="css/styles.css?v=3">
+<!-- Three.js (figura 3D del hero) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 <body>
 
@@ -158,9 +44,7 @@
 </a>
 <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
 <nav class="site-nav" id="site-nav">
-<!-- Indicador luminoso deslizante agregado -->
-<div class="nav-pill-indicator"></div>
-
+<div class="nav-pill-indicator" aria-hidden="true"></div>
 <a href="index.html" class="active" aria-current="page">Inicio</a>
 <a href="servicios.html">Servicios</a>
 <a href="portafolio.html">Portafolio</a>
@@ -177,52 +61,55 @@
 <!-- HERO -->
 <section class="hero">
 <div class="hero-content">
+
 <div class="hero-badge hero-badge-promo"><span class="status-dot"></span> PROMOCIÓN DE LANZAMIENTO · 50% DE DESCUENTO</div>
+
 <h1>Tu negocio merece <span>una web extraordinaria.</span></h1>
+
 <p class="hero-description">Creamos páginas web modernas, profesionales y estratégicas para convertir visitantes en clientes.</p>
 
-<div class="checkout-container" id="checkout-widget">
-  <button id="ate" class="checkout-btn" type="button">
-    <span class="ate__label">Cotizar ahora</span>
-    <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-      <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
-    </svg>
-  </button>
-
-  <div class="truck" aria-hidden="true">
-    <svg viewBox="0 0 272 96" width="100%" height="100%">
-      <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z"/>
-    </svg>
-  </div>
-  
-  <div class="confirm" aria-live="polite">¡Listo! Abriendo WhatsApp <i class="fa-solid fa-check"></i></div>
-</div>
-
-<p style="font-size:.72rem;margin-top:10px"><a href="legal.html#promos">Aplican términos y condiciones</a></p>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="promo-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% <i class="fa-solid fa-arrow-right"></i></a>
-
+<!-- 1) Botones principales -->
 <div class="hero-buttons">
-<a href="portafolio.html" class="btn btn-primary">Ver portafolio <i class="fa-solid fa-arrow-right"></i></a>
-<a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20asesor%C3%ADa%20para%20crear%20mi%20p%C3%A1gina%20web" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
+  <div class="checkout-container" id="checkout-widget">
+    <button id="ate" class="checkout-btn" type="button">
+      <span class="ate__label">Cotizar ahora</span>
+      <svg class="ate__cart" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="currentColor" d="M17 18c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.9.9-1.9 2s.9 2 1.9 2 2-.9 2-2-.9-2-2-2z"/>
+      </svg>
+    </button>
+
+    <div class="truck" aria-hidden="true">
+      <svg viewBox="0 0 272 96" width="100%" height="100%">
+        <path fill="currentColor" d="M200 60h-16l-10-20H80l-10 20H54c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h6c0 11 9 20 20 20s20-9 20-20h64c0 11 9 20 20 20s20-9 20-20h6c3.3 0 6-2.7 6-6V66c0-3.3-2.7-6-6-6zM86 92c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm100 0c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z"/>
+      </svg>
+    </div>
+
+    <div class="confirm" aria-live="polite">¡Listo! Abriendo WhatsApp <i class="fa-solid fa-check"></i></div>
+  </div>
+
+  <a href="portafolio.html" class="btn btn-primary">Ver portafolio <i class="fa-solid fa-arrow-right"></i></a>
 </div>
 
+<!-- 2) Promoción del 50% -->
+<div class="hero-promo">
+  <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20quiero%20aprovechar%20el%2050%25%20de%20descuento%20y%20comenzar%20mi%20proyecto%20web" class="promo-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Quiero aprovechar el 50% <i class="fa-solid fa-arrow-right"></i></a>
+  <small><a href="legal.html#promos">Aplican términos y condiciones</a></small>
+</div>
+
+<!-- 3) Datos de confianza -->
 <div class="hero-trust">
 <div><strong>100%</strong><span>Diseño personalizado</span></div>
 <div><strong>24/7</strong><span>Presencia digital</span></div>
 <div><strong>∞</strong><span>Posibilidades</span></div>
 </div>
+
 </div>
 
 <div class="hero-visual hero-3d">
   <div class="hero-orbit orbit-one" aria-hidden="true"></div>
   <div class="hero-orbit orbit-two" aria-hidden="true"></div>
 
-  <div
-    class="hero-3d-stage"
-    id="allweb-3d"
-    role="img"
-    aria-label="Figura 3D interactiva con los colores de ALLWEB">
-  </div>
+  <div class="hero-3d-stage" id="allweb-3d" role="img" aria-label="Figura 3D interactiva con los colores de ALLWEB"></div>
 
   <div class="hero-3d-label">
     <span class="status-dot"></span>
@@ -272,7 +159,7 @@
 </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- SERVICIOS (con imágenes) -->
 <section class="section" id="servicios">
 <div class="section-container">
 <div class="section-heading">
@@ -280,13 +167,75 @@
 <h2>Soluciones digitales <span>hechas para crecer.</span></h2>
 <p>Desde una página empresarial hasta una tienda online, construimos experiencias digitales adaptadas a tu negocio.</p>
 </div>
+
 <div class="services-grid">
-<article class="service-card"><div class="service-icon"><i class="fa-solid fa-code"></i></div><span class="service-number">01</span><h3>Diseño Web</h3><p>Páginas modernas, profesionales y adaptadas completamente a la identidad de tu negocio.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
-<article class="service-card"><div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><span class="service-number">02</span><h3>Tiendas Online</h3><p>Catálogos digitales, productos, carrito, contacto y herramientas para vender online.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
-<article class="service-card"><div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><span class="service-number">03</span><h3>Diseño Responsive</h3><p>Tu sitio funcionando correctamente en teléfonos, tablets, computadores y pantallas grandes.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
-<article class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><span class="service-number">04</span><h3>Optimización</h3><p>Estructuras rápidas y optimizadas para ofrecer una experiencia fluida.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
-<article class="service-card"><div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div><span class="service-number">05</span><h3>Landing Pages</h3><p>Páginas enfocadas en presentar productos, servicios y campañas.</p><a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a></article>
-<article class="service-card"><div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div><span class="service-number">06</span><h3>WhatsApp Business</h3><p>Integramos accesos directos para que tus clientes puedan contactarte rápidamente.</p><a href="contacto.html">Solicitar información <i class="fa-solid fa-arrow-right"></i></a></article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-web.webp" alt="Ejemplo de diseño web profesional para empresa de construcción en pantalla de escritorio y celular" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-code"></i></div><span class="service-number">01</span>
+<h3>Diseño Web</h3>
+<p>Páginas modernas, profesionales y adaptadas completamente a la identidad de tu negocio.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-tienda.webp" alt="Ejemplo de tienda online con catálogo de productos, carrito y pagos seguros" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div><span class="service-number">02</span>
+<h3>Tiendas Online</h3>
+<p>Catálogos digitales, productos, carrito, contacto y herramientas para vender online.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-responsive.webp" alt="Ejemplo de página web adaptada a computador, tablet y celular" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div><span class="service-number">03</span>
+<h3>Diseño Responsive</h3>
+<p>Tu sitio funcionando correctamente en teléfonos, tablets, computadores y pantallas grandes.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-optimizacion.webp" alt="Ejemplo de panel de rendimiento y velocidad de un sitio web" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-bolt"></i></div><span class="service-number">04</span>
+<h3>Optimización</h3>
+<p>Estructuras rápidas y optimizadas para ofrecer una experiencia fluida.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-landing.webp" alt="Ejemplo de landing page de alta conversión con llamado a la acción y testimonios" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div><span class="service-number">05</span>
+<h3>Landing Pages</h3>
+<p>Páginas enfocadas en presentar productos, servicios y campañas.</p>
+<a href="servicios.html">Conocer servicio <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
+<article class="service-card">
+<figure class="service-media">
+<img src="img/servicio-whatsapp.webp" alt="Ejemplo de página web con chat integrado a WhatsApp Business" width="1024" height="1024" loading="lazy" decoding="async">
+<figcaption>CONCEPTO DEMOSTRATIVO</figcaption>
+</figure>
+<div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div><span class="service-number">06</span>
+<h3>WhatsApp Business</h3>
+<p>Integramos accesos directos para que tus clientes puedan contactarte rápidamente.</p>
+<a href="contacto.html">Solicitar información <i class="fa-solid fa-arrow-right"></i></a>
+</article>
+
 </div>
 </div>
 </section>
@@ -348,7 +297,7 @@
       <textarea id="resenas-texto" maxlength="500" required></textarea>
     </div>
 
-    <!-- Campo trampa contra bots -->
+    <!-- Campo trampa contra bots (no lo borres) -->
     <input type="text" id="resenas-web" class="aw-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
 
     <label class="aw-check">
@@ -445,7 +394,7 @@
 <div class="footer-social-links">
 <a href="https://www.instagram.com/allweb_colombia/" class="footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram ALLWEB" title="Instagram"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
 <a href="https://www.tiktok.com/@allweb_colombia" class="footer-social-icon tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok ALLWEB" title="TikTok"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
-<a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo al correo ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
+<a href="mailto:allwebcolombia@gmail.com" class="footer-social-icon email" aria-label="Enviar correo a ALLWEB" title="Correo electrónico"><i class="fa-solid fa-envelope"></i><span>Correo</span></a>
 </div>
 </div>
 
@@ -460,78 +409,68 @@
 <!-- WHATSAPP FLOTANTE -->
 <a href="https://wa.me/573042753303?text=Hola%20ALLWEB%2C%20deseo%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar con ALLWEB por WhatsApp"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
 
-<!-- SCRIPTS -->
-<script src="js/app.js"></script>
+<!-- SCRIPT PRINCIPAL -->
+<script src="js/app.js?v=3"></script>
 
-<!-- SCRIPT DE LUZ DESLIZANTE PARA EL MENÚ FLOTANTE -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const nav = document.getElementById("site-nav");
-    if (!nav) return;
-
-    const indicator = nav.querySelector(".nav-pill-indicator");
-    const links = nav.querySelectorAll(".site-nav a:not(.nav-whatsapp)");
-
-    if (!indicator || links.length === 0) return;
-
-    function updateIndicator(element) {
-        const navRect = nav.getBoundingClientRect();
-        const elemRect = element.getBoundingClientRect();
-        
-        const left = elemRect.left - navRect.left;
-        const width = elemRect.width;
-
-        indicator.style.transform = `translateX(${left}px)`;
-        indicator.style.width = `${width}px`;
-    }
-
-    const activeLink = nav.querySelector(".site-nav a.active") || links[0];
-    if (activeLink) {
-        updateIndicator(activeLink);
-    }
-
-    links.forEach(link => {
-        link.addEventListener("mouseenter", (e) => {
-            updateIndicator(e.currentTarget);
-        });
-
-        link.addEventListener("click", (e) => {
-            links.forEach(l => l.classList.remove("active"));
-            e.currentTarget.classList.add("active");
-            updateIndicator(e.currentTarget);
-        });
-    });
-
-    nav.addEventListener("mouseleave", () => {
-        const currentActive = nav.querySelector(".site-nav a.active") || links[0];
-        if (currentActive) {
-            updateIndicator(currentActive);
-        }
-    });
-});
-</script>
-
-<!-- SCRIPT ANIMACIÓN DEL CAMIÓN -->
+<!-- MENÚ: LUZ DESLIZANTE (solo escritorio) -->
 <script>
 (() => {
-  const widget = document.getElementById('checkout-widget');
-  const btn = document.getElementById('ate');
+  const nav = document.getElementById("site-nav");
+  if (!nav) return;
+
+  const indicator = nav.querySelector(".nav-pill-indicator");
+  const links = Array.from(nav.querySelectorAll("a:not(.nav-whatsapp)"));
+  if (!indicator || !links.length) return;
+
+  const isDesktop = () => window.innerWidth > 900;
+
+  function move(el) {
+    if (!el || !isDesktop()) return;
+    const navRect = nav.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    indicator.style.transform = "translateX(" + (r.left - navRect.left) + "px)";
+    indicator.style.width = r.width + "px";
+  }
+
+  const current = () => nav.querySelector("a.active") || links[0];
+
+  function init() { move(current()); }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(init);
+  window.addEventListener("load", init);
+  window.addEventListener("resize", init, { passive: true });
+  init();
+
+  links.forEach(link => {
+    link.addEventListener("mouseenter", () => move(link));
+    link.addEventListener("focus", () => move(link));
+  });
+
+  nav.addEventListener("mouseleave", () => move(current()));
+})();
+</script>
+
+<!-- BOTÓN CON CAMIÓN -->
+<script>
+(() => {
+  const widget = document.getElementById("checkout-widget");
+  const btn = document.getElementById("ate");
   if (!widget || !btn) return;
 
-  const url = 'https://wa.me/573042753303?text=' +
-    encodeURIComponent('Hola ALLWEB, quiero cotizar mi página web.');
+  const url = "https://wa.me/573042753303?text=" +
+    encodeURIComponent("Hola ALLWEB, quiero cotizar mi página web.");
 
-  btn.addEventListener('click', () => {
-    if (widget.classList.contains('animating') || widget.classList.contains('success')) return;
+  btn.addEventListener("click", () => {
+    if (widget.classList.contains("animating") || widget.classList.contains("success")) return;
 
-    const win = window.open('', '_blank');
+    const win = window.open("", "_blank");
     if (win) win.opener = null;
 
-    widget.classList.add('is-packing', 'animating');
+    widget.classList.add("is-packing", "animating");
 
     setTimeout(() => {
-      widget.classList.remove('animating');
-      widget.classList.add('success');
+      widget.classList.remove("animating");
+      widget.classList.add("success");
 
       setTimeout(() => {
         if (win) win.location.href = url;
@@ -542,5 +481,331 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+<!-- FIGURA 3D DEL HERO -->
+<script>
+window.addEventListener("load", () => {
+  const host = document.getElementById("allweb-3d");
+  if (!host) return;
+
+  const fallback = () => {
+    host.innerHTML =
+      '<div style="height:100%;display:grid;place-items:center;font-family:Orbitron,sans-serif;' +
+      'font-size:64px;color:#00f2fe;text-shadow:0 0 30px rgba(0,242,254,.4)">&lt;/&gt;</div>';
+  };
+
+  if (!window.THREE) { fallback(); return; }
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  } catch (e) {
+    fallback();
+    return;
+  }
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  host.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.set(0, 0, 7);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+  const lightCyan = new THREE.PointLight(0x00f2fe, 2.2, 30);
+  lightCyan.position.set(4, 3, 5);
+  scene.add(lightCyan);
+
+  const lightPurple = new THREE.PointLight(0x7928ca, 2.2, 30);
+  lightPurple.position.set(-4, -3, 4);
+  scene.add(lightPurple);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  // Núcleo sólido
+  const coreGeo = new THREE.IcosahedronGeometry(1.15, 0);
+  const core = new THREE.Mesh(
+    coreGeo,
+    new THREE.MeshStandardMaterial({
+      color: 0x0b1020,
+      metalness: 0.85,
+      roughness: 0.28,
+      emissive: 0x00222a
+    })
+  );
+  group.add(core);
+
+  group.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(coreGeo),
+    new THREE.LineBasicMaterial({ color: 0x00f2fe })
+  ));
+
+  // Malla exterior
+  const shellGeo = new THREE.IcosahedronGeometry(1.95, 1);
+  const shell = new THREE.LineSegments(
+    new THREE.EdgesGeometry(shellGeo),
+    new THREE.LineBasicMaterial({ color: 0xa855f7, transparent: true, opacity: 0.55 })
+  );
+  group.add(shell);
+
+  // Anillos
+  const ring1 = new THREE.Mesh(
+    new THREE.TorusGeometry(2.6, 0.012, 8, 140),
+    new THREE.MeshBasicMaterial({ color: 0x00f2fe, transparent: true, opacity: 0.65 })
+  );
+  ring1.rotation.x = Math.PI / 2.6;
+  group.add(ring1);
+
+  const ring2 = new THREE.Mesh(
+    new THREE.TorusGeometry(2.25, 0.01, 8, 140),
+    new THREE.MeshBasicMaterial({ color: 0x7928ca, transparent: true, opacity: 0.7 })
+  );
+  ring2.rotation.y = Math.PI / 2.8;
+  ring2.rotation.x = -Math.PI / 5;
+  group.add(ring2);
+
+  // Partículas
+  const COUNT = 180;
+  const positions = new Float32Array(COUNT * 3);
+  for (let i = 0; i < COUNT; i++) {
+    const r = 3 + Math.random() * 1.6;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    positions[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    positions[i * 3 + 2] = r * Math.cos(phi);
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const points = new THREE.Points(
+    pGeo,
+    new THREE.PointsMaterial({ color: 0x78dcff, size: 0.045, transparent: true, opacity: 0.8 })
+  );
+  group.add(points);
+
+  function resize() {
+    const w = host.clientWidth || 400;
+    const h = host.clientHeight || 400;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    camera.position.z = w < 420 ? 8.4 : 7;
+  }
+
+  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(host);
+  window.addEventListener("resize", resize, { passive: true });
+  resize();
+
+  // Interacción con el mouse (suave)
+  let tx = 0, ty = 0;
+  host.addEventListener("pointermove", e => {
+    if (e.pointerType === "touch") return;
+    const r = host.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 0.9;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 0.9;
+  }, { passive: true });
+  host.addEventListener("pointerleave", () => { tx = 0; ty = 0; });
+
+  let running = false, visible = true, frame = null;
+
+  function render() {
+    renderer.render(scene, camera);
+  }
+
+  function tick() {
+    if (!running) return;
+    group.rotation.y += 0.0045 + (tx - group.rotation.y * 0) * 0;
+    group.rotation.x += (ty * 0.6 - group.rotation.x) * 0.04;
+    shell.rotation.y -= 0.003;
+    ring1.rotation.z += 0.004;
+    ring2.rotation.z -= 0.005;
+    points.rotation.y += 0.0008;
+    group.position.x += (tx * 0.35 - group.position.x) * 0.05;
+    render();
+    frame = requestAnimationFrame(tick);
+  }
+
+  function start() {
+    if (reduced || running || !visible || document.hidden) return;
+    running = true;
+    frame = requestAnimationFrame(tick);
+  }
+
+  function stop() {
+    running = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = null;
+  }
+
+  render();
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      visible ? start() : stop();
+    }, { threshold: 0.05 }).observe(host);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();
+});
+</script>
+
+<!-- RESEÑAS CON FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyABpaGuzz2oW7CqGi4gyK6klY29fbKh8Nw",
+  authDomain: "allweb-resenas.firebaseapp.com",
+  projectId: "allweb-resenas",
+  storageBucket: "allweb-resenas.firebasestorage.app",
+  messagingSenderId: "384949733251",
+  appId: "1:384949733251:web:1018d4aa99be13d8c0d8b6",
+  measurementId: "G-GWNBVYK8YL"
+};
+
+const $ = (id) => document.getElementById(id);
+const lista = $("resenas-lista");
+const msg = $("resenas-mensaje");
+let calificacion = 0;
+
+const estrellasTxt = (n) => "★".repeat(n) + "☆".repeat(5 - n);
+
+function mensaje(texto, ok = false){
+  msg.textContent = texto;
+  msg.className = texto ? (ok ? "is-ok" : "is-error") : "";
+}
+
+function mostrarVacio(texto){
+  lista.textContent = "";
+  const d = document.createElement("div");
+  d.className = "aw-review-empty";
+  d.textContent = texto;
+  lista.append(d);
+}
+
+// ---- Selector de estrellas ----
+const botones = document.querySelectorAll("#resenas-estrellas button");
+function pintar(n){
+  botones.forEach(b => b.classList.toggle("is-selected", +b.dataset.rating <= n));
+}
+botones.forEach(b => {
+  b.addEventListener("click", () => {
+    calificacion = +b.dataset.rating;
+    pintar(calificacion);
+    botones.forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.rating === calificacion)));
+  });
+  b.addEventListener("mouseenter", () => pintar(+b.dataset.rating));
+});
+$("resenas-estrellas").addEventListener("mouseleave", () => pintar(calificacion));
+
+let db = null;
+try {
+  db = getFirestore(initializeApp(firebaseConfig));
+} catch (e) {
+  console.error("Firebase no pudo iniciar:", e);
+}
+
+// ---- Cargar reseñas aprobadas ----
+async function cargar(){
+  if (!db){ mostrarVacio("Las opiniones estarán disponibles muy pronto."); return; }
+  try {
+    const snap = await getDocs(query(collection(db, "reviews"), where("approved", "==", true)));
+    const datos = snap.docs.map(d => d.data())
+      .sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+
+    const total = datos.length;
+    const prom = total ? datos.reduce((s, r) => s + r.rating, 0) / total : 0;
+    $("resenas-promedio").textContent = prom.toFixed(1);
+    $("resenas-resumen-estrellas").textContent = estrellasTxt(Math.round(prom));
+    $("resenas-total").textContent = total + (total === 1 ? " opinión" : " opiniones");
+
+    if (!total){ mostrarVacio("Aún no hay opiniones. ¡Sé el primero en compartir la tuya!"); return; }
+
+    lista.textContent = "";
+    datos.forEach(r => {
+      const card = document.createElement("article");
+      card.className = "aw-review-card";
+
+      const head = document.createElement("div");
+      head.className = "aw-review-header";
+      const nom = document.createElement("strong");
+      nom.className = "aw-review-name";
+      nom.textContent = r.name;
+      const est = document.createElement("span");
+      est.className = "aw-review-stars";
+      est.textContent = estrellasTxt(r.rating);
+      est.setAttribute("aria-label", r.rating + " de 5 estrellas");
+      head.append(nom, est);
+
+      const txt = document.createElement("p");
+      txt.className = "aw-review-comment";
+      txt.textContent = r.comment;
+
+      const fecha = document.createElement("span");
+      fecha.className = "aw-review-date";
+      fecha.textContent = r.createdAt ? r.createdAt.toDate().toLocaleDateString("es-CO") : "";
+
+      card.append(head, txt, fecha);
+      lista.append(card);
+    });
+  } catch (e) {
+    console.error(e);
+    mostrarVacio("No pudimos cargar las opiniones en este momento.");
+  }
+}
+
+// ---- Enviar reseña ----
+$("resenas-formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = $("resenas-nombre").value.trim();
+  const comment = $("resenas-texto").value.trim();
+
+  if ($("resenas-web").value) return; // bot
+  if (name.length < 2 || comment.length < 5 || !calificacion){
+    mensaje("Completa tu nombre, calificación y opinión (mínimo 5 caracteres)."); return;
+  }
+  if (!$("resenas-acepto").checked){ mensaje("Debes aceptar la política de datos."); return; }
+  if (!db){ mensaje("El envío de opiniones aún no está activo."); return; }
+
+  let ultima = 0;
+  try { ultima = +localStorage.getItem("ultimaResena") || 0; } catch (_) {}
+  if (Date.now() - ultima < 60000){ mensaje("Espera un minuto antes de enviar otra."); return; }
+
+  const btn = $("resenas-enviar");
+  btn.disabled = true;
+  btn.textContent = "Enviando…";
+  mensaje("");
+
+  try {
+    await addDoc(collection(db, "reviews"), {
+      name, comment, rating: calificacion, approved: false, createdAt: serverTimestamp()
+    });
+    try { localStorage.setItem("ultimaResena", String(Date.now())); } catch (_) {}
+    e.target.reset();
+    calificacion = 0;
+    pintar(0);
+    botones.forEach(x => x.setAttribute("aria-pressed", "false"));
+    mensaje("¡Gracias! Tu opinión fue enviada y se publicará tras ser revisada.", true);
+  } catch (err) {
+    console.error(err);
+    mensaje("No se pudo enviar. Inténtalo de nuevo.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Publicar reseña";
+  }
+});
+
+cargar();
+</script>
 </body>
 </html>
