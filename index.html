@@ -493,7 +493,8 @@ window.addEventListener("load", () => {
       'font-size:64px;color:#00f2fe;text-shadow:0 0 30px rgba(0,242,254,.4)">&lt;/&gt;</div>';
   };
 
-  if (!window.THREE) { fallback(); return; }
+  const lite = window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+  if (lite || !window.THREE) { fallback(); return; }
 
   let renderer;
   try {
