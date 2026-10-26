@@ -788,5 +788,200 @@ $("resenas-formulario").addEventListener("submit", async (e) => {
 
 cargar();
 </script>
+  <script>
+(() => {
+  const root = document.getElementById("carousel3d");
+  if (!root) return;
+ 
+  const stage   = root.querySelector(".c3d-stage");
+  const items   = Array.from(stage.querySelectorAll(".c3d-item"));
+  const n       = items.length;
+  if (!n) return;
+ 
+  const info    = root.querySelector(".c3d-info");
+  const elCount = root.querySelector(".c3d-count");
+  const elTitle = root.querySelector(".c3d-title");
+  const elText  = root.querySelector(".c3d-text");
+  const elLink  = root.querySelector(".c3d-link");
+  const elLinkT = elLink.querySelector("span");
+  const dotsBox = root.querySelector(".c3d-dots");
+ 
+  let pos = 0;        // posición continua (permite arrastrar con fluidez)
+  let current = 0;    // índice activo (0..n-1)
+  let stepPx = 200;   // separación entre imágenes
+  const prevD = new Array(n).fill(null);
+ 
+  const mod = (a, m) => ((a % m) + m) % m;
+ 
+  /* ---- Puntos ---- */
+  const dots = items.map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "c3d-dot";
+    b.setAttribute("aria-label", "Ir al servicio " + (i + 1));
+    b.addEventListener("click", () => goTo(i));
+    dotsBox.appendChild(b);
+    return b;
+  });
+ 
+  function measure() {
+    const w = items[0].offsetWidth || 300;
+    stepPx = w * (stage.clientWidth < 520 ? 0.52 : 0.6);
+  }
+ 
+  /* ---- Dibuja cada imagen según su distancia al centro ---- */
+  function render() {
+    for (let i = 0; i < n; i++) {
+      let d = mod(i - pos, n);
+      if (d > n / 2) d -= n;
+ 
+      const abs = Math.abs(d);
+      const side = Math.max(-1, Math.min(1, d));
+ 
+      const x  = Math.sign(d) * (Math.min(abs, 1) * stepPx + Math.max(abs - 1, 0) * stepPx * 0.62);
+      const z  = -Math.min(abs, 2.5) * 120;
+      const ry = -side * 42;
+      const s  = 1 - Math.min(abs, 2) * 0.07;
+      const o  = abs <= 1 ? 1 - abs * 0.18 : Math.max(0, 0.82 - (abs - 1) * 0.75);
+ 
+      const el = items[i];
+ 
+      // Si la imagen "da la vuelta" de un lado al otro, sin animación para que no cruce volando
+      const jumped = prevD[i] !== null && Math.abs(d - prevD[i]) > n / 2;
+      if (jumped) el.style.transition = "none";
+ 
+      el.style.transform =
+        "translate(-50%, -50%) translateX(" + x.toFixed(1) + "px) translateZ(" + z.toFixed(1) +
+        "px) rotateY(" + ry.toFixed(1) + "deg) scale(" + s.toFixed(3) + ")";
+      el.style.opacity = o.toFixed(3);
+      el.style.zIndex = String(100 - Math.round(abs * 10));
+      el.style.setProperty("--shade", (Math.min(abs, 1.5) * 0.45).toFixed(3));
+      el.style.pointerEvents = o < 0.05 ? "none" : "auto";
+      el.classList.toggle("is-active", abs < 0.5);
+ 
+      if (jumped) {
+        void el.offsetWidth;       // fuerza el repintado
+        el.style.transition = "";
+      }
+      prevD[i] = d;
+    }
+  }
+ 
+  /* ---- Actualiza el texto del servicio activo ---- */
+  function setCurrent(p) {
+    const idx = mod(p, n);
+    if (idx === current && info.dataset.ready) return;
+    current = idx;
+    info.dataset.ready = "1";
+ 
+    const it = items[idx];
+    elCount.textContent = String(idx + 1).padStart(2, "0") + " / " + String(n).padStart(2, "0");
+    elTitle.textContent = it.dataset.title || "";
+    elText.textContent  = it.dataset.text || "";
+    elLink.setAttribute("href", it.dataset.link || "servicios.html");
+    elLinkT.textContent = it.dataset.cta || "Conocer servicio";
+ 
+    dots.forEach((d, i) => {
+      d.classList.toggle("is-on", i === idx);
+      d.setAttribute("aria-current", i === idx ? "true" : "false");
+    });
+ 
+    info.classList.remove("swap");
+    void info.offsetWidth;
+    info.classList.add("swap");
+  }
+ 
+  function snap(target) {
+    pos = Math.round(target);
+    setCurrent(pos);
+    render();
+  }
+ 
+  function goTo(i) {
+    const base = Math.round(pos);
+    let diff = mod(i - base, n);
+    if (diff > n / 2) diff -= n;
+    snap(base + diff);
+  }
+ 
+  const next = () => snap(Math.round(pos) + 1);
+  const prev = () => snap(Math.round(pos) - 1);
+ 
+  root.querySelector(".c3d-next").addEventListener("click", next);
+  root.querySelector(".c3d-prev").addEventListener("click", prev);
+ 
+  stage.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { e.preventDefault(); next(); }
+    if (e.key === "ArrowLeft")  { e.preventDefault(); prev(); }
+  });
+ 
+  /* ---- Arrastrar con el dedo o el mouse ---- */
+  let dragging = false, startX = 0, startPos = 0, moved = 0, lastX = 0, lastT = 0, vel = 0;
+ 
+  stage.addEventListener("pointerdown", e => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    dragging = true;
+    moved = 0;
+    startX = lastX = e.clientX;
+    startPos = pos;
+    lastT = performance.now();
+    vel = 0;
+    root.classList.add("is-dragging");
+    try { stage.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+ 
+  stage.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    moved = Math.max(moved, Math.abs(dx));
+ 
+    const now = performance.now();
+    vel = (e.clientX - lastX) / Math.max(now - lastT, 1);
+    lastX = e.clientX;
+    lastT = now;
+ 
+    pos = startPos - dx / stepPx;
+    render();
+  });
+ 
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    root.classList.remove("is-dragging");
+ 
+    // Toque simple (sin arrastrar): si tocó una imagen lateral, la lleva al centro
+    if (moved < 8 && e.type === "pointerup") {
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const item = el && el.closest ? el.closest(".c3d-item") : null;
+      if (item) {
+        const i = items.indexOf(item);
+        if (i > -1) { goTo(i); return; }
+      }
+    }
+ 
+    if (performance.now() - lastT > 90) vel = 0;
+    const boost = Math.max(-2, Math.min(2, -vel * 220 / stepPx));
+    snap(pos + boost);
+  }
+ 
+  stage.addEventListener("pointerup", endDrag);
+  stage.addEventListener("pointercancel", endDrag);
+ 
+  /* ---- Inicio ---- */
+  measure();
+  root.classList.add("is-dragging");     // sin animación en la primera pintura
+  setCurrent(0);
+  render();
+  root.classList.add("is-ready");
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("is-dragging")));
+ 
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(() => { measure(); render(); }).observe(stage);
+  } else {
+    window.addEventListener("resize", () => { measure(); render(); }, { passive: true });
+  }
+})();
+</script>
+ 
 </body>
 </html>
