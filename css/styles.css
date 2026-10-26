@@ -2485,17 +2485,12 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
         -webkit-backdrop-filter: none !important;
     }
 }
-<!-- =========================================================
-     PARTE 2 · CSS  (pegar al final de css/styles.css)
-     NO incluyas las líneas <style> ni </style>, solo lo de adentro.
-     ========================================================= -->
- 
-<style>
+
 /* ===== CARRUSEL 3D DE SERVICIOS ===== */
 .carousel3d {
     position: relative;
     margin-top: 10px;
-    --c3d-w: clamp(200px, 34vw, 340px);
+    --c3d-w: clamp(220px, 30vw, 380px);
 }
  
 .c3d-stage {
@@ -2669,6 +2664,167 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
     .carousel3d { --c3d-w: min(62vw, 300px); }
     .c3d-nav { width: 40px; height: 40px; }
 }
-</style>
- 
- 
+
+
+/* =========================================================
+   AJUSTES DE ESCRITORIO + CARRITO (v4)
+   Va al final de styles.css, sin etiquetas <style>.
+========================================================= */
+
+/* ---------- Carrusel de servicios: ocupa todo el ancho ---------- */
+.services-showcase { width: 100%; }
+
+/* ---------- Reseñas: encabezado centrado + 2 columnas en PC ---------- */
+.aw-reviews-container { width: min(100%, 1120px); }
+
+.aw-reviews-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.aw-reviews-head .aw-reviews-subtitle { margin: 0 auto; }
+
+.aw-reviews-head .aw-review-summary { margin: 28px auto 0; justify-content: center; }
+
+.aw-reviews-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 28px;
+    align-items: start;
+}
+
+/* el formulario ya no necesita limitarse a 720px ni tener margen inferior */
+.aw-reviews-layout #resenas-formulario {
+    max-width: none;
+    margin: 0;
+    position: sticky;
+    top: 100px;
+}
+
+.aw-reviews-list-wrap { min-width: 0; }
+
+.aw-reviews-list-wrap h3 { margin-bottom: 18px; }
+
+/* las opiniones van en una sola columna, una debajo de otra */
+.aw-reviews-layout #resenas-lista { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+
+.aw-review-card .aw-review-header { align-items: center; }
+
+.aw-review-card .aw-review-stars { font-size: 16px; letter-spacing: 2px; white-space: nowrap; }
+
+/* estrellas del formulario: reparto uniforme, sin amontonarse */
+#resenas-estrellas { gap: 10px; }
+
+@media (max-width: 900px) {
+    .aw-reviews-layout { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .aw-reviews-layout #resenas-formulario { position: static; }
+}
+
+/* ---------- Botón "Cotizar ahora" con carrito ---------- */
+.checkout-container {
+    position: relative;
+    display: inline-flex;
+    min-width: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 0 25px rgba(0, 242, 254, .15);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.checkout-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 242, 254, .28), 0 0 24px rgba(168, 85, 247, .18);
+}
+
+.checkout-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(100deg, var(--cyan), #a78bfa);
+    color: #030305;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.checkout-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.checkout-btn .ate__label { position: relative; white-space: nowrap; }
+
+.checkout-btn .ate__cart {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    transition: transform .35s cubic-bezier(.22, .8, .3, 1);
+}
+
+.checkout-container:hover .ate__cart { transform: translateX(3px) rotate(-6deg); }
+
+/* barra de progreso fina mientras "prepara" la cotización */
+.checkout-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: rgba(3, 3, 5, .35);
+}
+
+.checkout-container.animating .checkout-btn { pointer-events: none; }
+
+.checkout-container.animating .checkout-btn::after {
+    width: 100%;
+    transition: width 1s linear;
+}
+
+.checkout-container.animating .ate__cart { animation: awCartDrive 1s ease-in-out; }
+
+@keyframes awCartDrive {
+    0%   { transform: translateX(0) rotate(0); }
+    35%  { transform: translateX(26px) rotate(-8deg); }
+    65%  { transform: translateX(-6px) rotate(5deg); }
+    100% { transform: translateX(0) rotate(0); }
+}
+
+/* mensaje de confirmación: se desliza por encima del botón */
+.checkout-container .confirm {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 16px;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #22c55e, #16a34a);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+    transition: transform .45s cubic-bezier(.22, .8, .3, 1), opacity .3s ease;
+}
+
+.checkout-container.success .confirm { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 520px) {
+    .checkout-container { display: flex; width: 100%; }
+}
