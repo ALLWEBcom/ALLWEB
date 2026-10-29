@@ -2860,3 +2860,39 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
 }
+
+
+
+
+/* ===== MODO RÁPIDO ===== */
+body {
+    background-attachment: scroll;
+}
+
+body::before,
+body::after,
+section::before,
+.premium-light-sweep,
+.background-glow,
+.motion-grid,
+.motion-cursor,
+.allweb-particles {
+    display: none !important;
+}
+
+.motion-orb {
+    filter: blur(40px);
+    animation: none;
+    will-change: auto;
+}
+
+.glass-card,
+.glass-review-card,
+.review-card,
+.payment-panel,
+.aw-review-card,
+#resenas-formulario,
+.aw-review-summary {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
