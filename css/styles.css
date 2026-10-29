@@ -2831,155 +2831,175 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 
 /* ==========================================
-   SECCIÓN CASCADA DE CÓDIGOS QR
+   CARRUSEL 3D DE PROYECTOS Y QR
    ========================================== */
-.cascade-timeline {
+.carrusel-3d-wrapper {
   position: relative;
-  max-width: 900px;
-  margin: 3rem auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  max-width: 1000px;
+  margin: 2.5rem auto 0;
+  padding: 2rem 0;
+  overflow: hidden;
 }
 
-/* Línea central conectora en escritorio */
-.cascade-timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  background: linear-gradient(180deg, rgba(0,242,254,0.8) 0%, rgba(121,40,202,0.8) 100%);
-  transform: translateX(-50%);
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
-}
-
-.cascade-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  width: 100%;
+.c3d-stage-qr {
   position: relative;
-}
-
-/* Orientación alternada en cascada */
-.cascade-item.cascade-left {
-  flex-direction: row;
-}
-
-.cascade-item.cascade-right {
-  flex-direction: row-reverse;
-}
-
-.cascade-content {
-  flex: 1;
-  background: rgba(11, 16, 32, 0.75);
-  border: 1px solid rgba(0, 242, 254, 0.2);
-  backdrop-filter: blur(12px);
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.cascade-content:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 242, 254, 0.6);
-}
-
-.cascade-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
-  color: #00f2fe;
-  letter-spacing: 1px;
-  margin-bottom: 0.75rem;
-}
-
-.cascade-content h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.cascade-content p {
-  color: #a0a5b5;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-}
-
-.cascade-url {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #00f2fe;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  word-break: break-all;
-  transition: color 0.2s ease;
-}
-
-.cascade-url:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.cascade-qr-box {
-  flex: 0 0 220px;
+  height: 440px;
+  perspective: 1200px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.qr-frame {
-  background: rgba(3, 3, 5, 0.8);
-  border: 1px solid rgba(0, 242, 254, 0.3);
-  padding: 12px;
-  border-radius: 16px;
+.c3d-card-qr {
+  position: absolute;
+  width: 320px;
+  background: rgba(11, 16, 32, 0.85);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.5s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+  will-change: transform, opacity;
 }
 
-.qr-frame:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+/* Tarjeta activa en el centro */
+.c3d-card-qr.active {
+  border-color: rgba(0, 242, 254, 0.8);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.25), 0 20px 40px rgba(0, 0, 0, 0.7);
+  z-index: 10;
 }
 
-.qr-frame img {
-  border-radius: 8px;
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.qr-frame span {
-  display: block;
-  margin-top: 8px;
+.c3d-badge-qr {
+  display: inline-block;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
+  color: #00f2fe;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.qr-card-header h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.qr-card-header p {
+  font-size: 0.85rem;
+  color: #a0a5b5;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.qr-frame-3d {
+  background: rgba(3, 3, 5, 0.9);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  padding: 10px;
+  border-radius: 14px;
+  display: inline-block;
+}
+
+.qr-frame-3d img {
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.qr-frame-3d span {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
   color: #00f2fe;
   letter-spacing: 0.5px;
 }
 
-/* Responsivo para móviles */
-@media (max-width: 768px) {
-  .cascade-timeline::before {
-    display: none;
-  }
-  
-  .cascade-item.cascade-left,
-  .cascade-item.cascade-right {
-    flex-direction: column;
-  }
-  
-  .cascade-qr-box {
-    width: 100%;
-  }
+.c3d-btn-qr {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  color: #00f2fe;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.c3d-btn-qr:hover {
+  background: #00f2fe;
+  color: #030305;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+}
+
+/* Flechas de navegación */
+.c3d-nav-qr {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(11, 16, 32, 0.8);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  color: #00f2fe;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+}
+
+.c3d-nav-qr:hover {
+  background: #00f2fe;
+  color: #030305;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+}
+
+.c3d-prev-qr { left: 10px; }
+.c3d-next-qr { right: 10px; }
+
+/* Puntos indicadores */
+.c3d-dots-qr {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.c3d-dot-qr {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.c3d-dot-qr.active {
+  background: #00f2fe;
+  width: 26px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+}
+
+@media (max-width: 600px) {
+  .c3d-stage-qr { height: 420px; }
+  .c3d-card-qr { width: 280px; padding: 1.2rem; }
 }
