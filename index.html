@@ -236,85 +236,71 @@
 </div>
 </div>
 </section>
-<!-- SECCIÓN QR DEMOSTRATIVO -->
-<section class="section qr-showcase-section">
-  <div class="section-container">
-    <div class="qr-showcase-card" style="background: rgba(11, 16, 32, 0.7); border: 1px solid rgba(0, 242, 254, 0.2); backdrop-filter: blur(12px); border-radius: 20px; padding: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-      
-      <div class="qr-info" style="flex: 1 1 300px;">
-        <div class="section-tag" style="margin-bottom: 0.75rem;"><span></span> PRUEBA NUESTRO TRABAJO</div>
-        <h2 style="font-size: 1.8rem; font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 1rem;">
-          Escanea y explora una <span style="color: #00f2fe;">web en vivo</span>
-        </h2>
-        <p style="color: #a0a5b5; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-          Apunta la cámara de tu celular al código QR para interactuar directamente desde tu dispositivo móvil con una de nuestras plataformas web desarrolladas.
-        </p>
-        <div style="display: flex; align-items: center; gap: 0.75rem; color: #00f2fe; font-size: 0.9rem; font-weight: 600;">
-          <i class="fa-solid fa-mobile-screen-button" style="font-size: 1.2rem;"></i>
-          <span>Optimizado para cualquier teléfono</span>
-        </div>
-      </div>
 
-      <div class="qr-image-wrapper" style="position: relative; padding: 12px; background: rgba(0, 242, 254, 0.05); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 16px; text-align: center;">
-        <img src="adobe-express-qr-code.png" alt="Escanea para ver página web realizada por ALLWEB" width="200" height="200" style="border-radius: 10px; display: block; max-width: 100%; height: auto;">
-        <span style="display: inline-block; margin-top: 10px; font-size: 0.75rem; color: #00f2fe; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">
-          ESCANEAR CÓDIGO
-        </span>
-      </div>
 
-    </div>
-  </div>
-</section>
-<!-- SECCIÓN CASCADA DE PROYECTOS / QR -->
-<section class="section qr-cascade-section" id="demostraciones">
+
+  <!-- SECCIÓN CARRUSEL 3D DE PROYECTOS / QR -->
+<section class="section qr-carousel-section" id="demostraciones">
   <div class="section-container">
     <div class="section-heading centered">
       <div class="section-tag"><span></span> PROYECTOS EN VIVO</div>
       <h2>Escanea y prueba <span>nuestros desarrollos.</span></h2>
-      <p>Apunta con la cámara de tu celular al código QR de cada proyecto para navegar en la versión móvil en tiempo real.</p>
+      <p>Desliza o usa las flechas para explorar cada proyecto y escanea el código QR con tu celular para navegar en vivo.</p>
     </div>
 
-    <div class="cascade-timeline">
+    <div class="carrusel-3d-wrapper" id="carrusel-qr-3d">
       
-      <!-- Proyecto 1 (Izquierda) -->
-      <div class="cascade-item cascade-left">
-        <div class="cascade-content">
-          <div class="cascade-badge"><i class="fa-solid fa-laptop-code"></i> PLATAFORMA WEB</div>
-          <h3>Mi Trabajo Listo</h3>
-          <p>Solución digital optimizada para la gestión, presentación de servicios y catálogo interactivo en línea.</p>
-          <div class="cascade-link-box">
-            <a href="https://allwebcom.github.io/mitrabajolistocom/" target="_blank" rel="noopener noreferrer" class="cascade-url">
-              allwebcom.github.io/mitrabajolistocom/ <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      <!-- Escena 3D -->
+      <div class="c3d-stage-qr">
+
+        <!-- Proyecto 1: Mi Trabajo Listo -->
+        <article class="c3d-card-qr active" data-index="0">
+          <div class="qr-card-header">
+            <span class="c3d-badge-qr"><i class="fa-solid fa-laptop-code"></i> PLATAFORMA WEB</span>
+            <h3>Mi Trabajo Listo</h3>
+            <p>Solución digital optimizada para la gestión, presentación de servicios y catálogo interactivo en línea.</p>
+          </div>
+          <div class="qr-card-body">
+            <div class="qr-frame-3d">
+              <img src="adobe-express-qr-code.png" alt="QR Mi Trabajo Listo" width="170" height="170" loading="lazy">
+              <span><i class="fa-solid fa-mobile-screen"></i> ESCANEAR PROYECTO</span>
+            </div>
+          </div>
+          <div class="qr-card-footer">
+            <a href="https://allwebcom.github.io/mitrabajolistocom/" target="_blank" rel="noopener noreferrer" class="c3d-btn-qr">
+              Visitar sitio <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
-        </div>
-        <div class="cascade-qr-box">
-          <div class="qr-frame">
-            <img src="adobe-express-qr-code.png" alt="QR Mi Trabajo Listo" width="180" height="180" loading="lazy">
-            <span><i class="fa-solid fa-mobile-screen"></i> ESCANEAR PROYECTO</span>
+        </article>
+
+        <!-- Proyecto 2: ALLWEB Demo -->
+        <article class="c3d-card-qr" data-index="1">
+          <div class="qr-card-header">
+            <span class="c3d-badge-qr"><i class="fa-solid fa-store"></i> E-COMMERCE / TIENDA</span>
+            <h3>Demo Tienda Online</h3>
+            <p>Experiencia de compra fluida con catálogo de productos, carrito dinámico y pasarela a WhatsApp.</p>
           </div>
-        </div>
+          <div class="qr-card-body">
+            <div class="qr-frame-3d">
+              <img src="adobe-express-qr-code.png" alt="QR ALLWEB Demo" width="170" height="170" loading="lazy">
+              <span><i class="fa-solid fa-mobile-screen"></i> ESCANEAR PROYECTO</span>
+            </div>
+          </div>
+          <div class="qr-card-footer">
+            <a href="https://allwebcom.github.io/ALLWEB/" target="_blank" rel="noopener noreferrer" class="c3d-btn-qr">
+              Visitar sitio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+
       </div>
 
-      <!-- Proyecto 2 (Derecha - Ejemplo para duplicar) -->
-      <div class="cascade-item cascade-right">
-        <div class="cascade-content">
-          <div class="cascade-badge"><i class="fa-solid fa-store"></i> E-COMMERCE / TIENDA</div>
-          <h3>Demo Tienda Online</h3>
-          <p>Experiencia de compra fluida con catálogo de productos, carrito dinámico y pasarela directa a WhatsApp.</p>
-          <div class="cascade-link-box">
-            <a href="https://allwebcom.github.io/ALLWEB/" target="_blank" rel="noopener noreferrer" class="cascade-url">
-              allwebcom.github.io/ALLWEB/ <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-        <div class="cascade-qr-box">
-          <div class="qr-frame">
-            <img src="adobe-express-qr-code.png" alt="QR ALLWEB Demo" width="180" height="180" loading="lazy">
-            <span><i class="fa-solid fa-mobile-screen"></i> ESCANEAR PROYECTO</span>
-          </div>
-        </div>
-      </div>
+      <!-- Navegación -->
+      <button type="button" class="c3d-nav-qr c3d-prev-qr" aria-label="Proyecto anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button type="button" class="c3d-nav-qr c3d-next-qr" aria-label="Proyecto siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+
+      <!-- Indicadores de puntos -->
+      <div class="c3d-dots-qr"></div>
 
     </div>
   </div>
