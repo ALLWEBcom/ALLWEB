@@ -282,7 +282,7 @@
           </div>
           <div class="qr-card-body">
             <div class="qr-frame-3d">
-              <img src="adobe-express-qr-code.png" alt="QR ALLWEB Demo" width="170" height="170" loading="lazy">
+             <img src="qr-la-central.png" alt="QR La Central" width="170" height="170" loading="lazy">
               <span><i class="fa-solid fa-mobile-screen"></i> ESCANEAR PROYECTO</span>
             </div>
           </div>
@@ -1063,6 +1063,54 @@ cargar();
   }
 })();
 </script>
- 
+<!-- CARRUSEL QR -->
+<script>
+(() => {
+  const root = document.getElementById("carrusel-qr-3d");
+  if (!root) return;
+
+  const cards = Array.from(root.querySelectorAll(".c3d-card-qr"));
+  const dotsBox = root.querySelector(".c3d-dots-qr");
+  const n = cards.length;
+  if (!n) return;
+
+  let idx = 0;
+
+  const dots = cards.map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "c3d-dot-qr";
+    b.setAttribute("aria-label", "Ir al proyecto " + (i + 1));
+    b.addEventListener("click", () => go(i));
+    dotsBox.appendChild(b);
+    return b;
+  });
+
+  function render() {
+    cards.forEach((c, i) => {
+      c.classList.remove("active", "left-off", "right-off");
+      if (i === idx) c.classList.add("active");
+      else if (i < idx) c.classList.add("left-off");
+      else c.classList.add("right-off");
+    });
+    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+  }
+
+  function go(i) { idx = (i + n) % n; render(); }
+
+  root.querySelector(".c3d-next-qr").addEventListener("click", () => go(idx + 1));
+  root.querySelector(".c3d-prev-qr").addEventListener("click", () => go(idx - 1));
+
+  // Deslizar con el dedo
+  let sx = 0;
+  root.addEventListener("touchstart", e => { sx = e.touches[0].clientX; }, { passive: true });
+  root.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  render();
+})();
+</script>
 </body>
 </html>
