@@ -2831,19 +2831,19 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 
 /* ==========================================
-   CARRUSEL 3D DE PROYECTOS Y QR
+   CARRUSEL DE PROYECTOS Y QR (RESPONSIVE)
    ========================================== */
 .carrusel-3d-wrapper {
   position: relative;
   max-width: 1000px;
-  margin: 2.5rem auto 0;
-  padding: 2rem 0;
+  margin: 1.5rem auto 0;
+  padding: 1rem 0;
   overflow: hidden;
 }
 
 .c3d-stage-qr {
   position: relative;
-  height: 440px;
+  height: 480px;
   perspective: 1200px;
   display: flex;
   align-items: center;
@@ -2853,28 +2853,28 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 .c3d-card-qr {
   position: absolute;
   width: 320px;
-  background: rgba(11, 16, 32, 0.85);
-  border: 1px solid rgba(0, 242, 254, 0.25);
+  max-width: 88vw;
+  background: rgba(11, 16, 32, 0.95);
+  border: 1px solid rgba(0, 242, 254, 0.3);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1.25rem;
   backdrop-filter: blur(14px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  user-select: none;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
-              opacity 0.5s ease, 
+  box-sizing: border-box;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.4s ease, 
               border-color 0.3s ease, 
               box-shadow 0.3s ease;
   will-change: transform, opacity;
 }
 
-/* Tarjeta activa en el centro */
 .c3d-card-qr.active {
   border-color: rgba(0, 242, 254, 0.8);
-  box-shadow: 0 0 30px rgba(0, 242, 254, 0.25), 0 20px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.3), 0 15px 35px rgba(0, 0, 0, 0.9);
   z-index: 10;
 }
 
@@ -2884,35 +2884,38 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
   font-size: 0.7rem;
   color: #00f2fe;
   letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .qr-card-header h3 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: #fff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .qr-card-header p {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: #a0a5b5;
-  line-height: 1.4;
-  margin-bottom: 1rem;
+  line-height: 1.35;
+  margin-bottom: 0.8rem;
 }
 
 .qr-frame-3d {
-  background: rgba(3, 3, 5, 0.9);
+  background: rgba(3, 3, 5, 0.95);
   border: 1px solid rgba(0, 242, 254, 0.3);
   padding: 10px;
   border-radius: 14px;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .qr-frame-3d img {
   border-radius: 8px;
   display: block;
   margin: 0 auto;
+  max-width: 150px;
+  height: auto;
 }
 
 .qr-frame-3d span {
@@ -2930,9 +2933,9 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   padding: 0.6rem 1rem;
-  background: rgba(0, 242, 254, 0.1);
+  background: rgba(0, 242, 254, 0.12);
   border: 1px solid rgba(0, 242, 254, 0.4);
   color: #00f2fe;
   border-radius: 10px;
@@ -2953,13 +2956,13 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(11, 16, 32, 0.8);
-  border: 1px solid rgba(0, 242, 254, 0.4);
+  background: rgba(11, 16, 32, 0.9);
+  border: 1px solid rgba(0, 242, 254, 0.5);
   color: #00f2fe;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   z-index: 20;
   transition: all 0.2s ease;
@@ -2968,23 +2971,22 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 .c3d-nav-qr:hover {
   background: #00f2fe;
   color: #030305;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
 }
 
-.c3d-prev-qr { left: 10px; }
-.c3d-next-qr { right: 10px; }
+.c3d-prev-qr { left: 5px; }
+.c3d-next-qr { right: 5px; }
 
 /* Puntos indicadores */
 .c3d-dots-qr {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .c3d-dot-qr {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   border: none;
@@ -2994,12 +2996,20 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 
 .c3d-dot-qr.active {
   background: #00f2fe;
-  width: 26px;
+  width: 22px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
 }
 
-@media (max-width: 600px) {
-  .c3d-stage-qr { height: 420px; }
-  .c3d-card-qr { width: 280px; padding: 1.2rem; }
+/* AJUSTE MÓVIL PANTALLA ESTRECHA */
+@media (max-width: 768px) {
+  .c3d-stage-qr {
+    height: 450px;
+    perspective: none; /* Elimina la distorsión 3D en móvil para evitar solapamiento */
+  }
+  
+  .c3d-card-qr {
+    width: 290px;
+    padding: 1.1rem;
+  }
 }
