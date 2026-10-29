@@ -2828,3 +2828,158 @@ body.page-changing { opacity: 0; transform: translateY(5px); }
 @media (max-width: 520px) {
     .checkout-container { display: flex; width: 100%; }
 }
+
+
+/* ==========================================
+   SECCIÓN CASCADA DE CÓDIGOS QR
+   ========================================== */
+.cascade-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Línea central conectora en escritorio */
+.cascade-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(0,242,254,0.8) 0%, rgba(121,40,202,0.8) 100%);
+  transform: translateX(-50%);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+}
+
+.cascade-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  position: relative;
+}
+
+/* Orientación alternada en cascada */
+.cascade-item.cascade-left {
+  flex-direction: row;
+}
+
+.cascade-item.cascade-right {
+  flex-direction: row-reverse;
+}
+
+.cascade-content {
+  flex: 1;
+  background: rgba(11, 16, 32, 0.75);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.cascade-content:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 242, 254, 0.6);
+}
+
+.cascade-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  color: #00f2fe;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.cascade-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.cascade-content p {
+  color: #a0a5b5;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.cascade-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #00f2fe;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+  transition: color 0.2s ease;
+}
+
+.cascade-url:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cascade-qr-box {
+  flex: 0 0 220px;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-frame {
+  background: rgba(3, 3, 5, 0.8);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  padding: 12px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qr-frame:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+}
+
+.qr-frame img {
+  border-radius: 8px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.qr-frame span {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  color: #00f2fe;
+  letter-spacing: 0.5px;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .cascade-timeline::before {
+    display: none;
+  }
+  
+  .cascade-item.cascade-left,
+  .cascade-item.cascade-right {
+    flex-direction: column;
+  }
+  
+  .cascade-qr-box {
+    width: 100%;
+  }
+}
