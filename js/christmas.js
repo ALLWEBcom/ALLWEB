@@ -60,6 +60,7 @@
     const c = document.createElement("canvas");
     c.id = "xmas-snow";
     c.setAttribute("aria-hidden", "true");
+    c.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40";
     document.body.appendChild(c);
     const ctx = c.getContext("2d");
     let W = 0, H = 0, flakes = [], wind = 0, windT = 0, raf = null;
@@ -118,6 +119,7 @@
     const g = document.createElement("div");
     g.className = "xmas-garland";
     g.setAttribute("aria-hidden", "true");
+    g.style.cssText = "position:absolute;left:0;right:0;top:100%;height:44px;pointer-events:none;overflow:hidden;z-index:60";
     header.appendChild(g);
 
     function build() {
@@ -148,7 +150,7 @@
     if (!logo) return;
     if (getComputedStyle(logo).position === "static") logo.style.position = "relative";
     logo.insertAdjacentHTML("beforeend",
-      '<svg class="xmas-hat" viewBox="0 0 40 34" aria-hidden="true">' +
+      '<svg class="xmas-hat" viewBox="0 0 40 34" aria-hidden="true" style="position:absolute;left:-8px;top:-15px;width:34px;height:30px;pointer-events:none">' +
       '<path d="M6 28 Q8 6 26 4 Q34 4 36 12 Q26 10 30 28Z" fill="#e11d48"/>' +
       '<path d="M10 24 Q12 12 24 8" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/>' +
       '<rect x="3" y="25" width="30" height="8" rx="4" fill="#fff"/>' +
@@ -305,6 +307,18 @@
     if (b) b.innerHTML = '<span class="status-dot"></span> ' + CFG.promoText;
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  /* Carga christmas.css si no está en el HTML. Si no existe, no hace nada. */
+  function ensureCSS(cb) {
+    const has = Array.from(document.styleSheets).some(s => s.href && s.href.indexOf("christmas.css") > -1);
+    if (has) return cb();
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "css/christmas.css?v=1";
+    l.onload = cb;
+    l.onerror = () => console.warn("ALLWEB Navidad: no se encontró css/christmas.css, efectos desactivados.");
+    document.head.appendChild(l);
+  }
+  const go = () => ensureCSS(init);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go);
+  else go();
 })();
