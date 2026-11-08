@@ -1,0 +1,152 @@
+/* =========================================================
+   ALLWEB · Navidad Futurista  (christmas.css)
+   Se apaga solo: quita la clase y todo desaparece.
+   ========================================================= */
+:root{
+  --xm-cyan:#00f2fe; --xm-purple:#a855f7; --xm-red:#ff3b5c;
+  --xm-green:#22e58b; --xm-gold:#ffd166; --xm-ink:#030305;
+}
+
+/* ---------- Nieve ---------- */
+#xmas-snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+
+/* ---------- Aurora navideña suave (rojo / verde / cian) ---------- */
+.xmas-aurora{
+  position:fixed;left:0;right:0;bottom:0;height:46vh;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(60% 80% at 15% 110%, rgba(255,59,92,.16), transparent 70%),
+    radial-gradient(55% 80% at 85% 110%, rgba(34,229,139,.14), transparent 70%),
+    radial-gradient(50% 70% at 50% 120%, rgba(0,242,254,.14), transparent 70%);
+  animation:xm-aurora 9s ease-in-out infinite alternate;
+}
+@keyframes xm-aurora{from{opacity:.65}to{opacity:1}}
+
+/* ---------- Guirnalda LED en el header ---------- */
+.xmas-garland{position:absolute;left:0;right:0;top:100%;height:44px;pointer-events:none;z-index:60;overflow:hidden}
+.xmas-garland svg{position:absolute;inset:0;width:100%;height:100%}
+.xmas-garland path{fill:none;stroke:rgba(255,255,255,.28);stroke-width:1.2}
+.xm-bulb{
+  position:absolute;width:7px;height:11px;margin:-2px 0 0 -3.5px;
+  border-radius:50% 50% 50% 50% / 38% 38% 62% 62%;
+  background:var(--c);
+  box-shadow:0 0 6px 1px var(--c),0 0 16px 3px var(--c);
+  animation:xm-blink 2.4s ease-in-out infinite;
+}
+.xm-bulb::before{content:"";position:absolute;left:1.5px;top:-3px;width:4px;height:3px;background:#2a2f3d;border-radius:1px}
+@keyframes xm-blink{0%,100%{opacity:1;filter:brightness(1.25)}50%{opacity:.35;filter:brightness(.7)}}
+
+/* ---------- Gorro de Papá Noel en el logo ---------- */
+.xmas-hat{
+  position:absolute;left:-8px;top:-15px;width:34px;height:30px;pointer-events:none;z-index:2;
+  transform:rotate(-16deg);filter:drop-shadow(0 0 6px rgba(255,59,92,.55));
+}
+
+/* ---------- Trineo holográfico ---------- */
+.xmas-sleigh{
+  position:fixed;left:0;top:22vh;width:min(300px,56vw);z-index:45;pointer-events:none;
+  opacity:0;transform:translate3d(-340px,0,0);
+}
+.xmas-sleigh svg{display:block;width:100%;height:auto;overflow:visible;
+  filter:drop-shadow(0 0 5px var(--xm-cyan)) drop-shadow(0 0 16px rgba(0,242,254,.55))}
+.xmas-sleigh::before{ /* estela de luz */
+  content:"";position:absolute;right:92%;top:52%;width:240px;height:3px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,rgba(168,85,247,.55),rgba(0,242,254,.9));
+  filter:blur(1px);box-shadow:0 0 18px rgba(0,242,254,.6);
+}
+.xmas-sleigh.fly{animation:xm-fly 15s linear forwards}
+@keyframes xm-fly{
+  0%{opacity:0;transform:translate3d(-340px,18px,0) rotate(2deg)}
+  6%{opacity:1}
+  50%{transform:translate3d(50vw,-26px,0) rotate(-2deg)}
+  94%{opacity:1}
+  100%{opacity:0;transform:translate3d(calc(100vw + 340px),10px,0) rotate(1deg)}
+}
+.xm-nose{animation:xm-blink 1.1s ease-in-out infinite}
+
+/* ---------- Bolas navideñas colgantes (hero) ---------- */
+.xm-ornament{
+  position:absolute;top:-6px;width:0;z-index:3;pointer-events:none;
+  transform-origin:top center;animation:xm-swing 4.6s ease-in-out infinite alternate;
+}
+.xm-ornament i{display:block;width:1px;height:var(--len,60px);margin-left:-.5px;
+  background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.1))}
+.xm-ornament b{
+  display:block;width:var(--d,34px);height:var(--d,34px);margin-left:calc(var(--d,34px)/-2);
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff 0 6%,var(--c) 28%,rgba(3,3,5,.9) 100%);
+  box-shadow:0 0 14px var(--c),0 0 34px color-mix(in srgb,var(--c) 45%,transparent),inset 0 0 10px rgba(255,255,255,.18);
+  border:1px solid color-mix(in srgb,var(--c) 70%,#fff);
+  position:relative;
+}
+.xm-ornament b::before{content:"";position:absolute;left:50%;top:-6px;width:12px;height:7px;margin-left:-6px;
+  background:linear-gradient(#ffe29a,#b88a2a);border-radius:2px 2px 0 0}
+@keyframes xm-swing{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+
+/* ---------- Panel de cuenta regresiva + personajes ---------- */
+.xmas-widget{
+  position:fixed;left:16px;bottom:16px;z-index:55;width:min(292px,calc(100vw - 110px));
+  font-family:"Inter",system-ui,sans-serif;color:#e8f6ff;
+  transform:translateY(130%);opacity:0;transition:transform .9s cubic-bezier(.2,1.1,.3,1),opacity .6s;
+}
+.xmas-widget.show{transform:none;opacity:1}
+.xmas-card{
+  position:relative;padding:14px 16px 13px;border-radius:16px;
+  background:linear-gradient(160deg,rgba(10,16,32,.86),rgba(18,8,36,.82));
+  border:1px solid rgba(0,242,254,.35);
+  box-shadow:0 0 0 1px rgba(168,85,247,.18),0 10px 40px rgba(0,0,0,.55),0 0 28px rgba(0,242,254,.14);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;
+}
+.xmas-card::after{ /* línea de escaneo */
+  content:"";position:absolute;left:0;right:0;top:-40%;height:40%;pointer-events:none;
+  background:linear-gradient(transparent,rgba(0,242,254,.10),transparent);
+  animation:xm-scan 5s linear infinite;
+}
+@keyframes xm-scan{to{top:120%}}
+.xm-title{font:700 10.5px/1 "Orbitron",sans-serif;letter-spacing:.16em;color:var(--xm-cyan);margin:0 0 9px;
+  display:flex;align-items:center;gap:8px}
+.xm-title::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--xm-green);box-shadow:0 0 10px var(--xm-green);animation:xm-blink 1.6s infinite}
+.xm-clock{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.xm-clock div{padding:7px 0 6px;border-radius:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+.xm-clock strong{display:block;font:700 19px/1 "Orbitron",sans-serif;color:#fff;text-shadow:0 0 12px rgba(0,242,254,.6);font-variant-numeric:tabular-nums}
+.xm-clock span{display:block;margin-top:4px;font-size:9px;letter-spacing:.12em;color:#9fb4c8;text-transform:uppercase}
+.xm-msg{margin:0;font-size:13px;line-height:1.45;text-align:center;color:#dff6ff}
+.xm-cta{display:block;margin-top:10px;padding:8px 10px;border-radius:10px;text-align:center;text-decoration:none;
+  font-size:12.5px;font-weight:700;color:#031018;
+  background:linear-gradient(90deg,var(--xm-cyan),#8be9ff);transition:transform .2s,box-shadow .2s}
+.xm-cta:hover{transform:translateY(-1px);box-shadow:0 0 22px rgba(0,242,254,.55)}
+.xm-cta:focus-visible,.xm-btn:focus-visible{outline:2px solid var(--xm-gold);outline-offset:2px}
+.xm-tools{position:absolute;top:8px;right:8px;display:flex;gap:4px;z-index:2}
+.xm-btn{width:22px;height:22px;border-radius:7px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);
+  color:#bfe9ff;font-size:12px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.xm-btn:hover{background:rgba(0,242,254,.18)}
+
+/* personajes asomándose sobre el panel */
+.xm-chars{position:absolute;left:0;right:0;bottom:calc(100% - 14px);height:56px;display:flex;justify-content:space-between;
+  padding:0 20px;pointer-events:none;z-index:0}
+.xm-char{width:62px;height:56px;transform-origin:bottom center}
+.xm-char svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 0 8px rgba(0,242,254,.35))}
+.xm-char.elf{animation:xm-peek 5.5s ease-in-out infinite}
+.xm-char.santa{animation:xm-peek 5.5s ease-in-out infinite;animation-delay:1.1s}
+@keyframes xm-peek{0%,60%,100%{transform:translateY(0) rotate(0)}70%{transform:translateY(-8px) rotate(-5deg)}80%{transform:translateY(-3px) rotate(4deg)}90%{transform:translateY(-7px) rotate(-3deg)}}
+.xmas-card{z-index:1}
+
+/* ---------- Interruptor de efectos (modo minimizado) ---------- */
+.xmas-widget.min .xm-body,.xmas-widget.min .xm-chars{display:none}
+.xmas-widget.min{width:auto}
+.xmas-widget.min .xmas-card{padding:10px 40px 10px 14px}
+.xmas-widget.min .xm-title{margin:0}
+
+/* ---------- Efectos apagados ---------- */
+body.xmas-off #xmas-snow,body.xmas-off .xmas-sleigh,body.xmas-off .xmas-garland,
+body.xmas-off .xmas-aurora,body.xmas-off .xm-ornament,body.xmas-off .xmas-hat{display:none!important}
+
+/* ---------- Móvil y accesibilidad ---------- */
+@media (max-width:900px){
+  .xm-ornament{display:none}
+  .xmas-garland{height:34px}
+  .xmas-widget{bottom:12px;left:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .xmas-sleigh,.xm-bulb,.xm-ornament,.xm-char,.xmas-aurora,.xmas-card::after{animation:none!important}
+  .xmas-sleigh{display:none}
+}
